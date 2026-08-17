@@ -32,5 +32,78 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
       ))}
     </nav>
     <a href="/donate" class="hidden md:inline-block font-sans text-sm bg-oxblood text-paper px-4 py-2 rounded-sm no-underline hover:bg-[#5e1717]">Donate</a>
+    <button
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      data-menu-toggle
+      class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-sm border border-rule text-ink hover:bg-ink/5"
+    >
+      <svg data-menu-icon-open xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" y1="7" x2="20" y2="7"></line>
+        <line x1="4" y1="12" x2="20" y2="12"></line>
+        <line x1="4" y1="17" x2="20" y2="17"></line>
+      </svg>
+      <svg data-menu-icon-close xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  <div
+    data-menu-panel
+    class="md:hidden hidden border-t border-rule bg-paper"
+  >
+    <nav class="mx-auto max-w-6xl px-6 py-4 flex flex-col gap-1 font-sans text-base">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'no-underline px-2 py-3 rounded-sm text-ink/80 hover:bg-ink/5',
+            path === item.href && 'text-oxblood font-medium',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href="/donate"
+        class="mt-2 inline-block text-center bg-oxblood text-paper px-4 py-3 rounded-sm no-underline hover:bg-[#5e1717]"
+      >
+        Donate
+      </a>
+    </nav>
   </div>
 </header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const panel = document.querySelector<HTMLDivElement>('[data-menu-panel]');
+  const iconOpen = document.querySelector<SVGElement>('[data-menu-icon-open]');
+  const iconClose = document.querySelector<SVGElement>('[data-menu-icon-close]');
+
+  function setOpen(open: boolean) {
+    if (!toggle || !panel || !iconOpen || !iconClose) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    panel.classList.toggle('hidden', !open);
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    setOpen(!isOpen);
+  });
+
+  // Close menu when a link inside the panel is tapped.
+  panel?.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => setOpen(false));
+  });
+
+  // Reset state when crossing the md breakpoint upward.
+  const mq = window.matchMedia('(min-width: 768px)');
+  mq.addEventListener('change', (e) => {
+    if (e.matches) setOpen(false);
+  });
+</script>
