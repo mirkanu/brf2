@@ -1,0 +1,81 @@
+---
+---
+<button
+  type="button"
+  data-theme-toggle
+  aria-label="Cycle theme"
+  title="Light / dark / auto"
+  class="inline-flex items-center justify-center w-10 h-10 rounded-sm border border-rule text-ink hover:bg-ink/5"
+>
+  <svg data-theme-icon-auto xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9"></circle>
+    <path d="M12 3v18"></path>
+    <path d="M3 12h18"></path>
+  </svg>
+  <svg data-theme-icon-light xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2"></path>
+    <path d="M12 20v2"></path>
+    <path d="M4.93 4.93l1.41 1.41"></path>
+    <path d="M17.66 17.66l1.41 1.41"></path>
+    <path d="M2 12h2"></path>
+    <path d="M20 12h2"></path>
+    <path d="M4.93 19.07l1.41-1.41"></path>
+    <path d="M17.66 6.34l1.41-1.41"></path>
+  </svg>
+  <svg data-theme-icon-dark xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+</button>
+
+<script>
+  type Theme = 'auto' | 'light' | 'dark';
+  const STORAGE_KEY = 'brf-theme';
+  const ORDER: Theme[] = ['auto', 'light', 'dark'];
+
+  function current(): Theme {
+    const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
+    return stored && ORDER.includes(stored) ? stored : 'auto';
+  }
+
+  function resolve(): 'light' | 'dark' {
+    const t = current();
+    if (t === 'auto') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return t;
+  }
+
+  function apply() {
+    const resolved = resolve();
+    document.documentElement.dataset.theme = resolved;
+    const btn = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+    if (!btn) return;
+    btn.dataset.theme = current();
+    btn.setAttribute('aria-label', `Theme: ${current()} (click to change)`);
+    const auto = document.querySelector<SVGElement>('[data-theme-icon-auto]');
+    const light = document.querySelector<SVGElement>('[data-theme-icon-light]');
+    const dark = document.querySelector<SVGElement>('[data-theme-icon-dark]');
+    auto?.classList.toggle('hidden', current() !== 'auto');
+    light?.classList.toggle('hidden', current() !== 'light');
+    dark?.classList.toggle('hidden', current() !== 'dark');
+  }
+
+  function cycle() {
+    const i = ORDER.indexOf(current());
+    const next = ORDER[(i + 1) % ORDER.length];
+    if (next === 'auto') localStorage.removeItem(STORAGE_KEY);
+    else localStorage.setItem(STORAGE_KEY, next);
+    apply();
+  }
+
+  document.querySelector<HTMLButtonElement>('[data-theme-toggle]')?.addEventListener('click', cycle);
+
+  // Follow OS when in auto mode.
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (current() === 'auto') apply();
+  });
+
+  // Initial paint: read storage and resolve before first frame.
+  apply();
+</script>
