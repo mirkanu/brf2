@@ -1,0 +1,37 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-rule mt-16 bg-paper">
+  <div class="mx-auto max-w-6xl px-6 py-10 grid gap-8 md:grid-cols-4 font-sans text-sm">
+    <div class="md:col-span-2">
+      <p class="font-serif text-base font-semibold">British Reformed Fellowship</p>
+      <p class="text-muted mt-2 max-w-prose">
+        A confessional Reformed fellowship committed to the historic Christian faith, the Westminster Standards, and the spiritual heritage of the British Isles.
+      </p>
+    </div>
+    <div>
+      <p class="font-medium text-ink/90">Site</p>
+      <ul class="mt-2 space-y-1 text-muted">
+        <li><a href="/about" class="hover:text-ink">About</a></li>
+        <li><a href="/beliefs" class="hover:text-ink">What we believe</a></li>
+        <li><a href="/conferences" class="hover:text-ink">Conferences</a></li>
+        <li><a href="/journal" class="hover:text-ink">Journal</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="font-medium text-ink/90">Connect</p>
+      <ul class="mt-2 space-y-1 text-muted">
+        <li><a href="/contact" class="hover:text-ink">Contact</a></li>
+        <li><a href="/donate" class="hover:text-ink">Donate</a></li>
+        <li><a href="https://www.youtube.com/@britishreformed" class="hover:text-ink">YouTube</a></li>
+        <li><a href="/podcast" class="hover:text-ink">Podcast</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-rule">
+    <div class="mx-auto max-w-6xl px-6 py-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-2 text-xs text-muted font-sans">
+      <p>© {year} British Reformed Fellowship. Registered charity.</p>
+      <p>Built with care in the British Isles.</p>
+    </div>
+  </div>
+</footer>
