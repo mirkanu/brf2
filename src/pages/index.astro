@@ -6,21 +6,32 @@ import Footer from '../components/Footer.astro';
 <Site title="British Reformed Fellowship">
   <Header />
 
-  <!-- Hero: panoramic lava strip, then copy card below -->
+  <!-- Hero: panoramic watershed, brand mark as watermark, copy card anchored over the seam -->
   <section class="relative">
-    <div class="relative h-[42vh] min-h-[280px] max-h-[460px] overflow-hidden bg-[#2a1a14]">
+    <div class="relative h-[58vh] min-h-[360px] max-h-[560px] overflow-hidden bg-[#2a1a14]">
       <img
-        src="/img/hero-lava.gif"
-        alt=""
+        src="/img/hero-am-fluss.png"
+        alt="The river Exe meandering through Devon countryside at sunset"
         class="absolute inset-0 h-full w-full object-cover object-center"
         fetchpriority="high"
       />
-      <div class="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-black/15"></div>
-      <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[#fbf8f3]"></div>
+      <!-- left-side darken so eyebrow / headline breathe -->
+      <div class="absolute inset-0 bg-gradient-to-r from-black/55 via-black/15 to-transparent"></div>
+      <!-- bottom fade into paper -->
+      <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#fbf8f3]"></div>
+
+      <!-- brand mark watermark, right-aligned, faded -->
+      <img
+        src="/img/brand-mark.png"
+        alt=""
+        aria-hidden="true"
+        class="hidden md:block absolute top-6 right-6 h-20 w-20 lg:h-28 lg:w-28 opacity-90 drop-shadow-[0_4px_16px_rgba(0,0,0,0.35)]"
+      />
     </div>
 
-    <div class="mx-auto max-w-6xl px-6 -mt-16 md:-mt-24 relative">
-      <div class="bg-paper border border-rule shadow-[0_2px_24px_rgba(26,26,26,0.06)] p-8 md:p-12">
+    <!-- Copy card, anchored bottom-left over the river into the page -->
+    <div class="mx-auto max-w-6xl px-6 -mt-44 md:-mt-56 relative">
+      <div class="bg-paper border border-rule shadow-[0_2px_24px_rgba(26,26,26,0.06)] p-8 md:p-12 max-w-3xl">
         <p class="font-sans text-xs uppercase tracking-[0.22em] text-oxblood">A confessional Reformed fellowship</p>
         <h1 class="font-serif text-4xl md:text-6xl leading-[1.05] tracking-tight mt-4 text-balance">
           Holding fast the faithful Word,<br />
@@ -38,7 +49,7 @@ import Footer from '../components/Footer.astro';
   </section>
 
   <!-- Now strip -->
-  <section class="mx-auto max-w-6xl px-6 py-10 grid md:grid-cols-3 gap-10 font-sans text-sm">
+  <section class="mx-auto max-w-6xl px-6 pt-12 pb-10 grid md:grid-cols-3 gap-10 font-sans text-sm">
     <div class="border-t border-oxblood pt-5">
       <p class="text-xs uppercase tracking-[0.18em] text-muted">Now</p>
       <p class="mt-2 font-serif text-base text-ink/90">Summer Conference 2026</p>
