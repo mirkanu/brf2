@@ -1,12 +1,28 @@
 ---
 import Site from '../layouts/Site.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 <Site title="British Reformed Fellowship">
-  <section class="border-b border-rule">
-    <div class="mx-auto max-w-6xl px-6 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-end">
-      <div class="md:col-span-8">
+  <Header />
+
+  <!-- Hero: panoramic lava strip, then copy card below -->
+  <section class="relative">
+    <div class="relative h-[42vh] min-h-[280px] max-h-[460px] overflow-hidden bg-[#2a1a14]">
+      <img
+        src="/img/hero-lava.gif"
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover object-center"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-black/15"></div>
+      <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[#fbf8f3]"></div>
+    </div>
+
+    <div class="mx-auto max-w-6xl px-6 -mt-16 md:-mt-24 relative">
+      <div class="bg-paper border border-rule shadow-[0_2px_24px_rgba(26,26,26,0.06)] p-8 md:p-12">
         <p class="font-sans text-xs uppercase tracking-[0.22em] text-oxblood">A confessional Reformed fellowship</p>
-        <h1 class="font-serif text-4xl md:text-6xl leading-[1.05] tracking-tight mt-4">
+        <h1 class="font-serif text-4xl md:text-6xl leading-[1.05] tracking-tight mt-4 text-balance">
           Holding fast the faithful Word,<br />
           for the churches of these islands.
         </h1>
@@ -18,16 +34,30 @@ import Site from '../layouts/Site.astro';
           <a href="/journal" class="border border-rule px-5 py-2.5 rounded-sm no-underline hover:bg-[#f3eee2]">Read the Journal</a>
         </div>
       </div>
-      <aside class="md:col-span-4 border-l border-rule pl-6 font-sans text-sm text-muted">
-        <p class="text-xs uppercase tracking-[0.18em] text-ink/70">Now</p>
-        <p class="mt-2 text-ink/90 font-serif text-base">Summer Conference 2026</p>
-        <p class="mt-1">21–24 July · High Leigh Conference Centre</p>
-        <p class="mt-3 text-xs">Speakers announced. Booking open.</p>
-      </aside>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-3 gap-10 font-serif">
+  <!-- Now strip -->
+  <section class="mx-auto max-w-6xl px-6 py-10 grid md:grid-cols-3 gap-10 font-sans text-sm">
+    <div class="border-t border-oxblood pt-5">
+      <p class="text-xs uppercase tracking-[0.18em] text-muted">Now</p>
+      <p class="mt-2 font-serif text-base text-ink/90">Summer Conference 2026</p>
+      <p class="mt-1 text-muted">21–24 July · High Leigh Conference Centre</p>
+    </div>
+    <div class="border-t border-oxblood pt-5">
+      <p class="text-xs uppercase tracking-[0.18em] text-muted">Latest issue</p>
+      <p class="mt-2 font-serif text-base text-ink/90">British Reformed Journal 184</p>
+      <p class="mt-1 text-muted">Christ and the covenant — out now</p>
+    </div>
+    <div class="border-t border-oxblood pt-5">
+      <p class="text-xs uppercase tracking-[0.18em] text-muted">Listen</p>
+      <p class="mt-2 font-serif text-base text-ink/90">Conference lectures, on demand</p>
+      <p class="mt-1 text-muted">Available as a podcast feed</p>
+    </div>
+  </section>
+
+  <!-- Three pillars -->
+  <section class="mx-auto max-w-6xl px-6 pb-20 grid md:grid-cols-3 gap-10 font-serif">
     <article class="border-t border-oxblood pt-5">
       <p class="font-sans text-xs uppercase tracking-[0.18em] text-muted">Journal</p>
       <h2 class="text-2xl mt-2 leading-snug">The latest from the British Reformed Journal</h2>
@@ -47,4 +77,6 @@ import Site from '../layouts/Site.astro';
       <a href="/podcast" class="font-sans text-sm text-oxblood mt-4 inline-block">Listen or subscribe →</a>
     </article>
   </section>
+
+  <Footer />
 </Site>
