@@ -1,0 +1,42 @@
+---
+import Site from '../layouts/Site.astro';
+---
+<Site title="About — British Reformed Fellowship">
+  <section class="mx-auto max-w-3xl px-6 py-12">
+    <p class="font-sans text-xs uppercase tracking-[0.22em] text-oxblood">About</p>
+    <h1 class="font-serif text-4xl md:text-5xl tracking-tight mt-3 text-balance">A confessional Reformed fellowship for the churches of these islands.</h1>
+
+    <div class="prose-section">
+      <p>The British Reformed Fellowship is a registered charity made up of ministers, churches, and individual Christians who share a commitment to the historic Christian faith as summarised in the Westminster Confession of Faith and Catechisms.</p>
+
+      <p>We exist to encourage and equip confessional Reformed witness across the United Kingdom and Ireland — through conferences, publications, and the sharing of resources.</p>
+
+      <h2>What we do</h2>
+      <ul>
+        <li>An annual summer conference, held since the 1980s, with a week of preaching, teaching, and fellowship.</li>
+        <li>The British Reformed Journal, a quarterly publication of essays, reviews, and sermons.</li>
+        <li>Conference lectures released as a podcast feed.</li>
+        <li>Regional meetings and study days for ministers and members.</li>
+      </ul>
+
+      <h2>Our commitments</h2>
+      <ul>
+        <li>The Bible, as the inspired and infallible Word of God, is our only rule of faith and life.</li>
+        <li>The Westminster Confession of Faith and the Larger and Shorter Catechisms, as a faithful summary of biblical doctrine.</li>
+        <li>The historic Christian creeds (Apostles', Nicene, Athanasian, Chalcedonian).</li>
+        <li>The Reformed worship and government of the churches of these islands.</li>
+      </ul>
+
+      <h2>Governance</h2>
+      <p>The Fellowship is overseen by a council of trustees drawn from ministers and elders across the constituent churches. Day-to-day affairs are managed by an executive committee elected at the annual general meeting.</p>
+    </div>
+  </section>
+</Site>
+
+<style is:global>
+  .prose-section { font-family: var(--font-serif); margin-top: 2.5rem; }
+  .prose-section p { font-size: 1.1rem; line-height: 1.7; color: var(--color-ink); margin-top: 1.25rem; }
+  .prose-section h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+  .prose-section ul { list-style: disc; padding-left: 1.5rem; margin-top: 1rem; }
+  .prose-section li { font-size: 1.1rem; line-height: 1.7; margin-top: 0.5rem; }
+</style>

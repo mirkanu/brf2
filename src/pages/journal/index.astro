@@ -1,0 +1,38 @@
+---
+import Site from '../../layouts/Site.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.published.valueOf() - a.data.published.valueOf()
+);
+
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Site title="Journal — British Reformed Fellowship">
+  <section class="mx-auto max-w-6xl px-6 pt-12 pb-8">
+    <p class="font-sans text-xs uppercase tracking-[0.22em] text-oxblood">The British Reformed Journal</p>
+    <h1 class="font-serif text-4xl md:text-5xl tracking-tight mt-3 text-balance">Essays, reviews, and sermons from the Reformed tradition.</h1>
+    <p class="font-serif text-lg text-muted mt-5 max-w-2xl">A quarterly publication of the British Reformed Fellowship. Browse the pilot archive below, or read the latest issue in full.</p>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pb-20">
+    <ul class="divide-y divide-rule border-y border-rule">
+      {articles.map((a) => (
+        <li class="py-7 grid md:grid-cols-[120px_1fr_auto] gap-6 items-baseline">
+          <div class="font-sans text-xs uppercase tracking-[0.18em] text-muted">
+            {fmtDate(a.data.published)}
+          </div>
+          <div>
+            <h2 class="font-serif text-2xl md:text-[1.7rem] leading-snug">
+              <a href={`/journal/${a.id}`} class="text-ink no-underline hover:text-oxblood">{a.data.title}</a>
+            </h2>
+            <p class="font-sans text-sm text-muted mt-1">{a.data.author} · {a.data.issue}</p>
+            <p class="font-serif text-base text-ink/85 mt-3 max-w-prose">{a.data.summary}</p>
+          </div>
+          <a href={a.data.pdf} class="font-sans text-sm text-oxblood whitespace-nowrap no-underline hover:underline">Read PDF →</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Site>
