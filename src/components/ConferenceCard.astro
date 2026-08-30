@@ -2,16 +2,19 @@
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  item?: CollectionEntry<'conferences'>;
+  item: CollectionEntry<'conferences'>;
   href?: string;
 }
+
 const { item, href } = Astro.props;
-const { title, subtitle, year, theme, venue, dates } = item.data;
-const realHref = href || `/conferences/${year}`;
+if (!item) throw new Error('ConferenceCard requires an item prop');
+const { title, year, venue, dates } = item.data;
+const subtitle = (item.data as any).subtitle as string | undefined;
+const realHref = href || (year != null ? `/conferences/${year}` : '/conferences');
 ---
 <li class="rounded-lg border border-brand-ink/15 bg-white p-5">
   <a href={realHref} class="block hover:underline">
-    <p class="text-xs uppercase tracking-wider text-brand-ink/55">{year}</p>
+    <p class="text-xs uppercase tracking-wider text-brand-ink/55">{year ?? ''}</p>
     <p class="mt-1 font-serif text-xl text-brand-ink leading-tight">{title}</p>
   </a>
   {subtitle && <p class="mt-2 text-sm text-brand-ink/75">{subtitle}</p>}

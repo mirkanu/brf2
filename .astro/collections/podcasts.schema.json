@@ -11,9 +11,11 @@
     "datePublished": {
       "type": "string"
     },
-    "author": {
-      "default": "",
-      "type": "string"
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "tags": {
       "default": [],
@@ -30,12 +32,17 @@
       }
     },
     "primaryCategory": {
+      "default": null,
       "type": [
         "string",
         "null"
       ]
     },
+    "section": {
+      "type": "string"
+    },
     "duration": {
+      "default": null,
       "type": [
         "string",
         "null"
@@ -47,6 +54,9 @@
   },
   "required": [
     "title",
-    "legacyPath"
+    "legacyPath",
+    "datePublished",
+    "authors",
+    "section"
   ]
 }

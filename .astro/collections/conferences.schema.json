@@ -11,9 +11,11 @@
     "datePublished": {
       "type": "string"
     },
-    "author": {
-      "default": "",
-      "type": "string"
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "tags": {
       "default": [],
@@ -30,24 +32,43 @@
       }
     },
     "primaryCategory": {
+      "default": null,
       "type": [
         "string",
         "null"
       ]
     },
+    "section": {
+      "type": "string"
+    },
     "year": {
-      "anyOf": [
-        {
-          "type": "integer",
-          "minimum": -9007199254740991,
-          "maximum": 9007199254740991
-        },
-        {
-          "type": "null"
-        }
-      ]
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
     },
     "venue": {
+      "default": null,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "subtitle": {
+      "default": null,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "theme": {
+      "default": null,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "dates": {
+      "default": null,
       "type": [
         "string",
         "null"
@@ -59,6 +80,10 @@
   },
   "required": [
     "title",
-    "legacyPath"
+    "legacyPath",
+    "datePublished",
+    "authors",
+    "section",
+    "year"
   ]
 }

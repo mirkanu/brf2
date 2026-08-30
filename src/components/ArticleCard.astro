@@ -2,20 +2,23 @@
 import { fmtDate } from '../lib/format';
 import type { CollectionEntry } from 'astro:content';
 
+type AnyEntry = CollectionEntry<'journal'> | CollectionEntry<'conferences'> | CollectionEntry<'podcasts'>;
+
 interface Props {
-  item?: CollectionEntry<'journal'> | CollectionEntry<'conferences'>;
-  article?: CollectionEntry<'journal'> | CollectionEntry<'conferences'>;
+  item?: AnyEntry;
+  article?: AnyEntry;
   showIssue?: boolean;
   href?: string;
 }
+
 const { item, article, showIssue = true, href } = Astro.props;
-const entry = item ?? article;
+const entry: AnyEntry = (item ?? article)!;
 if (!entry) throw new Error('ArticleCard requires either item or article prop');
-const { title, datePublished, issueNumber, legacyPath } = entry.data;
+
+const { title, datePublished } = entry.data;
+const issueNumber = 'issueNumber' in entry.data ? entry.data.issueNumber : undefined;
 const authorNames: string[] = Array.isArray((entry.data as any).authors)
-  ? (entry.data as any).authors
-  : (entry.data as any).author
-  ? [(entry.data as any).author as string]
+  ? (entry.data as any).authors.filter((s: string) => s && s.trim().length > 0)
   : [];
 const authorLabel = authorNames.length === 0
   ? 'BRF'

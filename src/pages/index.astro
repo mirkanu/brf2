@@ -98,7 +98,7 @@ function fmtDate(iso: string | undefined): string {
           {latestPodcasts.map(p => (
             <li class="rounded-lg border border-brand-ink/15 bg-white p-5">
               <p class="font-serif text-lg text-brand-ink">{p.data.title}</p>
-              {p.data.author && <p class="mt-1 text-sm text-brand-ink/60">{p.data.author}</p>}
+              {p.data.authors?.[0] && <p class="mt-1 text-sm text-brand-ink/60">{p.data.authors[0]}</p>}
               {p.data.datePublished && <p class="mt-1 text-xs text-brand-ink/50">{fmtDate(p.data.datePublished)}</p>}
             </li>
           ))}

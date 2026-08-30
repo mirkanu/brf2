@@ -10,7 +10,7 @@ for (const entry of allArticles) {
   if (!year) continue;
   const slot = issuesByYear.get(year) ?? { count: 0, issues: new Set() };
   slot.count += 1;
-  slot.issues.add(entry.data.issueNumber);
+  slot.issues.add(entry.data.issueNumber == null ? undefined : String(entry.data.issueNumber));
   issuesByYear.set(year, slot);
 }
 

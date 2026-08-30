@@ -1,45 +1,44 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// Shared frontmatter shape for all migrated entries.
 const baseSchema = z.object({
   title: z.string(),
   legacyPath: z.string(),
-  datePublished: z.string().optional(),
-  author: z.string().optional().default(''),
+  datePublished: z.string(),
+  authors: z.array(z.string()),
   tags: z.array(z.string()).default([]),
   rawCategories: z.array(z.string()).default([]),
-  primaryCategory: z.string().nullable().optional(),
+  primaryCategory: z.string().nullable().default(null),
+  section: z.string(),
 });
 
-// Conference-specific extras: derived year (from title prefix) and venue.
 const conferences = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/conferences' }),
   schema: baseSchema.extend({
-    year: z.number().int().nullable().optional(),
-    venue: z.string().nullable().optional(),
+    year: z.number().int(),
+    venue: z.string().nullable().default(null),
+    subtitle: z.string().nullable().default(null),
+    theme: z.string().nullable().default(null),
+    dates: z.string().nullable().default(null),
   }),
 });
 
-// Podcast extras.
 const podcasts = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/podcasts' }),
   schema: baseSchema.extend({
-    duration: z.string().nullable().optional(),
+    duration: z.string().nullable().default(null),
   }),
 });
 
-// Journal extras.
 const journal = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/journal' }),
   schema: baseSchema.extend({
-    issueNumber: z.number().int().nullable().optional(),
-    issueYear: z.number().int().nullable().optional(),
-    pdfLink: z.string().nullable().optional(),
+    issueNumber: z.number().int().nullable().default(null),
+    issueYear: z.number().int().nullable().default(null),
+    pdfLink: z.string().nullable().default(null),
   }),
 });
 
-// Static pages.
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/pages' }),
   schema: baseSchema,

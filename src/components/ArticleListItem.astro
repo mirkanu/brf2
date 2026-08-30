@@ -2,16 +2,19 @@
 import { fmtDate } from '../lib/format';
 import type { CollectionEntry } from 'astro:content';
 
+type AnyEntry = CollectionEntry<'journal'> | CollectionEntry<'conferences'> | CollectionEntry<'podcasts'>;
+
 interface Props {
-  entry: CollectionEntry<'journal'> | CollectionEntry<'conferences'> | CollectionEntry<'podcasts'>;
+  entry: AnyEntry;
   href?: string;
 }
+
 const { entry, href } = Astro.props;
-const { title, datePublished, issueNumber, issueYear, legacyPath, primaryCategory } = entry.data;
+const { title, datePublished, primaryCategory, legacyPath } = entry.data as any;
+const issueNumber = (entry.data as any).issueNumber as number | null | undefined;
+const issueYear = (entry.data as any).issueYear as number | null | undefined;
 const authorNames: string[] = Array.isArray((entry.data as any).authors)
-  ? (entry.data as any).authors
-  : (entry.data as any).author
-  ? [(entry.data as any).author as string]
+  ? (entry.data as any).authors.filter((s: string) => s && s.trim().length > 0)
   : [];
 const link = href ?? legacyPath ?? `/${entry.collection}/${entry.id.replace(/\.json$/, '')}`;
 ---
