@@ -1,0 +1,9 @@
+---
+title: "1996:4 The Church: Its Institutional Form"
+legacyPath: "/podcast/category/the-church-its-institutional-form"
+datePublished: "2024-08-25 15:44:45"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

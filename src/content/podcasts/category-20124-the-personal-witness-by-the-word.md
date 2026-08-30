@@ -1,0 +1,9 @@
+---
+title: "2012:4 The Personal Witness by the Word"
+legacyPath: "/podcast/category/20124-the-personal-witness-by-the-word"
+datePublished: "2024-08-25 21:06:57"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

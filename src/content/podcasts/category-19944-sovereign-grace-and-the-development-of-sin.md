@@ -1,0 +1,9 @@
+---
+title: "1994:4 Sovereign Grace and The Development of Sin"
+legacyPath: "/podcast/category/19944-sovereign-grace-and-the-development-of-sin"
+datePublished: "2024-08-25 15:36:38"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

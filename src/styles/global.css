@@ -7,6 +7,9 @@
   --color-rule: var(--rule);
   --color-oxblood: var(--oxblood);
   --color-oxblood-hover: var(--oxblood-hover);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-parchment: var(--brand-parchment);
 
   --font-serif: "Source Serif 4", "Source Serif Pro", Georgia, serif;
   --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
@@ -20,6 +23,9 @@ html[data-theme="light"] {
   --rule: #e6dfd2;
   --oxblood: #7a1f1f;
   --oxblood-hover: #5e1717;
+  --brand-ink: #1a1a1a;
+  --brand-cream: #f8f4eb;
+  --brand-parchment: #efe7d6;
 }
 
 html[data-theme="dark"] {
@@ -29,6 +35,9 @@ html[data-theme="dark"] {
   --rule: #2a251c;
   --oxblood: #c66a5a;
   --oxblood-hover: #d8856f;
+  --brand-ink: #ece6d8;
+  --brand-cream: #1c1814;
+  --brand-parchment: #221d18;
 }
 
 html {
@@ -42,4 +51,62 @@ body {
   color: var(--ink);
   font-family: var(--font-serif);
   transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* prose adjustments so markdown content looks consistent with site typography */
+.prose {
+  color: var(--ink);
+}
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-family: var(--font-serif);
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.prose h2 { font-size: 1.6rem; margin-top: 1.6em; margin-bottom: 0.6em; font-weight: 600; }
+.prose h3 { font-size: 1.25rem; margin-top: 1.4em; margin-bottom: 0.4em; font-weight: 600; }
+.prose p,
+.prose li {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--ink);
+}
+.prose a {
+  color: var(--oxblood);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose a:hover {
+  color: var(--oxblood-hover);
+}
+.prose blockquote {
+  border-left: 3px solid var(--rule);
+  padding-left: 1rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 1.4rem 0;
+}
+.prose code {
+  background: var(--brand-parchment);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.4rem;
+  margin: 1rem 0;
+}
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 1.2rem 0;
+}
+.prose hr {
+  border-color: var(--rule);
+  margin: 2rem 0;
 }

@@ -1,0 +1,9 @@
+---
+title: "2006:2 Sovereign Predestination"
+legacyPath: "/podcast/category/20062-sovereign-predestination"
+datePublished: "2024-08-25 16:19:51"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

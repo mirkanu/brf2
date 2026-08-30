@@ -1,0 +1,9 @@
+---
+title: "2000:4 The Kingdom, Gospel and Law"
+legacyPath: "/podcast/category/20004-the-kingdom-gospel-and-law"
+datePublished: "2024-08-25 16:01:44"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

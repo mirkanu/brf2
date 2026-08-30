@@ -1,0 +1,21 @@
+---
+import Site from '../../layouts/Site.astro';
+import ArticleBody from '../../components/ArticleBody.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allPodcasts = await getCollection('podcasts');
+  return allPodcasts.map((entry) => ({
+    params: { slug: entry.id.replace(/\.json$/, '') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<Site title={entry.data.title} description={entry.data.title}>
+  <ArticleBody entry={entry} showAudio={true}>
+    <Content />
+  </ArticleBody>
+</Site>

@@ -1,0 +1,9 @@
+---
+title: "7  Special Lecture on Charismaticism"
+legacyPath: "/podcast/category/7-special-lecture-on-charismaticism"
+datePublished: "2024-08-25 20:46:36"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

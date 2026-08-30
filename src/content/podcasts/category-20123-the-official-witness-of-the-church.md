@@ -1,0 +1,9 @@
+---
+title: "2012:3 The Official Witness of the Church"
+legacyPath: "/podcast/category/20123-the-official-witness-of-the-church"
+datePublished: "2024-08-25 21:05:52"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

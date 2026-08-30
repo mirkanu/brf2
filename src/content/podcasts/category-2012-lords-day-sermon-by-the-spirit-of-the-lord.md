@@ -1,0 +1,9 @@
+---
+title: "2012 Lord's Day Sermon: By the Spirit of the Lord"
+legacyPath: "/podcast/category/2012-lords-day-sermon-by-the-spirit-of-the-lord"
+datePublished: "2024-08-25 21:01:26"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

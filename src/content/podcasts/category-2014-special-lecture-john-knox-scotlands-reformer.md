@@ -1,0 +1,9 @@
+---
+title: "2014 Special Lecture: John Knox: Scotland's Reformer"
+legacyPath: "/podcast/category/2014-special-lecture-john-knox-scotlands-reformer"
+datePublished: "2024-08-25 21:21:40"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

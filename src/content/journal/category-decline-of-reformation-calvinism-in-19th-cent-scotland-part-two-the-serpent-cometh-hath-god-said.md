@@ -1,0 +1,11 @@
+---
+title: "Decline of Reformation Calvinism in 19th Cent. Scotland Part Two: The Serpent Cometh - Hath God said?"
+legacyPath: "/journal/articles/category/decline-of-reformation-calvinism-in-19th-cent-scotland-part-two-the-serpent-cometh-hath-god-said"
+datePublished: "2019-04-18 17:51:09"
+authors:
+  - "H.L.Williams"
+issueNumber: 23
+issueYear: 1998
+---
+
+[Click Here](/s/Issue-232-Decline-of-Reformation.pdf)

@@ -1,38 +1,69 @@
 ---
 import Site from '../../layouts/Site.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
 
-const articles = (await getCollection('articles')).sort(
-  (a, b) => b.data.published.valueOf() - a.data.published.valueOf()
-);
+const PER_PAGE = 20;
+const all = await getCollection('journal');
+const sorted = all
+  .filter(j => j.data.datePublished)
+  .sort((a, b) => b.data.datePublished.localeCompare(a.data.datePublished));
 
-const fmtDate = (d: Date) =>
-  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+// Show first page on /journal (sorted by date desc, page 1)
+const page1 = sorted.slice(0, PER_PAGE);
+const totalPages = Math.max(1, Math.ceil(sorted.length / PER_PAGE));
+
+// Group by category for the category cloud (top categories only)
+const counts = new Map<string, number>();
+for (const j of all) (j.data.categories || []).forEach(c => counts.set(c, (counts.get(c) || 0) + 1));
+const topCats = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20);
 ---
-<Site title="Journal — British Reformed Fellowship">
-  <section class="mx-auto max-w-6xl px-6 pt-12 pb-8">
-    <p class="font-sans text-xs uppercase tracking-[0.22em] text-oxblood">The British Reformed Journal</p>
-    <h1 class="font-serif text-4xl md:text-5xl tracking-tight mt-3 text-balance">Essays, reviews, and sermons from the Reformed tradition.</h1>
-    <p class="font-serif text-lg text-muted mt-5 max-w-2xl">A quarterly publication of the British Reformed Fellowship. Browse the pilot archive below, or read the latest issue in full.</p>
+<Site title="The British Reformed Journal — BRF">
+  <section class="bg-brand-cream border-b border-brand-ink/10">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Journal' }]} />
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl text-brand-ink">The British Reformed Journal</h1>
+      <p class="mt-3 max-w-2xl text-brand-ink/75">
+        Articles, reviews, and editorials on the Reformed faith, history, theology, and practice —
+        edited by Rev. Dr. R. S. Allan and published by the British Reformed Fellowship.
+      </p>
+    </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-6 pb-20">
-    <ul class="divide-y divide-rule border-y border-rule">
-      {articles.map((a) => (
-        <li class="py-7 grid md:grid-cols-[120px_1fr_auto] gap-6 items-baseline">
-          <div class="font-sans text-xs uppercase tracking-[0.18em] text-muted">
-            {fmtDate(a.data.published)}
-          </div>
-          <div>
-            <h2 class="font-serif text-2xl md:text-[1.7rem] leading-snug">
-              <a href={`/journal/${a.id}`} class="text-ink no-underline hover:text-oxblood">{a.data.title}</a>
-            </h2>
-            <p class="font-sans text-sm text-muted mt-1">{a.data.author} · {a.data.issue}</p>
-            <p class="font-serif text-base text-ink/85 mt-3 max-w-prose">{a.data.summary}</p>
-          </div>
-          <a href={a.data.pdf} class="font-sans text-sm text-oxblood whitespace-nowrap no-underline hover:underline">Read PDF →</a>
-        </li>
-      ))}
-    </ul>
+  <section class="bg-white">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Latest articles</h2>
+      <ul class="mt-8 grid gap-6 md:grid-cols-2">
+        {page1.map(item => <ArticleCard item={item} />)}
+      </ul>
+      {totalPages > 1 && (
+        <nav class="mt-10 flex items-center justify-between border-t border-brand-ink/15 pt-6">
+          <span />
+          <p class="text-sm text-brand-ink/60">Page 1 of {totalPages}</p>
+          <a href="/journal/2" class="text-brand-ink hover:underline">Next →</a>
+        </nav>
+      )}
+    </div>
   </section>
+
+  {topCats.length > 0 && (
+    <section class="bg-brand-parchment">
+      <div class="max-w-5xl mx-auto px-6 py-12">
+        <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Browse by category</h2>
+        <ul class="mt-6 flex flex-wrap gap-2">
+          {topCats.map(([cat, n]) => (
+            <li>
+              <a
+                href={`/journal/category/${cat}`}
+                class="inline-block rounded-full border border-brand-ink/25 bg-white px-3 py-1 text-sm text-brand-ink hover:bg-brand-ink/5"
+              >
+                {cat.replace(/-/g, ' ')} <span class="ml-1 text-brand-ink/55">({n})</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
 </Site>

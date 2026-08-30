@@ -1,0 +1,9 @@
+---
+title: "2012 Lord's Day Sermon: The Martyr Church's Witness to the Ascended Lord"
+legacyPath: "/podcast/category/2012-lords-day-sermon-the-martyr-churchs-witness-to-the-ascended-lord"
+datePublished: "2024-08-25 21:02:38"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

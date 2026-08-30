@@ -1,0 +1,9 @@
+---
+title: "2000:6 The Life of the Kingdom"
+legacyPath: "/podcast/category/20006-the-life-of-the-kingdom"
+datePublished: "2024-08-25 16:03:12"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

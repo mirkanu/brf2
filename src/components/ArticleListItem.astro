@@ -1,0 +1,31 @@
+---
+import { fmtDate } from '../lib/format';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'journal'> | CollectionEntry<'conferences'> | CollectionEntry<'podcasts'>;
+  href?: string;
+}
+const { entry, href } = Astro.props;
+const { title, datePublished, issueNumber, issueYear, legacyPath, primaryCategory } = entry.data;
+const authorNames: string[] = Array.isArray((entry.data as any).authors)
+  ? (entry.data as any).authors
+  : (entry.data as any).author
+  ? [(entry.data as any).author as string]
+  : [];
+const link = href ?? legacyPath ?? `/${entry.collection}/${entry.id.replace(/\.json$/, '')}`;
+---
+<li class="py-4">
+  <a href={link} class="block hover:underline">
+    <div class="flex items-baseline justify-between gap-4">
+      <p class="font-serif text-lg text-brand-ink leading-snug">{title}</p>
+      {datePublished && <time class="shrink-0 text-xs text-brand-ink/55 tabular-nums">{fmtDate(datePublished)}</time>}
+    </div>
+    <p class="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-brand-ink/65">
+      {authorNames.length > 0 && <span>{authorNames.join(', ')}</span>}
+      {issueYear != null && <span>{issueYear}</span>}
+      {issueNumber != null && <span>Issue {issueNumber}</span>}
+      {primaryCategory && <span>{primaryCategory}</span>}
+    </p>
+  </a>
+</li>

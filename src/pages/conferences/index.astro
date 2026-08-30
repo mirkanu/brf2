@@ -1,0 +1,66 @@
+---
+import Site from '../../layouts/Site.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ConferenceCard from '../../components/ConferenceCard.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('conferences');
+const currentYear = new Date().getFullYear();
+const upcoming = all
+  .filter(c => c.data.year >= currentYear)
+  .sort((a, b) => a.data.year - b.data.year);
+const past = all
+  .filter(c => c.data.year < currentYear)
+  .sort((a, b) => b.data.year - a.data.year);
+
+// Group past conferences by decade for the "Past" section
+function byDecade(items: typeof all) {
+  const out = new Map<string, typeof all>();
+  for (const it of items) {
+    const decade = Math.floor(it.data.year / 10) * 10;
+    const k = `${decade}s`;
+    if (!out.has(k)) out.set(k, []);
+    out.get(k)!.push(it);
+  }
+  return out;
+}
+const pastByDecade = byDecade(past);
+const decades = [...pastByDecade.keys()].sort().reverse();
+---
+<Site title="Conferences — British Reformed Fellowship">
+  <section class="bg-brand-cream border-b border-brand-ink/10">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Conferences' }]} />
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl text-brand-ink">Conferences</h1>
+      <p class="mt-3 max-w-2xl text-brand-ink/75">
+        BRF has held annual conferences across the British Isles since 1975, bringing together
+        Reformed Christians for teaching, fellowship, and worship.
+      </p>
+    </div>
+  </section>
+
+  {upcoming.length > 0 && (
+    <section class="bg-brand-parchment border-b border-brand-ink/10">
+      <div class="max-w-5xl mx-auto px-6 py-12">
+        <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Upcoming</h2>
+        <ul class="mt-6 grid gap-4 md:grid-cols-2">
+          {upcoming.map(c => <ConferenceCard item={c} />)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="bg-white">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Past Conferences</h2>
+      {decades.map(d => (
+        <div class="mt-8">
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-brand-ink/60">{d}</h3>
+          <ul class="mt-3 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {pastByDecade.get(d)!.map(c => <ConferenceCard item={c} />)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</Site>

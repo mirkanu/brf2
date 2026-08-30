@@ -1,0 +1,9 @@
+---
+title: "1992:3 The Cosmic Character of the Covenant"
+legacyPath: "/podcast/category/1992-3"
+datePublished: "2024-08-25 14:37:54"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

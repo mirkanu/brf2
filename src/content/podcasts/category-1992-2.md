@@ -1,0 +1,9 @@
+---
+title: "1992:2 The Covenant with Adam, a Covenant of Works"
+legacyPath: "/podcast/category/1992-2"
+datePublished: "2024-08-18 14:29:20"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

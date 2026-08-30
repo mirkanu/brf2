@@ -1,0 +1,24 @@
+---
+import Site from '../../layouts/Site.astro';
+import ArticleBody from '../../components/ArticleBody.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  // Conference "spread" pages: longer content with venue/dates, not the year summary
+  const all = await getCollection('conferences');
+  return all
+    .filter((c) => !(c.data.year != null) || !String(c.data.year).match(/^\d{4}$/))
+    .map((c) => ({
+      params: { slug: c.id.replace(/\.json$/, '') },
+      props: { entry: c },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<Site title={entry.data.title} description={entry.data.subtitle ?? entry.data.title}>
+  <ArticleBody entry={entry}>
+    <Content />
+  </ArticleBody>
+</Site>

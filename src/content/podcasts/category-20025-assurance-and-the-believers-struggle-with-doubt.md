@@ -1,0 +1,9 @@
+---
+title: "2002:5 Assurance and the Believers Struggle with Doubt"
+legacyPath: "/podcast/category/20025-assurance-and-the-believers-struggle-with-doubt"
+datePublished: "2024-08-25 16:07:58"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

@@ -1,0 +1,9 @@
+---
+title: "2002:4 Assurance and the Holy Life"
+legacyPath: "/podcast/category/20024-assurance-and-the-holy-life"
+datePublished: "2024-08-25 16:07:12"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

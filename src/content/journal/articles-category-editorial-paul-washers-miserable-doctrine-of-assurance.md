@@ -1,0 +1,14 @@
+---
+title: "Editorial: Paul Washer’s Miserable Doctrine of Assurance"
+legacyPath: "/journal/articles/articles/category/editorial-paul-washers-miserable-doctrine-of-assurance"
+datePublished: "2020-07-10 18:06:25"
+authors:
+  - "MartynMcGeown"
+issueNumber: 66
+issueYear: null
+tags:
+  - "editorial"
+  - "assurance"
+---
+
+[View this article](/s/Editorial-fprw.pdf) (PDF file)

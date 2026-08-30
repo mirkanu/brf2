@@ -1,0 +1,36 @@
+---
+import { fmtDate } from '../lib/format';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  item?: CollectionEntry<'journal'> | CollectionEntry<'conferences'>;
+  article?: CollectionEntry<'journal'> | CollectionEntry<'conferences'>;
+  showIssue?: boolean;
+  href?: string;
+}
+const { item, article, showIssue = true, href } = Astro.props;
+const entry = item ?? article;
+if (!entry) throw new Error('ArticleCard requires either item or article prop');
+const { title, datePublished, issueNumber, legacyPath } = entry.data;
+const authorNames: string[] = Array.isArray((entry.data as any).authors)
+  ? (entry.data as any).authors
+  : (entry.data as any).author
+  ? [(entry.data as any).author as string]
+  : [];
+const authorLabel = authorNames.length === 0
+  ? 'BRF'
+  : authorNames.length === 1
+  ? authorNames[0]
+  : `${authorNames[0]} +${authorNames.length - 1}`;
+const link = href ?? legacyPath ?? `/${entry.collection}/${entry.id.replace(/\.json$/, '')}`;
+---
+<li class="rounded-lg border border-brand-ink/15 bg-white p-5">
+  <a href={link} class="block hover:underline">
+    <p class="font-serif text-xl text-brand-ink leading-tight">{title}</p>
+  </a>
+  <p class="mt-2 text-sm text-brand-ink/70">{authorLabel}</p>
+  <p class="mt-1 text-xs text-brand-ink/55">
+    {fmtDate(datePublished)}
+    {showIssue && issueNumber != null && (<span> · Issue {issueNumber}</span>)}
+  </p>
+</li>

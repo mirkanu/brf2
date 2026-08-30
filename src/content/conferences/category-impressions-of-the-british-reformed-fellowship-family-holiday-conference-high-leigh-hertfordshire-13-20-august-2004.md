@@ -1,0 +1,26 @@
+---
+title: "Impressions of the British Reformed Fellowship Family Holiday Conference High Leigh, Hertfordshire, 13-20 August 2004"
+legacyPath: "/conference/category/impressions-of-the-british-reformed-fellowship-family-holiday-conference-high-leigh-hertfordshire-13-20-august-2004"
+datePublished: "2004-11-26 09:54:00"
+authors:
+  - "manuelkuhs@gmail.com"
+tags:
+  - "2004"
+---
+
+_by_ _Dr Malcolm A H McCausland_
+
+This year’s BRF Conference brought together nearly 100 people of all ages (from under 3 months to 84 years) from the UK, Canada, France, the Netherlands, the Ukraine and the USA. The principal speakers - the Rev. Professor David Engelsma, Professor of Dogmatics and Old Testament in the Protestant Reformed Seminary, Grandville, Michigan and the Rev. Professor Herman Hanko, Emeritus Professor of Church History and New Testament in the same institution - brought a wealth of pastoral and academic experience to bear on doctrinal and practical aspects of keeping God’s Covenant in the Church, in marriage, in the home, in the family, and in the world.
+
+The conference addresses formed the core of a varied programme comprising daily worship, outings, recreation, question-and-answer sessions, group discussions, and innumerable informal conversations with friends old and new. The two coach trips (one to Cambridge, the other to London) centered on aspects of our Reformed heritage. The prime focus of the London outing was a visit to Westminster Abbey, the venue of the Westminster Assembly. Those who participated had been well prepared on the preceding evening by an imaginatively presented address on _The Westminster Assembly and its Catechisms_ by Mr. Chad Van Dixhoorn, Research Fellow at the University of Cambridge and licentiate in the Orthodox Presbyterian Church. Towards the end of the Conference the children had an opportunity to display their knowledge of the Heidelberg and Westminster Catechisms and their ability to sing psalms from memory. (The Songs of Zion, in metrical form, were a recurrent feature of the entire Conference - especially welcome to those who were weary of exclusive hymnody.) There was also a special group discussion on the Covenant and evangelism. The entire programme was nicely balanced and the organisation excellent. Those who have visited the High Leigh Conference Centre will not need to be reminded of the excellent food, friendly service, comfortable accommodation and delightful surroundings.
+
+One of the objectives of the British Reformed Fellowship is to provide advice, information and support to Reformed Christians who are living and working in isolation. The extent of this problem was impressed on me in one-to-one conversations, mostly with people whom I had not met before, and reinforced by an unscheduled informal session entirely devoted to the subject. The plight of isolated Reformed believers in our once-Christian country was poignantly expressed in an appreciative email from a lady for whom this was the first BRF Conference: “_I had been totally isolated, unable to find a church that was faithful to my Reformed convictions. I knew that God must have his faithful remnant in Britain, and had been asking Him where they might be found. I would have been grateful to meet just one believer. Two would have been a luxury - and here \[at the Conference\] was the most magnificent group of God-loving people I could ever ask for! Sinful me had the privilege and joy of fellowship with all of you delightful children of our gracious Lord._”
+
+Much more could be said if space permitted; just three lasting impressions must suffice.
+
+*   The clarity, practicality, warmth, wit, and uncompromising orthodoxy of the addresses. This participant, for one, came away convinced of the relevance of covenant theology to virtually every aspect of the believer’s life.
+*   The gaiety and outright hilarity of the young people - and their doctrinal literacy, manifested in enthusiastic coffee-table discussions and penetrating questions to our learned speakers.
+*   These young people would regularly gather for psalmsinging late into the evening, along with those of us older folk who had the requisite stamina. Where in the world outside (or indeed in the contemporary visible Church) would one find so felicitous a combination of knowledge, seriousness and joy? What a powerful rebuttal of popular myths about miserable, hard-faced Calvinists!
+*   The participation and involvement of the children, according to their capacity - a reflection of the commitment of Reformed believers to the Covenant status of their children in the Church of Christ.
+
+This was _the most edifying Christian conference that I have ever had the privilege to attend._ If you feel that you’ve missed something, you can order a complete set of the tapes of the seven main addresses and the Lord’s day services for a mere £12. E-mail cprfaudiostore@yahoo.co.uk or write to Mr. Sean Courtney, 78 Millfield Ballymena, BT43 6PD. (The tapes won’t re-create the conference atmosphere, but they’ll at least convey the quality of the teaching.) Plan _not_ to miss the next BRF family conference, this time on the Five Points of Calvinism, to be held in Wales in the summer of 2006, D.V.

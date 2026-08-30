@@ -1,0 +1,39 @@
+---
+title: "Recap: Evolutionism's Effect on Education"
+legacyPath: "/blog-/category/recap-evolutionisms-effect-on-education"
+datePublished: "2023-05-14 22:18:11"
+authors:
+  - "Editor"
+issueNumber: null
+issueYear: null
+tags:
+  - "education"
+  - "evolution"
+  - "humanism"
+  - "prayer"
+  - "science"
+  - "philosophy"
+  - "worldview"
+---
+
+Perhaps you remember that I mentioned in the last blog post that all the previous issues of the BRJ are available to review by the list of [issues](/journal/issues), list of [article titles](/journal/articles), or by our [search page](/search-)? Perhaps you also recall that one of the purposes of the British Reformed Fellowship is “to promote Reformed causes such as Christian education, Christian benevolence, biblical ecumenism and fellowship throughout the British Isles.”
+
+In this post, I’d like to briefly share a little about the particular cause of Christian education. One way in which we aim to further this cause has been the occasional presentation on the subject at our BRF Family Conferences. Another is the occasional article touching on the subject. Here’s a quote from one such article from Issue 52, way back in Spring/Summer 2010 ([the second part of Rev. Angus Stewart’s article on “Calvin Versus Darwin: Anniversaries, Origins and World-Views](https://static.squarespace.com/static/5359681be4b04d0a00bdd9ad/5398a5fde4b0172c0d398003/5398a619e4b0172c0d39867d/1402512921373/Calvin%20versus%20Darwin%202.pdf?format=original)”):
+
+> Not only does evolutionism affect the various fields of study: biology, geology, linguistics, religion, etc.; and not only does it attack the very idea of truth itself; evolutionism also affects education, that is, the passing on of knowledge.
+> 
+> It affects education, first, because evolution determines both the subject and the object of teaching. The teacher is an evolved ape and those taught are developed slime. If a teacher believes that he is teaching human beings originally created in the image of God and that he is accountable to Him, that is one thing. But if he believes that a classroom is a place where one evolved ape instructs other, usually younger, evolved apes, his view of education is radically different.
+> 
+> Second, the world-view of evolutionists is presented, consciously or unconsciously, through their instruction. I remember when I went through the state school system, I unconsciously imbibed the unspoken assumption that God is irrelevant. “I can study the various disciplines and grasp all these things, but I do not need to know the God and Father of our Lord Jesus Christ through the forgiveness of sins in the cross. I can be a fully-functioning human being with real, substantial knowledge without knowing God.” God is irrelevant; God is absurd within the state school system—the real God, revealed in the whole of Scripture and summed in the Reformed confessions. In my day, Religious Education (RE) was a joke—way down at the end of the curriculum, with poor textbooks and poor teaching. The real action was in the other subjects—science, maths, languages, etc. The knowledge of the true and living God of heaven and earth, before whom we live every day and to whom we must give account, was reckoned as nothing.
+> 
+> The Humanist Manifesto I (1933) is deliberately anti-Christian. How does it begin? Article 1 claims that the universe was not created; it arose through a huge explosion. Article 2 reckons that the human race evolved from slime. The big bang and evolutionism—that is how the Humanist Manifesto I starts. It rigorously excludes God’s creation, the Bible, the church and Jesus Christ. Building on its first two evolutionary articles, its next thirteen articles attack religion and promote humanism.
+> 
+> The Humanist Manifesto I was followed forty years later by the Humanist Manifesto II (1973) and then A Secular Humanist Declaration (1980). All three of these documents make it very clear that the humanists desire, and are working towards, an education that is totally committed to, and wholeheartedly promotes, evolutionism. By education they mean state education—at kindergartens, primary schools, high schools and universities. This is their goal and this is what is happening in Northern Ireland, the United Kingdom, the European Union, the United States and the whole Western world, year after year and decade after decade. With each generation, state education—and therefore the students that receive this indoctrination—has become more and more consistent with evolutionary, big bang philosophy.
+
+For those of us, like myself, who have been brought up in a secular culture and through a secular school system it is difficult to even conceive of what the alternative to the humanist dream looks like from a practical viewpoint. And yet the reality of the God who created all things, governs all things, and who will judge all things is inescapable in serious study of mathematics or the natural sciences or history, etc. This is especially true for the believer, but even the unbeliever ordinarily has to exert himself to suppress in unrighteousness the truth of God revealed in creation and even in himself (Rom. 1:18-20). At the same time, for both the believer and unbeliever, this evil suppression is almost automatic and unconscious for us (all the more so in a secular culture which has deeply imbibed the tenets of evolutionism), it is the natural inclination of our fallen and darkened hearts: “The wicked, through the pride of his countenance, will not seek after God: God is not in all his thoughts” (Ps. 10:4).
+
+We may talk about how the educator must be explicit about relating the fundamentals of his subject (if not every lesson) to the all-wise God who ordained and determined all things, and even to harmonize, if not derive his conclusions from a sound biblical theology. In mathematics, for example, the teacher can use illustrations from Scripture where basic mathematical principles are important and relate these to the simplicity and perfection the God of order and truth and other doctrines. Similar connections and illustrations may be used in other subjects. At the same time, his lesson must be primarily mathematics rather than religious education.
+
+In many ways what is lacking is not so much explicit Bible references shoehorned awkwardly into different subjects but a holistic and foundational teaching on the principles of all the subjects of learning so that the student is constantly developing a robust philosophy of science and knowledge based upon Christian theology as the driving force empowering and informing his study of all the other subjects. Humanism succeeds so much in secular education because it refuses to enter into this arena. It attempts to hide the fact that the emperor has no clothes, that its entire super-structure of supposed knowledge and learning is built upon the sand of subjectivity. In this godless subjectivity there is no absolute truth nor anything which can truly be known or understood or related to an overall purpose or order. Even to promote its lies about evolutionism, it must dishonestly borrow from the objective foundation of a theistic worldview.
+
+But true and helpful as this might be, I think this is not fundamentally where to begin to counter the humanist attempt to keep God out of education and our thinking generally. I think that prayer is where we must begin, including prayer before and after school, at the beginning of lessons and whenever else as occasion arises. This is where we train ourselves, and students, that God must come first, and that all our thinking and learning must be of Him, through Him, and to Him. More importantly, this is where we will find the grace and strength and wisdom of God in Jesus Christ to educate and to learn as Christians rather than as godless humanists. May God give us also the grace to pray and prosper our efforts for His sake.

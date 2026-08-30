@@ -1,0 +1,9 @@
+---
+title: "2014 Lord's Day Sermon: The Calling to Work Out Our Own Salvation"
+legacyPath: "/podcast/category/2014-lords-day-sermon-the-calling-to-work-out-our-own-salvation"
+datePublished: "2024-08-25 21:19:37"
+authors:
+  - "manuelkuhs@gmail.com"
+---
+
+

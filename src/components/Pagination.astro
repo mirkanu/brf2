@@ -1,0 +1,23 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string; // e.g. '/journal' or '/journal/category/sermons'
+}
+const { currentPage, totalPages, baseUrl } = Astro.props;
+const hasPrev = currentPage > 1;
+const hasNext = currentPage < totalPages;
+const prevHref = hasPrev ? (currentPage === 2 ? baseUrl : `${baseUrl}/${currentPage - 1}`) : null;
+const nextHref = hasNext ? `${baseUrl}/${currentPage + 1}` : null;
+---
+{totalPages > 1 && (
+  <nav aria-label="Pagination" class="mt-10 flex items-center justify-between border-t border-brand-ink/15 pt-6">
+    {prevHref ? (
+      <a href={prevHref} class="text-brand-ink hover:underline">← Previous</a>
+    ) : <span />}
+    <p class="text-sm text-brand-ink/60">Page {currentPage} of {totalPages}</p>
+    {nextHref ? (
+      <a href={nextHref} class="text-brand-ink hover:underline">Next →</a>
+    ) : <span />}
+  </nav>
+)}

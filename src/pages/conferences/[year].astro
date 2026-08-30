@@ -1,0 +1,61 @@
+---
+import Site from '../../layouts/Site.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection, render } from 'astro:content';
+import { fmtDate } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const all = await getCollection('conferences');
+  return all.map(c => ({
+    params: { year: String(c.data.year) },
+    props: { conf: c },
+  }));
+}
+
+const { conf } = Astro.props;
+const { Content } = await render(conf);
+---
+<Site title={`${conf.data.title} (${conf.data.year}) — BRF`}>
+  <section class="bg-brand-cream border-b border-brand-ink/10">
+    <div class="max-w-4xl mx-auto px-6 py-12">
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/' },
+        { label: 'Conferences', href: '/conferences' },
+        { label: String(conf.data.year) },
+      ]} />
+      <p class="mt-3 text-xs uppercase tracking-wider text-brand-ink/60">{conf.data.year} Conference</p>
+      <h1 class="mt-2 font-serif text-4xl md:text-5xl text-brand-ink leading-tight">{conf.data.title}</h1>
+      {conf.data.subtitle && <p class="mt-3 text-lg text-brand-ink/80">{conf.data.subtitle}</p>}
+      <dl class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+        {conf.data.dates && (
+          <div>
+            <dt class="uppercase text-brand-ink/55 tracking-wider text-xs">Dates</dt>
+            <dd class="mt-1 text-brand-ink">{conf.data.dates}</dd>
+          </div>
+        )}
+        {conf.data.venue && (
+          <div>
+            <dt class="uppercase text-brand-ink/55 tracking-wider text-xs">Venue</dt>
+            <dd class="mt-1 text-brand-ink">{conf.data.venue}</dd>
+          </div>
+        )}
+        {conf.data.theme && (
+          <div>
+            <dt class="uppercase text-brand-ink/55 tracking-wider text-xs">Theme</dt>
+            <dd class="mt-1 text-brand-ink">{conf.data.theme}</dd>
+          </div>
+        )}
+      </dl>
+    </div>
+  </section>
+
+  {conf.body && conf.body.trim().length > 0 && (
+    <section class="bg-white">
+      <div class="max-w-3xl mx-auto px-6 py-12">
+        <div class="prose prose-brand">
+          <Content />
+        </div>
+      </div>
+    </section>
+  )}
+</Site>
