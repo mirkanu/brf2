@@ -16,7 +16,7 @@ const issueYear = (entry.data as any).issueYear as number | null | undefined;
 const authorNames: string[] = Array.isArray((entry.data as any).authors)
   ? (entry.data as any).authors.filter((s: string) => s && s.trim().length > 0)
   : [];
-const link = href ?? legacyPath ?? `/${entry.collection}/${entry.id.replace(/\.json$/, '')}`;
+const link = href ?? `/${entry.collection}/${entry.id.replace(/\.json$/, '')}`;
 ---
 <li class="py-4">
   <a href={link} class="block hover:underline">
