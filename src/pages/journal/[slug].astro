@@ -5,18 +5,8 @@ import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const articles = await getCollection('journal');
-  const slugFor = (a: any) => {
-    const legacy = a.data?.legacyPath as string | undefined;
-    if (legacy && legacy.startsWith('/journal/articles/')) {
-      return 'articles/' + legacy.slice('/journal/articles/'.length);
-    }
-    if (legacy && legacy.startsWith('/journal/')) {
-      return legacy.slice('/journal/'.length);
-    }
-    return a.id.replace(/\.json$/, '');
-  };
   return articles.map((a) => ({
-    params: { slug: slugFor(a) },
+    params: { slug: a.id.replace(/\.json$/, '') },
     props: { article: a },
   }));
 }
