@@ -1,16 +1,20 @@
 #!/usr/bin/env node
 /**
- * Generate dist/sitemap-*.xml + dist/rss.xml from the built site.
- * Run AFTER `npm run build`. Writes to dist/ so the deploy picks them up.
+ * Generate sitemap-index.xml + sitemap-N.xml + rss.xml from built dist/.
+ * Outputs to whatever directory the caller chose — Astro is configured to run
+ * this script with `OUT_DIR=public` so files are picked up as static assets.
  *
- *   node scratch/phase-2/gen-sitemaps.mjs
+ *   npm run sitemap                  # default → dist/
+ *   OUT_DIR=public node ...          # for Pages deploy
+ *
+ * Run after `astro build`.
  */
-import { readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
-import { join, relative, sep } from 'node:path';
+import { readdirSync, writeFileSync, statSync, readFileSync } from 'node:fs';
 import { glob } from 'node:fs/promises';
+import { join, relative, sep } from 'node:path';
 
 const ROOT = '/home/workspace/1 Projects/brf2';
-const DIST = join(ROOT, 'dist');
+const DIST = process.env.OUT_DIR ?? join(ROOT, 'dist');
 const SITE = 'https://brf2.pages.dev';
 
 function walk(dir) {
@@ -32,7 +36,7 @@ function toUrl(absPath) {
 }
 
 function lastmod(absPath) {
-  return new Date(statSync(absPath).mtime).toISOString().slice(0, 10);
+  return new Date(statSync(DIST).mtime).toISOString().slice(0, 10);
 }
 
 const all = walk(DIST).map(p => ({ url: toUrl(p), mtime: lastmod(p) }));
@@ -52,7 +56,9 @@ function chunk(arr, size) {
 
 const chunks = chunk(staticPages, 1000);
 
-const urls = chunks.map((c, i) => `  <sitemap>\n    <loc>${SITE}/sitemap-${i + 1}.xml</loc>\n  </sitemap>`).join('\n');
+const urls = chunks.map((c, i) => `  <sitemap>
+    <loc>${SITE}/sitemap-${i + 1}.xml</loc>
+  </sitemap>`).join('\n');
 
 const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -63,7 +69,10 @@ ${urls}
 writeFileSync(join(DIST, 'sitemap-index.xml'), indexXml);
 
 chunks.forEach((c, i) => {
-  const body = c.map(u => `  <url>\n    <loc>${u.url}</loc>\n    <lastmod>${u.mtime}</lastmod>\n  </url>`).join('\n');
+  const body = c.map(u => `  <url>
+    <loc>${u.url}</loc>
+    <lastmod>${u.mtime}</lastmod>
+  </url>`).join('\n');
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${body}
@@ -72,7 +81,6 @@ ${body}
   writeFileSync(join(DIST, `sitemap-${i + 1}.xml`), xml);
 });
 
-// RSS — most recent 50 journal articles.
 const articles = [];
 for await (const f of glob('src/content/journal/**/*.json', { cwd: ROOT })) {
   const j = JSON.parse(readFileSync(join(ROOT, f), 'utf8'));
@@ -90,14 +98,12 @@ for await (const f of glob('src/content/journal/**/*.json', { cwd: ROOT })) {
 articles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 const top = articles.slice(0, 50);
 
-const esc = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
 const rssItems = top.map(a => `    <item>
-      <title>${esc(a.title)}</title>
-      <link>${esc(a.link)}</link>
-      <description>${esc(a.description)}</description>
+      <title>${a.title.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</title>
+      <link>${a.link}</link>
+      <description>${a.description.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</description>
       <pubDate>${a.pubDate}</pubDate>
-      ${a.authors ? `<dc:creator>${esc(a.authors)}</dc:creator>` : ''}
+      ${a.authors ? `<dc:creator>${a.authors.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</dc:creator>` : ''}
     </item>`).join('\n');
 
 const rss = `<?xml version="1.0" encoding="UTF-8"?>
