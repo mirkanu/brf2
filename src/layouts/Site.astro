@@ -35,6 +35,25 @@ const { title, description = 'British Reformed Fellowship — confessional Refor
       })();
     </script>
     <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:site_name" content="British Reformed Fellowship" />
+    <meta property="og:image" content="https://brf2.pages.dev/assets/og-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://brf2.pages.dev/assets/og-default.png" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "British Reformed Fellowship",
+      "url": "https://brf2.pages.dev",
+      "logo": "https://brf2.pages.dev/assets/og-default.png",
+      "description": description,
+      "sameAs": []
+    })} />
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
