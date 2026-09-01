@@ -14,7 +14,9 @@ Welcome to the web site of the British Reformed Fellowship, founded in 1990 by a
 
 ## 2024 Conference Audio Now Available
 
-[![](https://images.squarespace-cdn.com/content/v1/5359681be4b04d0a00bdd9ad/ce87742d-8c76-4599-b7c1-faa5d9b2385a/Screenshot+2025-01-05+104337.png?format=original)](https://www.youtube.com/watch?v=K1vcgSD-RNY&list=PL2fVCudX3g_gksbfmIpeeZZf9Q5-9jY_4&ab_channel=BritishReformedFellowship)
+<a href="https://www.youtube.com/watch?v=K1vcgSD-RNY&list=PL2fVCudX3g_gksbfmIpeeZZf9Q5-9jY_4&ab_channel=BritishReformedFellowship">
+<img src="/img/journal-cover.jpg" alt="2024 conference audio playlist on YouTube" width="696" height="391" loading="lazy" decoding="async" />
+</a>
 
 ## New Book Available
 
