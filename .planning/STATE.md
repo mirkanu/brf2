@@ -4,7 +4,7 @@ Last updated: 2026-09-01
 
 ## Current Position
 
-Phase 1 (Functional Duplicate) — **complete** (2026-08-30). Production at https://brf2.pages.dev.
+Phase 1 (Functional Duplicate) — **complete** (2026-08-30). Phase 1.5 (R2 Sizing Audit) — **complete** (2026-09-01). Production at https://brf2.pages.dev.
 
 **Deploy re-enabled 2026-09-01:** the Cloudflare GitHub App was installed at the user level but lacked per-repo access to `mirkanu/brf2`, so push events weren't reaching the Pages build queue. After granting the app access to all repos, an empty commit triggered a fresh build within ~90s and the new `/journal/category/issue-04/` route went live. Auto-deploys are now working again.
 
@@ -30,6 +30,12 @@ Cloudflare Pages auto-deploys from `main`.
 - 3 pilot articles: `gods-saving-will-in-the-new-testament`, `image-of-god-and-responsibility-of-man`, `more-loving-than-god` — each with `.md` body, `.json` metadata, original PDF in `public/articles/`
 - Cloudflare Pages project `brf2` operational, deploying from `main`, serving https://brf2.pages.dev
 
+**Phase 1.5 (2026-09-01):**
+- Probed every MP3 URL in the Squarespace export: 16 unique files, all 200 OK, ~214 MB total. Both `britishreformed.squarespace.com` and `britishreformed.org` host the audio; everything still reachable.
+- Probed every PDF URL: 39 PDFs successfully measured (32 articles, 7 issues, 3 local pilot) totalling ~16.4 MB. Export-coverage gap means real PDF total likely 5–15 GB (BRJ Articles zip still pending).
+- **R2 free tier confirmed** as the asset host; upgrade triggered at >8 GB. See `.planning/PHASE-1.5-SIZING.md`.
+- Harvest scripts archived at `scripts/sizing-audit/harvest-mp3.ts` and `harvest-pdf.ts` for re-runs.
+
 **Phase 1 (2026-08-30):**
 - Squarespace WordPress export of Blog + Conferences blogs received: 575 posts, 16 pages, 36 attachments, byte-identical between the two exports, contains the BRJ Articles (categories `issue-XX-*`), lectures, book reviews, pamphlets, blog posts, conference session pages
 - Revised Phase 1 plan written: `.planning/PHASE-1-DUPLICATE.md`
@@ -46,16 +52,15 @@ Cloudflare Pages auto-deploys from `main`.
 
 ## What's Next
 
-**Phase 1 polish (small):**
-- Lighthouse + WCAG audits on landing + article pages (REQ-18, REQ-20)
+**Phase 2 — Templates & Infrastructure (next phase):**
+- Wire Cloudflare R2 (free) to `brf2.pages.dev/files` and re-host the 39 measured PDFs + 16 MP3s as the first cut. Article+issue+MP3 re-association per the SIZING doc, in batches by issue. Local samples in `scratch/phase-1.5/samples/`.
+- Lighthouse + WCAG 2.1 AA passes on landing + article pages (REQ-18, REQ-20)
 - README documenting structure, local dev, deploy (REQ-25)
+- Redirect inventory + `_redirects` decision (REQ-08, REQ-23)
+- DNS audit: confirm whether britishreformed.org currently has live email (REQ-24)
 
 **Backlog (formerly Phase 1):**
-- Reconcile old BRF URL inventory (REQ-08)
-- Decide `_redirects` file vs. Cloudflare Bulk Redirects (REQ-23)
-- DNS audit: confirm whether britishreformed.org currently has live email (REQ-24)
-- Domain cutover (REQ-22)
-- Re-host the 36 attachments under our own CDN before cutover
+- Domain cutover (REQ-22) — depends on R2 wiring + redirect validation
 - Ingest BRJ Articles export (the bigger Squarespace blog) when ready
 
 ## Blocked / Waiting
@@ -84,6 +89,9 @@ Cloudflare Pages auto-deploys from `main`.
 | Deploy trigger? | Push to `main` → Cloudflare Pages build | 2026-08-17 |
 | Schema strategy? | Glob loader over `**/*.json`, Zod-validated frontmatter | 2026-08-17 |
 | Phase 1 scope? | Functional duplicate only; redirect/DNS/cutover → backlog | 2026-08-30 |
+| R2 tier for asset hosting? | R2 free tier; upgrade at >8 GB | 2026-09-01 |
+| Conference MP3 hosting? | Each conference page hosts the audio directly; no separate podcast feed | 2026-09-01 |
+| MP3 metadata schema? | conference slug, author, title, track number (or kind for non-numbered talks), optional date, optional transcript URL | 2026-09-01 |
 | Author source for /authors/* pages? | Derive from Squarespace export (canonical) | 2026-08-30 |
 | Attachments (PDFs, images)? | Reference by URL from export; replace with local files before cutover | 2026-08-30 |
 
@@ -91,5 +99,5 @@ Cloudflare Pages auto-deploys from `main`.
 
 - The pilot set is small (3 articles). The export gives us 575 — bulk migration is now unblocked.
 - Cloudflare Pages was the original choice. Is there reason to revisit? (None surfaced — keep unless told otherwise.)
-- **Attachments still referenced by legacy Squarespace CDN URLs** — fine until cutover, must re-host before switching DNS.
+- **Attachments still referenced by legacy Squarespace CDN URLs** — R2 sizing done; re-host is now Phase 2 work.
 - **BRJ Articles (the big blog) not yet ingested** — only Blog + Conferences exports were processed. The two exports are byte-identical on the items they share (confirmed), so the Articles export should add ~3-5x more journal content. Blocked on user providing the zip.

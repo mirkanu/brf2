@@ -12,6 +12,9 @@ Live snapshot of feature status. Manuel reviews before each phase gate.
 - Podcast: single combined feed `feed/podcast.xml`.
 - Migration: ~575 articles from Squarespace export, scraped PDFs from canonical `/brj-articles` URLs.
 - Pilot gate: 2-3 articles must be approved before bulk import.
+- MP3 model: one MP3 per talk (single artefact serves both conference page player and podcast feed).
+- Asset hosting: Cloudflare R2 (free tier). Permanent decision landed 2026-09-01 in Phase 1.5. Upgrade at >8 GB.
+- Asset URL path during development: `brf2.pages.dev/files/*`; rewire to `britishreformed.org/files/*` once CNAME is live.
 
 ## Phases
 
@@ -19,6 +22,7 @@ Live snapshot of feature status. Manuel reviews before each phase gate.
 |-------|--------|---------|
 | 0 — Repo, stack, skeleton | ✅ | 2026-08 |
 | 1 — Pilot: journal issues + articles on new schema | ✅ | 2026-09-01 |
+| 1.5 — R2 sizing audit (MP3 + PDF) | ✅ | 2026-09-01 |
 | 2 — Templates & infrastructure | next | — |
 | 3 — Bulk article migration | — | — |
 | 4 — Decap CMS at `/admin` | — | — |
@@ -28,35 +32,36 @@ Live snapshot of feature status. Manuel reviews before each phase gate.
 ## Phase 1 — what shipped (2026-09-01)
 
 - **Issue collection created**: 74 entries under `src/content/issues/issue-NN/issue.json` (new metadata schema: `issueNumber`, `issueDate`, `pdfUrl`, `legacyPath`, `coverImage`).
-- **Article schema migrated**: dropped `issueYear`, `pdfLink`, `datePublished`; added `issueNumber` (FK to issue), `pdfUrl` (optional), `authorSlugs` (array of hyphenated lowercase slugs).
-- **Routes**:
+- **Article collection created**: 695 entries under `src/content/articles/` from a single-pass migration script that translated `issueYear/pdfLink/datePublished` → `issueNumber/issueDate/pdfUrl/legacyPath/coverImage`.
+- **Routes live** (Astro static build, 0 errors, 695 pages generated):
   - `/journal/` — issue index
   - `/journal/issue-NN/` — single issue page
-  - `/journal/issue-NN/[slug]/` — single article (e.g. `/journal/issue-73/the-doctrine-of-repentance/`)
-  - `/author/[name]/` — author landing (lists that author's articles; bio + cross-linking deferred)
-- **Legacy routes removed**: `/journal/[slug]`, `/journal/issues/[year]`, `/journal/category/[...slug]`, `/journal/article/*`, `/journal/tags/*`, `/authors/*`. All return 404 (no 301 redirects configured — site private until launch).
-- **PDF button**: rendered on article pages, disabled (no `href`) until actual PDFs are uploaded in a future phase.
-- **Placeholder covers**: 74 neutral SVGs at `src/assets/issue-covers/issue-NN.svg` displaying issue number + date.
-- **Author slugs**: lowercase hyphenated, derived from author display name at build time (e.g. `Samuel Watterson` → `samuel-watterson`).
-- **Build verified**: `astro build` — 695 article pages, 74 issue pages, 74 author pages. No errors.
+  - `/journal/issue-NN/[slug]/` — single article
+  - `/author/[name]/` — author landing (author slug = lowercase hyphenated display name, e.g. `samuel-watterson`)
+- **Author pages** now list only that author's articles; biographies and cross-linking removed (deferred to a later phase).
+- **Legacy routes** (`/journal/[slug]`, `/journal/issues/[year]`, `/journal/category/*`, `/journal/article/*`, `/journal/tags/*`, `/authors/*`) return 404 — no redirects configured (site remains private until launch).
+- **Issue "Read PDF" button** rendered as disabled (no URL wired) — pending R2 re-host.
+- **Article `pdfUrl`** is `null` for every entry — pending R2 re-host.
+- **MP3s** not yet modelled in content collections; deferred to Phase 1.5.
+- **Placeholder covers** at `src/assets/issue-covers/issue-NN.svg` — replace when real covers arrive.
 
-## Current backlog
+## Phase 1.5 — R2 sizing audit (MP3 + PDF) — shipped 2026-09-01
 
-| Phase | Item | Owner | State | Notes |
-|-------|------|-------|-------|-------|
-| 2 | Templates & infrastructure | Josie | next | full-bleed layouts, header/footer, typography pass |
-| 3 | Bulk article migration | Josie | after templates | 695 articles now in collection; quality sweep |
-| 4 | Decap CMS at `/admin` | Josie | after bulk | PR-based editorial flow |
-| 5 | Pagefind index on build | Josie | with templates | incremental |
-| 6 | Cloudflare Pages deploy | Manuel | final | project name + DNS |
+- **MP3s probed**: 16 unique conference audio files, all 200 OK, ~214 MB total. Source domains: `britishreformed.squarespace.com` and `britishreformed.org`. Per-conference breakdown: 2018 conference = 10 talks, "Behold I Come Quickly" = 6 talks.
+- **PDFs probed**: 39 PDFs successfully measured (32 articles, 7 issues, 3 local pilot) totalling ~16.4 MB. **Export coverage gap**: the Squarespace export contains only 7 of 74 issue PDFs and 32 of 695 article PDFs as `<wp:attachment_url>`; the rest must be re-harvested or downloaded from `britishreformed.org` before re-hosting. Realistic PDF total: **5–15 GB**.
+- **MP3 metadata schema approved**: `conference slug, author, title, track number (or kind for non-numbered talks), optional date, optional transcript URL`. Each conference will have multiple MP3 tracks.
+- **Single-MP3 model confirmed**: one file per conference speech, displayed on the conference page and also served as podcast. No duplicate MP3 for podcast vs. page.
+- **Hosting decision**: **Cloudflare R2 (free tier)**. 10 GB stored, 10M reads/month. Triggers: upgrade at >8 GB; rotate to `britishreformed.org/files/*` once CNAME is live.
+- **Deliverables**: `.planning/PHASE-1.5-SIZING.md` (full audit) + `.planning/PHASE-1.5-PLAN.md` (work log) + `scripts/sizing-audit/harvest-mp3.ts` + `harvest-pdf.ts` (re-runnable harvesters). Raw CSVs and local samples live under `scratch/phase-1.5/` (project-local, not committed).
 
-## Risks
+## Phase 2 — Templates & infrastructure (deferred details)
 
-- Squarespace export OCR quality varies. Some scanned pre-2015 issues will need manual transcription — flag for Manuel review batch by batch.
-- MP3 lecture files on Squarespace may be hosted externally and not in the export ZIP. Confirm via direct scrape.
-- Cloudflare Pages does not allow image transformations without custom code. Use Apline.js + LQIP for image optimisation if needed.
-- No 301 redirects configured for legacy URLs during Phase 1 (site private). Must be added before public launch to preserve SEO continuity from Squarespace.
+Pending tasks (unchanged from previous plan):
+- Lighthouse ≥ 90 + WCAG 2.1 AA passes on new routes.
+- README documenting structure, local dev, deploy (REQ-25).
+- Wire `pdfUrl` and MP3 URLs to R2 (R2 upload + re-association per `PHASE-1.5-SIZING.md`).
 
-## What's next
+## Open questions parked for later
 
-Phase 2: templates and infrastructure. Layout polish, header/footer, typography. Then bulk content sweep, then Decap CMS for editorial workflow.
+- Manual transcription workflow for older articles without OCR'd text — Worth raising with user before Phase 3.
+- BRJ Articles export zip — once dropped in `0 Inbox/`, re-run the PDF harvester to close the export-coverage gap. The realistic PDF total (5–15 GB) cannot be refined further without the export or a direct scrape of `britishreformed.org/brj-articles`.
