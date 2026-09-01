@@ -1,0 +1,106 @@
+---
+import Site from '../../layouts/Site.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const articles = await getCollection('journal');
+
+  const authorMap = new Map<string, { displayName: string; slugs: Set<string> }>();
+  for (const entry of articles) {
+    if (entry.data.section !== 'journal-article') continue;
+    for (const name of entry.data.authors ?? []) {
+      const cleanName = name.trim();
+      if (!cleanName || cleanName.toLowerCase() === 'unknown' || cleanName.toLowerCase() === 'admin') continue;
+      const slug = cleanName
+        .replace(/([a-z])([A-Z])/g, '$1 $2') // AngusStewart -> Angus Stewart
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      const existing = authorMap.get(slug);
+      if (existing) existing.slugs.add(cleanName);
+      else authorMap.set(slug, { displayName: cleanName, slugs: new Set([cleanName]) });
+    }
+  }
+
+  return Array.from(authorMap.entries()).map(([slug, info]) => ({
+    params: { name: slug },
+    props: { slug, displayName: info.displayName },
+  }));
+}
+
+const { slug, displayName } = Astro.props;
+const articles = await getCollection('journal');
+
+const matches = articles
+  .filter((entry) => {
+    if (entry.data.section !== 'journal-article') return false;
+    return (entry.data.authors ?? []).some((name) => {
+      const cleanName = name.trim();
+      if (!cleanName) return false;
+      const authorSlug = cleanName
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      return authorSlug === slug;
+    });
+  })
+  .sort((a, b) => +new Date(b.data.datePublished) - +new Date(a.data.datePublished));
+
+const bc = [
+  { label: 'Home', href: '/' },
+  { label: 'Authors' },
+  { label: displayName },
+];
+---
+
+<Site title={`${displayName} — Authors — BRF`} description={`Articles by ${displayName} in the British Reformed Journal.`}>
+  <section class="bg-brand-cream border-b border-brand-ink/10">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <Breadcrumbs items={bc} />
+      <p class="mt-3 text-xs uppercase tracking-widest text-brand-ink/60">Author</p>
+      <h1 class="mt-2 font-serif text-4xl md:text-5xl text-brand-ink leading-tight tracking-tight">{displayName}</h1>
+      <p class="mt-3 text-brand-ink/75">
+        {matches.length} {matches.length === 1 ? 'article' : 'articles'} in the British Reformed Journal.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      {matches.length === 0 ? (
+        <p class="text-brand-ink/60">No articles by this author yet.</p>
+      ) : (
+        <ul class="divide-y divide-brand-ink/10 border-y border-brand-ink/10">
+          {matches.map((entry) => {
+            const slugStr = entry.id.replace(/\.json$/, '').replace(/^article-/, '');
+            const issueNum = entry.data.issueNumber;
+            const url = issueNum != null
+              ? `/journal/issue/issue-${String(issueNum).padStart(2, '0')}/${slugStr}`
+              : `/journal/${slugStr}`;
+            return (
+              <li class="py-4">
+                <a href={url} class="block hover:underline">
+                  <div class="flex items-baseline justify-between gap-4">
+                    <p class="font-serif text-lg text-brand-ink leading-snug">{entry.data.title}</p>
+                    {entry.data.datePublished && (
+                      <time class="shrink-0 text-xs text-brand-ink/55 tabular-nums">
+                        {new Date(entry.data.datePublished).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      </time>
+                    )}
+                  </div>
+                  {issueNum != null && (
+                    <p class="mt-1 text-xs text-brand-ink/65">Issue {issueNum}</p>
+                  )}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  </section>
+</Site>

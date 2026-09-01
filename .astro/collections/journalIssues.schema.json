@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "issueNumber": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    },
+    "issueDate": {
+      "default": null,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pdfUrl": {
+      "default": null,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "legacyPath": {
+      "default": null,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "coverImage": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "issueNumber",
+    "coverImage"
+  ]
+}

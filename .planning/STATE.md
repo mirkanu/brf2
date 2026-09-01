@@ -1,10 +1,12 @@
 # State
 
-Last updated: 2026-08-30
+Last updated: 2026-09-01
 
 ## Current Position
 
 Phase 1 (Functional Duplicate) — **complete** (2026-08-30). Production at https://brf2.pages.dev.
+
+**Deploy re-enabled 2026-09-01:** the Cloudflare GitHub App was installed at the user level but lacked per-repo access to `mirkanu/brf2`, so push events weren't reaching the Pages build queue. After granting the app access to all repos, an empty commit triggered a fresh build within ~90s and the new `/journal/category/issue-04/` route went live. Auto-deploys are now working again.
 
 **Scope revision 2026-08-30:** redirect, DNS, and cutover work (REQ-08, REQ-22,
 REQ-23, REQ-24) stayed in backlog. Phase 1 ended when the new site was fully

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 420" width="320" height="420" role="img" aria-label="British Reformed Journal Issue 09">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1f2a36"/>
+      <stop offset="100%" stop-color="#0f1620"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="420" fill="url(#bg)"/>
+  <rect x="0" y="0" width="320" height="6" fill="#8b1a1a"/>
+  <rect x="0" y="414" width="320" height="6" fill="#8b1a1a"/>
+  <text x="160" y="170" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#e8dccb" letter-spacing="3">THE BRITISH</text>
+  <text x="160" y="200" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#e8dccb" letter-spacing="3">REFORMED JOURNAL</text>
+  <line x1="110" y1="225" x2="210" y2="225" stroke="#8b1a1a" stroke-width="1"/>
+  <text x="160" y="265" text-anchor="middle" font-family="Georgia, serif" font-size="44" fill="#e8dccb" font-weight="600">Issue 09</text>
+  <text x="160" y="295" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#bfae94" letter-spacing="2">September 2015</text>
+</svg>

@@ -39,9 +39,28 @@ const journal = defineCollection({
   }),
 });
 
+/**
+ * Journal issues — one entry per issue of the British Reformed Journal.
+ * Articles live in the `journal` collection and reference an issue by `issueNumber`.
+ * Articles themselves carry no PDF/cover metadata; they inherit it from the parent issue.
+ *
+ * Fields are intentionally minimal. The display title is `[issueDate]` if provided,
+ * otherwise `Issue {issueNumber}`. Cover image is a path under `/assets/issue-covers/`.
+ */
+const journalIssues = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/journal-issues' }),
+  schema: z.object({
+    issueNumber: z.number().int(),
+    issueDate: z.string().nullable().default(null),
+    pdfUrl: z.string().nullable().default(null),
+    legacyPath: z.string().nullable().default(null),
+    coverImage: z.string(),
+  }),
+});
+
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/pages' }),
   schema: baseSchema,
 });
 
-export const collections = { journal, conferences, podcasts, pages };
+export const collections = { journal, journalIssues, conferences, podcasts, pages };
