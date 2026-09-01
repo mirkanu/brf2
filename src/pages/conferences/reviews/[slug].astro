@@ -1,0 +1,67 @@
+---
+import Site from '../../../layouts/Site.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const all = await getCollection('conferenceReviews');
+  return all.map((entry) => {
+    const slug = entry.id.replace(/\.md$/, '');
+    const yearTag = (entry.data.tags ?? []).find(t => /^\d{4}$/.test(String(t))) ?? null;
+    return {
+      params: { slug },
+      props: { entry, yearTag },
+    };
+  });
+}
+
+const { entry, yearTag } = Astro.props;
+const { Content } = await render(entry);
+const { title, datePublished, authors, tags, legacyPath, rawCategories, primaryCategory } = entry.data;
+
+function fmtDate(iso: string): string {
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+const authorNames: string[] = Array.isArray(authors) ? authors.filter(s => s && s.trim().length > 0) : [];
+const authorLabel = authorNames.length === 0
+  ? 'BRF'
+  : authorNames.length === 1
+  ? authorNames[0]
+  : `${authorNames[0]} +${authorNames.length - 1}`;
+
+const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: 'Conferences', href: '/conferences' }];
+if (yearTag) breadcrumbItems.push({ label: String(yearTag), href: `/conferences/${yearTag}` });
+breadcrumbItems.push({ label: 'Review' });
+---
+<Site title={`${title} — Conference Review — BRF`} description={`Conference review by ${authorLabel}`}>
+  <section class="bg-brand-cream border-b border-brand-ink/10">
+    <div class="max-w-4xl mx-auto px-6 py-12">
+      <Breadcrumbs items={breadcrumbItems} />
+      <p class="mt-3 text-xs uppercase tracking-wider text-muted">
+        {yearTag ? `${yearTag} Conference Review` : 'Conference Review'}
+      </p>
+      <h1 class="mt-3 font-serif text-3xl md:text-4xl text-brand-ink leading-tight tracking-tight">{title}</h1>
+      <p class="mt-3 text-sm text-brand-ink/75">
+        {authorLabel}{datePublished && (<span> · {fmtDate(datePublished)}</span>)}
+      </p>
+      {legacyPath && (
+        <p class="mt-2 text-xs text-muted">Originally at {legacyPath}</p>
+      )}
+    </div>
+  </section>
+  <section class="bg-white">
+    <div class="max-w-3xl mx-auto px-6 py-10">
+      <article class="prose prose-brand max-w-none">
+        <Content />
+      </article>
+      {(rawCategories && rawCategories.length > 0 || primaryCategory) && (
+        <div class="mt-8 border-t border-brand-ink/10 pt-6 font-sans text-xs text-muted">
+          Filed under: {[primaryCategory, ...(rawCategories ?? [])].filter(Boolean).join(', ')}
+        </div>
+      )}
+    </div>
+  </section>
+</Site>
