@@ -54,12 +54,27 @@ Live snapshot of feature status. Manuel reviews before each phase gate.
 - **Hosting decision**: **Cloudflare R2 (free tier)**. 10 GB stored, 10M reads/month. Triggers: upgrade at >8 GB; rotate to `britishreformed.org/files/*` once CNAME is live.
 - **Deliverables**: `.planning/PHASE-1.5-SIZING.md` (full audit) + `.planning/PHASE-1.5-PLAN.md` (work log) + `scripts/sizing-audit/harvest-mp3.ts` + `harvest-pdf.ts` (re-runnable harvesters). Raw CSVs and local samples live under `scratch/phase-1.5/` (project-local, not committed).
 
-## Phase 2 — Templates & infrastructure (deferred details)
+## Phase 2 — Templates & infrastructure
 
-Pending tasks (unchanged from previous plan):
-- Lighthouse ≥ 90 + WCAG 2.1 AA passes on new routes.
-- README documenting structure, local dev, deploy (REQ-25).
-- Wire `pdfUrl` and MP3 URLs to R2 (R2 upload + re-association per `PHASE-1.5-SIZING.md`).
+| Sub | Status | Shipped |
+|---|---|---|
+| 2.3 Conference descriptions + Reviews section | ✅ | 2026-09-01 (commit 1469cce) |
+| 2.6 README + R2 upload reference doc | ✅ | 2026-09-01 (commit 1469cce) |
+| 2.4 R2 PDF upload (~74 issues + ~695 articles) | ⏸ | pending user-supplied URL list |
+| 2.5 Lighthouse ≥ 90 + WCAG 2.1 AA | ⏸ | pending R2 (large media blocks audit) |
+| 2.7 Redirects + DNS audit | ⏸ | blocked on Phase 5 (launch) |
+
+### Phase 2a (2026-09-01) shipped
+
+- **WS-2.3 conference descriptions**: added `description` field to 20 conference JSONs (the real annual conferences). Reviews section now renders on year pages (currently lists 2 reviews for 2014). Conference `description` field added to schema (`src/content.config.ts`).
+- **WS-2.6 README + R2 reference**: README rewritten to reflect Astro 7 + Tailwind 4 + journal/issue/conference collections; R2 upload reference at `scratch/phase-2/r2-upload.md` documents the free-tier setup and `npm run` script.
+- **Build status**: 695 pages, 0 errors, dev + production deploys verified.
+
+### Phase 2b (next)
+
+- **WS-2.4 R2 PDF upload**: route ~73 issue PDFs + several hundred article PDFs to R2; re-associate `pdfUrl` in content JSON. Source URLs harvested in `scratch/phase-1.5/pdf-bytes.csv` (Squarespace CDN). Some URLs returned 0-byte / 404 in the original probe — needs re-harvest against `britishreformed.org` or the `0 Inbox/brf-squarespace-exports/` zips.
+- **WS-2.5 Lighthouse + WCAG**: audit landing + article + conference pages after R2 is wired (large PDFs block current Lighthouse scores).
+- **WS-2.7 Redirects + DNS audit**: cutover prep, blocked on Phase 5 launch task.
 
 ## Open questions parked for later
 

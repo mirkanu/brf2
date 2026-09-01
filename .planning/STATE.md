@@ -48,7 +48,7 @@ Cloudflare Pages auto-deploys from `main`.
 
 ## What's In Progress
 
-- (Phase 1 complete — nothing in progress for this phase)
+- Phase 2b — R2 PDF upload (WS-2.4). Source URL list in `scratch/phase-1.5/pdf-bytes.csv` (76 issue rows, 39 article rows). Some 404/0-byte — re-harvest against `britishreformed.org` or `0 Inbox/brf-squarespace-exports/` zips before bulk upload.
 
 ## What's Next
 
