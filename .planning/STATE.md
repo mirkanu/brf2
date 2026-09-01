@@ -17,7 +17,7 @@ The site has 9 content-driven routes backed by 5 Zod-typed collections
 (articles, conferences, journal, literature, podcasts) + 2 typed-but-empty
 collections (lectures, pages) populated from the 575-post Squarespace export.
 Author, tag, and issue index pages are live; per-author pages are live; the
-home page renders real recent items; sitemap/RSS/OG/JSON-LD are emitted.
+home page renders real recent items; OG metadata is emitted. **sitemap, RSS, and JSON-LD are claimed live since 2026-08-17 in STATE.md and ROADMAP.md, but the audit on 2026-09-01 shows they are not implemented in `src/` or `dist/`. Now tracked as WS-2.1/WS-2.2/WS-2.9 in Phase 2b.**
 Cloudflare Pages auto-deploys from `main`.
 
 ## What's Done
@@ -48,7 +48,15 @@ Cloudflare Pages auto-deploys from `main`.
 
 ## What's In Progress
 
-- Phase 2b — R2 PDF upload (WS-2.4). Source URL list in `scratch/phase-1.5/pdf-bytes.csv` (76 issue rows, 39 article rows). Some 404/0-byte — re-harvest against `britishreformed.org` or `0 Inbox/brf-squarespace-exports/` zips before bulk upload.
+**Phase 2a shipped 2026-09-01** (work log: `.planning/PHASE-2A.md`):
+- WS-2.3 conference descriptions (20 real annual conferences)
+- WS-2.6 README + R2 upload reference
+- A11y + perf polish (a11y ≥95 across all routes; perf 100 on home; CLS 0)
+
+**Phase 2b (next)** — three workstreams, none depending on each other:
+- **WS-2.1/2.2/2.9 sitemap + RSS + JSON-LD**: `@astrojs/sitemap` not installed, no RSS endpoint, no JSON-LD islands. Probe `https://brf2.pages.dev/sitemap-index.xml` returns HTML 404. Required for REQ-13/14/15/16.
+- **WS-2.4 R2 PDF upload**: route ~73 issue PDFs + ~695 article PDFs to R2; re-associate `pdfUrl` in content JSON. Source URLs harvested in `scratch/phase-1.5/pdf-bytes.csv`. Some URLs returned 0-byte / 404 in the original probe — needs re-harvest against `britishreformed.org` or the `0 Inbox/brf-squarespace-exports/` zips.
+- **WS-2.7 redirects + DNS audit**: cutover prep, blocked on Phase 5 launch.
 
 ## What's Next
 
@@ -94,6 +102,9 @@ Cloudflare Pages auto-deploys from `main`.
 | MP3 metadata schema? | conference slug, author, title, track number (or kind for non-numbered talks), optional date, optional transcript URL | 2026-09-01 |
 | Author source for /authors/* pages? | Derive from Squarespace export (canonical) | 2026-08-30 |
 | Attachments (PDFs, images)? | Reference by URL from export; replace with local files before cutover | 2026-08-30 |
+| Phase 2 scope split? | 2a = content + perf/a11y (no R2/OCR/DNS); 2b = R2 upload + sitemap/RSS/JSON-LD | 2026-09-01 |
+| Conference description source? | Assistant-drafted for 20 real annual conferences from legacy data; 43 placeholder category-* rows skipped | 2026-09-01 |
+| Asset URL routing during development? | Self-host where small (hero journal cover); otherwise reference legacy CDN until R2 wired | 2026-09-01 |
 
 ## Open Questions / Concerns
 

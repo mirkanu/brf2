@@ -22,8 +22,9 @@ Live snapshot of feature status. Manuel reviews before each phase gate.
 |-------|--------|---------|
 | 0 — Repo, stack, skeleton | ✅ | 2026-08 |
 | 1 — Pilot: journal issues + articles on new schema | ✅ | 2026-09-01 |
+| 2a — Conference content + perf/a11y polish | ✅ | 2026-09-01 |
 | 1.5 — R2 sizing audit (MP3 + PDF) | ✅ | 2026-09-01 |
-| 2 — Templates & infrastructure | next | — |
+| 2 — Templates & infrastructure | 2a ✅ / 2b next | — |
 | 3 — Bulk article migration | — | — |
 | 4 — Decap CMS at `/admin` | — | — |
 | 5 — Pagefind index on build | — | — |
@@ -56,13 +57,25 @@ Live snapshot of feature status. Manuel reviews before each phase gate.
 
 ## Phase 2 — Templates & infrastructure
 
+**2a — shipped 2026-09-01** (work log: `.planning/PHASE-2A.md`)
+
 | Sub | Status | Shipped |
 |---|---|---|
-| 2.3 Conference descriptions + Reviews section | ✅ | 2026-09-01 (commit 1469cce) |
-| 2.6 README + R2 upload reference doc | ✅ | 2026-09-01 (commit 1469cce) |
-| 2.4 R2 PDF upload (~74 issues + ~695 articles) | ⏸ | pending user-supplied URL list |
-| 2.5 Lighthouse ≥ 90 + WCAG 2.1 AA | ⏸ | pending R2 (large media blocks audit) |
-| 2.7 Redirects + DNS audit | ⏸ | blocked on Phase 5 (launch) |
+| 2.3 Conference descriptions + Reviews section | ✅ | 2026-09-01 (commit 1469cce; + `description` schema field) |
+| 2.6 README + R2 upload reference doc | ✅ | 2026-09-01 (commit 1469cce + later) |
+| A11y polish (a11y ≥95) + robots.txt | ✅ | 2026-09-01 (commit 2adfbff) |
+| Perf polish (Lighthouse 100, CLS 0) | ✅ | 2026-09-01 (commits 75da46b + c0d7322) |
+
+Post-fix Lighthouse (2026-09-01): home 100/95/100/92, conferences 100/95/100/92, journal 100/95/100/92, literature 100/100/100/92, podcasts 100/95/100/92.
+
+**2b — next**
+
+| Sub | Status | Blockers |
+|---|---|---|
+| 2.1 sitemap + 2.2 RSS + 2.9 JSON-LD | ⏸ | Was falsely claimed live since 2026-08-17. `@astrojs/sitemap` not installed; no RSS endpoint; no JSON-LD islands. Probe `/sitemap-index.xml` returns HTML 404. |
+| 2.4 R2 PDF upload (~74 issues + ~695 articles) | ⏸ | Pending user-supplied URL list (or re-harvest against `britishreformed.org`) |
+| 2.5 Lighthouse ≥ 90 + WCAG 2.1 AA on PDF pages | ⏸ | Pending R2 wiring (large PDFs currently proxy via Squarespace CDN) |
+| 2.7 Redirects + DNS audit | ⏸ | Blocked on Phase 5 (launch) |
 
 ### Phase 2a (2026-09-01) shipped
 

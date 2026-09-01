@@ -24,7 +24,7 @@ to R2 as the asset host for \~700 PDFs + conference MP3s.
 - New routes live: `/journal/`, `/journal/issue-NN/`, `/journal/issue-NN/[slug]/`, `/author/[name]/`.
 - Legacy routes return 404 (no redirects — site private until launch).
 - Placeholder covers: 74 SVGs in `src/assets/issue-covers/`.
-- Sitemap, RSS, OG metadata, JSON-LD emitted.
+- OG metadata emitted. (Sitemap/RSS/JSON-LD are claimed live since 2026-08-17 but were never actually implemented — see Phase 2b / WS-2.1/2.2/2.9.)
 - Cloudflare Pages auto-deploy from `main` — operational since 2026-08-17.
 
 ## Phase 1.5 — R2 Sizing Audit
@@ -33,7 +33,7 @@ to R2 as the asset host for \~700 PDFs + conference MP3s.
 
 **Requirements touched:** REQ-05 (PDF/audio on R2 — decision in this phase, execution in Phase 2).
 
-**Status:** ✅ Complete (2026-09-01). **R2 (free tier) confirmed** as asset host; ~1.7 GB projected from measured sample (16 MP3s, 39 PDFs). See `.planning/PHASE-1.5-SIZING.md` for the audit and `.planning/PHASE-1.5-PLAN.md` for the work log.
+**Status:** ✅ Complete (2026-09-01). **R2 (free tier) confirmed** as asset host; ~1.7 GB projected from the original 16-MP3 + 39-PDF sample; a wider re-probe will likely revise this upward (real total expected 5–15 GB). (16 MP3s, 39 PDFs). See `.planning/PHASE-1.5-SIZING.md` for the audit and `.planning/PHASE-1.5-PLAN.md` for the work log.
 
 **Why now:** Phase 2 needs to know whether R2 free tier (10 GB) is enough, whether compression is mandatory, or whether the budget must include R2 paid storage. Doing this *after* the 700-file upload is the expensive way to find out.
 
@@ -57,19 +57,22 @@ to R2 as the asset host for \~700 PDFs + conference MP3s.
 
 **Requirements covered:** REQ-09, REQ-10, REQ-11, REQ-12, REQ-13, REQ-14, REQ-15, REQ-16, REQ-17, REQ-18, REQ-19, REQ-20, REQ-21, REQ-25, REQ-05 (upload), REQ-08 (redirect inventory), REQ-24 (DNS audit).
 
-**Status:** Partial — pilot shipped 2026-08-17. Phase 1.5 sizing landed 2026-09-01; R2 upload unblocked. Pending: Lighthouse ≥ 90 + WCAG 2.1 AA, README (REQ-25), R2 upload, redirect inventory, DNS audit.
+**Status:** **2a shipped 2026-09-01** (work log `.planning/PHASE-2A.md`) — conference descriptions (WS-2.3), README + R2 reference (WS-2.6), a11y + perf polish (Lighthouse perf 100 across all routes, a11y ≥95, robots.txt live).
+
+**2b pending** — R2 PDF upload (WS-2.4), sitemap + RSS + JSON-LD (WS-2.1/2.2/2.9 — currently false-claimed as shipped; actual implementation required), Lighthouse on PDFs (WS-2.5), redirect inventory + DNS audit (WS-2.7).
 
 **Exit criteria:**
 
-- Conference session layout + literature page rendering
-- Conference content (18+ pages) authored from existing data
-- Sitemap, RSS, OG metadata, JSON-LD all generated — already live since 2026-08-17
-- Lighthouse ≥ 90, WCAG 2.1 AA passes
-- README documenting structure, local dev, deploy (REQ-25)
-- Cloudflare Pages build wired to `main` — already satisfied
-- PDF + MP3 archive uploaded to R2 and linked from migrated pages (REQ-05)
-- Complete inventory of old BRF URLs reconciled (REQ-08)
-- DNS audit confirms whether britishreformed.org currently has live email (REQ-24)
+- [x] Conference session layout + literature page rendering
+- [x] Conference content (20 real annual conferences) authored from existing data — see `scratch/phase-2/conferences-needing-description.md` for the 23 still flagged
+- [ ] Sitemap, RSS, OG metadata, JSON-LD all generated — OG done; the other three deferred to 2b
+- [x] Lighthouse ≥ 90 on landing + non-PDF routes (perf 100, a11y ≥95 across all five audited routes)
+- [ ] WCAG 2.1 AA on article pages with PDFs — blocked on R2
+- [x] README documenting structure, local dev, deploy (REQ-25)
+- [x] Cloudflare Pages build wired to `main` — satisfied since 2026-08-17
+- [ ] PDF + MP3 archive uploaded to R2 and linked from migrated pages (REQ-05) — see 2b
+- [ ] Complete inventory of old BRF URLs reconciled (REQ-08) — see 2b
+- [ ] DNS audit confirms whether britishreformed.org currently has live email (REQ-24) — see 2b
 
 ## Phase 3 — Bulk Content Ingestion
 
@@ -124,7 +127,7 @@ to R2 as the asset host for \~700 PDFs + conference MP3s.
 | --- | --- | --- |
 | 1 | Pilot: journal issues + articles on new schema | ✅ Complete (2026-09-01) |
 | 1.5 | R2 Sizing Audit | ✅ Complete (2026-09-01) — R2 (free) confirmed; \~1.7 GB projected |
-| 2 | Templates & Infrastructure | Partial (pilot shipped; Lighthouse/README/R2/inventory pending) |
+| 2 | Templates & Infrastructure | **2a shipped 2026-09-01** (WS-2.3 + WS-2.6 + a11y/perf); 2b pending (R2 + sitemap/RSS/JSON-LD + redirects/DNS) |
 | 3 | Bulk Content Ingestion | Partial (695/N migrated in Phase 1; OCR-blocked and post-pilot pending) |
 | 4 | Redirect Generation & Validation | Not started |
 | 5 | DNS Cutover & Launch | Not started |
