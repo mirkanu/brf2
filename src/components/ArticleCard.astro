@@ -32,7 +32,7 @@ const link = href ?? `/${entry.collection}/${entry.id.replace(/\.json$/, '')}`;
     <p class="font-serif text-xl text-brand-ink leading-tight">{title}</p>
   </a>
   <p class="mt-2 text-sm text-brand-ink/70">{authorLabel}</p>
-  <p class="mt-1 text-xs text-brand-ink/55">
+  <p class="mt-1 text-xs text-muted">
     {fmtDate(datePublished)}
     {showIssue && issueNumber != null && (<span> · Issue {issueNumber}</span>)}
   </p>

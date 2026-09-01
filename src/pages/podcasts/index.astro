@@ -32,13 +32,13 @@ const decades = [...grouped.keys()].sort().reverse();
     <div class="max-w-5xl mx-auto px-6 py-12">
       {decades.map((d) => (
         <div class="mt-8 first:mt-0">
-          <h2 class="text-sm font-semibold uppercase tracking-wider text-brand-ink/60">{d}</h2>
+          <h2 class="text-sm font-semibold uppercase tracking-wider text-muted">{d}</h2>
           <ul class="mt-3 divide-y divide-brand-ink/10 border-y border-brand-ink/10">
             {grouped.get(d)!.map((p) => (
               <li class="py-4">
                 <a href={`/podcasts/${p.id.replace(/\.json$/, '')}`} class="group flex flex-wrap items-baseline justify-between gap-x-6 hover:bg-brand-cream/40 -mx-2 px-2 py-1 rounded-sm">
                   <span class="font-serif text-lg text-brand-ink group-hover:underline">{p.data.title}</span>
-                  <span class="text-xs text-brand-ink/55">{fmtDate(p.data.datePublished)}</span>
+                  <span class="text-xs text-muted">{fmtDate(p.data.datePublished)}</span>
                 </a>
               </li>
             ))}

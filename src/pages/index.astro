@@ -63,7 +63,7 @@ function fmtDate(iso: string | undefined): string {
   {upcoming && (
     <section class="bg-brand-parchment border-b border-brand-ink/10">
       <div class="max-w-5xl mx-auto px-6 py-12">
-        <p class="text-sm font-medium uppercase tracking-wider text-brand-ink/60">Upcoming Conference</p>
+        <p class="text-sm font-medium uppercase tracking-wider text-muted">Upcoming Conference</p>
         <h2 class="mt-2 font-serif text-3xl md:text-4xl text-brand-ink">
           <a href={`/conferences/${upcoming.data.year}`} class="hover:underline">{upcoming.data.title}</a>
         </h2>
@@ -98,8 +98,8 @@ function fmtDate(iso: string | undefined): string {
           {latestPodcasts.map(p => (
             <li class="rounded-lg border border-brand-ink/15 bg-white p-5">
               <p class="font-serif text-lg text-brand-ink">{p.data.title}</p>
-              {p.data.authors?.[0] && <p class="mt-1 text-sm text-brand-ink/60">{p.data.authors[0]}</p>}
-              {p.data.datePublished && <p class="mt-1 text-xs text-brand-ink/50">{fmtDate(p.data.datePublished)}</p>}
+              {p.data.authors?.[0] && <p class="mt-1 text-sm text-muted">{p.data.authors[0]}</p>}
+              {p.data.datePublished && <p class="mt-1 text-xs text-muted">{fmtDate(p.data.datePublished)}</p>}
             </li>
           ))}
         </ul>
@@ -114,7 +114,7 @@ function fmtDate(iso: string | undefined): string {
         <ul class="mt-6 grid gap-3 md:grid-cols-3">
           {pastConfs.map(c => (
             <li class="rounded-lg border border-brand-ink/15 bg-white p-5">
-              <p class="text-xs uppercase tracking-wider text-brand-ink/50">{c.data.year}</p>
+              <p class="text-xs uppercase tracking-wider text-muted">{c.data.year}</p>
               <p class="mt-2 font-serif text-lg text-brand-ink">{c.data.title}</p>
               {c.data.subtitle && <p class="mt-1 text-sm text-brand-ink/70">{c.data.subtitle}</p>}
             </li>

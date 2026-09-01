@@ -34,7 +34,7 @@ const sorted = issues.slice().sort((a, b) => {
         Articles, reviews, and editorials on the Reformed faith, history, theology, and practice —
         edited by Rev. Dr. R. S. Allan and published by the British Reformed Fellowship.
       </p>
-      <p class="mt-3 text-sm text-brand-ink/60">{sorted.length} issues in the archive.</p>
+      <p class="mt-3 text-sm text-muted">{sorted.length} issues in the archive.</p>
     </div>
   </section>
 
@@ -61,7 +61,7 @@ const sorted = issues.slice().sort((a, b) => {
                   />
                 )}
                 <p class="mt-2 font-serif text-lg text-brand-ink leading-tight group-hover:underline">{title}</p>
-                <p class="mt-0.5 text-xs text-brand-ink/60 tabular-nums">
+                <p class="mt-0.5 text-xs text-muted tabular-nums">
                   {count} {count === 1 ? 'article' : 'articles'}
                 </p>
               </a>

@@ -27,25 +27,25 @@ const { Content } = await render(conf);
         { label: 'Conferences', href: '/conferences' },
         { label: String(conf.data.year) },
       ]} />
-      <p class="mt-3 text-xs uppercase tracking-wider text-brand-ink/60">{conf.data.year} Conference</p>
+      <p class="mt-3 text-xs uppercase tracking-wider text-muted">{conf.data.year} Conference</p>
       <h1 class="mt-2 font-serif text-4xl md:text-5xl text-brand-ink leading-tight">{conf.data.title}</h1>
       {conf.data.subtitle && <p class="mt-3 text-lg text-brand-ink/80">{conf.data.subtitle}</p>}
       <dl class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
         {conf.data.dates && (
           <div>
-            <dt class="uppercase text-brand-ink/55 tracking-wider text-xs">Dates</dt>
+            <dt class="uppercase text-muted tracking-wider text-xs">Dates</dt>
             <dd class="mt-1 text-brand-ink">{conf.data.dates}</dd>
           </div>
         )}
         {conf.data.venue && (
           <div>
-            <dt class="uppercase text-brand-ink/55 tracking-wider text-xs">Venue</dt>
+            <dt class="uppercase text-muted tracking-wider text-xs">Venue</dt>
             <dd class="mt-1 text-brand-ink">{conf.data.venue}</dd>
           </div>
         )}
         {conf.data.theme && (
           <div>
-            <dt class="uppercase text-brand-ink/55 tracking-wider text-xs">Theme</dt>
+            <dt class="uppercase text-muted tracking-wider text-xs">Theme</dt>
             <dd class="mt-1 text-brand-ink">{conf.data.theme}</dd>
           </div>
         )}
@@ -82,7 +82,7 @@ const { Content } = await render(conf);
             </li>
           ))}
         </ul>
-        <p class="mt-4 text-xs text-brand-ink/55">
+        <p class="mt-4 text-xs text-muted">
           Review pages are not yet routed; see Phase 2b.
         </p>
       </div>

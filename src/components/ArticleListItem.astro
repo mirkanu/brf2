@@ -22,7 +22,7 @@ const link = href ?? `/${entry.collection}/${entry.id.replace(/\.json$/, '')}`;
   <a href={link} class="block hover:underline">
     <div class="flex items-baseline justify-between gap-4">
       <p class="font-serif text-lg text-brand-ink leading-snug">{title}</p>
-      {datePublished && <time class="shrink-0 text-xs text-brand-ink/55 tabular-nums">{fmtDate(datePublished)}</time>}
+      {datePublished && <time class="shrink-0 text-xs text-muted tabular-nums">{fmtDate(datePublished)}</time>}
     </div>
     <p class="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-brand-ink/65">
       {authorNames.length > 0 && <span>{authorNames.join(', ')}</span>}
