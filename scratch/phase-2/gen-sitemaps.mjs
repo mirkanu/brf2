@@ -13,9 +13,13 @@ import { readdirSync, writeFileSync, statSync, readFileSync } from 'node:fs';
 import { glob } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
 
-const ROOT = '/home/workspace/1 Projects/brf2';
-const DIST = process.env.OUT_DIR ?? join(ROOT, 'dist');
-const SITE = 'https://brf2.pages.dev';
+const ROOT = process.env.PROJECT_ROOT ?? '/home/workspace/1 Projects/brf2';
+const WALK_DIRS = (process.env.WALK_DIRS ?? join(ROOT, 'dist'))
+  .split(',')
+  .map(s => s.trim())
+  .filter(Boolean);
+const OUT_DIR = process.env.OUT_DIR ?? WALK_DIRS[0];
+const SITE = process.env.SITE_URL ?? 'https://brf2.pages.dev';
 
 function walk(dir) {
   const out = [];
@@ -28,18 +32,23 @@ function walk(dir) {
   return out;
 }
 
+function findRoot(absPath) {
+  return WALK_DIRS.find(d => absPath === d || absPath.startsWith(d + sep)) ?? WALK_DIRS[0];
+}
+
 function toUrl(absPath) {
-  const rel = relative(DIST, absPath).split(sep).join('/');
+  const root = findRoot(absPath);
+  const rel = relative(root, absPath).split(sep).join('/');
   if (rel === 'index.html') return SITE + '/';
   if (rel.endsWith('/index.html')) return SITE + '/' + rel.replace(/\/index\.html$/, '/');
   return SITE + '/' + rel.replace(/\.html$/, '');
 }
 
 function lastmod(absPath) {
-  return new Date(statSync(DIST).mtime).toISOString().slice(0, 10);
+  return new Date(statSync(findRoot(absPath)).mtime).toISOString().slice(0, 10);
 }
 
-const all = walk(DIST).map(p => ({ url: toUrl(p), mtime: lastmod(p) }));
+const all = WALK_DIRS.flatMap(d => walk(d)).map(p => ({ url: toUrl(p), mtime: lastmod(p) }));
 
 const staticPages = all.filter(u => {
   const p = new URL(u.url).pathname;
@@ -66,7 +75,7 @@ ${urls}
 </sitemapindex>
 `;
 
-writeFileSync(join(DIST, 'sitemap-index.xml'), indexXml);
+writeFileSync(join(OUT_DIR, 'sitemap-index.xml'), indexXml);
 
 chunks.forEach((c, i) => {
   const body = c.map(u => `  <url>
@@ -78,7 +87,7 @@ chunks.forEach((c, i) => {
 ${body}
 </urlset>
 `;
-  writeFileSync(join(DIST, `sitemap-${i + 1}.xml`), xml);
+  writeFileSync(join(OUT_DIR, `sitemap-${i + 1}.xml`), xml);
 });
 
 const articles = [];
@@ -118,6 +127,6 @@ ${rssItems}
 </rss>
 `;
 
-writeFileSync(join(DIST, 'rss.xml'), rss);
+writeFileSync(join(OUT_DIR, 'rss.xml'), rss);
 
 console.log(`Wrote sitemap-index.xml + ${chunks.length} sitemap-N.xml, rss.xml (${top.length} items)`);
