@@ -20,6 +20,7 @@ const conferences = defineCollection({
     subtitle: z.string().nullable().default(null),
     theme: z.string().nullable().default(null),
     dates: z.string().nullable().default(null),
+    description: z.string().nullable().default(null),
   }),
 });
 

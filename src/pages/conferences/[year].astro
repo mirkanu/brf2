@@ -6,13 +6,17 @@ import { fmtDate } from '../../lib/format';
 
 export async function getStaticPaths() {
   const all = await getCollection('conferences');
+  const reviews = all.filter(c => c.data.primaryCategory === 'review');
   return all.map(c => ({
     params: { year: String(c.data.year) },
-    props: { conf: c },
+    props: {
+      conf: c,
+      reviews: reviews.filter(r => r.data.year === c.data.year || r.data.tags?.includes(String(c.data.year))),
+    },
   }));
 }
 
-const { conf } = Astro.props;
+const { conf, reviews } = Astro.props;
 const { Content } = await render(conf);
 ---
 <Site title={`${conf.data.title} (${conf.data.year}) — BRF`}>
@@ -49,12 +53,38 @@ const { Content } = await render(conf);
     </div>
   </section>
 
-  {conf.body && conf.body.trim().length > 0 && (
+  {(conf.data.description || (conf.body && conf.body.trim().length > 0)) && (
     <section class="bg-white">
       <div class="max-w-3xl mx-auto px-6 py-12">
-        <div class="prose prose-brand">
-          <Content />
-        </div>
+        {conf.data.description && (
+          <p class="text-lg text-brand-ink/85 leading-relaxed">{conf.data.description}</p>
+        )}
+        {conf.body && conf.body.trim().length > 0 && (
+          <div class="prose prose-brand mt-8">
+            <Content />
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  {reviews && reviews.length > 0 && (
+    <section class="bg-brand-parchment border-t border-brand-ink/10">
+      <div class="max-w-4xl mx-auto px-6 py-12">
+        <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Reviews</h2>
+        <ul class="mt-6 divide-y divide-brand-ink/10">
+          {reviews.map(r => (
+            <li class="py-4">
+              <p class="font-medium text-brand-ink">{r.data.title}</p>
+              <p class="mt-1 text-sm text-brand-ink/65">
+                By {r.data.authors.join(', ')} · {fmtDate(r.data.datePublished)}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-4 text-xs text-brand-ink/55">
+          Review pages are not yet routed; see Phase 2b.
+        </p>
       </div>
     </section>
   )}
