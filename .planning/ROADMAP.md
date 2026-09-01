@@ -6,7 +6,7 @@ The previous roadmap treated Phase 1 as schema work; in practice Phase 1
 shipped as the functional duplicate on the new schema (74 issue pages + 695
 article pages on the new routes, 2026-08-17 pilot, 2026-09-01 build
 verified). A new Phase 1.5 inserts a sizing audit before Phase 2 commits
-to R2 as the asset host for ~700 PDFs + conference MP3s.
+to R2 as the asset host for \~700 PDFs + conference MP3s.
 
 ## Phase 1 — Pilot: journal issues + articles on new schema ✅ COMPLETE
 
@@ -17,9 +17,10 @@ to R2 as the asset host for ~700 PDFs + conference MP3s.
 **Status:** Complete — shipped 2026-08-17 (pilot), build verified 2026-09-01.
 
 **What shipped:**
+
 - `articles` Zod schema frozen (`title`, `authors`, `issueNumber`, `pdfUrl?`, `authorSlugs?`).
-- `issues` collection: 74 `issue-NN/issue.json` entries (`issueNumber`, `issueDate`, `pdfUrl?`, `legacyPath`, `coverImage`).
-- 695 article `.md` files migrated under `src/content/articles/`.
+- `issues` collection: 74 `file issue-NN/issue.json` entries (`issueNumber`, `issueDate`, `pdfUrl?`, `legacyPath`, `coverImage`).
+- 695 article `file .md` files migrated under `src/content/articles/`.
 - New routes live: `/journal/`, `/journal/issue-NN/`, `/journal/issue-NN/[slug]/`, `/author/[name]/`.
 - Legacy routes return 404 (no redirects — site private until launch).
 - Placeholder covers: 74 SVGs in `src/assets/issue-covers/`.
@@ -32,19 +33,23 @@ to R2 as the asset host for ~700 PDFs + conference MP3s.
 
 **Requirements touched:** REQ-05 (PDF/audio on R2 — decision in this phase, execution in Phase 2).
 
+**Status:** ✅ Complete (2026-09-01). **R2 (free tier) confirmed** as asset host; ~1.7 GB projected from measured sample (16 MP3s, 39 PDFs). See `.planning/PHASE-1.5-SIZING.md` for the audit and `.planning/PHASE-1.5-PLAN.md` for the work log.
+
 **Why now:** Phase 2 needs to know whether R2 free tier (10 GB) is enough, whether compression is mandatory, or whether the budget must include R2 paid storage. Doing this *after* the 700-file upload is the expensive way to find out.
 
 **Tasks:**
+
 - Re-harvest the canonical MP3 list from the Squarespace export (MP3 = podcast — single canonical asset per speech, not the duplicated feed entries).
 - Catalogue the issue PDFs (Google Drive `1gtXO5azesAEeAti2eKNOFpA_jtcCQGGs`) and article PDFs (linked from the legacy `/brj-articles` page) — count + bytes.
 - Sum totals; compare to 10 GB R2 free limit.
 - If over budget: estimate compressed size (audio re-encode to lower bitrate; PDF optimisation with `qpdf`/`ghostscript`); decide whether free + compression is viable.
-- Deliverable: `.planning/PHASE-1.5-SIZING.md` with totals, per-conference MP3 count, PDF count + bytes, R2 tier recommendation, and the go/no-go for free-tier upload. **Status:** ✅ Completed 2026-09-01 — see SIZING doc.
+- Deliverable: `file .planning/PHASE-1.5-SIZING.md` with totals, per-conference MP3 count, PDF count + bytes, R2 tier recommendation, and the go/no-go for free-tier upload. **Status:** ✅ Completed 2026-09-01 — see SIZING doc.
 
 **Exit criteria:**
-- Sizing doc committed.
-- R2 tier decision (free / free+compression / paid) confirmed.
-- Podcast hosting path decided alongside R2 (single MP3 per speech, served from `brf2.pages.dev/files` until DNS cutover, then rewired to `britishreformed.org/files`).
+
+- [x] Sizing doc committed (`.planning/PHASE-1.5-SIZING.md`).
+- [x] R2 tier decision (free) confirmed.
+- [x] Podcast hosting path decided (single MP3 per speech, served from `brf2.pages.dev/files` until DNS cutover, then rewired to `cdn.britishreformed.org`).
 
 ## Phase 2 — Templates & Infrastructure
 
@@ -55,6 +60,7 @@ to R2 as the asset host for ~700 PDFs + conference MP3s.
 **Status:** Partial — pilot shipped 2026-08-17. Phase 1.5 sizing landed 2026-09-01; R2 upload unblocked. Pending: Lighthouse ≥ 90 + WCAG 2.1 AA, README (REQ-25), R2 upload, redirect inventory, DNS audit.
 
 **Exit criteria:**
+
 - Conference session layout + literature page rendering
 - Conference content (18+ pages) authored from existing data
 - Sitemap, RSS, OG metadata, JSON-LD all generated — already live since 2026-08-17
@@ -71,9 +77,10 @@ to R2 as the asset host for ~700 PDFs + conference MP3s.
 
 **Requirements covered:** REQ-01, REQ-02, REQ-03, REQ-04 (partial — final slugs), REQ-05 (linking).
 
-**Status:** Partial — 695 of ~target articles migrated in Phase 1; OCR-blocked and post-pilot additions remain.
+**Status:** Partial — 695 of \~target articles migrated in Phase 1; OCR-blocked and post-pilot additions remain.
 
 **Exit criteria:**
+
 - All journal articles migrated with original publication dates
 - All literature/translation pages migrated with attribution metadata
 - Final article slugs locked (Phase 4 needs them for redirects)
@@ -89,6 +96,7 @@ to R2 as the asset host for ~700 PDFs + conference MP3s.
 **Status:** Not started — blocked on Phase 2 redirect inventory.
 
 **Exit criteria:**
+
 - Every old BRF URL has a verified redirect target
 - Bulk Redirects provisioned if `_redirects` would exceed practical limit
 - Automated test runs against the redirect set (crawl the old sitemap, assert 200/301)
@@ -102,6 +110,7 @@ to R2 as the asset host for ~700 PDFs + conference MP3s.
 **Status:** Not started.
 
 **Exit criteria:**
+
 - DNS records updated; HTTPS cert provisioned
 - Email (if any) migrated or confirmed handled
 - Old Squarespace plan cancelled
@@ -111,10 +120,10 @@ to R2 as the asset host for ~700 PDFs + conference MP3s.
 
 ## Phase Summary
 
-| # | Phase | Status |
-|---|-------|--------|
+| \# | Phase | Status |
+| --- | --- | --- |
 | 1 | Pilot: journal issues + articles on new schema | ✅ Complete (2026-09-01) |
-| 1.5 | R2 Sizing Audit | ✅ Complete (2026-09-01) — R2 (free) confirmed; ~1.7 GB projected |
+| 1.5 | R2 Sizing Audit | ✅ Complete (2026-09-01) — R2 (free) confirmed; \~1.7 GB projected |
 | 2 | Templates & Infrastructure | Partial (pilot shipped; Lighthouse/README/R2/inventory pending) |
 | 3 | Bulk Content Ingestion | Partial (695/N migrated in Phase 1; OCR-blocked and post-pilot pending) |
 | 4 | Redirect Generation & Validation | Not started |
