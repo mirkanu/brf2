@@ -4,12 +4,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scratch/phase-2/gen-sitemaps.mjs",
     "build": "astro build",
-    "postbuild": "node scratch/phase-2/gen-sitemaps.mjs",
     "preview": "astro preview",
-    "sitemap": "node scratch/phase-2/gen-sitemaps.mjs",
-    "sitemap:dry": "OUT_DIR=public PROJECT_ROOT=. WALK_DIRS=dist node scratch/phase-2/gen-sitemaps.mjs",
-    "sitemap:public": "OUT_DIR=public PROJECT_ROOT=. WALK_DIRS=dist node scratch/phase-2/gen-sitemaps.mjs"
+    "sitemap": "node scratch/phase-2/gen-sitemaps.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.1.16",
