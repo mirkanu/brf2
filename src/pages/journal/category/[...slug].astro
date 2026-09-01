@@ -1,0 +1,55 @@
+---
+import Site from '../../../layouts/Site.astro';
+import ArticleListItem from '../../../components/ArticleListItem.astro';
+import { getCollection } from 'astro:content';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const allArticles = await getCollection('journal');
+  const seen = new Map<string, string>();
+  for (const entry of allArticles) {
+    if (entry.data.section !== 'journal-article') continue;
+    for (const c of entry.data.rawCategories ?? []) {
+      const k = c.toLowerCase();
+      if (!seen.has(k)) seen.set(k, c);
+    }
+  }
+  return Array.from(seen.entries()).map(([k, label]) => ({
+    params: { slug: k.replace(/\s+/g, '-') },
+    props: { label },
+  }));
+}
+
+const { slug: rawSlug } = Astro.params;
+const { label } = Astro.props;
+const requested = decodeURIComponent(rawSlug ?? '').toLowerCase();
+
+const allArticles = await getCollection('journal');
+const matches = allArticles.filter((entry) => {
+  if (entry.data.section !== 'journal-article') return false;
+  return (entry.data.rawCategories ?? []).some((c) => c.toLowerCase() === requested);
+});
+matches.sort((a, b) => +new Date(b.data.datePublished) - +new Date(a.data.datePublished));
+
+const displayLabel = label ?? requested;
+---
+<Site title={`Category: ${displayLabel}`} description={`Articles in the ${displayLabel} category in the British Reformed Journal.`}>
+  <div class="border-b border-[var(--border)] bg-[var(--surface-1)]">
+    <div class="mx-auto max-w-6xl px-6 py-12">
+      <p class="text-sm uppercase tracking-widest text-[var(--muted)]">Category</p>
+      <h1 class="mt-2 font-serif text-4xl md:text-5xl leading-[1.05] tracking-tight">{displayLabel.replace(/-/g, ' ')}</h1>
+      <p class="mt-3 text-[var(--muted)]">{matches.length} {matches.length === 1 ? 'article' : 'articles'}.</p>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-6xl px-6 py-12">
+    {matches.length === 0 ? (
+      <p class="text-[var(--muted)]">No articles match this category.</p>
+    ) : (
+      <ul class="divide-y divide-[var(--border)] border-y border-[var(--border)]">
+        {matches.map((entry) => <ArticleListItem entry={entry} />)}
+      </ul>
+    )}
+  </div>
+</Site>
