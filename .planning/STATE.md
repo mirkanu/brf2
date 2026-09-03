@@ -1,6 +1,6 @@
 # State
 
-Last updated: 2026-09-01
+Last updated: 2026-09-02
 
 ## Current Position
 
@@ -53,10 +53,11 @@ Cloudflare Pages auto-deploys from `main`.
 - WS-2.6 README + R2 upload reference
 - A11y + perf polish (a11y ≥95 across all routes; perf 100 on home; CLS 0)
 
-**Phase 2b (next)** — three workstreams, none depending on each other:
+**Phase 2b (in progress)** — three workstreams:
 - **WS-2.1/2.2/2.9 sitemap + RSS + JSON-LD**: `@astrojs/sitemap` not installed, no RSS endpoint, no JSON-LD islands. Probe `https://brf2.pages.dev/sitemap-index.xml` returns HTML 404. Required for REQ-13/14/15/16.
 - **WS-2.4 R2 PDF upload**: route ~73 issue PDFs + ~695 article PDFs to R2; re-associate `pdfUrl` in content JSON. Source URLs harvested in `scratch/phase-1.5/pdf-bytes.csv`. Some URLs returned 0-byte / 404 in the original probe — needs re-harvest against `britishreformed.org` or the `0 Inbox/brf-squarespace-exports/` zips.
 - **WS-2.7 redirects + DNS audit**: cutover prep, blocked on Phase 5 launch.
+- **WS-2.4 status (2026-09-02):** R2 bucket `brf2-assets` exists in WEUR (created 2026-09-01 22:18 UTC, Standard tier, ~0 bytes). Public dev URL is **not toggleable via the cloudflare MCP** — only `tool_docs`, `tool_search`, `tool_execute_post` are exposed; candidate endpoints (`/domains`, `/domains/custom`, `/public-dev-url`, `/dev-url`) all return 10015 no-route. The MCP-bound token lacks the r2.dev public-access scope. To unblock: (a) drop `CLOUDFLARE_API_TOKEN` into Settings → Advanced with `Account → R2: Edit`, or (b) run `wrangler r2 bucket dev-url enable brf2-assets` locally. Without this, no R2 upload step (WS-2.4) can be verified against a public URL.
 
 ## What's Next
 

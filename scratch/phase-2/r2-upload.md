@@ -5,7 +5,7 @@ file is the canonical reference for the upload process used by WS-2.4.
 
 ## Bucket
 
-- Name: `brf`
+- Name: `brf2-assets` (locked 2026-09-02; was `brf` in earlier draft)
 - Account: project's Cloudflare account (connected via Wrangler).
 - Tier: free. Upgrade when total stored bytes exceed 8 GB.
 
@@ -27,7 +27,7 @@ CNAME goes live (Phase 4).
    `src/content/journal/*.json`. Columns: `kind, id, source_url, target_key`.
 2. **Fetch** — download the source PDF from the Squarespace URL listed
    in the CSV (HEAD-probe for byte size; GET for the file).
-4. **Upload** — `wrangler r2 object put brf/<target-key> --file <local>`
+4. **Upload** — `wrangler r2 object put brf2-assets/<target-key> --file <local>`
    with ~20 concurrent uploads. Idempotent: re-running overwrites with
    the same bytes.
 4. **Rewrite content** — update the `pdfUrl` / `pdfLink` field in the

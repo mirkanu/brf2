@@ -6,8 +6,9 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
+  jsonLd?: Record<string, unknown> | null;
 }
-const { title, description = 'British Reformed Fellowship — confessional Reformed theology, conferences, and the British Reformed Journal.' } = Astro.props;
+const { title, description = 'British Reformed Fellowship — confessional Reformed theology, conferences, and the British Reformed Journal.', jsonLd = null } = Astro.props;
 ---
 <!doctype html>
 <html lang="en-GB">
@@ -45,15 +46,19 @@ const { title, description = 'British Reformed Fellowship — confessional Refor
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://brf2.pages.dev/assets/og-default.png" />
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "British Reformed Fellowship",
-      "url": "https://brf2.pages.dev",
-      "logo": "https://brf2.pages.dev/assets/og-default.png",
-      "description": description,
-      "sameAs": []
-    })} />
+    {jsonLd ? (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    ) : (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "British Reformed Fellowship",
+        "url": "https://brf2.pages.dev",
+        "logo": "https://brf2.pages.dev/assets/og-default.png",
+        "description": description,
+        "sameAs": []
+      })} />
+    )}
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />

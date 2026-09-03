@@ -39,7 +39,7 @@ const authorNames = (authors ?? []).filter((s) => s && s.trim().length > 0);
 
 // Display title: [issueDate] if provided, otherwise "Issue [issueNumber]"
 const issueTitle = issue.data.issueDate ?? `Issue ${issueNum}`;
-const pdfUrl = issue.data.pdfUrl; // null until actual PDFs are uploaded in future phases
+const pdfUrl = article.data.pdfLink ?? issue.data.pdfUrl; // article PDF wins; falls back to issue PDF
 
 const bc = [
   { label: 'Home', href: '/' },
@@ -47,9 +47,41 @@ const bc = [
   { label: issueTitle, href: `/journal/issue/issue-${String(issueNum).padStart(2, '0')}` },
   { label: title },
 ];
----
 
-<Site title={`${title} — ${issueTitle}`} description={`Article from ${issueTitle} of the British Reformed Journal.`}>
+const SITE = 'https://brf2.pages.dev';
+const idSlug = article.id.replace(/\.json$/, '');
+const slugClean = idSlug.replace(/^article-/, '');
+const pageUrl = `${SITE}/journal/issue/issue-${String(issueNum).padStart(2, '0')}/${slugClean}/`;
+
+const publisher = {
+  '@type': 'Organization',
+  name: 'British Reformed Fellowship',
+  url: SITE,
+};
+
+const encoding = pdfUrl ? {
+  '@type': 'MediaObject',
+  encodingFormat: 'application/pdf',
+  url: pdfUrl,
+} : null;
+
+const articleLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  datePublished: datePublished ? new Date(datePublished).toISOString() : undefined,
+  author: authorNames.map((name) => ({ '@type': 'Person', name })),
+  mainEntityOfPage: pageUrl,
+  publisher,
+  isPartOf: {
+    '@type': 'PublicationIssue',
+    issueNumber: issueNum,
+    datePublished: issue.data.issueDate ? new Date(issue.data.issueDate).toISOString() : undefined,
+  },
+};
+if (encoding) articleLd.encoding = encoding;
+---
+<Site title={`${title} — ${issueTitle}`} description={`Article from ${issueTitle} of the British Reformed Journal.`} jsonLd={articleLd}>
   <section class="bg-brand-cream border-b border-brand-ink/10">
     <div class="max-w-3xl mx-auto px-6 py-10">
       <Breadcrumbs items={bc} />

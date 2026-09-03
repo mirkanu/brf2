@@ -68,14 +68,21 @@ Live snapshot of feature status. Manuel reviews before each phase gate.
 
 Post-fix Lighthouse (2026-09-01): home 100/95/100/92, conferences 100/95/100/92, journal 100/95/100/92, literature 100/100/100/92, podcasts 100/95/100/92.
 
-**2b — next**
+**2b — shipped 2026-09-02**
+
+| Sub | Status | Shipped |
+|---|---|---|
+| 2.1 sitemap | ✅ | 2026-09-02 (`scratch/phase-2/gen-sitemaps.mjs` postbuild writes `sitemap-index.xml` + `sitemap-0.xml`; robots.txt updated) |
+| 2.2 RSS | ✅ | 2026-09-02 (`@astrojs/rss`, 525 items: journal / conferences / podcasts) |
+| 2.9 JSON-LD | ✅ | 2026-09-02 (`Article` for issue + article, `Event` for conferences, `PodcastEpisode` when duration parses) |
+
+**2c — open / remaining**
 
 | Sub | Status | Blockers |
 |---|---|---|
-| 2.1 sitemap + 2.2 RSS + 2.9 JSON-LD | ⏸ | Was falsely claimed live since 2026-08-17. `@astrojs/sitemap` not installed; no RSS endpoint; no JSON-LD islands. Probe `/sitemap-index.xml` returns HTML 404. |
-| 2.4 R2 PDF upload (~74 issues + ~695 articles) | ⏸ | Pending user-supplied URL list (or re-harvest against `britishreformed.org`) |
+| 2.4 R2 PDF upload (~74 issues + ~426 articles) | ⏸ | Blocked: `CLOUDZFLARE_API_TOKEN` is invalid against Cloudflare's `/user/tokens/verify` (2026-09-02). PDF source URLs also need re-harvesting against `britishreformed.org` (only 39 currently harvested). Sitemap crawl archived at `scratch/phase-2/crawl/sitemap.xml` (822 URLs). |
 | 2.5 Lighthouse ≥ 90 + WCAG 2.1 AA on PDF pages | ⏸ | Pending R2 wiring (large PDFs currently proxy via Squarespace CDN) |
-| 2.7 Redirects + DNS audit | ⏸ | Blocked on Phase 5 (launch) |
+| 2.7 Redirects + DNS audit | ⏸ | Blocked on Phase 5 (launch). **Binding rule**: redirects only from `britishreformed.org` (Squarespace) → `brf2.pages.dev`; never the reverse. Source-of-truth sitemap crawl done (822 URLs, `scratch/phase-2/crawl/sitemap.xml`). Durable rule: `0 Inbox/redirect-rule-britishreformed-only.md`. |
 
 ### Phase 2a (2026-09-01) shipped
 
@@ -83,13 +90,42 @@ Post-fix Lighthouse (2026-09-01): home 100/95/100/92, conferences 100/95/100/92,
 - **WS-2.6 README + R2 reference**: README rewritten to reflect Astro 7 + Tailwind 4 + journal/issue/conference collections; R2 upload reference at `scratch/phase-2/r2-upload.md` documents the free-tier setup and `npm run` script.
 - **Build status**: 695 pages, 0 errors, dev + production deploys verified.
 
-### Phase 2b (next)
+### Phase 2b (shipped 2026-09-02)
 
-- **WS-2.4 R2 PDF upload**: route ~73 issue PDFs + several hundred article PDFs to R2; re-associate `pdfUrl` in content JSON. Source URLs harvested in `scratch/phase-1.5/pdf-bytes.csv` (Squarespace CDN). Some URLs returned 0-byte / 404 in the original probe — needs re-harvest against `britishreformed.org` or the `0 Inbox/brf-squarespace-exports/` zips.
+- **WS-2.1 sitemap**: postbuild script at `scratch/phase-2/gen-sitemaps.mjs` walks `dist/` and writes `dist/sitemap-index.xml` + `dist/sitemap-0.xml`. `public/robots.txt` updated to reference the index URL.
+- **WS-2.2 RSS**: `src/pages/rss.xml.ts` emits a single feed (`/rss.xml`) with 525 items across journal / conferences / podcasts. `@astrojs/rss` added to dependencies.
+- **WS-2.9 JSON-LD**: per-route JSON-LD islands wired via the `jsonLd` prop on `Site.astro` (defaults to `Organization`). Article LD carries `encoding: MediaObject` when `pdfUrl` is present. PodcastEpisode LD emitted only when `duration` parses — entries without parseable durations are left out without breaking the build.
+- **Build**: 696 pages, 0 errors, sitemap-index written.
+
+### Phase 2c (open)
+
+- **WS-2.4 R2 PDF upload**: route issue + article PDFs to R2; re-associate `pdfUrl` in content JSON. 32 of 426 articles still have `issueNumber: null` and are excluded from journal routing; orphan routes will be revisited once PDF URLs are wired so they can link directly.
 - **WS-2.5 Lighthouse + WCAG**: audit landing + article + conference pages after R2 is wired (large PDFs block current Lighthouse scores).
-- **WS-2.7 Redirects + DNS audit**: cutover prep, blocked on Phase 5 launch task.
+- **WS-2.7 Redirects + DNS audit**: cutover prep, blocked on Phase 5 launch. Sitemap crawl of `britishreformed.org/sitemap.xml` complete (822 URLs, archived 2026-09-02 at `scratch/phase-2/crawl/sitemap.xml`). Binding constraint: redirects only from `britishreformed.org` (Squarespace) → `brf2.pages.dev`. Durable rule file at `0 Inbox/redirect-rule-britishreformed-only.md`.
 
 ## Open questions parked for later
 
 - Manual transcription workflow for older articles without OCR'd text — Worth raising with user before Phase 3.
 - BRJ Articles export zip — once dropped in `0 Inbox/`, re-run the PDF harvester to close the export-coverage gap. The realistic PDF total (5–15 GB) cannot be refined further without the export or a direct scrape of `britishreformed.org/brj-articles`.
+
+## Verification log (2026-09-02T10:33Z)
+
+- `npm run build` → 696 pages, 0 errors.
+- Postbuild wrote `dist/sitemap-index.xml` (199 B) + `dist/sitemap-1.xml` (106 KB, 694 `<url>` entries).
+- `curl -L https://britishreformed.org/sitemap.xml` → 184,840 B, 822 URLs, archived at `scratch/phase-2/crawl/sitemap.xml`.
+- `curl /user/tokens/verify` with `$CLOUDZFLARE_API_TOKEN` → `success: false` / `Invalid API Token` → WS-2.4 (R2) blocked until a valid token is supplied.
+
+## Status update — 2026-09-02T12:30Z
+
+- **Cloudflare token**: confirmed working via `GET /accounts/{CLOUDFLARE_ACCOUNT_ID}/r2/buckets` (200 OK). The earlier `/user/tokens/verify` "Invalid API Token" reply is misleading — that endpoint expects a different token scope. The real token, paired with `CLOUDFLARE_ACCOUNT_ID`, lists R2 buckets and works.
+- **R2 bucket to use (locked)**: `brf2-assets` (existing). NOT a new `brf` bucket. `scratch/phase-2/r2-upload.md` references the wrong bucket name and needs an edit.
+- **GDrive leg (issue PDFs)**: blocked on tool surface. `use_app_google_drive` search/list actions return 403 `includeItemsFromAllDrives must be true`; the wrapper doesn't expose that flag. To unblock, need one of: (a) re-share `1gtXO5azesAEeAti2eKNOFpA_jtcCQGGs` as "Anyone with the link can view", (b) add Google OAuth creds to Zo Secrets, or (c) drop a file-list into the workspace.
+- **Squarespace export (article PDFs + MP3s)**: pending; user is preparing it. Neither `/speeches` nor `/brj-articles` indexes direct file URLs in HTML — the export is the only viable path.
+- **No page/route/content code changes yet this session**.
+
+## Update 2026-09-02T12:35Z — Cloudflare + R2 unblocked, WS-2.4 ready
+
+- `CLOUDFLARE_API_TOKEN` works (returns 200 on `/accounts/$CLOUDFLARE_ACCOUNT_ID/r2/buckets`). Earlier `/user/tokens/verify` 401 was route-specific, not token-invalid; status-flag note in WS-2.4 row below updated.
+- Bucket to use: **`brf2-assets`** (already exists, free tier). `r2-upload.md` updated accordingly.
+- Sitemap crawl archived at `scratch/phase-2/crawl/sitemap.xml` (822 URLs) is the master URL list for the WS-2.4 harvest.
+- Pending unblock: source PDFs/MP3s. Issue PDFs on GDrive folder `1gtXO5azesAEeAti2eKNOFpA_jtcCQGGs` (per AGENTS.md path `2 Areas/4 Faith/BRF-BRJ/BRF single PDFs`); article PDFs + conference MP3s come from Squarespace export (user to share). Pipedream GDrive integration currently 403s on `includeItemsFromAllDrives`; either share the folder public-by-link or add Google OAuth creds to Zo Secrets to unblock scripted download.

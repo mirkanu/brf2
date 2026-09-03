@@ -18,8 +18,68 @@ export async function getStaticPaths() {
 
 const { conf, reviews } = Astro.props;
 const { Content } = await render(conf);
+
+const SITE = 'https://brf2.pages.dev';
+const pageUrl = `${SITE}/conferences/${conf.data.year}/`;
+
+/**
+ * Convert conference `dates` strings ("3-10 August", "16-23 July", "9-16 July, 2022", "21-28 July")
+ * into an ISO date for `startDate`. The conference `year` is used for the year.
+ * Returns null if the input is null/empty or cannot be parsed safely.
+ */
+function parseStartDate(dates: string | null | undefined, fallbackYear: number | string | null | undefined): string | null {
+  if (!dates) return null;
+  const yearNum = Number(fallbackYear);
+  const year = Number.isFinite(yearNum) ? yearNum : new Date().getFullYear();
+
+  // Pull out "Month" word.
+  const monthMatch = dates.match(/\b(January|February|March|April|May|June|July|August|September|October|November|December|Jan|Febri Febr Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)\b/i);
+  let monthIdx: number | null = null;
+  if (monthMatch) {
+    const m = monthMatch[1].toLowerCase();
+    const monthMap: Record<string, number> = {
+      january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+      july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
+      jan: 0, feb: 1, mar: 2, apr: 3, jun: 5, jul: 6, aug: 7, sept: 8, sep: 8, oct: 9, nov: 10, dec: 11,
+    };
+    monthIdx = monthMap[m] ?? null;
+  }
+
+  // Pull out an explicit year if present.
+  const yearMatch = dates.match(/\b((?:19|20)\d{2})\b/);
+  const effectiveYear = yearMatch ? Number(yearMatch[1]) : year;
+
+  // Pull out the first day number (1-31).
+  const dayMatch = dates.match(/\b([0-3]?\d)\b/);
+
+  if (monthIdx == null || !dayMatch) return null;
+  const day = Number(dayMatch[1]);
+  if (!Number.isFinite(day) || day < 1 || day > 31) return null;
+
+  // Use UTC to avoid TZ drift; emit date-only ISO.
+  return new Date(Date.UTC(effectiveYear, monthIdx, day)).toISOString().slice(0, 10);
+}
+
+const startDate = parseStartDate(conf.data.dates, conf.data.year);
+
+const venue = conf.data.venue ?? null;
+
+const eventLd = startDate ? {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: conf.data.title,
+  startDate,
+  location: {
+    '@type': 'Place',
+    name: venue ?? '',
+    address: '',
+  },
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  mainEntityOfPage: pageUrl,
+} : null;
 ---
-<Site title={`${conf.data.title} (${conf.data.year}) — BRF`}>
+<Site title={`${conf.data.title} (${conf.data.year}) — BRF`} jsonLd={eventLd}>
   <section class="bg-brand-cream border-b border-brand-ink/10">
     <div class="max-w-4xl mx-auto px-6 py-12">
       <Breadcrumbs items={[

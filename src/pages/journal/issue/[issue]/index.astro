@@ -5,6 +5,8 @@ import { getCollection } from 'astro:content';
 
 export const prerender = true;
 
+const SITE = 'https://brf2.pages.dev';
+
 export async function getStaticPaths() {
   const issues = await getCollection('journalIssues');
   const articles = await getCollection('journal');
@@ -43,9 +45,43 @@ const bc = [
   { label: 'Journal', href: '/journal' },
   { label: issueTitle },
 ];
----
 
-<Site title={`${issueTitle} — British Reformed Journal`} description={`Articles from ${issueTitle} of the British Reformed Journal.`}>
+const issueUrl = `${SITE}/journal/issue/issue-${String(issueNum).padStart(2, '0')}/`;
+
+// First article's datePublished as a proxy for the issue's datePublished.
+const firstArticleDate = articles.length > 0 ? articles[0].data.datePublished : null;
+
+const issueLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${issueTitle} — British Reformed Journal`,
+  description: `Articles from ${issueTitle} of the British Reformed Journal.`,
+  datePublished: firstArticleDate ? new Date(firstArticleDate).toISOString() : undefined,
+  author: [{ '@type': 'Organization', name: 'British Reformed Fellowship' }],
+  mainEntityOfPage: issueUrl,
+  publisher: {
+    '@type': 'Organization',
+    name: 'British Reformed Fellowship',
+  },
+  isPartOf: {
+    '@type': 'Periodical',
+    name: 'British Reformed Journal',
+  },
+  hasPart: articles.map((a) => ({
+    '@type': 'Article',
+    headline: a.data.title,
+    datePublished: a.data.datePublished ? new Date(a.data.datePublished).toISOString() : undefined,
+  })),
+};
+
+if (pdfUrl) {
+  issueLd.encoding = {
+    '@type': 'MediaObject',
+    url: pdfUrl,
+  };
+}
+---
+<Site title={`${issueTitle} — British Reformed Journal`} description={`Articles from ${issueTitle} of the British Reformed Journal.`} jsonLd={issueLd}>
   <section class="bg-brand-cream border-b border-brand-ink/10">
     <div class="max-w-5xl mx-auto px-6 py-12">
       <Breadcrumbs items={bc} />
