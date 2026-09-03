@@ -1,0 +1,34 @@
+---
+/**
+ * BibleUp — auto-detects scripture references in article body and shows the
+ * verse text in a hover popover (no editor effort required). Scoped to the
+ * parent .prose-brand container; not initialised if there is no article body
+ * on the page (so other pages stay quiet).
+ */
+interface Props {
+  version?: 'KJV' | 'ASV' | 'LSV' | 'WEB';
+}
+const { version = 'KJV' } = Astro.props;
+---
+<script is:inline src="https://cdn.jsdelivr.net/npm/@bibleup/bibleup@1"></script>
+<script is:inline define:vars={{ version }}>
+  (function () {
+    function init() {
+      var target = document.querySelector('.prose-brand');
+      if (!target || !window.BibleUp) return;
+      var bu = new window.BibleUp(target, {
+        version: version,
+        popup: 'wiki',
+        darkTheme: document.documentElement.getAttribute('data-theme') === 'dark',
+        ignoreCase: true,
+        bu_ignore: ['BLOCKQUOTE', 'NAV', 'HEADER', 'FOOTER'],
+      });
+      bu.create();
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>

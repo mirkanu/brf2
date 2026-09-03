@@ -1,6 +1,7 @@
 ---
 import Site from '../../../../layouts/Site.astro';
 import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
+import ScriptureHover from '../../../../components/ScriptureHover.astro';
 import { getCollection, render } from 'astro:content';
 import { slugify } from '../../../../lib/format';
 
@@ -124,6 +125,7 @@ if (encoding) articleLd.encoding = encoding;
           </a>
         </div>
       )}
+      <ScriptureHover version="KJV" />
       <article class="prose prose-brand max-w-none">
         {Content && <Content />}
       </article>
@@ -148,4 +150,5 @@ if (encoding) articleLd.encoding = encoding;
       </div>
     </div>
   </section>
+<ScriptureHover />
 </Site>
