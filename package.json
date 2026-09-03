@@ -9,9 +9,11 @@
     "preview": "astro preview",
     "sitemap": "node scratch/phase-2/gen-sitemaps.mjs",
     "sitemap:dry": "OUT_DIR=public PROJECT_ROOT=. WALK_DIRS=dist node scratch/phase-2/gen-sitemaps.mjs",
-    "sitemap:public": "OUT_DIR=public PROJECT_ROOT=. WALK_DIRS=dist node scratch/phase-2/gen-sitemaps.mjs"
+    "sitemap:public": "OUT_DIR=public PROJECT_ROOT=. WALK_DIRS=dist node scratch/phase-2/gen-sitemaps.mjs",
+    "redirects": "node scratch/phase-2/gen-redirects.mjs"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.19",
     "@tailwindcss/vite": "4.1.16",
     "astro": "7.2.2",
     "tailwindcss": "4.1.16",
