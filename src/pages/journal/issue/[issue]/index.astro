@@ -56,7 +56,7 @@ const issueLd: Record<string, unknown> = {
   '@type': 'Article',
   headline: `${issueTitle} — British Reformed Journal`,
   description: `Articles from ${issueTitle} of the British Reformed Journal.`,
-  datePublished: firstArticleDate ? new Date(firstArticleDate).toISOString() : undefined,
+  datePublished: firstArticleDate && !Number.isNaN(new Date(firstArticleDate).getTime()) ? new Date(firstArticleDate).toISOString() : undefined,
   author: [{ '@type': 'Organization', name: 'British Reformed Fellowship' }],
   mainEntityOfPage: issueUrl,
   publisher: {
@@ -70,7 +70,7 @@ const issueLd: Record<string, unknown> = {
   hasPart: articles.map((a) => ({
     '@type': 'Article',
     headline: a.data.title,
-    datePublished: a.data.datePublished ? new Date(a.data.datePublished).toISOString() : undefined,
+    datePublished: a.data.datePublished && !Number.isNaN(new Date(a.data.datePublished).getTime()) ? new Date(a.data.datePublished).toISOString() : undefined,
   })),
 };
 

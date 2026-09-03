@@ -1,7 +1,8 @@
 {
   "issueNumber": 42,
-  "issueDate": "2019-04",
-  "pdfUrl": null,
+  "issueDate": "Spring 2005",
+  "pdfUrl": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/pdfs/issues/issue-42.pdf",
   "legacyPath": null,
-  "coverImage": "/assets/issue-covers/issue-42.svg"
+  "coverImage": "/assets/issue-covers/issue-42.svg",
+  "legacyPdfUrl": "Copy of BRJ-42-Spring 2005.pdf"
 }

@@ -76,7 +76,11 @@ const articleLd: Record<string, unknown> = {
   isPartOf: {
     '@type': 'PublicationIssue',
     issueNumber: issueNum,
-    datePublished: issue.data.issueDate ? new Date(issue.data.issueDate).toISOString() : undefined,
+    datePublished: (() => {
+      if (!issue.data.issueDate) return undefined;
+      const d = new Date(issue.data.issueDate);
+      return Number.isNaN(d.getTime()) ? undefined : d.toISOString();
+    })(),
   },
 };
 if (encoding) articleLd.encoding = encoding;

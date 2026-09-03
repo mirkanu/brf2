@@ -1,7 +1,8 @@
 {
   "issueNumber": 1,
-  "issueDate": "2012-03",
-  "pdfUrl": null,
+  "issueDate": "Jan-Mar 1993",
+  "pdfUrl": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/pdfs/issues/issue-01.pdf",
   "legacyPath": null,
-  "coverImage": "/assets/issue-covers/issue-01.svg"
+  "coverImage": "/assets/issue-covers/issue-01.svg",
+  "legacyPdfUrl": "Copy of BRJ-01-Jan-Mar 1993.pdf"
 }
