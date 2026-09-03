@@ -41,6 +41,17 @@ const journal = defineCollection({
 });
 
 /**
+ * Bodies for journal articles: one .md per article, filename matches the article
+ * id (without .json). Loaded as a separate collection so the JSON loader above
+ * can keep metadata + list queries lightweight. The article route looks up the
+ * body by article id and renders it with `render()`.
+ */
+const journalBodies = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/journal' }),
+  schema: z.object({}),
+});
+
+/**
  * Journal issues — one entry per issue of the British Reformed Journal.
  * Articles live in the `journal` collection and reference an issue by `issueNumber`.
  * Articles themselves carry no PDF/cover metadata; they inherit it from the parent issue.
@@ -64,4 +75,4 @@ const pages = defineCollection({
   schema: baseSchema,
 });
 
-export const collections = { journal, journalIssues, conferences, podcasts, pages };
+export const collections = { journal, journalBodies, journalIssues, conferences, podcasts, pages };

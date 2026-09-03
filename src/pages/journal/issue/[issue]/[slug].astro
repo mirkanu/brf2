@@ -32,7 +32,12 @@ export async function getStaticPaths() {
 }
 
 const { article, issue, issueNum } = Astro.props;
-const { Content } = await render(article);
+
+// Look up matching body from `journalBodies` collection; if none, render nothing.
+const articleId = article.id.replace(/\.json$/, '');
+const bodies = await getCollection('journalBodies');
+const body = bodies.find((b) => b.id === `${articleId}.md` || b.id === articleId);
+const { Content } = body ? await render(body) : { Content: () => null };
 
 const { title, datePublished, authors } = article.data;
 const authorNames = (authors ?? []).filter((s) => s && s.trim().length > 0);
@@ -120,7 +125,7 @@ if (encoding) articleLd.encoding = encoding;
         </div>
       )}
       <article class="prose prose-brand max-w-none">
-        <Content />
+        {Content && <Content />}
       </article>
       <div class="mt-10 border-t border-brand-ink/10 pt-6 flex items-center gap-3">
         {pdfUrl ? (
