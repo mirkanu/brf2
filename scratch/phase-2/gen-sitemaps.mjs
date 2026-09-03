@@ -13,7 +13,7 @@ import { readdirSync, writeFileSync, statSync, readFileSync } from 'node:fs';
 import { glob } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
 
-const ROOT = process.env.PROJECT_ROOT ?? '/home/workspace/1 Projects/brf2';
+const ROOT = process.env.PROJECT_ROOT ?? process.cwd();
 const WALK_DIRS = (process.env.WALK_DIRS ?? join(ROOT, 'dist'))
   .split(',')
   .map(s => s.trim())
