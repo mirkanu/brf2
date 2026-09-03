@@ -104,6 +104,21 @@ if (encoding) articleLd.encoding = encoding;
 
   <section class="bg-white">
     <div class="max-w-3xl mx-auto px-6 py-10">
+      {pdfUrl && (
+        <div class="mb-8 flex items-center justify-between gap-3 rounded-sm border border-brand-ink/15 bg-brand-cream/50 px-4 py-3">
+          <p class="text-xs uppercase tracking-wider text-muted">
+            Read in your browser below, or open the original PDF
+          </p>
+          <a
+            href={pdfUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-sm bg-oxblood px-4 py-2 text-sm font-medium text-paper hover:bg-oxblood-hover"
+          >
+            Read PDF
+          </a>
+        </div>
+      )}
       <article class="prose prose-brand max-w-none">
         <Content />
       </article>
