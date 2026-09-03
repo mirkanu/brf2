@@ -15,14 +15,8 @@ for (const a of articles) {
   countByIssue.set(n, (countByIssue.get(n) ?? 0) + 1);
 }
 
-// Sort newest first
-const sorted = issues.slice().sort((a, b) => {
-  // Prefer issueDate desc, then issueNumber desc
-  const ad = a.data.issueDate ?? '';
-  const bd = b.data.issueDate ?? '';
-  if (ad !== bd) return bd.localeCompare(ad);
-  return b.data.issueNumber - a.data.issueNumber;
-});
+// Sort newest first by issueNumber desc
+const sorted = issues.slice().sort((a, b) => b.data.issueNumber - a.data.issueNumber);
 ---
 
 <Site title="The British Reformed Journal — BRF">
@@ -45,7 +39,7 @@ const sorted = issues.slice().sort((a, b) => {
         {sorted.map((issue) => {
           const n = issue.data.issueNumber;
           const url = `/journal/issue/issue-${String(n).padStart(2, '0')}`;
-          const title = issue.data.issueDate ?? `Issue ${n}`;
+          const title = issue.data.issueDate ?? `Issue ${n}`; // keep - display label
           const count = countByIssue.get(n) ?? 0;
           return (
             <li>
