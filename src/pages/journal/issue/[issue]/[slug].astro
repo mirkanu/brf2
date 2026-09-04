@@ -5,6 +5,7 @@ import ScriptureHover from '../../../../components/ScriptureHover.astro';
 import FootnoteHover from '../../../../components/FootnoteHover.astro';
 import { getCollection, render } from 'astro:content';
 import { slugify } from '../../../../lib/format';
+import { decodeEntities } from '../../../../lib/text';
 
 export const prerender = true;
 
@@ -41,7 +42,8 @@ const bodies = await getCollection('journalBodies');
 const body = bodies.find((b) => b.id === `${articleId}.md` || b.id === articleId);
 const { Content } = body ? await render(body) : { Content: () => null };
 
-const { title, datePublished, authors } = article.data;
+const { title: rawTitle, datePublished, authors } = article.data;
+const title = decodeEntities(rawTitle);
 const authorNames = (authors ?? []).filter((s) => s && s.trim().length > 0);
 
 // Display title: [issueDate] if provided, otherwise "Issue [issueNumber]"

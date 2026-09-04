@@ -1,5 +1,6 @@
 ---
 import { fmtDate } from '../lib/format';
+import { decodeEntities } from '../lib/text';
 import type { CollectionEntry } from 'astro:content';
 
 type AnyEntry = CollectionEntry<'journal'> | CollectionEntry<'conferences'> | CollectionEntry<'podcasts'>;
@@ -15,7 +16,8 @@ const { item, article, showIssue = true, href } = Astro.props;
 const entry: AnyEntry = (item ?? article)!;
 if (!entry) throw new Error('ArticleCard requires either item or article prop');
 
-const { title, datePublished } = entry.data;
+const { title: rawTitle, datePublished } = entry.data;
+const title = decodeEntities(rawTitle);
 const issueNumber = 'issueNumber' in entry.data ? entry.data.issueNumber : undefined;
 const authorNames: string[] = Array.isArray((entry.data as any).authors)
   ? (entry.data as any).authors.filter((s: string) => s && s.trim().length > 0)
