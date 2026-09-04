@@ -1,3 +1,7 @@
+## Agent handbook
+
+The canonical BRF skill lives at `docs/agent-handbook/` (SKILL.md, references/, assets/). `Skills/brf-website` is a symlink to that path so workspace tools resolve it from either location. Edit the repo copy and commit; the symlink picks up changes immediately.
+
 ## Development
 
 When starting the dev server, use background mode:
@@ -8,7 +12,9 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
-## Project routing index (Phase 2, 2026-09-02)
+## Project routing index
+
+Updated 2026-09-04. The project no longer keeps a `.planning/` directory; this file, `docs/agent-handbook/`, and `STATUS.md` are the canonical sources of project state.
 
 ### Collections (`src/content.config.ts`)
 
