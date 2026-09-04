@@ -10,4 +10,325 @@ tags:
   - "calvinism"
 ---
 
-[Read PDF](/s/BRJ77savingwill1.pdf)
+## Introduction
+
+Our title, "God's Saving Will in the New Testament," deliberately limits the field.[^1] We are not going to look at God's saving will in the Old Testament, except by way of passing references; otherwise there would be too much material to treat here. We will especially focus on two Greek verbs for the activity of willing: *thelō* and *boulomai* (and their cognates), which occur in the New Testament about 270 times and about 50 times, respectively.[^2]
+
+Dietrich Müller's analysis of what can and cannot be said regarding the different shades of meaning of these two Greek words is reflective of modern biblical scholarship:
+
+> A clear terminological distinction between *boulomai* (originally volition as a mental act) and *thelō* (originally instinctive desire) is no longer possible after the very early overlap of the areas covered by the words and is excluded by the time of the NT [i.e., New Testament] by their largely synonymous usage.[^3]
+
+However, the old nuances are there in the first instance of *thelō* and the first instance of *boulomai*, with both Greek verbs occurring in the same verse which occurs very near the start of the New Testament, even in its first chapter. After tracing our Lord's genealogy back to King David and the patriarch Abraham (Matt. 1:1-17), and after stating that Joseph's fiancée Mary is pregnant by the Holy Spirit (v. 18), just two verses into the narrative, we read, "Then Joseph her husband, being a just man, and not willing [*thelō*] to make her a publick example, was minded [*boulomai*] to put her away privily" (v. 19). In other words, because he did not want or desire (*thelō*) to embarrass Mary publicly, Joseph decided or resolved (*boulomai*) to break their engagement quietly.
+
+Theologically, the will of the Triune God has historically and helpfully been spoken of in two main ways:
+
+> 1. God's will of decree—what He has sovereignly decided to do. This is God's eternal and immutable counsel which determines absolutely everything that has happened or shall come to pass.
+> 2. God's will of command—what He tells man he should do. This is God's moral and ethical standard for us revealing His holy requirements from us, which are summarized in the Ten Commandments.
+
+Below is a fine quote from the authoritative entry in *The Theological Dictionary of the New Testament* on *thelō* or *thelein*, the Greek word used most often in the New Testament to refer to God's will. The passage speaks first of God's will of decree and then His will of command:
+
+> [1] God's *thelein* [will] is always characterised by absolute definiteness, sovereign self-assurance and efficacy. It is resolute and complete willing … it refers either to the divine will in creation (I C[or]. 12:18; 15:38) or to the divine sovereignty in disposing to salvation ([John] 3:8 of the Spirit in regeneration …) … it denotes the independent and self-efficacious power of disposal in the hands of God, who is a free to do what He wills with His own. In R[omans] 9:18, 22 Paul shows how the *thelein* [will] of free and sovereign disposal is declared in the event of salvation. It finds expression as a demonstration of wrath and power both in having mercy and in hardening … [2] Other statements with reference to God use *thelein* [will] to denote that which God requires of the righteous. In this respect there is recurrent reference (M[at]t. 9:13; 12:7; H[e]b. 10:5, 8) to the prophetic statement that God requires *eleos* [mercy] and not *thusia* [sacrifice] (Hos. 6:6; [Ps.] 39:6 [Hebrew = 40:6 English]).[^4]
+
+This powerful statement describes well God's will of decree: "always characterized by absolute definiteness, sovereign self-assurance and efficacy … resolute and complete willing … the independent and self-efficacious power of disposal … [so that God is] free to do what He wills with His own," etc. After describing [1] Jehovah's will of decree, the quote mentions [2] His will of command, what He "requires" of us.
+
+There are several interrelated purposes of this article on "God's Saving Will in the New Testament." First, it will show us that God's will, especially His saving will, is a massive theme in the New Testament revelation, as well as in the Scriptures generally. There are many texts on the saving will of God or Christ or the Holy Spirit. References to the will of the Trinity or the wills of believers (which it graciously renews) or the wills of the wicked (to which it is in moral opposition) are found in every one of the 27 books of the New Testament, whether history, epistle or apocalypse. The subject of the will appears in parables, miracles and controversies; it is presented in doctrinal discourses, ethical passages and moving doxologies; and it occurs in connection with the believer's duty, the church's calling and the Saviour's cross. It is a rich field to survey and enjoy!
+
+Second, it will set forth Jehovah's amazing control and government of the universe, and especially His gracious salvation of His church in the Lord Jesus.
+
+Third, it will expose both the falsity and the poverty of the well-meant offer, the notion that the Almighty earnestly and fervently wills, wishes, wants and desires the salvation of those whom He eternally and immutably reprobated. This strange doctrine presents the ghastly spectre of a failing, foolish and frustrated god. It will be refuted at appropriate places in this article and the whole of the Appendix will be devoted to this subject.
+
+Fourth, it will strengthen our faith in the absolutely sovereign God of heaven and earth, our confidence in His wholly gracious salvation, and our comfort in the all-wise and all-powerful will of God in our Lord Jesus Christ.
+
+Fifth, it will teach us our glorious calling as Jehovah's servants "both to will and to do of his good pleasure" (Phil. 2:13).
+
+## God's Will in Ephesians 1:1-14
+
+Let us start by considering Ephesians 1:1-14, paying special attention to the words and phrases that are italicized or emboldened:
+
+> 1 Paul, an apostle of Jesus Christ by the will of God, to the saints which are at Ephesus, and to the faithful in Christ Jesus: 2 grace be to you, and peace, from God our Father, and from the Lord Jesus Christ. 3 Blessed be the God and Father of our Lord Jesus Christ, who hath blessed us with all spiritual blessings in heavenly places in Christ: 4 according as he hath chosen us in him before the foundation of the world, that we should be holy and without blame before him in love: 5 having predestinated us unto the adoption of children by Jesus Christ to himself, according to the good pleasure of his will, 6 to the praise of the glory of his grace, wherein he hath made us accepted in the beloved. 7 in whom we have redemption through his blood, the forgiveness of sins, according to the riches of his grace; 8 wherein he hath abounded toward us in all wisdom and prudence; 9 having made known unto us the mystery of his will, according to his good pleasure which he hath purposed in himself: 10 that in the dispensation of the fulness of times he might gather together in one all things in Christ, both which are in heaven, and which are on earth; even in him: 11 in whom also we have obtained an inheritance, being predestinated according to the purpose of him who worketh all things after the counsel of his own will: 12 that we should be to the praise of his glory, who first trusted in Christ. 13 in whom ye also trusted, after that ye heard the word of truth, the gospel of your salvation: in whom also after that ye believed, ye were sealed with that holy Spirit of promise, 14 which is the earnest of our inheritance until the redemption of the purchased possession, unto the praise of his glory.
+
+This familiar and beautiful passage refers to God's "will" of decree four times (vv. 1, 5, 9, 11)—italicized (above). We also have five closely related words or phrases: God's "good pleasure" (vv. 5, 9) or "purpose" (vv. 9, 11) or "counsel" (v. 11), as well as the "predestination" of God's people (vv. 5, 11) or our eternal election or being "chosen" in Christ (v. 4)—emboldened (above). These six key terms are found 12 times in the first 14 verses of Ephesians 1. Sometimes three or even four of these crucial words or phrases are heaped together in one verse, as in verses 5, 9 and 11. The apostle is using weighty theological terms that sharpen and reinforce each other in order to build an unassailable case regarding God's saving will in Jesus Christ.
+
+We can distinguish different shades of meaning in the four references to God's "will" in Ephesians 1. First, in verse 11, we have the great truth that our heavenly Father "worketh all things after the counsel of his own will." This is God's all-encompassing will of decree that excludes nothing and includes everything in His creation.[^5]
+
+Second, in speaking of our legal inclusion in His family, verse 5 brings God's saving will into sharper focus: "God predestinated us unto the adoption of children by Jesus Christ to himself, according to the good pleasure of his will."
+
+Third, Ephesians 1 declares the oneness of the eschatological catholic or universal church of Christ: the totality of elect Jews and Gentiles in the new creation in the age to come. God has
+
+> made known unto us the mystery of his will, according to the good pleasure which he hath purposed in himself: that in the dispensation of the fulness of times he might gather together in one all things in Christ, both which are in heaven, and which are on earth; even in him (vv. 9-10).
+
+
+Fourth, the very first verse of Ephesians mentions the will of God in its reference to Paul's office and ministry in the church: "Paul, an apostle of Jesus Christ by the will of God" (v. 1; cf. I Cor. 1:1; II Cor. 1:1; Col. 1:1; II Tim. 1:1). He preached and served the saving purpose of God in the first century, and, by his inspired epistles, he teaches and extols that salvific will to the whole church throughout the last days until our Lord's second coming.
+
+These two spheres of God's will of decree—His all-encompassing will that embraces the whole universe and His saving will regarding His elect in Jesus Christ—are, of course, intimately related. Ephesians 1:11 states that we are "predestinated according to the purpose of him who worketh all things after the counsel of his own will." Thus God's saving will in delivering us from our sin and misery is served by His all-encompassing will.
+
+Likewise, Christ taught that the Father has "given him power over all flesh, that he should give eternal life to as many as thou hast given him" (John 17:2). Thus "we know that all things [in the all-encompassing will of God] work together for good to them that love God, to them who are the called according to his [saving] purpose" (Rom. 8:28).
+
+Ephesians 1 refers to God's will in relationship to eternity—eternity past, so to speak—and time. God's will is eternal because we were "chosen" or elected in Christ "before the foundation of the world" (v. 4). God's eternal will of decree, both in our election and with respect to absolutely everything in His creation, is perfectly effected in history, because He "worketh all things" in space and time "after the counsel of his own will" (v. 11). Therefore, God's all-encompassing counsel or plan, His will of decree or good pleasure, is realized in an equally all-embracing providence so that He does in time exactly what He willed in eternity (Ps. 115:3; 135:6; Isa. 14:24-27; 46:10; Dan. 4:35). This all-encompassing decree, effected in an all-encompassing providence, serves the salvation of all of the elect through the crucified and risen Christ.
+
+God's saving will, the apostle teaches in Ephesians 1:1-14, is Trinitarian. Consider even the structure of the passage. After Paul's address to the Ephesians (vv. 1-2), he speaks especially of the role of the Father in our salvation (vv. 3-6). In verses 7-12, Christ, the eternal Son incarnate who redeemed us from our sins, is in the foreground. Then the Holy Spirit is presented as the seal and down payment of our salvation (vv. 13-14). Thus God's redemptive will—in its conception in eternity, its accomplishment at the cross, and its application to us in this world and the next—is Trinitarian: of the Father, through the Son and by the Holy Spirit.
+
+Schrenk ably sets forth "the counsel of his own will" (v. 11) as the eternal source and driving force of the church's gracious salvation in Ephesians 1:1-14:
+
+> In the magnifying of the divine economy of salvation in Eph. 1, which is shot through with references to the will of God … the expositions of the foreordination and election of the community within a Christological universalism which embraces both heaven and earth (v. 10), lead finally to a solemn climax in the statement (v. 11): ["in whom also we have obtained an inheritance, being predestinated according to the purpose of him who worketh all things after the counsel of his own will"]. The inheritance of the community, which consists in the final revelation and has its provisional seal in the Spirit … is rooted in [God's predestinating purpose]. Everything is mediated and present once and for all in Christ … and everything finally derives from the ["counsel of his own will"] which finally effects the whole fulness of the event of salvation. It is quite plain that this ["counsel of his own will"] has the final word, that it not merely overarches the [election] (v. 4), [predestination] (v. 5, 11) and ["purpose"] (v. 11), but that it also sets in movement everything which in this whole section is described as the grace present in Christ and granted to the community as the reality of salvation. This helps us to see that in the formula "counsel of his will" the inflexible ordination of His will finds a full-orbed pleonastic expression.[^6]
+
+How must we, the objects and beneficiaries of God's saving will, respond, especially as we grasp more and more of its riches? First, we worship the Triune God. At the end of the sections on the Father (vv. 3-6), the Son (vv. 7-12) and the Spirit (vv. 13-14), we have some form of the statement that our salvation is all "to the praise of his glory" (vv. 6, 12, 14). Second, we bless God: "Blessed be the God and Father of our Lord Jesus Christ, who hath blessed us with all spiritual blessings in heavenly places in Christ: according as he hath chosen [or elected] us in him before the foundation of the world" (vv. 3-4).
+
+We praise and bless God! That is the practical goal and result for Christ's children in studying God's saving will, especially as it is set forth in Ephesians 1!
+
+## God's Will in Romans 9:6-24
+
+Having considered God's will in Ephesians 1:1-14, we now turn to our second major passage on this wonderful subject, Romans 9:6-24:
+
+> 6 Not as though the word of God hath taken none effect. For they are not all Israel, which are of Israel: 7 neither, because they are the seed of Abraham, are they all children: but, In Isaac shall thy seed be called. 8 That is, They which are the children of the flesh, these are not the children of God: but the children of the promise are counted for the seed. 9 For this is the word of promise, At this time will I come, and Sara shall have a son. 10 And not only this; but when Rebecca also had conceived by one, even by our father Isaac; 11 (for the children being not yet born, neither having done any good or evil, that the purpose of God according to election might stand, not of works, but of him that calleth;) 12 it was said unto her, The elder shall serve the younger. 13 As it is written, Jacob have I loved, but Esau have I hated. 14 What shall we say then? Is there unrighteousness with God? God forbid. 15 For he saith to Moses, I will have mercy on whom I will have mercy, and I will have compassion on whom I will have compassion. 16 So then it is not of him that willeth, nor of him that runneth, but of God that sheweth mercy. 17 For the scripture saith unto Pharaoh, Even for this same purpose have I raised thee up, that I might shew my power in thee, and that my name might be declared throughout all the earth. 18 Therefore hath he mercy on whom he will have mercy, and whom he will he hardeneth. 19 Thou wilt say then unto me, Why doth he yet find fault? For who hath resisted his will? 20 Nay but, O man, who art thou that repliest against God? Shall the thing formed say to him that formed it, Why hast thou made me thus? 21 Hath not the potter power over the clay, of the same lump to make one vessel unto honour, and another unto dishonour? 22 What if God, willing to shew his wrath, and to make his power known, endured with much longsuffering the vessels of wrath fitted to destruction: 23 and that he might make known the riches of his glory on the vessels of mercy, which he had afore prepared unto glory 24 even us, whom he hath called, not of the Jews only, but also of the Gentiles?
+
+Like Ephesians 1, Romans 9 refers frequently to Jehovah's will: *thelō* or *boulomai* (or their cognates). It is mentioned four times in the three verses below from this great chapter of Scripture:
+
+> Therefore hath he mercy on whom he will have mercy, and whom he will he hardeneth (v. 18).
+>
+> Thou wilt say then unto me, Why doth he yet find fault? For who hath resisted his will? (v. 19).
+>
+> What if God, willing to shew his wrath, and to make his power known, endured with much longsuffering the vessels of wrath fitted to destruction …? (v. 22).
+
+Whereas Ephesians 1 speaks only of God's will in election, Romans 9 deals with His will in both election and reprobation. Election, of course, is God's eternal, sovereign and unconditional choice of certain people in Jesus Christ, both to grace and to glory, to the honour of His name alone. Reprobation, on the other hand, is God's eternal, sovereign and unconditional purpose to pass by and ordain to destruction all others, in the way of their sins, to the praise of His holy justice.
+
+Election and reprobation go hand-in-hand with God's love and God's hatred respectively: "Jacob have I loved, but Esau have I hated" (v. 13). In the context of Romans 9, the covenant God is saying, in effect, "Elect Jacob have I loved and reprobate Esau have I hated."
+
+Election and reprobation also go hand-in-hand with God's mercy and God's hardening respectively: "Therefore hath he mercy on whom he will have mercy [i.e., the elect], and whom he will he hardeneth [i.e., the reprobate]" (v. 18).
+
+Putting it all together, there is one people embraced in God's election, God's love and God's mercy. There is also God's reprobation, God's hatred and God's hardening of others.
+
+These two realities, hatred and hardening, are crucial aspects of the biblical and Reformed doctrine of reprobation. Divine reprobation entails divine hatred and divine hardening of those whom He passed by in His absolute sovereignty and ordained to destruction for their sins in His unassailable justice.
+
+God's saving will regarding His elect is not only served by His all-encompassing decree of providence (Eph. 1:11) but is also served by His rejecting will. That is, God's election of some in Jesus Christ is served by His reprobation of others: "The elder [i.e., reprobate, hated Esau] shall serve the younger [i.e., elect, beloved Jacob]" (Rom. 9:12).
+
+Both God's will in election and His will in reprobation are irresistible, as the apostle teaches in his rhetorical question of Romans 9:19: "who hath resisted his will?" No one has or will for "none can stay his hand, or say unto him, What doest thou?" (Dan. 4:35).
+
+Of course, objections to this biblical teaching always arise from unbelieving, proud man. The apostle brings them up and deals with them in Romans 9. Thus he writes, "What shall we say then? Is there unrighteousness with God?" The response? "God forbid," literally, "May it not be!" (v. 14).
+
+Paul anticipates another protest: "Thou wilt say then unto me, Why doth he yet find fault? For who hath resisted his will?" (v. 19). The apostle counters,
+
+> Nay but, O man, who art thou that repliest against God? Shall the thing formed say to him that formed it, Why hast thou made me thus? Hath not the potter power over the clay, of the same lump to make one vessel unto honour, and another unto dishonour? (vv. 20-21).
+
+
+The former Pharisee makes it clear that his inspired teaching in Romans 9 is in full accord with the Old Testament Scriptures on God's will in election and reprobation. In the space of only eleven verses (vv. 7-17), Paul quotes the first two books of the Pentateuch as many as five times.
+
+First, he provides three citations from Genesis, with the last two prefaced by introductory remarks: "In Isaac shall thy seed be called" (Rom. 9:7; Gen. 21:12); "For this is the word of promise, At this time will I come, and Sara shall have a son" (Rom. 9:9; Gen. 18:10, 14); "it was said unto her, The elder shall serve the younger" (Rom. 9:12; Gen. 25:23).
+
+Second, Paul uses quotation formulas before citing two verses from Exodus: "For he [i.e., God] saith to Moses, I will have mercy on whom I will have mercy, and I will have compassion on whom I will have compassion" (Rom. 9:15; Ex. 33:19); "For the scripture saith unto Pharaoh, Even for this same purpose have I raised thee up, that I might shew my power in thee, and that my name might be declared throughout all the earth" (Rom. 9:17; Ex. 9:16).
+
+Romans 9:6-24 quotes not only the first two scriptural books, Genesis and Exodus, but also the last book of the Old Testament, as is arranged in our Bibles, Malachi: "As it is written, Jacob have I loved, but Esau have I hated" (Rom. 9:13; Mal. 1:2-3).
+
+Clearly, the doctrine of the apostle to the Gentiles in Romans 9:6-24 regarding God's will in sovereign election and reprobation is divinely authoritative. It fits with, and unpacks, six Old Testament texts: five from Moses, in Genesis and Exodus, and one from Malachi. Moreover, Romans 9, like all of Scripture, consists of words breathed forth by the Holy Spirit (II Tim. 3:16), who was sent by the ascended Lord Jesus Christ, the revelation of the Triune God.
+
+This authoritative teaching in Romans 9:6-24 refutes two common errors. First, it condemns man's free will, the Arminian heresy that man is able to choose God and His salvation with the help of an alleged resistible divine grace. The biblical and Reformed faith boldly proclaims the holy God's free will in both election and reprobation, not totally depraved man's free will! Paul explicitly draws this conclusion: "So then it [i.e., salvation] is not of him that willeth [i.e., man and his supposed free will], nor of him that runneth [i.e., man and his works, even his most strenuous religious exertions], but of God that sheweth mercy" (v. 16).
+
+Second, Romans 9 exposes the well-meant offer of the gospel, that is, the idea that God earnestly desires to save absolutely all men head-for-head or everyone who hears the gospel (including the reprobate). This is a position that is intrinsic to Roman Catholic and Arminian soteriology, but it is now promoted by many in Reformed and Presbyterian circles as if it were the biblical and Reformed gospel.
+
+However, Romans 9 actually states the exact opposite. It is not merely that God does not earnestly want to save the reprobate but, instead, He earnestly wills and desires—and this has to be said reverently because it is a fearful thing—to punish the wicked for their sins.
+
+It is not that God delights in hurting people (Eze. 33:11), but rather that He wills to reveal His own infinite holiness and omnipotence in punishing the impenitent as they justly deserve. This is what Romans 9 clearly says, "What if God, willing [i.e., wishing, desiring, wanting] to shew his wrath, and to make his power known, endured with much longsuffering the vessels of wrath fitted to destruction …?" (v. 22).
+
+This is the true and sincere desire of God—a desire which He always fulfils!—in accordance with His unchangeable will of decree in reprobation. It is the exact opposite of what is claimed to be scriptural and Reformed teaching and preaching by many in our day.
+
+Finally, it is striking that Romans 9's theodicy or justification of God in election and reprobation is stated in terms of God's will concerning salvation, both with regard to whom He wills or wishes or wants or desires to save in Jesus Christ and whom He wills or wishes or wants or desires not to save.
+
+> What if God, willing to shew his wrath, and to make his power
+> known, endured with much longsuffering the vessels of wrath
+> fitted to destruction: and that he might make known the
+> riches of his glory on the vessels of mercy, which he had afore
+> prepared unto glory even us, whom he hath called, not of the
+> Jews only, but also of the Gentiles? (vv. 22-24).
+
+Clearly, the Bible's own inspired theodicy or justification of God's decree of election and reprobation in Romans 9 includes the truth that He wills or desires to glorify Himself by the manifestation of His justice and omnipotence in punishing those whom He has eternally ordained to destruction. So how can advocates of the well-meant offer, who claim that He desires to save the reprobate, properly defend the absolute sovereignty of God, truly explain the coherence of biblical theology and faithfully exegete this great chapter?
+
+## The Will of the Triune God
+
+So far we have treated two major Scripture passages, Ephesians 1:1-14 and Romans 9:6-24, on God's will. Now we are going to consider the will of the Triune God in several texts in the New Testament.
+
+The elders in heaven utter this doxology regarding Jehovah's will in creation: "Thou art worthy, O Lord, to receive glory and honour and power: for thou hast created all things, and for thy pleasure they are and were created" (Rev. 4:11). The origin and occurrences of the universe do not lie with eternal matter or a cosmic explosion or pitiless evolution or remorseless fate or blind chance or any other idol vainly forged by futile man. The source and government of all things rests in the personal will of the Triune God. Jehovah created and rules everything to honour Himself and for His pleasure!
+
+Not just the whole vast creation, but even the nature and form of all kinds of tiny plant seeds are determined by the sovereign will of the Almighty: "God giveth it a body as it hath pleased him, and to every seed his own body" (I Cor. 15:38). It is not due to time and chance or millions of years of evolution after a gigantic explosion; it is the will of the Most High that determines the shape and size of the seeds of all the types of vegetation!
+
+Jehovah's will is sovereign not only in natural things but also in salvation. In the parable of the vineyard, the Triune God, portrayed as "the lord of the vineyard" (Matt. 20:8), asks, "Is it not lawful for me to do what I will with mine own?" (v. 15). Our Father in heaven explains that His unconditional decree of election is determinative in salvation: "for many be called [i.e., externally in the preaching], but few chosen" (v. 16). As the sovereign Lord, He has the right to do whatever He wills or wishes or wants, including in eternal predestination!
+
+Robert Godfrey explains God's unconditional choice of some to salvation in Christ according to His good pleasure or will:
+
+> Election is grounded on what God finds in Himself, not on
+> what He finds or anticipates in us. God's good pleasure, that
+> is, the purpose that pleases Him, is the motive of His plan.
+> This reality ensures that God receives all the glory for salvation
+> and that we are appropriately humbled before Him.[^7]
+
+What about regeneration, the first element in the application of God's salvation in Jesus Christ? John 1:13 states that elect sinners are "born [again], not of blood, nor of the will of the flesh, nor of the will of man, but of God." No one has been, or ever will be, regenerated by his own will or by the will of another human being, whether it is the will of their minister or parents or neighbours. Instead, the new birth comes solely by the will or desire of the blessed Trinity!
+
+James 1:18 teaches the same God-exalting truth: "Of his own will begat he us with the word of truth." Moreover, Jehovah and His desires are absolutely unchangeable: "Every good gift and every perfect gift is from above, and cometh down from the Father of lights, with whom is no variableness, neither shadow of turning" (v. 17).
+
+What is Jehovah's saving will regarding the regenerate "little ones which believe in" Jesus (Matt. 18:6)? Our Redeemer teaches us, "it is not the will of your Father which is in heaven, that one of these little ones should perish" (v. 14). Since God does not wish or desire the eternal destruction of any of His elect lambs or straying sheep (vv. 12-13), their spiritual preservation in this life and everlasting blessedness in the next are divinely guaranteed!
+
+Hebrews 6:17 declares that our heavenly Father
+
+> willing more abundantly to shew unto the heirs of promise the
+> immutability [or unchangeableness] of his counsel, confirmed
+> it by an oath: that by two immutable things, in which it was
+> impossible for God to lie, we might have a strong consola-
+> tion, who have fled for refuge to lay hold upon the hope set
+> before us.
+
+These "two immutable things" are Jehovah's promise (v. 13) and oath (vv. 13-14, 16-17). By nature, the true and faithful God cannot lie. By adding His promise and oath, He shows that He "more abundantly" wills and earnestly desires that His people know that His "counsel," decree or purpose to bless us is absolutely unchangeable (v. 14)!
+
+In the age of the new covenant, the Triune God desires to, and does, reveal the mystery of the catholic or universal church of Jews and Gentiles through their union with the Lord Jesus:
+
+> the mystery which hath been hid from ages and from genera-
+> tions, but now is made manifest to his saints: to whom God
+> would make known what is the riches of the glory of this
+> mystery among the Gentiles; which is Christ in you, the hope
+> of glory (Col. 1:26-27).
+
+In the first century, our heavenly Father gave supernatural miracles and spiritual gifts through the apostles in the service of the gospel: "God also bearing them witness, both with signs and wonders, and with divers miracles, and gifts of the Holy Ghost, according to his own will" (Heb. 2:4).
+
+The Triune God also wills to judge His professing people (and the ungodly world): "Therefore is the kingdom of heaven likened unto a certain king, which would take account of his servants" (Matt. 18:23), punishing the wicked by delivering them in His wrath to the "tormentors" (v. 34).
+
+Over against the absolute sovereignty of God, we learn of "the pseudo-sovereignty of the Satanic claim" during our Lord's temptation in the wilderness:[^8] "the devil said unto him, All this power will I give thee, and the glory of them: for that is delivered unto me; and to whomsoever I will I give it" (Luke 4:6).
+
+Now let us move from the Triune God's will of decree to His will of command. The Gospel According to Matthew records Jesus twice quoting Hosea 6:6 to the self-righteous Pharisees:
+
+> But go ye and learn what that meaneth, I will have mercy,
+> and not sacrifice: for I am not come to call the righteous, but
+> sinners to repentance (9:13).
+
+
+But if ye had known what this meaneth, I will have mercy, and not sacrifice, ye would not have condemned the guiltless (12:7).
+
+The divine utterance, "I will have mercy, and not sacrifice," refers to God's will of command or preceptive will, not His will of decree, as Schrenk rightly states in a quote cited earlier:
+
+> Other statements with reference to God use thelein [will] to denote that which God requires of the righteous. In this respect there is recurrent reference (Matt. 9:13; 12:7; Heb. 10:5, 8) to the prophetic statement that God requires *eleos* [mercy] and not *thusia* [sacrifice] (Hos. 6:6; Ps. 39:6 [Hebrew = 40:6 English]).[^9]
+
+Both the Old Testament prophet, Hosea, and our chief prophet, the Lord Christ, are referring to the great calling of human beings to have, and show, mercy towards others.
+
+This fits with the context in both Matthean passages. Jesus is wrongly rebuked by the Pharisees in the former for dining with infamous sinners and despised tax collectors, like Matthew himself, and in the latter for His disciples' plucking heads of grain and eating them on the Sabbath.
+
+As to the meaning of the aphorism itself, we note, first, that "I will have mercy, and not sacrifice" is a comparison, rather than an absolute statement. Behaving mercifully, a requirement of God's moral law, is better than offering sacrifices, a requirement of God's ceremonial law (I Sam. 15:22; cf. Jer. 7:22-23; Amos 5:21-24; Micah 6:8; Matt. 23:23-26; Mark 12:33). This is especially the case if the latter were not brought by the right people (true saints), from the right principle (faith) and to a right end (the glory of God).
+
+Second, "I will have mercy, and not sacrifice" assures us of our Father's moral approbation, delight and good pleasure in our Spirit-wrought obedience to His perceptive will in showing mercy to others (Rom. 12:2; Phil. 2:13; Col. 1:9-10).
+
+Third, in so far as man's being merciful to his neighbour is a divine desire, Jehovah's irresistible grace affects such godly behaviour in the elect and regenerate members of Christ's body (Ps. 115:3; 135:6; Eph. 1:11).[^10] God's merciful saving will renews the wills of His people so that we show mercy to others.
+
+John Calvin's comments on Matthew 9:13 are helpful:
+
+> That the statement, I desired not sacrifice, must be understood comparatively, is evident from the second clause [in the sentence by the son of Beeri], that the knowledge of God is better than burnt-offerings [Hos. 6:6]. By these words he [i.e., Hosea] does not absolutely reject [the Old Testament] burnt-offerings, but places them in a rank inferior to piety and faith. We ought to hold, that faith and spiritual worship are in themselves pleasing to God, and that charity and the duties of humanity towards our neighbours are in themselves required; but that sacrifices are but appendages, so to speak, which are of no value or estimation, where substantial truth is not found ... It ought to be observed that there is a synecdoche in the word mercy: for under one head the prophet embraces all the kindness which we owe to our brethren.[^11]
+
+Luke 7:29-30 states,
+
+> And all the people that heard him [i.e., John the Baptist], and the publicans, justified God, being baptized with the baptism of John. But the Pharisees and lawyers rejected the counsel of God against themselves, being not baptized of him.
+
+Here "the counsel of God" refers to Jehovah's preceptive will, yet not as a summary of man's duty towards his neighbour, as in the passages we just considered (Hos. 6:6; Matt. 9:13; 12:7), but specifically regarding the ministry of John the Baptist.
+
+On the one hand, the common or "unlearned" people and the notorious tax collectors believed John's message of the soon-coming Messiah, repented of their sins and received the ordinance of baptism. Thus they "justified God," that is, they declared Him righteous in His will and works and ways (Luke 7:29). On the other hand, the Jewish religious leaders spurned John's preaching concerning the kingdom of God and so refused to be baptized with water by him. Their gross disobedience was to their terrible disadvantage in time and eternity (v. 30).
+
+## I Timothy 2:4
+
+In the history of the New Testament church, over the sixteen centuries from the Pelagian controversy to the present day, I Timothy 2:4 has been the most prominent text urged in support of the false doctrine that Almighty God earnestly wishes or passionately desires to save absolutely all human beings, including the reprobate. Hence it is worth taking more time with this verse than the preceding texts in the section on "The Will of the Triune God."
+
+I Timothy 2:4 states that Jehovah "will have all men to be saved, and to come unto the knowledge of the truth." Advocates of the well-meant offer wrongly interpret "all" men here to refer to everybody head for head.
+
+Our first argument against this position involves the link between I Timothy 2:4 and its succeeding context (vv. 5-6):
+
+> [God] will have all men to be saved, and to come unto the knowledge of the truth. For there is one God, and one mediator between God and men, the man Christ Jesus; who gave himself a ransom for all, to be testified in due time (vv. 4-6).
+
+Logically, there are four—and only four—options regarding the interpretation of the word "all" in verses 4 and 6, and the resulting doctrines.
+
+> [1] "All" in verses 4 and 6 means absolutely everybody, resulting in the well-meant offer and universal atonement.
+>
+> [2] "All" in verse 4 means absolutely everybody but "all" in verse 6 refers to (the elect of) all kinds or sorts of people, resulting in the well-meant offer and particular atonement.
+>
+> [3] "All" in verse 4 speaks of (the elect of) all kinds or sorts of people but "all" in verse 6 means absolutely everybody, resulting in God's effectual saving desire and universal atonement.
+>
+> [4] "All" in verses 4 and 6 refers to (the elect of) all kinds or sorts of people, resulting in God's effectual saving desire and particular atonement.
+
+Theologically, [3] is incoherent, and I know of no one who believes both that God effectually desires to save the elect alone and that He sent His only begotten Son to die for the sins of everyone head for head. [1] is consistent Arminianism: God wants to save everybody and so Christ died to try to save everybody. [4] is consistent Calvinism: God effectually desires to save all His sheep out of every kindred, tribe, tongue and nation, and so Jesus shed His precious blood for all of them. [2] is an amalgam of Arminianism (an ineffectual divine desire to save the reprobate) and Calvinism (particular atonement).
+
+Textually, the position of those who call themselves Calvinists and hold to the well-meant offer [2] is excluded. I Timothy 2 explains why God "will have all men to be saved" (v. 4): "For there is … one mediator between [the one] God and men, the man Christ Jesus; who gave himself a ransom for all" (vv. 5-6). If the "all" in verse 4 refers to absolutely everyone, it has the same meaning in verse 6. That is, if the "all" whom God desires to save is every human being head for head (v. 4), then the "all" for whom Christ died is every human being head for head (v. 6). In other words, if I Timothy 2:4 teaches the well-meant offer, then it leads to the heretical doctrine of universal atonement in verse 6! This is something that professed Calvinists should seriously consider, before swiftly drawing back from the Arminian abyss (cf. Canons II)! The fact that the "all" in both verse 4 and verse 6 refers to the same group provides textual support for [4] as the correct interpretation.
+
+Our second argument looks not at the succeeding context but at I Timothy 2:4 itself: God "will have all men [1] to be saved, and [2] to come unto the knowledge of the truth." The two things that Jehovah is here said to desire are essentially one. In fact, I Timothy 2:4 contains a hendiadys, that is, [1] through [2]. In other words, the Lord wants to save "all men" through their coming to the knowledge of the truth.
+
+By any reasonable analysis, if God really desires everyone to come to the (saving) knowledge of the truth, He is making a very poor job of it. After all, in the history of the world, only a minority of people have ever heard the gospel even once. In Old Testament days, only the Jews received God's verbal revelation (Ps. 147:19-20; Rom. 3:2). Even in the first 1,500 years of the New Testament era, the gospel was largely confined to the Mediterranean area or northern Europe. Is it really credible that the Most High passionately wants everyone head for head to come to the knowledge of the truth of His crucified and exalted Son, yet He has not even brought the preaching of His Word to most of them?
+
+In our third argument, we move from the succeeding context of I Timothy 2:4 and the text itself to the preceding verses, which exhort us to pray, and express our gratitude, to God for civil rulers:
+
+> I exhort therefore, that, first of all, supplications, prayers, intercessions, and giving of thanks, be made for all men; for kings, and for all that are in authority; that we may lead a quiet and peaceable life in all godliness and honesty. For this is good and acceptable in the sight of God our Saviour; who will have all men to be saved, and to come unto the knowledge of the truth (vv. 1-4).
+
+Have you prayed today for a politician or king or anyone in a position of civil authority? You might think, "What's the point? They are trapped in a politically-correct system where it is almost impossible for them to believe in Jesus Christ and live unto Him within that ungodly framework."
+
+Yet consider Paul's own day! The Roman Empire in which he lived was the fourth beast of Daniel 7. Under its auspices, the incarnate son of God had been crucified. Paul himself had been imprisoned multiple times by imperial authorities and he would later be martyred by the Roman state in its capital city on the Tiber.
+
+Paul's exhortation in I Timothy 2 is, Pray for all kinds of men, even kings and magistrates, because God wants to save all sorts of people, even pagan rulers, including those who persecute Christians (vv. 1-4). Among them too are those for whom our only mediator "gave himself a ransom" (vv. 5-6). The apostle gives another good reason for intercession for civil authorities: "that we may lead a quiet and peaceable life in all godliness and honesty" (v. 2).
+
+Out of the many great theologians that he could have chosen, Jaroslav Pelikan mentions Augustine (354-430), Martin Bucer (1491-1551), John Calvin
+
+
+(1509-1564) and Zacharias Ursinus (1534-1583) as interpreting I Timothy 2:4 in agreement with what has been set forth above:
+
+> Martin Bucer, to whose exegesis of the Pauline epistles Calvin acknowledged his indebtedness, followed Augustine's explanation that the saving will of God of which the passage spoke pertained not to individuals, but to classes of men. Ursinus, too, interpreted the passage to refer to "all classes" rather than to all individuals … It was essential, according to Calvin, not to superimpose 1 Timothy 2:1-4 on the doctrine of predestination, but rather to read it in the light of "the term 'election,' [which] occurs so often in Scripture." Then it would be evident that "the apostle's meaning here is simply that no nation of the earth and no class of society is excluded from salvation." By any other interpretation, this command to pray for pagan kings and emperors, "an almost hopeless group of men," would be "absurd" on the face of it.[^12]
+
+After this examination of I Timothy 2:4 in its context, the Reformed man or woman responds, first, with a measure of holy relief: "It is good to see so clearly that I Timothy 2 does not teach either a failed desire of the Lord of glory to save everybody or the Arminian lie of universal atonement." Second, the apostle's exhortation regarding intercession and thanksgiving for civil magistrates often forces us to conclude, "I need to pray more for politicians for I have been sorely tempted to neglect this, since it must be so hard for civil rulers to trust in Jesus alone and operate as faithful saints in their environment."
+
+## II Peter 3:9
+
+Besides I Timothy 2:4, II Peter 3:9 is a second New Testament text that is often cited as if it taught a frustrated desire of the Triune God to save everyone head for head. The verse reads, "The Lord is not slack concerning his promise, as some men count slackness; but is longsuffering to us-ward, not willing that any should perish, but that all should come to repentance."
+
+But what one usually hears cited is only this bit: "The Lord is … not willing that any should perish, but that all should come to repentance." The "any" and "all" allegedly refer to absolutely everybody. Thus the well-meant offer claims that God does not wish or desire that a single person perish in hell. It is wrong, however, to take half a verse from the Bible and then run with it into strange theological positions, without even explaining it in its context.
+
+First, what is the situation that II Peter 3 addressing? Some people denied that the Lord would ever return: "Where is the promise of his coming?" (v. 4). By the inspiration of the Spirit, the apostle explains why Jesus has not yet appeared, over against the "scoffers" and their arguments (vv. 3-4).
+
+If Peter is teaching that Christ delayed His second coming because God is not willing that any individual human being should perish, as the well-meant offer teaches, the Lord is never going to come back, since everybody will never be saved. It is certain that not everybody has been saved in the past, not everybody is saved now and not everybody shall be saved in the future.
+
+Thus Peter's argument would reach the same conclusion as the scoffers: Christ is not returning. If He will not come back until He has saved everybody, then we are in for an interminably long wait! Some of the postmillennial Reconstructionists say that the last day might be tens of thousands or hundreds of thousands or millions of years away. The well-meant offer reading of II Peter 3:9 is even worse: There is no point looking, longing or praying for the Saviour's second coming since He will never return!
+
+Second, Peter exhorts believers to "account that the longsuffering of our Lord is salvation" (v. 15). All of those to whom God is longsuffering (v. 9) will certainly be saved, for "the longsuffering of our Lord is salvation" (v. 15). Peter instructs us that we are to "account" or reckon this as a first principle of the Christian religion!
+
+Third, we should notice the word "usward" in the apostolic affirmation that "God is longsuffering to usward, not willing that any should perish." Are we to think that God's longsuffering is particular and always effectual (v. 15) "to usward" (v. 9), that is, His "beloved" elect (1:10; 3:1, 8, 14, 17) in His "beloved Son" (1:17), but that, when the next clause in II Peter 3:9 states that He is "not willing that any should perish," the word "any" is to be understood universally of each and every human being, most of whom eternally perish? No! God's eternal love and irresistible longsuffering toward us, the predestinate, carries through the remainder of the verse: "But, beloved … the Lord … is longsuffering to us-ward, not willing that any [of us] should perish, but that all [of us] should come to repentance" (vv. 8-9).
+
+At the end of his treatment of "The 'All' Passages," to which Arminians frequently appeal, American Presbyterian Robert L. Reymond comments on II Peter 3:9 with appeal to a sixteenth-century French Reformed theologian, John Calvin, and a seventeenth-century British Congregationalist divine, John Owen (1616-1683).[^13]
+
+> Finally, there is the statement of 2 Peter 3:9 which the universalist alleges also teaches a universal saving will in God: "[The Lord] is patient with you, because he does not want any to perish, but all to come to repentance." Again, the contextual universe will allow no such conclusion. In 3:8 Peter addresses those to whom he is writing as "Beloved" [*agapētoi*], a term everywhere acknowledged to be a term for Christians or God's elect. Then to them he says: "[The Lord] is patient with you" (referring to the Christians he is addressing), offering as his ground for this reassuring promise to these Christians the axiomatic truth: "because he does not want any [of you elect] to perish, but all [of you] to come to repentance." Clearly the referent of his "any" is the Christian elect to whom he has been speaking and his "all" refers to the elect of God in their entirety; and his point is God's concern for the church: the Lord, he says, is delaying his coming in order that he might bring the whole elect of God to repentance. To argue to the contrary, that is [as John Owen states in *The Death of Death*, p. 236], "to argue that because God would have none of those to perish, but all of them to come to repentance, therefore he hath the same will and mind towards all and everyone in the world (even those to whom he never makes known his will, nor ever calls to repentance, if they never once hear of his way of salvation), comes not much short of extreme madness and folly" … Calvin argues that what Peter means here is that God wills that those be saved whom he brings to repentance, and then he argues that God, in whose hand resides the authority to grant repentance, does not will to give repentance to all men without exception (*Institutes*, III.xxiv.16).[^14]
+
+To sum it all up, our Saviour cannot come back so long as there is even a single elect sheep who has not yet been effectually called, any more than the Almighty could have rained down fire and brimstone, a picture of hell, on Sodom while righteous Lot remained in that city or too near it (cf. Gen. 19:22; II Pet. 2:6-9; Jude 7). The full company of the elect, the whole body of Christ, must be regenerated and only then will the Lord return. All of those chosen in Jesus before the foundation of the world must be physically conceived and spiritually reborn before He can appear with great majesty to make all things new!
+
+In light of all we have seen so far regarding the saving will of the blessed Trinity, we can agree wholeheartedly with this proposition of Jerome Zanchius (1516-1590): "The absolute will of God is the original spring and efficient cause of His people's salvation."[^15] The Italian Reformer gives this judicious explanation:
+
+> I say the original and efficient, for, *sensu complexo*, there are other intermediate causes of their salvation, which, however, all result from and are subservient to this primary one, the will of God. Such are His everlasting choice of them to eternal life—the eternal covenant of grace, entered into by the Trinity, in behalf of the elect; the incarnation, obedience, death and intercession of Christ for them—all which are so many links in the great chain of causes, and not one of these can be taken away without marring and subverting the whole Gospel plan of salvation by Jesus Christ. We see, then, that the free, unbiassed, sovereign will of God is the root of this tree of life, which bears so many glorious branches and yields such salutary fruits: He therefore loved the elect and ordained them to life because He would; according to that of the apostle, "having predestinated us, according to the good pleasure of His will" (Eph. 1.5). Then, next after God's covenant for His people and promises to them, comes in the infinite merit of Christ's righteousness and atonement, for we were chosen to salvation in Him as members of His mystic body, and through Him, as our Surety and Substitute, by whose vicarious obedience to the moral law and submission to its curse and penalty, all we, whose names are in the book of life, should never incur the Divine hatred or be punished for our sins, but continue to eternity, as we were from eternity, heirs of God and joint-heirs with Christ. But still the Divine grace and favour (and God extends these to whom He will) must be considered as what gave birth to the glorious scheme of redemption, according to what our Lord Himself teaches us, "God so loved the world, that He gave his only-begotten Son," etc. (John iii. 16), and that of the apostle, "In this was manifested the love of God towards us, because that He sent his only-begotten Son into the world, that we might live through Him" (1 John iv. 9).[^16]
+
+[^1]: This article is a greatly developed and expanded version of a speech delivered in South Wales on 25 January, 2018: "God's Saving Will in the New Testament" (www.cprc.co.uk/sermons/gods-saving-will-in-the-new-testament).
+
+[^2]: Unless otherwise indicated, these two Greek words underlie the italicized words in New Testament quotations in these articles, such as "will," "would," "counsel," "pleasure," "list," "desire," "wish," "voluntary," "disposed" and even "forward."
+
+[^3]: Dietrich Müller, "Will, Purpose," in Colin Brown (gen. ed.), *The New International Dictionary of New Testament Theology*, vol. 3 (USA: Zondervan, 1978), p. 1015.
+
+[^4]: Gottlob Schrenk, "*thelō*, *thelēma*, *thelēsis*," in Gerhard Kittel (ed.), *Theological Dictionary of the New Testament*, trans. and ed. Geoffrey W. Bromiley, vol. 3 (Grand Rapids, MI: Eerdmans, 1965), pp. 47-48. In article titles and quotes from Schrenk, I have transliterated the Greek.
+
+[^5]: This includes the life, death, burial and decomposition of Jesse's youngest son: "For David, after he had served his own generation by the will of God, fell on sleep, and was laid unto his fathers, and saw corruption" (Acts 13:36).
+
+[^6]: Gottlob Schrenk, "*boulomai*, *boulē*, *boulēma*," in Gerhard Kittel (ed.), *Theological Dictionary of the New Testament*, trans. and ed. Geoffrey W. Bromiley, vol. 1 (Grand Rapids, MI: Eerdmans, 1964), pp. 635-636.
+
+[^7]: W. Robert Godfrey, *Saving the Reformation: The Pastoral Theology of the Canons of Dort* (York, PA: Reformation Trust Publishing, 2019), p. 93.
+
+[^8]: Schrenk, "*thelō*, *thelēma*, *thelēsis*," p. 48.
+
+[^9]: Schrenk, "*thelō*, *thelēma*, *thelēsis*," p. 48; italics mine.
+
+[^10]: Notice that the text does not present God as saying, "I earnestly desire that every single human being, including the reprobate, shows mercy."
+
+[^11]: John Calvin, *Commentary on a Harmony of the Evangelists, Matthew, Mark, and Luke*, trans. William Pringle (Grand Rapids, MI: Baker, repr. 1993), vol. 1, p. 403; italics mine.
+
+[^12]: Jaroslav Pelikan, *The Christian Tradition: A History of the Development of Doctrine*, vol. 4: *Reformation of Church and Dogma (1300-1700)* (Chicago, IL: University of Chicago Press, 1984), p. 237. The webpage of "Quotes on I Timothy 2:4" contains some 40 pages of comments from men in the patristic, mediaeval, Reformation and modern periods who oppose or do not agree with that exegesis of the verse that proposes an unrealized or unfulfilled desire in God to save the reprobate (www.cprc.co.uk/quotes/1timothy2v4).
+
+[^13]: Robert L. Reymond, *A New Systematic Theology of the Christian Faith* (Nashville, TN: Thomas Nelson Publishers, 1998), pp. 685-695.
+
+[^14]: Reymond, *A New Systematic Theology*, p. 695. See "Quotes on II Peter 3:9" for some 18 pages of comments from many theological worthies (www.cprc.co.uk/quotes/2peter3v9).
+
+[^15]: Jerome Zanchius, *The Doctrine of Absolute Predestination*, trans. Augustus M. Toplady (London: Silver Trumpet Publications, repr. 1989), p. 23.
+
+[^16]: Zanchius, *The Doctrine of Absolute Predestination*, pp. 23-24. In an excellent section of this book, Zanchius states, defends and develops 14 theological propositions or "positions" regarding the will of God (pp. 12-25).
+
+OUTPUT_TRUNCATED: NO
