@@ -42,38 +42,38 @@ const { version = 'KJV' } = Astro.props;
 
       var pinned = false;
 
-      // Keep the popup visible while pinned. BibleUp adds `bu-popup-hide`
-      // on every link mouseleave; while pinned we strip it back off so
-      // the popup stays on screen. CSS also overrides the hide styles
-      // for the pinned state (see global.css).
-      var hideObserver = new MutationObserver(function () {
+      // Pin keeps the popup visible after the cursor leaves the link.
+      // BibleUp closes it on mouseleave by adding `bu-popup-hide` AND by
+      // overwriting the inline style with absolute top/left (which puts
+      // the popup off-screen for links near the bottom of the article).
+      // We watch both attributes and reset them on every change while
+      // pinned; the `bu-popup-pinned` class in CSS then docks the popup
+      // bottom-centre, matching the footnote popup.
+      var pinObserver = new MutationObserver(function (records) {
         if (!pinned) return;
-        if (popup.classList.contains('bu-popup-hide')) {
-          popup.classList.remove('bu-popup-hide');
-        }
+        records.forEach(function (r) {
+          if (r.attributeName === 'class' && popup.classList.contains('bu-popup-hide')) {
+            popup.classList.remove('bu-popup-hide');
+          }
+          if (r.attributeName === 'style') {
+            popup.style.top = '';
+            popup.style.left = '';
+            popup.style.transform = '';
+            popup.style.bottom = '';
+          }
+        });
       });
-      hideObserver.observe(popup, { attributes: true, attributeFilter: ['class'] });
-
-      function clearInlinePos() {
-        // BibleUp sets absolute top/left inline on the popup via
-        // positionPopup(). CSS bottom-centre positioning can only win
-        // if those inline values are cleared.
-        popup.style.top = '';
-        popup.style.left = '';
-        popup.style.transform = '';
-        popup.style.bottom = '';
-      }
+      pinObserver.observe(popup, { attributes: true, attributeFilter: ['class', 'style'] });
 
       function setPinned(next) {
         pinned = next;
         popup.classList.toggle('bu-popup-pinned', pinned);
         if (pinned) {
-          // Wait two rAFs so we run after BibleUp's own click handler
-          // (which also calls positionPopup) finishes.
-          requestAnimationFrame(function () {
-            clearInlinePos();
-            requestAnimationFrame(clearInlinePos);
-          });
+          // Strip whatever BibleUp just wrote inline so the CSS wins.
+          popup.style.top = '';
+          popup.style.left = '';
+          popup.style.transform = '';
+          popup.style.bottom = '';
         }
       }
 
