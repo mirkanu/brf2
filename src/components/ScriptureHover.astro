@@ -4,6 +4,11 @@
  * verse text in a hover popover (no editor effort required). Scoped to the
  * parent .prose-brand container; not initialised if there is no article body
  * on the page (so other pages stay quiet).
+ *
+ * Pin behaviour (#4): the BibleUp popup closes when the mouse leaves the
+ * verse link. We add a Pin button to the popup header; when toggled on, the
+ * popup stays open while the user scrolls/reads the verse. Press Escape or
+ * the close button to dismiss.
  */
 interface Props {
   version?: 'KJV' | 'ASV' | 'LSV' | 'WEB';
@@ -30,5 +35,55 @@ const { version = 'KJV' } = Astro.props;
     } else {
       init();
     }
+
+    // --- Pin button (#4) ------------------------------------------------------
+    // BibleUp appends one popup per page to <body>; we attach a single Pin
+    // toggle to its header. Re-runs on Astro view transitions so article
+    // navigation works without losing the wiring.
+    function wirePin() {
+      var popup = document.querySelector('[id^="bu-popup-"]');
+      if (!popup) return;
+      var header = popup.querySelector('.bu-popup-header');
+      if (!header) return;
+      if (header.querySelector('.bu-popup-pin')) return; // already wired
+
+      var pin = document.createElement('button');
+      pin.type = 'button';
+      pin.className = 'bu-popup-pin';
+      pin.setAttribute('aria-label', 'Pin this verse preview');
+      pin.setAttribute('aria-pressed', 'false');
+      pin.title = 'Pin this verse preview';
+      pin.innerHTML =
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17v5"/><path d="M9 10.76V6.5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4.26a2 2 0 0 0 .55 1.37l1.96 2.16A1 1 0 0 1 16.83 16H7.17a1 1 0 0 1-.68-1.71l1.96-2.16A2 2 0 0 0 9 10.76Z"/></svg>';
+      header.insertBefore(pin, header.firstChild);
+
+      var pinned = false;
+      pin.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        pinned = !pinned;
+        pin.setAttribute('aria-pressed', pinned ? 'true' : 'false');
+        popup.classList.toggle('bu-popup-pinned', pinned);
+      });
+
+      // Escape dismisses the pinned popup. Re-uses the existing close button
+      // path so cleanup matches BibleUp's own teardown.
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && pinned && !popup.hidden) {
+          pinned = false;
+          pin.setAttribute('aria-pressed', 'false');
+          popup.classList.remove('bu-popup-pinned');
+          var closeBtn = popup.querySelector('.bu-popup-close');
+          if (closeBtn) closeBtn.click();
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', wirePin);
+    } else {
+      wirePin();
+    }
+    document.addEventListener('astro:page-load', wirePin);
   })();
 </script>
