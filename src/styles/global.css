@@ -194,34 +194,6 @@ body {
   cursor: pointer;
 }
 [id^="bu-popup-"] .bu-popup-close:hover { opacity: 1; }
-/* Pin button (#4) — mirrors the footnote popup's pinned affordance */
-[id^="bu-popup-"] .bu-popup-pin {
-  margin-left: auto !important;
-  width: 22px !important;
-  height: 22px !important;
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  background: transparent !important;
-  border: 0 !important;
-  color: var(--paper, #fbf8f3) !important;
-  opacity: 0.85;
-  cursor: pointer;
-  padding: 0 !important;
-}
-[id^="bu-popup-"] .bu-popup-pin:hover { opacity: 1; }
-[id^="bu-popup-"] .bu-popup-pin[aria-pressed="true"] {
-  color: var(--brand-cream, #f8f4eb) !important;
-  opacity: 1;
-}
-[id^="bu-popup-"] .bu-popup-pin[aria-pressed="true"] svg { fill: var(--brand-cream, #f8f4eb); }
-/* When pinned: keep popup visible and remove the dimmed "wiki" shadow so it
- * reads as actively selected. */
-[id^="bu-popup-"].bu-popup-pinned {
-  opacity: 1 !important;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.28) !important;
-  border: 1px solid var(--oxblood, #7a1f1f) !important;
-}
 [id^="bu-popup-"] .bu-popup-content {
   background: var(--paper, #fbf8f3) !important;
   padding: 12px 14px !important;
@@ -236,33 +208,6 @@ body {
   display: none !important; /* hide "BibleUp 📖💡" self-promo footer */
 }
 
-/* Pin button (issue #4) — added to the BibleUp popup header by ScriptureHover.astro */
-[id^="bu-popup-"] .bu-popup-pin {
-  margin-right: 4px !important;
-  color: var(--paper, #fbf8f3) !important;
-  font-size: 1rem !important;
-  opacity: 0.7;
-  background: transparent !important;
-  border: 0 !important;
-  cursor: pointer;
-  padding: 0 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 18px !important;
-  height: 18px !important;
-}
-[id^="bu-popup-"] .bu-popup-pin:hover { opacity: 1; }
-[id^="bu-popup-"] .bu-popup-pin[aria-pressed="true"] {
-  color: var(--brand-cream, #f8f4eb) !important;
-  opacity: 1;
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
-}
-/* Pinned popup keeps BibleUp's own "stay visible on mouseleave" behaviour; we
-   only nudge the shadow to signal it is held open. */
-[id^="bu-popup-"].bu-popup-pinned {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(255, 255, 255, 0.08) !important;
-}
 /* Inline link in article body that BibleUp turned into a hover trigger */
 .bu-link-899911,
 .bu-link {

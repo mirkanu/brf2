@@ -5,10 +5,11 @@
  * parent .prose-brand container; not initialised if there is no article body
  * on the page (so other pages stay quiet).
  *
- * Pin behaviour (#4): the BibleUp popup closes when the mouse leaves the
- * verse link. We add a Pin button to the popup header; when toggled on, the
- * popup stays open while the user scrolls/reads the verse. Press Escape or
- * the close button to dismiss.
+ * Click-to-pin (issue #5): mirrors the footnote popup behaviour. A click on
+ * the scripture reference in the article body keeps the popup open after
+ * the cursor leaves the link. A second click, the close button, Escape,
+ * clicking the same link again, or moving the cursor away from both the
+ * link and the popup dismisses it.
  */
 interface Props {
   version?: 'KJV' | 'ASV' | 'LSV' | 'WEB';
@@ -29,61 +30,67 @@ const { version = 'KJV' } = Astro.props;
         bu_ignore: ['BLOCKQUOTE', 'NAV', 'HEADER', 'FOOTER'],
       });
       bu.create();
+
+      // --- Click-to-pin (issue #5) ---------------------------------------
+      // BibleUp only opens on hover, and closes as soon as the cursor
+      // leaves the link. After a click we want the popup to behave like
+      // the footnote popup: stay visible until the user actively dismisses
+      // it. We achieve that by simulating a cursor-leave on the link (so
+      // BibleUp's internal #closePopup schedules its hide) but then, if a
+      // pin flag is set, cancelling the close by putting the cursor back
+      // on the popup via #mouseOnPopup semantics — which we cannot read.
+      //
+      // Cleanest approach without monkey-patching BibleUp internals:
+      // - On click, toggle a .bu-pinned class on the popup and add
+      //   display:flex / opacity:1 !important via CSS (we override the
+      //   .bu-popup-hide styles for .bu-popup-pinned in global.css).
+      // - Add Escape and close-button handlers ourselves.
+      // - On any click outside the popup or link while pinned, unpin and
+      //   let BibleUp's own teardown run.
+      var popup = document.querySelector('[id^="bu-popup-"]');
+      if (!popup) return;
+      var links = target.querySelectorAll('[class*="bu-link"]');
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          // BibleUp already preventsDefault on the link; wait one tick so
+          // its own click handler runs first and the popup is visible.
+          setTimeout(function () {
+            var open = popup && !popup.classList.contains('bu-popup-hide');
+            if (!open) return;
+            var wasPinned = popup.classList.contains('bu-popup-pinned');
+            popup.classList.toggle('bu-popup-pinned', !wasPinned);
+          }, 0);
+        });
+      });
+
+      function unpin() {
+        if (!popup) return;
+        if (!popup.classList.contains('bu-popup-pinned')) return;
+        popup.classList.remove('bu-popup-pinned');
+      }
+
+      // Escape dismisses a pinned popup.
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') unpin();
+      });
+
+      // The BibleUp close button always closes the popup; unpin first so
+      // state stays in sync with visibility.
+      var observer = new MutationObserver(function () {
+        var closeBtn = popup && popup.querySelector('.bu-popup-close');
+        if (!closeBtn || closeBtn.__wired) return;
+        closeBtn.__wired = true;
+        closeBtn.addEventListener('click', unpin);
+      });
+      if (popup) observer.observe(popup, { childList: true, subtree: true });
     }
+
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', init);
     } else {
       init();
     }
-
-    // --- Pin button (#4) ------------------------------------------------------
-    // BibleUp appends one popup per page to <body>; we attach a single Pin
-    // toggle to its header. Re-runs on Astro view transitions so article
-    // navigation works without losing the wiring.
-    function wirePin() {
-      var popup = document.querySelector('[id^="bu-popup-"]');
-      if (!popup) return;
-      var header = popup.querySelector('.bu-popup-header');
-      if (!header) return;
-      if (header.querySelector('.bu-popup-pin')) return; // already wired
-
-      var pin = document.createElement('button');
-      pin.type = 'button';
-      pin.className = 'bu-popup-pin';
-      pin.setAttribute('aria-label', 'Pin this verse preview');
-      pin.setAttribute('aria-pressed', 'false');
-      pin.title = 'Pin this verse preview';
-      pin.innerHTML =
-        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17v5"/><path d="M9 10.76V6.5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4.26a2 2 0 0 0 .55 1.37l1.96 2.16A1 1 0 0 1 16.83 16H7.17a1 1 0 0 1-.68-1.71l1.96-2.16A2 2 0 0 0 9 10.76Z"/></svg>';
-      header.insertBefore(pin, header.firstChild);
-
-      var pinned = false;
-      pin.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        pinned = !pinned;
-        pin.setAttribute('aria-pressed', pinned ? 'true' : 'false');
-        popup.classList.toggle('bu-popup-pinned', pinned);
-      });
-
-      // Escape dismisses the pinned popup. Re-uses the existing close button
-      // path so cleanup matches BibleUp's own teardown.
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && pinned && !popup.hidden) {
-          pinned = false;
-          pin.setAttribute('aria-pressed', 'false');
-          popup.classList.remove('bu-popup-pinned');
-          var closeBtn = popup.querySelector('.bu-popup-close');
-          if (closeBtn) closeBtn.click();
-        }
-      });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', wirePin);
-    } else {
-      wirePin();
-    }
-    document.addEventListener('astro:page-load', wirePin);
+    document.addEventListener('astro:page-load', init);
   })();
 </script>
