@@ -2,6 +2,7 @@
 import Site from '../../../../layouts/Site.astro';
 import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
 import ScriptureHover from '../../../../components/ScriptureHover.astro';
+import FootnoteHover from '../../../../components/FootnoteHover.astro';
 import { getCollection, render } from 'astro:content';
 import { slugify } from '../../../../lib/format';
 
@@ -151,4 +152,5 @@ if (encoding) articleLd.encoding = encoding;
     </div>
   </section>
 <ScriptureHover />
+<FootnoteHover />
 </Site>

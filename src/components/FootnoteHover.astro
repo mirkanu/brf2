@@ -1,0 +1,164 @@
+---
+/**
+ * Footnote hover popup.
+ *
+ * Wires every `<sup><a data-footnote-ref href="#user-content-fn-N">N</a></sup>`
+ * inside `.prose` to a hover/click popup that previews the matching footnote
+ * definition from the article's `<section data-footnotes>`. Styled to mirror
+ * BibleUp's `.bu-wiki` panel so it looks identical to the scripture hover
+ * popup (see `src/styles/global.css`).
+ *
+ * - Desktop: hover opens, mouse-leave-with-pin closes (click toggles pin).
+ * - Mobile:  tap opens, tap-outside or close button closes.
+ * - Uses a single shared popup root and swaps content per active ref so the
+ *   DOM stays small even on long articles.
+ */
+---
+
+<div
+  id="fn-popup-root"
+  class="fn-popup"
+  role="dialog"
+  aria-live="polite"
+  aria-label="Footnote preview"
+  hidden
+>
+  <div class="bu-popup-header">
+    <span class="bu-popup-ref">Footnote</span>
+    <span class="bu-popup-version" data-fn-version>—</span>
+    <button
+      type="button"
+      class="bu-popup-close"
+      aria-label="Close footnote preview"
+      data-fn-close
+    >&times;</button>
+  </div>
+  <div class="bu-popup-content" data-fn-content></div>
+</div>
+
+<script>
+  // Module-style IIFE so re-runs on Astro view transitions don't double-bind.
+  (() => {
+    const root = document.getElementById('fn-popup-root');
+    const content = root?.querySelector<HTMLElement>('[data-fn-content]');
+    const version = root?.querySelector<HTMLElement>('[data-fn-version]');
+    const closeBtn = root?.querySelector<HTMLElement>('[data-fn-close]');
+    if (!root || !content || !version || !closeBtn) return;
+
+    const prose = document.querySelector<HTMLElement>('.prose');
+    if (!prose) return;
+
+    // Resolve the footnote list once. `section[data-footnotes]` is the
+    // standard Astro GitHub-style footnote sink.
+    const footnoteSection = document.querySelector<HTMLElement>(
+      'section[data-footnotes]'
+    );
+    if (!footnoteSection) return;
+
+    const refs = Array.from(
+      prose.querySelectorAll<HTMLAnchorElement>('a[data-footnote-ref]')
+    );
+    if (!refs.length) return;
+
+    // Cache: footnote number (from the id "user-content-fn-N") -> cloned <li>.
+    const items = new Map<string, HTMLElement>();
+    footnoteSection.querySelectorAll<HTMLElement>('li[id^="user-content-fn-"]').forEach((li) => {
+      const m = li.id.match(/^user-content-fn-(\d+)/);
+      if (m) items.set(m[1], li);
+    });
+
+    // Build a per-popup numbered label; mirrors BibleUp's `.bu-popup-version`
+    // badge so the chrome is visually consistent.
+    const articleNumber =
+      document.querySelector<HTMLElement>('[data-article-issue-number]')
+        ?.textContent?.trim() || '';
+    version.textContent = articleNumber ? `Issue ${articleNumber}` : '—';
+
+    let pinned = false;
+    let activeRef: HTMLAnchorElement | null = null;
+    let hideTimer: number | null = null;
+
+    const show = (ref: HTMLAnchorElement) => {
+      const m = ref.getAttribute('href')?.match(/#user-content-fn-(\d+)/);
+      if (!m) return;
+      const item = items.get(m[1]);
+      if (!item) return;
+
+      activeRef = ref;
+      const clone = item.cloneNode(true) as HTMLElement;
+      // Strip the backref arrow inside the preview.
+      clone
+        .querySelectorAll<HTMLElement>(
+          '[data-footnote-backref], a.data-footnote-backref'
+        )
+        .forEach((n) => n.remove());
+      // Reset native <sup> back to inline label inside the preview.
+      clone.querySelectorAll('sup').forEach((s) => {
+        s.outerHTML = s.innerHTML;
+      });
+
+      content!.innerHTML = '';
+      const ol = document.createElement('ol');
+      ol.start = Number(m[1]);
+      ol.appendChild(clone);
+      content!.appendChild(ol);
+
+      root!.hidden = false;
+    };
+
+    const hide = () => {
+      if (pinned) return;
+      root!.hidden = true;
+      activeRef = null;
+    };
+
+    const cancelHide = () => {
+      if (hideTimer != null) {
+        window.clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+    };
+
+    const scheduleHide = () => {
+      cancelHide();
+      hideTimer = window.setTimeout(hide, 120);
+    };
+
+    refs.forEach((ref) => {
+      ref.addEventListener('mouseenter', () => {
+        cancelHide();
+        show(ref);
+      });
+      ref.addEventListener('mouseleave', scheduleHide);
+      ref.addEventListener('focus', () => show(ref));
+      ref.addEventListener('blur', scheduleHide);
+      ref.addEventListener('click', (e) => {
+        // Click pins the popup so the user can scroll/select. Keyboard users
+        // get the same affordance. We don't preventDefault — the underlying
+        // anchor jump still works, and the user can dismiss via the close
+        // button or pressing Escape.
+        e.preventDefault();
+        pinned = true;
+        cancelHide();
+        show(ref);
+      });
+    });
+
+    root.addEventListener('mouseenter', cancelHide);
+    root.addEventListener('mouseleave', scheduleHide);
+
+    closeBtn.addEventListener('click', () => {
+      pinned = false;
+      hide();
+      activeRef?.focus();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !root.hidden) {
+        pinned = false;
+        hide();
+        activeRef?.focus();
+      }
+    });
+  })();
+</script>

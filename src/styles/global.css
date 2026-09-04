@@ -218,7 +218,7 @@ body {
 .bu-link-899911:hover,
 .bu-link:hover {
   text-decoration-style: solid !important;
-  color: var(--oxblood-hover, #5e1717) !important;
+  color: var(--color-oxblood-hover, #5e1717) !important;
 }
 
 
@@ -234,4 +234,218 @@ html { scroll-behavior: smooth; }
 .prose h2[id],
 .prose h3[id] {
   scroll-margin-top: 6rem;
+}
+
+
+
+/* Brand overrides for the footnote popup (mirrors the BibleUp block above
+   so both popups look identical: oxblood header, paper body, Inter for
+   version badge, no promo footer). The popup lives under [id^="fn-popup-"]
+   so the selectors never collide with BibleUp's [id^="bu-popup-"] rules. */
+[id^="fn-popup-"] .fn-popup {
+  background: var(--paper, #fbf8f3) !important;
+  color: var(--ink, #1a1a1a) !important;
+}
+[id^="fn-popup-"] .bu-popup-header {
+  background: var(--oxblood, #7a1f1f) !important;
+  color: var(--paper, #fbf8f3) !important;
+  padding: 10px 14px !important;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+[id^="fn-popup-"] .bu-popup-ref {
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  color: var(--paper, #fbf8f3) !important;
+  margin: 0 !important;
+}
+[id^="fn-popup-"] .bu-popup-version {
+  font-size: 0.7rem !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  background: rgba(255,255,255,0.18) !important;
+  color: var(--paper, #fbf8f3) !important;
+  padding: 2px 6px !important;
+  border-radius: 3px !important;
+  letter-spacing: 0.04em !important;
+  margin: 0 !important;
+}
+[id^="fn-popup-"] .bu-popup-close {
+  margin-left: auto !important;
+  color: var(--paper, #fbf8f3) !important;
+  font-size: 1rem !important;
+  opacity: 0.85;
+  background: transparent !important;
+  border: 0 !important;
+  cursor: pointer;
+}
+[id^="fn-popup-"] .bu-popup-close:hover { opacity: 1; }
+[id^="fn-popup-"] .bu-popup-content {
+  background: var(--paper, #fbf8f3) !important;
+  color: var(--ink, #1a1a1a) !important;
+  padding: 12px 14px !important;
+  font-size: 0.95rem;
+}
+[id^="fn-popup-"] .bu-popup-content ol { padding: 0 20px; }
+[id^="fn-popup-"] .bu-popup-content li {
+  padding: 0 5px;
+  display: list-item;
+}
+[id^="fn-popup-"] .bu-popup-content li:not(:last-child) { padding-bottom: 8px; }
+[id^="fn-popup-"] .bu-popup-content li p { margin: 0; }
+[id^="fn-popup-"] .bu-popup-content li em { font-style: italic; }
+[id^="fn-popup-"] .bu-popup-content li a {
+  color: var(--oxblood, #7a1f1f);
+  text-decoration: underline;
+  word-break: break-word;
+}
+
+/* ===== Footnote hover popup ===== */
+/* Mirrors BibleUp's `.bu-wiki` token set and layout so the scripture hover
+   popup and the footnote popup look identical. The popup root is gated by
+   `[id^="fn-popup-"]` to avoid colliding with BibleUp's `[id^="bu-popup-"]`
+   selectors. */
+[id^="fn-popup-"] {
+  --fn-popup-bg: var(--bu-wiki-bg, #fff);
+  --fn-popup-color: var(--bu-wiki-color, #212529);
+  --fn-popup-shadow: var(--bu-wiki-box-shadow, 0px 0px 3px 0.7px #a6a6a6);
+  --fn-header-bg: var(--bu-wiki-header-bg, #fff);
+  --fn-header-color: var(--bu-wiki-header-color, #212529);
+  --fn-version-bg: var(--bu-wiki-version-bg, #f2f2f2);
+  --fn-version-color: var(--bu-wiki-version-color, #212529);
+  --fn-close-color: var(--bu-wiki-close-color, #212529);
+  --fn-width: 90%;
+  --fn-max-width: 400px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  z-index: 1070;
+  box-sizing: border-box;
+}
+[id^="fn-popup-"] *,
+[id^="fn-popup-"] *::before,
+[id^="fn-popup-"] *::after { box-sizing: border-box; }
+
+/* The host element. Matches `.bu-wiki` defaults: fixed bottom-centre panel. */
+.fn-popup {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  width: var(--fn-width);
+  max-width: var(--fn-max-width);
+  max-height: 220px;
+  transform: translate(-50%, -20%);
+  background: var(--fn-popup-bg);
+  color: var(--fn-popup-color);
+  box-shadow: var(--fn-popup-shadow);
+  overflow: hidden;
+  border-radius: 0;
+}
+.fn-popup p { margin: 0; }
+.fn-popup .bu-popup-header {
+  background: var(--fn-header-bg);
+  color: var(--fn-header-color);
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+}
+.fn-popup .bu-popup-header .bu-popup-ref {
+  font-weight: 700;
+  padding: 2px 0;
+}
+.fn-popup .bu-popup-header .bu-popup-version {
+  background: var(--fn-version-bg);
+  color: var(--fn-version-color);
+  padding: 0 10px;
+  border-radius: 3px;
+  margin-left: 5px;
+}
+.fn-popup .bu-popup-header .bu-popup-close {
+  text-align: right;
+  margin-right: 5px;
+  margin-left: auto;
+  padding: 0 5px;
+  font-size: 18px;
+  cursor: pointer;
+  background: 0 0;
+  outline: 0;
+  border: none;
+  color: var(--fn-close-color);
+}
+.fn-popup .bu-popup-header .bu-popup-close:hover {
+  outline: 1.5px solid #b3b3b3;
+}
+.fn-popup .bu-popup-content {
+  max-height: 100px;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding: 10px 15px 0;
+}
+.fn-popup .bu-popup-content ol {
+  padding: 0 20px;
+  margin: 0;
+  list-style-type: decimal;
+}
+.fn-popup .bu-popup-content li {
+  margin: 0;
+  display: list-item;
+  padding: 0 5px;
+}
+.fn-popup .bu-popup-content li:not(:last-child) {
+  padding-bottom: 10px;
+}
+.fn-popup .bu-popup-content li p { margin: 0 0 0.25em 0; }
+.fn-popup .bu-popup-content li em { font-style: italic; }
+.fn-popup .bu-popup-content li a {
+  color: inherit;
+  text-decoration: underline;
+  word-break: break-word;
+}
+
+/* Dark mode mirrors BibleUp's `[data-bu-theme=dark]` token set so the
+   theme switch in ScriptureHover carries over without extra wiring. */
+:root[data-theme='dark'] [id^="fn-popup-"] {
+  --fn-popup-bg: #3d4245;
+  --fn-popup-color: #f2f2f2;
+  --fn-header-color: #f2f2f2;
+  --fn-header-bg: #3d4245;
+  --fn-version-color: #333;
+  --fn-version-bg: #f2f2f2;
+  --fn-close-color: #f2f2f2;
+}
+
+/* Mobile: anchor near the top for thumb reach. */
+@media (max-width: 640px) {
+  .fn-popup {
+    bottom: auto;
+    top: 4.5rem;
+    transform: translate(-50%, 0);
+    max-height: 60vh;
+  }
+}
+
+/* ===== Footnote ref hover affordance ===== */
+/* Mirrors the .bu-link rule so the cursor and underline behaviour match
+   the scripture hover exactly. We only target refs inside .prose so we
+   don't accidentally style the back-refs in the footnote section itself. */
+.prose a[data-footnote-ref] {
+  cursor: help;
+  text-decoration: underline dotted var(--color-oxblood, #7a1f1f);
+  text-underline-offset: 2px;
+  color: inherit;
+}
+.prose a[data-footnote-ref]:hover,
+.prose a[data-footnote-ref]:focus-visible {
+  text-decoration-style: solid;
+  color: var(--color-oxblood-hover, #5e1717);
+  outline: none;
 }
