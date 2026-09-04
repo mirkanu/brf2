@@ -12,8 +12,10 @@
  * `bu-popup-pinned` class on the popup and, while pinned, watch for the
  * library re-adding its own `bu-popup-hide` class (which it does on every
  * link mouseleave). We strip `bu-popup-hide` back off and the popup stays
- * visible. Pin is cleared by Escape, the close button, or any click
- * outside the popup or its originating link.
+ * visible. CSS also docks the pinned popup bottom-centre (matching the
+ * footnote popup) so it never gets pushed off-screen by BibleUp's inline
+ * absolute positioning. Pin is cleared by Escape, the close button, or any
+ * click outside the popup or its originating link.
  */
 interface Props {
   version?: 'KJV' | 'ASV' | 'LSV' | 'WEB';
@@ -52,9 +54,27 @@ const { version = 'KJV' } = Astro.props;
       });
       hideObserver.observe(popup, { attributes: true, attributeFilter: ['class'] });
 
+      function clearInlinePos() {
+        // BibleUp sets absolute top/left inline on the popup via
+        // positionPopup(). CSS bottom-centre positioning can only win
+        // if those inline values are cleared.
+        popup.style.top = '';
+        popup.style.left = '';
+        popup.style.transform = '';
+        popup.style.bottom = '';
+      }
+
       function setPinned(next) {
         pinned = next;
         popup.classList.toggle('bu-popup-pinned', pinned);
+        if (pinned) {
+          // Wait two rAFs so we run after BibleUp's own click handler
+          // (which also calls positionPopup) finishes.
+          requestAnimationFrame(function () {
+            clearInlinePos();
+            requestAnimationFrame(clearInlinePos);
+          });
+        }
       }
 
       function onLinkClick(e) {
