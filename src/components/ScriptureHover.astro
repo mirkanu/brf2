@@ -5,11 +5,15 @@
  * parent .prose-brand container; not initialised if there is no article body
  * on the page (so other pages stay quiet).
  *
- * Click-to-pin (issue #5): mirrors the footnote popup behaviour. A click on
- * the scripture reference in the article body keeps the popup open after
- * the cursor leaves the link. A second click, the close button, Escape,
- * clicking the same link again, or moving the cursor away from both the
- * link and the popup dismisses it.
+ * Click-to-pin (issue #4): the BibleUp popup normally closes as soon as the
+ * cursor leaves the scripture reference link. After a click on the reference
+ * we want it to stay visible until the user dismisses it — exactly like the
+ * footnote popup. To get that without forking BibleUp, we toggle a
+ * `bu-popup-pinned` class on the popup and, while pinned, watch for the
+ * library re-adding its own `bu-popup-hide` class (which it does on every
+ * link mouseleave). We strip `bu-popup-hide` back off and the popup stays
+ * visible. Pin is cleared by Escape, the close button, or any click
+ * outside the popup or its originating link.
  */
 interface Props {
   version?: 'KJV' | 'ASV' | 'LSV' | 'WEB';
@@ -31,59 +35,82 @@ const { version = 'KJV' } = Astro.props;
       });
       bu.create();
 
-      // --- Click-to-pin (issue #5) ---------------------------------------
-      // BibleUp only opens on hover, and closes as soon as the cursor
-      // leaves the link. After a click we want the popup to behave like
-      // the footnote popup: stay visible until the user actively dismisses
-      // it. We achieve that by simulating a cursor-leave on the link (so
-      // BibleUp's internal #closePopup schedules its hide) but then, if a
-      // pin flag is set, cancelling the close by putting the cursor back
-      // on the popup via #mouseOnPopup semantics — which we cannot read.
-      //
-      // Cleanest approach without monkey-patching BibleUp internals:
-      // - On click, toggle a .bu-pinned class on the popup and add
-      //   display:flex / opacity:1 !important via CSS (we override the
-      //   .bu-popup-hide styles for .bu-popup-pinned in global.css).
-      // - Add Escape and close-button handlers ourselves.
-      // - On any click outside the popup or link while pinned, unpin and
-      //   let BibleUp's own teardown run.
       var popup = document.querySelector('[id^="bu-popup-"]');
       if (!popup) return;
-      var links = target.querySelectorAll('[class*="bu-link"]');
 
-      links.forEach(function (link) {
-        link.addEventListener('click', function (e) {
-          // BibleUp already preventsDefault on the link; wait one tick so
-          // its own click handler runs first and the popup is visible.
-          setTimeout(function () {
-            var open = popup && !popup.classList.contains('bu-popup-hide');
-            if (!open) return;
-            var wasPinned = popup.classList.contains('bu-popup-pinned');
-            popup.classList.toggle('bu-popup-pinned', !wasPinned);
-          }, 0);
-        });
+      var pinned = false;
+
+      // Keep the popup visible while pinned. BibleUp adds `bu-popup-hide`
+      // on every link mouseleave; while pinned we strip it back off so
+      // the popup stays on screen. CSS also overrides the hide styles
+      // for the pinned state (see global.css).
+      var hideObserver = new MutationObserver(function () {
+        if (!pinned) return;
+        if (popup.classList.contains('bu-popup-hide')) {
+          popup.classList.remove('bu-popup-hide');
+        }
       });
+      hideObserver.observe(popup, { attributes: true, attributeFilter: ['class'] });
 
-      function unpin() {
-        if (!popup) return;
-        if (!popup.classList.contains('bu-popup-pinned')) return;
-        popup.classList.remove('bu-popup-pinned');
+      function setPinned(next) {
+        pinned = next;
+        popup.classList.toggle('bu-popup-pinned', pinned);
+      }
+
+      function onLinkClick(e) {
+        // Wait one tick so BibleUp's own click handler (which opens the
+        // popup) runs first.
+        setTimeout(function () {
+          var open = !popup.classList.contains('bu-popup-hide');
+          if (!open) return;
+          setPinned(!pinned);
+        }, 0);
+      }
+
+      function bindLinks() {
+        var links = target.querySelectorAll('[class*="bu-link"]');
+        links.forEach(function (link) {
+          if (link.__pinWired) return;
+          link.__pinWired = true;
+          link.addEventListener('click', onLinkClick);
+        });
+      }
+      bindLinks();
+
+      // Re-bind if BibleUp mutates the article body (it scans lazily).
+      var bodyObserver = new MutationObserver(bindLinks);
+      bodyObserver.observe(target, { childList: true, subtree: true });
+
+      function dismiss() {
+        if (!pinned) return;
+        setPinned(false);
+        // Let BibleUp run its normal hide on next mouseleave; for an
+        // immediate close, also re-apply its hide class.
+        popup.classList.add('bu-popup-hide');
       }
 
       // Escape dismisses a pinned popup.
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') unpin();
+        if (e.key === 'Escape') dismiss();
       });
 
-      // The BibleUp close button always closes the popup; unpin first so
-      // state stays in sync with visibility.
-      var observer = new MutationObserver(function () {
-        var closeBtn = popup && popup.querySelector('.bu-popup-close');
+      // BibleUp's close button: dismiss pin and let its own handler close.
+      var closeObserver = new MutationObserver(function () {
+        var closeBtn = popup.querySelector('.bu-popup-close');
         if (!closeBtn || closeBtn.__wired) return;
         closeBtn.__wired = true;
-        closeBtn.addEventListener('click', unpin);
+        closeBtn.addEventListener('click', dismiss);
       });
-      if (popup) observer.observe(popup, { childList: true, subtree: true });
+      closeObserver.observe(popup, { childList: true, subtree: true });
+
+      // Click outside the popup or its originating link unpins.
+      document.addEventListener('click', function (e) {
+        if (!pinned) return;
+        var t = e.target;
+        if (popup.contains(t)) return;
+        if (t.closest && t.closest('[class*="bu-link"]')) return;
+        dismiss();
+      }, true);
     }
 
     if (document.readyState === 'loading') {

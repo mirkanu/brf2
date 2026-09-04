@@ -208,6 +208,17 @@ body {
   display: none !important; /* hide "BibleUp 📖💡" self-promo footer */
 }
 
+/* Click-to-pin (issue #4): while pinned, undo BibleUp's own hide rule
+   so the popup stays visible after the cursor leaves the link. */
+[id^="bu-popup-"].bu-popup-pinned,
+[id^="bu-popup-"].bu-popup-pinned.bu-popup-hide {
+  visibility: visible !important;
+  position: fixed !important;
+  top: auto !important;
+  left: auto !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25) !important;
+}
+
 /* Inline link in article body that BibleUp turned into a hover trigger */
 .bu-link-899911,
 .bu-link {
