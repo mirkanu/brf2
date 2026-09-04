@@ -220,3 +220,18 @@ body {
   text-decoration-style: solid !important;
   color: var(--oxblood-hover, #5e1717) !important;
 }
+
+
+/* ===== Scroll-margin for in-prose anchors ===== */
+/* The sticky top nav sits ~4rem tall. When a reader jumps to a footnote
+   target (#user-content-fn-N, #footnote-label) or any in-prose heading
+   anchor, scroll-margin-top offsets the target below the bar.
+   6rem ~= 96px - well clear of the ~64px header with breathing room. */
+html { scroll-behavior: smooth; }
+.prose [id^="user-content-fn-"],
+.prose [id^="footnote"],
+.prose :target,
+.prose h2[id],
+.prose h3[id] {
+  scroll-margin-top: 6rem;
+}
