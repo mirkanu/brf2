@@ -1,5 +1,6 @@
 ---
 import Site from '../../../../layouts/Site.astro';
+import { decodeEntities } from '../../../../lib/text';
 import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 
@@ -69,7 +70,7 @@ const issueLd: Record<string, unknown> = {
   },
   hasPart: articles.map((a) => ({
     '@type': 'Article',
-    headline: a.data.title,
+    headline: decodeEntities(a.data.title),
     datePublished: a.data.datePublished && !Number.isNaN(new Date(a.data.datePublished).getTime()) ? new Date(a.data.datePublished).toISOString() : undefined,
   })),
 };
@@ -138,7 +139,7 @@ if (pdfUrl) {
             <li class="py-4">
               <a href={url} class="block hover:underline">
                 <div class="flex items-baseline justify-between gap-4">
-                  <p class="font-serif text-lg text-brand-ink leading-snug">{article.data.title}</p>
+                  <p class="font-serif text-lg text-brand-ink leading-snug">{decodeEntities(article.data.title)}</p>
                   {article.data.datePublished && (
                     <time class="shrink-0 text-xs text-muted tabular-nums">
                       {new Date(article.data.datePublished).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
