@@ -208,14 +208,22 @@ body {
   display: none !important; /* hide "BibleUp 📖💡" self-promo footer */
 }
 
-/* Click-to-pin (issue #4): while pinned, undo BibleUp's own hide rule
-   so the popup stays visible after the cursor leaves the link. */
+/* Click-to-pin (issue #4): while pinned, undo BibleUp's own hide rule so
+   the popup stays visible after the cursor leaves the link — and dock it
+   bottom-centre (mirrors the footnote popup) so it never gets pushed
+   off-screen by BibleUp's inline absolute positioning. */
 [id^="bu-popup-"].bu-popup-pinned,
 [id^="bu-popup-"].bu-popup-pinned.bu-popup-hide {
   visibility: visible !important;
   position: fixed !important;
   top: auto !important;
-  left: auto !important;
+  bottom: 5vh !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 90%;
+  max-width: 400px;
+  max-height: 60vh;
+  overflow-y: auto;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25) !important;
 }
 
