@@ -1,6 +1,6 @@
 ## Agent handbook
 
-The canonical BRF skill lives at `docs/agent-handbook/` (SKILL.md, references/, assets/). `Skills/brf-website` is a symlink to that path so workspace tools resolve it from either location. Edit the repo copy and commit; the symlink picks up changes immediately.
+The canonical BRF skill lives at `docs/agent-handbook/`. Sub-skills live under `docs/agent-handbook/skills/<name>/` (each with its own `SKILL.md` and optional `references/`). There is no `Skills/` directory at the repo root — edit the handbook path directly.
 
 ## Development
 
