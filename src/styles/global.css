@@ -690,3 +690,80 @@ html { scroll-behavior: smooth; }
   color: var(--color-oxblood-hover, #5e1717);
   outline: none;
 }
+
+
+/* ===== Back-to-top button with reading-progress ring ===== */
+/* Article-only. Button is fixed bottom-right, hidden until the reader
+   has scrolled past 1.5 viewport heights. The ring strokes a circular
+   path with --reading-progress (0-1) so it doubles as a progress
+   indicator. The button itself is a small circular hit area; the SVG
+   ring + chevron sit inside. Respects prefers-reduced-motion. */
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border, rgba(0, 0, 0, 0.12));
+  background: var(--color-background-elevated, #fff);
+  color: var(--color-foreground, #1a1a1a);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(0.5rem);
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease, background-color 120ms ease;
+  z-index: 40;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  padding: 0;
+}
+.back-to-top[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: var(--color-background-hover, #f5f0e8);
+  outline: none;
+}
+.back-to-top:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-oxblood, #7a1f1f), 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+.back-to-top__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.back-to-top__ring-track {
+  fill: none;
+  stroke: var(--color-border, rgba(0, 0, 0, 0.12));
+  stroke-width: 2;
+}
+.back-to-top__ring-fill {
+  fill: none;
+  stroke: var(--color-oxblood, #7a1f1f);
+  stroke-width: 2;
+  stroke-linecap: round;
+  /* dasharray + dashoffset are set inline by the script to mirror
+     --reading-progress (0-1) on the article shell. */
+  transition: stroke-dashoffset 0.08s linear;
+}
+.back-to-top__icon {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top,
+  .back-to-top__ring-fill {
+    transition: none;
+  }
+}

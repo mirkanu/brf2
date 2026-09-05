@@ -165,21 +165,80 @@ if (encoding) articleLd.encoding = encoding;
       </div>
     </div>
   </section>
+<button
+  type="button"
+  class="back-to-top"
+  data-back-to-top
+  aria-label="Back to top"
+  hidden
+>
+  <svg
+    class="back-to-top-ring"
+    viewBox="0 0 44 44"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle class="back-to-top-ring-track" cx="22" cy="22" r="20"></circle>
+    <circle
+      class="back-to-top-ring-fill"
+      cx="22"
+      cy="22"
+      r="20"
+      pathLength="1"
+    ></circle>
+  </svg>
+  <span class="back-to-top-icon" aria-hidden="true">
+    <svg viewBox="0 0 20 20" focusable="false">
+      <path
+        d="M10 4 L4 11 M10 4 L16 11 M10 4 L10 16"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+    </svg>
+  </span>
+</button>
+
 <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
 <script>
-  // Reading-progress indicator (issue #4): updates --reading-progress based on
-  // the article element's position relative to the viewport.
+  // Reading-progress indicator + back-to-top (issues #4 + #5):
+  // updates --reading-progress on the article, mirrors it on the
+  // back-to-top ring, and toggles button visibility after 1.5vh scroll.
   (() => {
     const bar = document.querySelector('[data-reading-progress]');
     const article = document.querySelector('article.prose');
+    const button = document.querySelector('[data-back-to-top]');
+    const ringFill = button ? button.querySelector('.back-to-top-ring-fill') : null;
     if (!bar || !article) return;
+
     let ticking = false;
+    let lastShown = false;
+
     const update = () => {
       const rect = article.getBoundingClientRect();
       const total = rect.height + window.innerHeight;
       const scrolled = Math.min(Math.max(window.innerHeight - rect.top, 0), total);
       const pct = total > 0 ? scrolled / total : 0;
-      bar.style.setProperty('--reading-progress', String(Math.max(0, Math.min(1, pct))));
+      const clamped = Math.max(0, Math.min(1, pct));
+      bar.style.setProperty('--reading-progress', String(clamped));
+      if (ringFill) {
+        ringFill.style.setProperty('--reading-progress', String(clamped));
+      }
+      if (button) {
+        // Industry pattern: appear after the reader has scrolled ~1.5
+        // viewports (Material Design, Tailwind UI, Vercel docs). Hide near
+        // the end so the button doesn't float over the footer.
+        const pastThreshold = window.scrollY > window.innerHeight * 1.5;
+        const nearEnd = clamped >= 0.98;
+        const shouldShow = pastThreshold && !nearEnd;
+        if (shouldShow !== lastShown) {
+          button.hidden = !shouldShow;
+          button.classList.toggle('is-visible', shouldShow);
+          lastShown = shouldShow;
+        }
+      }
       ticking = false;
     };
     const onScroll = () => {
@@ -189,6 +248,13 @@ if (encoding) articleLd.encoding = encoding;
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
+
+    if (button) {
+      button.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
     update();
   })();
 </script>
