@@ -46,6 +46,11 @@ const { title: rawTitle, datePublished, authors } = article.data;
 const title = decodeEntities(rawTitle);
 const authorNames = (authors ?? []).filter((s) => s && s.trim().length > 0);
 
+// Reading time: average adult reads ~225 wpm on long-form prose.
+// wordCount derived from the raw markdown body if available.
+const wordCount = body ? (body.body ?? '').trim().split(/\s+/).filter(Boolean).length : 0;
+const readingMinutes = Math.max(1, Math.round(wordCount / 225));
+
 // Display title: [issueDate] if provided, otherwise "Issue [issueNumber]"
 const issueTitle = issue.data.issueDate ?? `Issue ${issueNum}`;
 const pdfUrl = article.data.pdfLink ?? issue.data.pdfUrl; // article PDF wins; falls back to issue PDF
@@ -108,6 +113,13 @@ if (encoding) articleLd.encoding = encoding;
           {datePublished && (<span> · {new Date(datePublished).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>)}
         </p>
       )}
+      {wordCount > 0 && (
+        <p class="reading-meta" data-reading-meta>
+          <span>{readingMinutes} min read</span>
+          <span class="reading-meta-dot" aria-hidden="true"></span>
+          <span>{wordCount.toLocaleString('en-GB')} words</span>
+        </p>
+      )}
     </div>
   </section>
 
@@ -153,6 +165,33 @@ if (encoding) articleLd.encoding = encoding;
       </div>
     </div>
   </section>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<script>
+  // Reading-progress indicator (issue #4): updates --reading-progress based on
+  // the article element's position relative to the viewport.
+  (() => {
+    const bar = document.querySelector('[data-reading-progress]');
+    const article = document.querySelector('article.prose');
+    if (!bar || !article) return;
+    let ticking = false;
+    const update = () => {
+      const rect = article.getBoundingClientRect();
+      const total = rect.height + window.innerHeight;
+      const scrolled = Math.min(Math.max(window.innerHeight - rect.top, 0), total);
+      const pct = total > 0 ? scrolled / total : 0;
+      bar.style.setProperty('--reading-progress', String(Math.max(0, Math.min(1, pct))));
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  })();
+</script>
 <ScriptureHover />
 <FootnoteHover />
 </Site>

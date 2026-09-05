@@ -242,6 +242,227 @@ body {
 }
 
 
+/* ===== Article beautification (issue #4) =====
+   Drop caps on first paragraph, pull quotes, widow/orphan control,
+   optimal measure, distinct figure captions, dark-mode article pass. */
+.prose {
+  /* 64ch is a comfortable measure, well within the 60-75ch sweet spot
+     for long-form print-style prose. */
+  max-width: 64ch;
+  margin-inline: auto;
+}
+.prose > p:first-of-type::first-letter {
+  font-family: var(--font-serif);
+  font-size: 3.4em;
+  line-height: 0.85;
+  font-weight: 600;
+  float: left;
+  margin: 0.08em 0.12em 0 -0.04em;
+  color: var(--ink);
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+.prose p {
+  /* Widow = last line of a paragraph on its own page.
+     Orphan = first line of a paragraph on its own page.
+     Setting both >=2 keeps at least two lines together. */
+  widows: 2;
+  orphans: 2;
+}
+.prose blockquote.pull-quote {
+  border: 0;
+  padding: 0;
+  margin: 1.8rem 0 1.8rem 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  line-height: 1.4;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--oxblood);
+  text-align: left;
+  border-left: 3px solid var(--oxblood);
+  padding-left: 1.2rem;
+}
+.prose blockquote.pull-quote p {
+  text-indent: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+.prose blockquote.pull-quote::before { content: "\201C"; margin-right: 0.1em; }
+.prose blockquote.pull-quote::after { content: "\201D"; margin-left: 0.05em; }
+.prose figure {
+  margin: 2rem 0;
+}
+.prose figcaption {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 0.6rem;
+  text-indent: 0;
+}
+.prose figure img {
+  border: 1px solid var(--rule);
+}
+.prose aside.lede,
+.prose p.lede {
+  font-size: 1.18rem;
+  line-height: 1.6;
+  color: var(--muted);
+  font-style: italic;
+  text-indent: 0;
+  margin-bottom: 1.4rem;
+}
+/* Reading-time badge — sits above the article body, alongside byline */
+.reading-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+.reading-time::before {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 999px;
+  background: var(--oxblood);
+  opacity: 0.85;
+}
+
+/* Dark-mode article pass: the article body section uses bg-white which
+   becomes blinding in dark mode. Brand tokens already flip on
+   [data-theme="dark"], so we only need to swap the static white
+   sections to the token-driven paper colour. */
+:where(html[data-theme="dark"]) section.bg-white {
+  background: var(--paper);
+}
+:where(html[data-theme="dark"]) .prose figcaption {
+  color: var(--muted);
+}
+
+/* ===== Article beautification (issue #4) ===== */
+/* Phase-2 cosmetic pass: drop caps, pull quotes, widow/orphan control,
+   figure captions, reading time, progress bar, optimal measure.
+   All rules scoped to .prose / .article-shell so they don't leak onto
+   homepage, journal index, conference or podcast pages. */
+
+/* Drop cap on the first paragraph (print-magazine convention) */
+.prose > p:first-of-type::first-letter {
+  font-family: var(--font-serif);
+  float: left;
+  font-size: 4.5em;
+  line-height: 0.85;
+  font-weight: 600;
+  margin: 0.05em 0.08em -0.05em 0;
+  color: var(--oxblood);
+}
+
+/* Pull quote: blockquote styled as a magazine-style decorative side quote.
+   Renders flush-left on small screens, indented with a left rule on wider.
+   The italic / muted treatment was already present; this adds visual weight
+   and a marker bar to make it read as a featured quote, not a citation. */
+.prose blockquote {
+  position: relative;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  border-left: 4px solid var(--oxblood);
+  padding: 0.5rem 0 0.5rem 1.4rem;
+  margin: 2rem 0 2rem 0.5rem;
+}
+.prose blockquote::before {
+  content: "“";
+  position: absolute;
+  left: -0.4rem;
+  top: -1.2rem;
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--oxblood);
+  opacity: 0.35;
+}
+
+/* Widow / orphan control on every prose paragraph + heading */
+.prose p,
+.prose li,
+.prose h1,
+.prose h2,
+.prose h3,
+.prose blockquote {
+  orphans: 3;
+  widows: 3;
+}
+
+/* Bring text-rendering onto headings too (was only on body) */
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  text-rendering: optimizeLegibility;
+}
+
+/* Optimal measure: clamp prose to ~65ch on extra-wide viewports.
+   The article-shell .max-w-3xl is already 48rem (~75ch at 1.05rem base),
+   but at 2xl+ the prose box still drifts. Tighten via line-length clamp. */
+.prose {
+  max-width: 65ch;
+  margin-inline: auto;
+}
+
+/* Figure captions: prose img + em-style captions (and any caption-tag).
+   Magazine caption treatment: small caps, centered, muted, top rule. */
+.prose figure {
+  margin: 1.8rem 0;
+}
+.prose figcaption,
+.prose img + em,
+.prose p > em:only-child {
+  display: block;
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  font-size: 0.8rem;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 0.6rem;
+  text-indent: 0;
+}
+
+/* ===== Reading time + progress indicator ===== */
+.reading-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+.reading-meta-dot {
+  width: 1px;
+  height: 1em;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+/* Sticky-to-bottom progress bar, fixed under the viewport.
+   Width updated by inline style --reading-progress on the article shell. */
+.reading-progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--oxblood);
+  transform-origin: left center;
+  transform: scaleX(var(--reading-progress, 0));
+  transition: transform 0.08s linear;
+  z-index: 30;
+  pointer-events: none;
+}
+
 /* ===== Scroll-margin for in-prose anchors ===== */
 /* The sticky top nav sits ~4rem tall. When a reader jumps to a footnote
    target (#user-content-fn-N, #footnote-label) or any in-prose heading
