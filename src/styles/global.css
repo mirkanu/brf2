@@ -44,6 +44,9 @@ html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   color-scheme: light dark;
+  /* Extend the parchment background behind the iOS Safari chrome
+     so the OS bottom bar (transparent over the body) matches the page. */
+  background: var(--paper);
 }
 
 body {
@@ -51,6 +54,9 @@ body {
   color: var(--ink);
   font-family: var(--font-serif);
   transition: background-color 0.15s ease, color 0.15s ease;
+  /* Prevent rubber-band scroll from revealing the page's underlying
+     white default background on iOS Safari. */
+  background-attachment: fixed;
 }
 
 /* prose adjustments so markdown content looks consistent with site typography */
@@ -448,7 +454,8 @@ body {
 }
 
 /* Sticky-to-bottom progress bar, fixed under the viewport.
-   Width updated by inline style --reading-progress on the article shell. */
+   Width updated by inline style --reading-progress on the article shell.
+   Desktop only — on mobile the back-to-top ring button carries progress. */
 .reading-progress {
   position: fixed;
   left: 0;
@@ -461,6 +468,13 @@ body {
   transition: transform 0.08s linear;
   z-index: 30;
   pointer-events: none;
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .reading-progress {
+    display: block;
+  }
 }
 
 /* ===== Scroll-margin for in-prose anchors ===== */
