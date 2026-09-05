@@ -3,6 +3,7 @@ import Site from '../../../../layouts/Site.astro';
 import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
 import ScriptureHover from '../../../../components/ScriptureHover.astro';
 import FootnoteHover from '../../../../components/FootnoteHover.astro';
+import ArticleToc from '../../../../components/ArticleToc.astro';
 import { getCollection, render } from 'astro:content';
 import { slugify } from '../../../../lib/format';
 import { decodeEntities } from '../../../../lib/text';
@@ -40,7 +41,10 @@ const { article, issue, issueNum } = Astro.props;
 const articleId = article.id.replace(/\.json$/, '');
 const bodies = await getCollection('journalBodies');
 const body = bodies.find((b) => b.id === `${articleId}.md` || b.id === articleId);
-const { Content } = body ? await render(body) : { Content: () => null };
+const renderResult = body ? await render(body) : { Content: () => null, headings: [] };
+const Content = renderResult.Content;
+const allHeadings = renderResult.headings ?? [];
+const headings = allHeadings.filter((h) => h.depth === 2 || h.depth === 3);
 
 const { title: rawTitle, datePublished, authors } = article.data;
 const title = decodeEntities(rawTitle);
@@ -124,45 +128,52 @@ if (encoding) articleLd.encoding = encoding;
   </section>
 
   <section class="bg-white">
-    <div class="max-w-3xl mx-auto px-6 py-10">
-      {pdfUrl && (
-        <div class="mb-8 flex items-center justify-between gap-3 rounded-sm border border-brand-ink/15 bg-brand-cream/50 px-4 py-3">
-          <p class="text-xs uppercase tracking-wider text-muted">
-            Read in your browser below, or open the original PDF
-          </p>
-          <a
-            href={pdfUrl}
-            target="_blank"
-            rel="noopener"
-            class="inline-flex items-center gap-2 rounded-sm bg-oxblood px-4 py-2 text-sm font-medium text-paper hover:bg-oxblood-hover"
-          >
-            Read PDF
-          </a>
-        </div>
-      )}
-      <ScriptureHover version="KJV" />
-      <article class="prose prose-brand max-w-none">
-        {Content && <Content />}
-      </article>
-      <div class="mt-10 border-t border-brand-ink/10 pt-6 flex items-center gap-3">
-        {pdfUrl ? (
-          <a
-            href={pdfUrl}
-            class="inline-flex items-center gap-2 rounded-sm bg-oxblood px-4 py-2 text-sm font-medium text-paper hover:bg-oxblood-hover"
-          >
-            Read PDF
-          </a>
-        ) : (
-          <button
-            type="button"
-            disabled
-            aria-disabled="true"
-            class="inline-flex items-center gap-2 rounded-sm bg-brand-ink/10 px-4 py-2 text-sm font-medium text-brand-ink/40 cursor-not-allowed"
-          >
-            Read PDF
-          </button>
+    <div class={`mx-auto px-6 py-10 ${headings.length > 0 ? 'lg:grid lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-10 lg:max-w-5xl' : 'max-w-3xl'}`}>
+      <div class="min-w-0">
+        {pdfUrl && (
+          <div class="mb-8 flex items-center justify-between gap-3 rounded-sm border border-brand-ink/15 bg-brand-cream/50 px-4 py-3">
+            <p class="text-xs uppercase tracking-wider text-muted">
+              Read in your browser below, or open the original PDF
+            </p>
+            <a
+              href={pdfUrl}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 rounded-sm bg-oxblood px-4 py-2 text-sm font-medium text-paper hover:bg-oxblood-hover"
+            >
+              Read PDF
+            </a>
+          </div>
         )}
+        <ScriptureHover version="KJV" />
+        <article class="prose prose-brand max-w-none">
+          {Content && <Content />}
+        </article>
+        <div class="mt-10 border-t border-brand-ink/10 pt-6 flex items-center gap-3">
+          {pdfUrl ? (
+            <a
+              href={pdfUrl}
+              class="inline-flex items-center gap-2 rounded-sm bg-oxblood px-4 py-2 text-sm font-medium text-paper hover:bg-oxblood-hover"
+            >
+              Read PDF
+            </a>
+          ) : (
+            <button
+              type="button"
+              disabled
+              aria-disabled="true"
+              class="inline-flex items-center gap-2 rounded-sm bg-brand-ink/10 px-4 py-2 text-sm font-medium text-brand-ink/40 cursor-not-allowed"
+            >
+              Read PDF
+            </button>
+          )}
+        </div>
       </div>
+      {headings.length > 0 && (
+        <aside class="hidden lg:block">
+          <ArticleToc headings={headings} />
+        </aside>
+      )}
     </div>
   </section>
 <button

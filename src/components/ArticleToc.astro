@@ -1,0 +1,142 @@
+---
+// Sticky table of contents for journal articles.
+//
+// Reads rendered headings from a journal body and renders a two-level nav
+// (H2 sections, with H3 sub-entries indented underneath). The list itself is
+// plain HTML, so it works without JavaScript; the scroll-spy below adds the
+// "currently in view" highlight without affecting layout.
+//
+// Active-section detection uses a single IntersectionObserver with a rootMargin
+// biased toward the top quarter of the viewport — that's the Vercel docs /
+// Tailwind UI pattern that avoids both the "stuck on first item" and the
+// "flips through every item" failure modes.
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+const h2Count = headings.filter((h) => h.depth === 2).length;
+---
+
+{headings.length > 0 && (
+  <nav class="article-toc" aria-label="Table of contents">
+    <p class="article-toc-label">On this page</p>
+    <ol class="article-toc-list">
+      {headings.map((heading) => (
+        <li
+          class:list={[
+            'article-toc-item',
+            heading.depth === 3 && 'article-toc-item--sub',
+          ]}
+        >
+          <a
+            href={`#${heading.slug}`}
+            class="article-toc-link"
+            data-toc-link={heading.slug}
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+{h2Count >= 2 && (
+  <script>
+    // Scroll-spy: highlight the heading currently nearest the top of the
+    // viewport. Uses rootMargin "-80px 0px -70% 0px" so a heading is "active"
+    // while it's in the top 30% of the viewport, which matches how the page
+    // actually reads (the eye lands near the top, not the middle).
+    (() => {
+      const links = Array.from(document.querySelectorAll('[data-toc-link]'));
+      if (links.length === 0) return;
+
+      const linkBySlug = new Map();
+      for (const link of links) {
+        const slug = link.getAttribute('data-toc-link');
+        if (slug) linkBySlug.set(slug, link);
+      }
+
+      const targets = [];
+      for (const link of links) {
+        const id = link.getAttribute('data-toc-link');
+        const el = id ? document.getElementById(id) : null;
+        if (id && el) targets.push({ id, el });
+      }
+      if (targets.length === 0) return;
+
+      let activeSlug = null;
+      const setActive = (slug) => {
+        if (slug === activeSlug) return;
+        if (activeSlug) {
+          const prev = linkBySlug.get(activeSlug);
+          if (prev) prev.removeAttribute('aria-current');
+        }
+        activeSlug = slug;
+        if (slug) {
+          const next = linkBySlug.get(slug);
+          if (next) next.setAttribute('aria-current', 'location');
+        }
+      };
+
+      // When an H3 is the active scroll target, still highlight its parent
+      // H2 in the list — that mirrors how readers scan an outline.
+      const ownerH2 = (el) => {
+        let cur = el;
+        while (cur && cur.tagName !== 'H2') {
+          cur = cur.previousElementSibling;
+        }
+        return (cur || el).id;
+      };
+
+      const visible = new Set();
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const id = entry.target.id;
+            if (entry.isIntersecting) visible.add(id);
+            else visible.delete(id);
+          }
+          let chosen = null;
+          for (const t of targets) {
+            if (visible.has(t.id)) {
+              chosen = t.id;
+              break;
+            }
+          }
+          setActive(chosen ? ownerH2(document.getElementById(chosen)) : null);
+        },
+        {
+          // Header is ~64px tall; bias the active band to start ~16px below
+          // the header and end at 70% of the viewport so the next heading
+          // doesn't take over too early.
+          rootMargin: '-80px 0px -70% 0px',
+          threshold: 0,
+        },
+      );
+
+      for (const t of targets) observer.observe(t.el);
+
+      // Edge case: when the reader scrolls above the first heading, clear
+      // the active state so the TOC doesn't claim a section that isn't
+      // visible.
+      const onScroll = () => {
+        const first = targets[0];
+        if (!first) return;
+        const rect = first.el.getBoundingClientRect();
+        if (rect.top > window.innerHeight * 0.4) {
+          setActive(null);
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+  </script>
+)}

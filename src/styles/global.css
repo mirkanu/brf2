@@ -767,3 +767,67 @@ html { scroll-behavior: smooth; }
     transition: none;
   }
 }
+
+/* ===== Article table of contents ===== */
+/* Sticky right-rail nav on journal article pages (desktop only, lg+).
+   H2 entries are flush-left; H3 entries indent underneath. The scroll-spy
+   script marks the active link via aria-current="location"; the underline
+   shown here animates off that attribute so the list itself works
+   without JavaScript. */
+.article-toc {
+  position: sticky;
+  top: 5rem;
+  align-self: start;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+  padding: 1rem 1rem 1rem 1.25rem;
+  border-left: 1px solid var(--rule);
+  font-family: var(--font-sans);
+  font-size: 0.825rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.article-toc-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.article-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: toc;
+}
+.article-toc-item {
+  margin: 0.15rem 0;
+}
+.article-toc-item--sub {
+  padding-left: 0.85rem;
+  font-size: 0.78rem;
+}
+.article-toc-link {
+  display: inline-block;
+  padding: 0.1rem 0;
+  color: var(--muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  padding-left: 0.5rem;
+  margin-left: -0.5rem;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+.article-toc-link:hover,
+.article-toc-link:focus-visible {
+  color: var(--ink);
+  outline: none;
+}
+.article-toc-link[aria-current="location"] {
+  color: var(--oxblood);
+  border-left-color: var(--oxblood);
+  font-weight: 500;
+}
+@media (prefers-reduced-motion: reduce) {
+  .article-toc-link { transition: none; }
+}
