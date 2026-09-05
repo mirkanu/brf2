@@ -1,53 +1,33 @@
 ---
 name: github-issue-workflow
-description: How to track work on a GitHub issue in the brf2 repo — comment on the issue before starting work, assign it, link every branch/commit/PR back to it, and close it with a final comment. Activate whenever a task references a GitHub issue, milestone, or PR; before creating any branch; whenever a commit message mentions `(#NN)`.
+description: Pointer to the canonical GitHub workflow skill. Use that one — it lives outside the brf2 repo because it is repo-agnostic. This file only records brf2-specific conventions that override or supplement the canonical skill.
 ---
 
-# GitHub issue workflow
+# GitHub issue workflow (brf2-specific notes)
 
-Goal: a single click on any issue/PR shows the full lifecycle — who started, what was tried, which branches/PRs are involved, what's blocked, what shipped.
+The canonical, repo-agnostic skill lives at:
 
-## When this fires
+```
+/home/workspace/Skills/github-workflow/SKILL.md
+```
 
-Any of:
-- User mentions a GitHub issue/milestone/PR number or URL.
-- A task touches an open issue in `mirkanu/brf2`.
-- You're about to create a branch, commit, or PR.
+Read it first — it covers the full lifecycle (comment-on-start, claim the issue, branch/commit link, PR with `Closes #N`, comment-on-finish, milestone wiring, label hygiene, partial-work follow-ups, anti-patterns).
 
-## Lifecycle (do these in order)
+This file only adds what is **specific to the brf2 repo**:
 
-1. **Read the issue first.** `gh issue view <N> --repo mirkanu/brf2` — title, body, comments, linked PRs. Confirm the scope and acceptance criteria before touching code.
+## brf2 conventions (override or extend the canonical skill)
 
-2. **Assign it.** `gh issue edit <N> --repo mirkanu/brf2 --add-assignee mirkanu`. Sole-owner repos: assign to the user (mirkanu) so the avatar shows on the issue card.
+- **Assignee.** The brf2 repo is a sole-owner repo. Always assign issues to `mirkanu` (not "me", not the agent handle). The user wants the avatar visible on the issue card.
+- **PR draft on first push.** Open the PR as `--draft` as soon as the branch is pushed. Cloudflare Pages auto-builds and surfaces the preview URL on the PR. The canonical skill recommends opening a PR early; brf2 uses drafts specifically so PRs accumulate preview URLs while work continues.
+- **Comment with the preview URL on the issue, not just the PR.** The user reviews via issue comments — PRs are the technical record but issues are the user-facing record. Repeat after every iteration the user is asked to review.
+- **Milestone merge is one squash.** Don't `gh pr merge` per-workstream. The brf2 workflow is: each workstream ships a preview, the user approves each preview, then a single final squash merges the milestone to `main`. The canonical skill's "One PR per logical change" rule is honoured, but merge cadence is milestone-batched.
+- **Don't close without user confirmation.** Even if the fix is implemented and pushed, even if it "looks done", even if the user said "approved" about a different issue — wait for an explicit "close #N" or equivalent per-issue confirmation. Reopen with a comment if closed by mistake.
+- **Double-check the issue number before commenting or closing.** A fix for issue #5 goes on #5, not #4 — even if #4 was worked on earlier in the same branch. Before any `gh issue comment <N>` or `gh issue close <N>`, confirm `<N>` matches the issue the work actually addressed.
 
-3. **Comment "starting".** Single short message before any code:
-   ```
-   gh issue comment <N> --repo mirkanu/brf2 --body "Starting on a fix- branch. Plan: <one line>. Will post the preview URL when the first build is up."
-   ```
+## Verification (brf2-specific)
 
-4. **Branch + commit message conventions.**
-   - Branch prefix encodes workstream: `fix/`, `feat/`, `chore/`. Include the issue number in the branch name when one issue maps cleanly to it: `fix/amp-in-titles-3`.
-   - Commit messages reference the issue: `fix(WS1): decode HTML entities in article titles (#3)`.
+After any GitHub action, before yielding back to the user:
 
-5. **Open a PR as soon as the branch is pushed.** Even if work continues. `gh pr create --repo mirkanu/brf2 --head <branch> --base main --title "<scope>: <what> (#N)" --body "Closes #N" --draft`. Draft is fine. Cloudflare Pages auto-builds the branch and the PR surfaces the preview URL.
-
-6. **Comment with the preview URL on the issue** (not just the PR):
-   ```
-   gh issue comment <N> --repo mirkanu/brf2 --body "Preview: https://<branch>.brf2.pages.dev/"
-   ```
-   Repeat after every iteration the user is asked to review.
-
-7. **On close**, comment on the issue with what shipped and any deferred sub-items. If anything is parked, file a follow-up issue (see references/follow-up-issues.md) and reference it from the close comment.
-
-## What NOT to do
-
-- Don't start coding before reading the issue. The body almost always has scope hints the title doesn't.
-- Don't close an issue via commit message alone — issue state must change explicitly (`gh issue close` or a `Closes #N` in a merged PR).
-- Don't use `gh pr merge` for milestone work — this project merges the milestone as one final squash after every workstream's preview is approved, not per-PR.
-- Don't post the same comment on PR and issue. The PR is the technical record; the issue is the user-facing record. Keep them separate.
-
-## Verification
-
-Before yielding back to the user after any GitHub action:
-- Run `gh issue view <N> --repo mirkanu/brf2 --comments` and confirm the new comment is visible.
-- Run `gh pr list --repo mirkanu/brf2 --head <branch>` and confirm the PR exists with the expected state.
+- `gh issue view <N> --repo mirkanu/brf2 --comments` — confirm the new comment is on the right issue with the right number.
+- `gh pr list --repo mirkanu/brf2 --head <branch>` — confirm the PR exists in the expected state (draft/open/merged).
+- If a milestone is involved: `gh api repos/mirkanu/brf2/milestones --jq '.[] | {number, title, open_issues, closed_issues}'` to confirm progress is reflected.
