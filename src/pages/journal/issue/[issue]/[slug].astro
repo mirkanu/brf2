@@ -146,22 +146,16 @@ if (encoding) articleLd.encoding = encoding;
           </div>
         )}
         <ScriptureHover version="KJV" />
-                <details class="article-toc-inline" data-toc-inline>
-          <summary>
-            <span>On this page</span>
-            <span aria-hidden="true" class="article-toc-inline__chevron">▾</span>
-          </summary>
+                <div class="article-toc-inline" data-toc-inline>
+          <p class="article-toc-inline__label">Sections</p>
           <ol class="article-toc-inline-list">
-            <li class="article-toc-inline-item">
-              <a class="article-toc-inline-link article-toc-inline-link--top" href="#top">↑ Back to top</a>
-            </li>
             {headings.map((h) => (
               <li class={`article-toc-inline-item${h.depth === 3 ? " article-toc-inline-item--sub" : ""}`}>
                 <a class="article-toc-inline-link" href={`#${h.slug}`}>{h.text}</a>
               </li>
             ))}
           </ol>
-        </details>
+        </div>
         <article id="top" class="prose prose-brand max-w-none" data-has-toc={headings.length > 0}>
           {Content && <Content />}
         </article>
