@@ -247,6 +247,7 @@ if (encoding) articleLd.encoding = encoding;
         if (shouldShow !== lastShown) {
           button.hidden = !shouldShow;
           button.classList.toggle('is-visible', shouldShow);
+          button.dataset.visible = shouldShow ? 'true' : 'false';
           lastShown = shouldShow;
         }
       }
