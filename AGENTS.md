@@ -54,6 +54,16 @@ Redirect rule (binding): redirects are only built **from `britishreformed.org` (
 - `src/assets/issue-covers/issue-NN.svg` — placeholder covers. Replace when real covers arrive.
 - PDFs and audio live on Cloudflare R2 under prefixes `pdfs/issues/` and `pdfs/articles/` (path documented in `scratch/phase-2/r2-upload.md`). Until R2 wiring lands, `pdfUrl` is `null` and the article/issue "Read PDF" button is rendered `disabled`.
 
+### Launch state — pre-cutover (private beta)
+
+`brf2.pages.dev` is **not** the live site and is not publicly indexed or shared. It is in private beta until phase 5 cutover. While in this state:
+
+- **No redirects in or out of `brf2.pages.dev`.** Until launch, only `britishreformed.org → brf2.pages.dev` redirects matter (binding rule above).
+- **Slug changes do not require 301s.** Renaming URLs (e.g. replacing `-amp-` with `-` in article slugs) is safe as a hard cut. Internal links pointing at old slugs must be updated directly in the source rather than relying on redirects.
+- **Cosmetic-only changes can land without migration concerns.** Titles, slug spelling, layout, fonts — anything that does not affect R2/PDF/audio URLs — may change freely without preserving a back-compat path.
+
+This rule is binding until phase 5. After cutover, slugs become load-bearing and redirects in both directions must be maintained.
+
 ### Build & deploy
 
 - Build: `npm run build` (Astro 7 static). 696 pages, 0 errors. Postbuild script writes `dist/sitemap-index.xml`.
