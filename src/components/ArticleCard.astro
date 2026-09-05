@@ -1,5 +1,6 @@
 ---
 import { fmtDate } from '../lib/format';
+import { decodeEntities } from '../lib/text';
 import type { CollectionEntry } from 'astro:content';
 
 type AnyEntry = CollectionEntry<'journal'> | CollectionEntry<'conferences'> | CollectionEntry<'podcasts'>;
@@ -15,7 +16,8 @@ const { item, article, showIssue = true, href } = Astro.props;
 const entry: AnyEntry = (item ?? article)!;
 if (!entry) throw new Error('ArticleCard requires either item or article prop');
 
-const { title, datePublished } = entry.data;
+const { title: rawTitle, datePublished } = entry.data;
+const title = decodeEntities(rawTitle);
 const issueNumber = 'issueNumber' in entry.data ? entry.data.issueNumber : undefined;
 const authorNames: string[] = Array.isArray((entry.data as any).authors)
   ? (entry.data as any).authors.filter((s: string) => s && s.trim().length > 0)
@@ -28,8 +30,8 @@ const authorLabel = authorNames.length === 0
 const link = href ?? `/${entry.collection}/${entry.id.replace(/\.json$/, '')}`;
 ---
 <li class="rounded-lg border border-brand-ink/15 bg-white p-5">
-  <a href={link} class="block hover:underline">
-    <p class="font-serif text-xl text-brand-ink leading-tight">{title}</p>
+  <a href={link} class="block hover:text-oxblood hover:underline transition-colors">
+    <p class="font-serif text-base sm:text-xl text-brand-ink leading-snug sm:leading-tight text-balance">{title}</p>
   </a>
   <p class="mt-2 text-sm text-brand-ink/70">{authorLabel}</p>
   <p class="mt-1 text-xs text-muted">

@@ -1,5 +1,6 @@
 ---
 import { fmtDate } from '../lib/format';
+import { decodeEntities } from '../lib/text';
 import type { CollectionEntry } from 'astro:content';
 
 type AnyEntry = CollectionEntry<'journal'> | CollectionEntry<'conferences'> | CollectionEntry<'podcasts'>;
@@ -10,7 +11,8 @@ interface Props {
 }
 
 const { entry, href } = Astro.props;
-const { title, datePublished, primaryCategory, legacyPath } = entry.data as any;
+const { title: rawTitle, datePublished, primaryCategory, legacyPath } = entry.data as any;
+const title = decodeEntities(rawTitle);
 const issueNumber = (entry.data as any).issueNumber as number | null | undefined;
 const issueYear = (entry.data as any).issueYear as number | null | undefined;
 const authorNames: string[] = Array.isArray((entry.data as any).authors)
@@ -19,9 +21,9 @@ const authorNames: string[] = Array.isArray((entry.data as any).authors)
 const link = href ?? `/${entry.collection}/${entry.id.replace(/\.json$/, '')}`;
 ---
 <li class="py-4">
-  <a href={link} class="block hover:underline">
+  <a href={link} class="block hover:text-oxblood hover:underline transition-colors">
     <div class="flex items-baseline justify-between gap-4">
-      <p class="font-serif text-lg text-brand-ink leading-snug">{title}</p>
+      <p class="font-serif text-base sm:text-lg text-brand-ink leading-snug text-balance">{title}</p>
       {datePublished && <time class="shrink-0 text-xs text-muted tabular-nums">{fmtDate(datePublished)}</time>}
     </div>
     <p class="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-brand-ink/65">

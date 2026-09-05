@@ -39,8 +39,8 @@ repo when you genuinely suspect drift.
 
 Full routing/collection table: `1 Projects/brf2/AGENTS.md` in the repo.
 Quickstart + content schema summary: `1 Projects/brf2/README.md`. Live
-feature status: `1 Projects/brf2/STATUS.md`. Phase plans:
-`1 Projects/brf2/.planning/PLAN-2.md`, `ROADMAP.md`, `STATE.md`.
+feature status: `1 Projects/brf2/STATUS.md`. Project state + collections
+table: `1 Projects/brf2/AGENTS.md`.
 
 ## Hard rules
 

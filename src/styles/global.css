@@ -44,6 +44,9 @@ html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   color-scheme: light dark;
+  /* Extend the parchment background behind the iOS Safari chrome
+     so the OS bottom bar (transparent over the body) matches the page. */
+  background: var(--paper);
 }
 
 body {
@@ -51,6 +54,9 @@ body {
   color: var(--ink);
   font-family: var(--font-serif);
   transition: background-color 0.15s ease, color 0.15s ease;
+  /* Prevent rubber-band scroll from revealing the page's underlying
+     white default background on iOS Safari. */
+  background-attachment: fixed;
 }
 
 /* prose adjustments so markdown content looks consistent with site typography */
@@ -207,6 +213,26 @@ body {
 [id^="bu-popup-"] .bu-popup-footer {
   display: none !important; /* hide "BibleUp 📖💡" self-promo footer */
 }
+
+/* Click-to-pin (issue #4): while pinned, undo BibleUp's own hide rule so
+   the popup stays visible after the cursor leaves the link — and dock it
+   bottom-centre (mirrors the footnote popup) so it never gets pushed
+   off-screen by BibleUp's inline absolute positioning. */
+[id^="bu-popup-"].bu-popup-pinned,
+[id^="bu-popup-"].bu-popup-pinned.bu-popup-hide {
+  visibility: visible !important;
+  position: fixed !important;
+  top: auto !important;
+  bottom: 5vh !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 90%;
+  max-width: 400px;
+  max-height: 60vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25) !important;
+}
+
 /* Inline link in article body that BibleUp turned into a hover trigger */
 .bu-link-899911,
 .bu-link {
@@ -221,6 +247,235 @@ body {
   color: var(--color-oxblood-hover, #5e1717) !important;
 }
 
+
+/* ===== Article beautification (issue #4) =====
+   Drop caps on first paragraph, pull quotes, widow/orphan control,
+   optimal measure, distinct figure captions, dark-mode article pass. */
+.prose {
+  /* 64ch is a comfortable measure, well within the 60-75ch sweet spot
+     for long-form print-style prose. */
+  max-width: 64ch;
+  margin-inline: auto;
+}
+.prose > p:first-of-type::first-letter {
+  font-family: var(--font-serif);
+  font-size: 3.4em;
+  line-height: 0.85;
+  font-weight: 600;
+  float: left;
+  margin: 0.08em 0.12em 0 -0.04em;
+  color: var(--ink);
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+.prose p {
+  /* Widow = last line of a paragraph on its own page.
+     Orphan = first line of a paragraph on its own page.
+     Setting both >=2 keeps at least two lines together. */
+  widows: 2;
+  orphans: 2;
+}
+.prose blockquote.pull-quote {
+  border: 0;
+  padding: 0;
+  margin: 1.8rem 0 1.8rem 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  line-height: 1.4;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--oxblood);
+  text-align: left;
+  border-left: 3px solid var(--oxblood);
+  padding-left: 1.2rem;
+}
+.prose blockquote.pull-quote p {
+  text-indent: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+.prose blockquote.pull-quote::before { content: "\201C"; margin-right: 0.1em; }
+.prose blockquote.pull-quote::after { content: "\201D"; margin-left: 0.05em; }
+.prose figure {
+  margin: 2rem 0;
+}
+.prose figcaption {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 0.6rem;
+  text-indent: 0;
+}
+.prose figure img {
+  border: 1px solid var(--rule);
+}
+.prose aside.lede,
+.prose p.lede {
+  font-size: 1.18rem;
+  line-height: 1.6;
+  color: var(--muted);
+  font-style: italic;
+  text-indent: 0;
+  margin-bottom: 1.4rem;
+}
+/* Reading-time badge — sits above the article body, alongside byline */
+.reading-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+.reading-time::before {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 999px;
+  background: var(--oxblood);
+  opacity: 0.85;
+}
+
+/* Dark-mode article pass: the article body section uses bg-white which
+   becomes blinding in dark mode. Brand tokens already flip on
+   [data-theme="dark"], so we only need to swap the static white
+   sections to the token-driven paper colour. */
+:where(html[data-theme="dark"]) section.bg-white {
+  background: var(--paper);
+}
+:where(html[data-theme="dark"]) .prose figcaption {
+  color: var(--muted);
+}
+
+/* ===== Article beautification (issue #4) ===== */
+/* Phase-2 cosmetic pass: drop caps, pull quotes, widow/orphan control,
+   figure captions, reading time, progress bar, optimal measure.
+   All rules scoped to .prose / .article-shell so they don't leak onto
+   homepage, journal index, conference or podcast pages. */
+
+/* Drop cap on the first paragraph (print-magazine convention) */
+.prose > p:first-of-type::first-letter {
+  font-family: var(--font-serif);
+  float: left;
+  font-size: 4.5em;
+  line-height: 0.85;
+  font-weight: 600;
+  margin: 0.05em 0.08em -0.05em 0;
+  color: var(--oxblood);
+}
+
+/* Pull quote: blockquote styled as a magazine-style decorative side quote.
+   Renders flush-left on small screens, indented with a left rule on wider.
+   The italic / muted treatment was already present; this adds visual weight
+   and a marker bar to make it read as a featured quote, not a citation. */
+.prose blockquote {
+  position: relative;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  border-left: 4px solid var(--oxblood);
+  padding: 0.5rem 0 0.5rem 1.4rem;
+  margin: 2rem 0 2rem 0.5rem;
+}
+.prose blockquote::before {
+  content: "“";
+  position: absolute;
+  left: -0.4rem;
+  top: -1.2rem;
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--oxblood);
+  opacity: 0.35;
+}
+
+/* Widow / orphan control on every prose paragraph + heading */
+.prose p,
+.prose li,
+.prose h1,
+.prose h2,
+.prose h3,
+.prose blockquote {
+  orphans: 3;
+  widows: 3;
+}
+
+/* Bring text-rendering onto headings too (was only on body) */
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  text-rendering: optimizeLegibility;
+}
+
+/* Optimal measure: clamp prose to ~65ch on extra-wide viewports.
+   The article-shell .max-w-3xl is already 48rem (~75ch at 1.05rem base),
+   but at 2xl+ the prose box still drifts. Tighten via line-length clamp. */
+.prose {
+  max-width: 65ch;
+  margin-inline: auto;
+}
+
+/* Figure captions: prose img + em-style captions (and any caption-tag).
+   Magazine caption treatment: small caps, centered, muted, top rule. */
+.prose figure {
+  margin: 1.8rem 0;
+}
+.prose figcaption,
+.prose img + em,
+.prose p > em:only-child {
+  display: block;
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  font-size: 0.8rem;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 0.6rem;
+  text-indent: 0;
+}
+
+/* ===== Reading time + progress indicator ===== */
+.reading-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+.reading-meta-dot {
+  width: 1px;
+  height: 1em;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+/* Sticky-to-bottom progress bar, fixed under the viewport.
+   Width updated by inline style --reading-progress on the article shell.
+   Desktop only — on mobile the back-to-top ring button carries progress. */
+.reading-progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--oxblood);
+  transform-origin: left center;
+  transform: scaleX(var(--reading-progress, 0));
+  transition: transform 0.08s linear;
+  z-index: 30;
+  pointer-events: none;
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .reading-progress {
+    display: block;
+  }
+}
 
 /* ===== Scroll-margin for in-prose anchors ===== */
 /* The sticky top nav sits ~4rem tall. When a reader jumps to a footnote
@@ -448,4 +703,366 @@ html { scroll-behavior: smooth; }
   text-decoration-style: solid;
   color: var(--color-oxblood-hover, #5e1717);
   outline: none;
+}
+
+
+/* ===== Back-to-top button with reading-progress ring ===== */
+/* Article-only. Button is fixed bottom-right, hidden until the reader
+   has scrolled past 1.5 viewport heights. The ring strokes a circular
+   path with --reading-progress (0-1) so it doubles as a progress
+   indicator. The button itself is a small circular hit area; the SVG
+   ring + chevron sit inside. Respects prefers-reduced-motion. */
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border, rgba(0, 0, 0, 0.12));
+  background: var(--color-background-elevated, #fff);
+  color: var(--color-foreground, #1a1a1a);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(0.5rem);
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease, background-color 120ms ease;
+  z-index: 40;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  padding: 0;
+}
+/* Desktop: the top reading-progress bar is the progress indicator.
+   Hide the floating button entirely on lg+ so it doesn't compete. */
+@media (min-width: 1024px) {
+  .back-to-top { display: none; }
+}
+.back-to-top[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: var(--color-background-hover, #f5f0e8);
+  outline: none;
+}
+.back-to-top:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-oxblood, #7a1f1f), 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+.back-to-top__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.back-to-top__ring-track {
+  fill: none;
+  stroke: var(--color-border, rgba(0, 0, 0, 0.12));
+  stroke-width: 2;
+}
+.back-to-top__ring-fill {
+  fill: none;
+  stroke: var(--color-oxblood, #7a1f1f);
+  stroke-width: 2;
+  stroke-linecap: round;
+  /* Start the arc at 12 o'clock and fill clockwise. */
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  /* The SVG uses pathLength="1", so dasharray/dashoffset are unitless
+     fractions (0..1). --reading-progress (0..1) is set inline by JS.
+     dashoffset 1 = empty ring, 0 = full ring. */
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--reading-progress, 0));
+  transition: stroke-dashoffset 0.08s linear;
+}
+.back-to-top__icon {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top,
+  .back-to-top__ring-fill {
+    transition: none;
+  }
+}
+
+/* ===== Article table of contents ===== */
+/* Sticky right-rail nav on journal article pages (desktop only, lg+).
+   H2 entries are flush-left; H3 entries indent underneath. The scroll-spy
+   script marks the active link via aria-current="location"; the underline
+   shown here animates off that attribute so the list itself works
+   without JavaScript. */
+.article-toc {
+  position: sticky;
+  top: 5rem;
+  align-self: start;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+  padding: 1rem 1rem 1rem 1.25rem;
+  border-left: 1px solid var(--rule);
+  font-family: var(--font-sans);
+  font-size: 0.825rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.article-toc__top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--link, var(--oxblood));
+  text-decoration: none;
+  margin: 0 0 0.6rem;
+  padding: 0.15rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+.article-toc__top:hover,
+.article-toc__top:focus-visible {
+  color: var(--ink);
+  border-bottom-color: currentColor;
+  outline: none;
+}
+.article-toc-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.article-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: toc;
+}
+.article-toc-item {
+  margin: 0.15rem 0;
+}
+.article-toc-item--sub {
+  padding-left: 0.85rem;
+  font-size: 0.78rem;
+}
+.article-toc-link {
+  display: inline-block;
+  padding: 0.1rem 0;
+  color: var(--muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  padding-left: 0.5rem;
+  margin-left: -0.5rem;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+.article-toc-link:hover,
+.article-toc-link:focus-visible {
+  color: var(--ink);
+  outline: none;
+}
+.article-toc-link[aria-current="location"] {
+  color: var(--oxblood);
+  border-left-color: var(--oxblood);
+  font-weight: 500;
+}
+@media (prefers-reduced-motion: reduce) {
+  .article-toc-link { transition: none; }
+}
+
+
+/* ===== Inline mobile TOC inside <article> ===== */
+/* On lg+ the desktop sidebar handles the TOC; hide the inline panel. */
+.article-toc-inline {
+  display: none;
+}
+@media (max-width: 1023.98px) {
+  .article-toc-inline {
+    display: block;
+    border: 1px solid var(--rule);
+    border-radius: 0.5rem;
+    background: var(--paper);
+    color: var(--ink);
+    margin: 1.25rem 0 1.5rem;
+    padding: 0.85rem 1rem 1rem;
+    font-family: var(--font-sans);
+  }
+  .article-toc-inline__label {
+    margin: 0 0 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .article-toc-inline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .article-toc-inline-item--sub { padding-left: 0.9rem; }
+  .article-toc-inline-link {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    padding: 0.15rem 0 0.15rem 0.5rem;
+    transition: color 120ms ease, border-color 120ms ease;
+  }
+  .article-toc-inline-link:hover,
+  .article-toc-inline-link:focus-visible {
+    color: var(--ink);
+    outline: none;
+  }
+  .article-toc-inline-link[aria-current="location"] {
+    color: var(--oxblood);
+    border-left-color: var(--oxblood);
+    font-weight: 500;
+  }
+}
+/* ===== Auto-hide header on scroll-down (mobile + desktop) ===== */
+.site-header {
+  transition: transform 220ms ease;
+  will-change: transform;
+}
+.site-header[data-scroll-hidden="true"] {
+  transform: translateY(-100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header { transition: none; }
+}
+
+/* ===== Mobile TOC sidebar sheet =====
+   When html[data-toc-sidebar="open"] is set (mobile only), the desktop
+   <aside> is repositioned to a fixed bottom sheet. Tap the backdrop or a
+   TOC link to close. Hidden entirely on lg+ where the sidebar is inline. */
+@media (max-width: 1023.98px) {
+  html[data-toc-sidebar="open"] body { overflow: hidden; }
+  .article-toc-aside[data-toc-sidebar-panel] {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 60;
+    height: 70vh;
+    max-height: 70vh;
+    background: var(--paper, #fff);
+    color: var(--ink);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.18);
+    transform: translateY(100%);
+    transition: transform 220ms ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem 1.25rem;
+  }
+  html[data-toc-sidebar="open"] .article-toc-aside[data-toc-sidebar-panel] {
+    transform: translateY(0);
+  }
+  .article-toc-aside[data-toc-sidebar-panel]::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 0.3rem;
+    border-radius: 999px;
+    background: var(--muted);
+    opacity: 0.45;
+    margin: 0.25rem auto 0.5rem;
+  }
+  .article-toc-aside[data-toc-sidebar-panel] > .article-toc {
+    overflow-y: auto;
+    flex: 1 1 auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.25rem 0.25rem 1rem;
+  }
+  .article-toc-aside[data-toc-sidebar-panel] .article-toc__top {
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+  }
+  body::before[data-toc-sidebar-backdrop] {
+    /* placeholder — backdrop drawn via <div> injected by script */
+  }
+}
+
+/* Backdrop is a real <div data-toc-sidebar-backdrop>; only shown when open.
+   Sits above page content but below the sheet. */
+[data-toc-sidebar-backdrop] {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+html[data-toc-sidebar="open"] [data-toc-sidebar-backdrop] {
+  opacity: 1;
+  pointer-events: auto;
+}
+@media (min-width: 1024px) {
+  [data-toc-sidebar-backdrop] { display: none; }
+}
+
+/* ===== Mobile sidebar sheet (uses the desktop <aside> contents) ===== */
+[data-toc-sidebar-backdrop] {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+  z-index: 60;
+}
+html[data-toc-sidebar="open"] [data-toc-sidebar-backdrop] {
+  opacity: 1;
+  pointer-events: auto;
+}
+@media (max-width: 1023.98px) {
+  html[data-toc-sidebar="open"] [data-toc-sidebar-panel] {
+    display: block;
+    position: fixed;
+    inset: auto 0 0 0;
+    max-height: 70vh;
+    background: var(--paper, #fff);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.25);
+    z-index: 70;
+    transform: translateY(100%);
+    transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    overflow-y: auto;
+    padding: 1.5rem 1.25rem 2rem;
+  }
+  /* Drag handle at the top of the sheet */
+  html[data-toc-sidebar="open"] [data-toc-sidebar-panel]::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 0.25rem;
+    border-radius: 9999px;
+    background: var(--muted, #888);
+    margin: 0 auto 1rem;
+    opacity: 0.6;
+  }
+  html[data-toc-sidebar="open"] [data-toc-sidebar-panel] {
+    transform: translateY(0);
+  }
+  body { overscroll-behavior: none; }
+  html[data-toc-sidebar="open"] body { overflow: hidden; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-toc-sidebar-backdrop],
+  html[data-toc-sidebar="open"] [data-toc-sidebar-panel] {
+    transition: none;
+  }
 }

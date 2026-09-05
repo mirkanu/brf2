@@ -4,6 +4,18 @@
  * verse text in a hover popover (no editor effort required). Scoped to the
  * parent .prose-brand container; not initialised if there is no article body
  * on the page (so other pages stay quiet).
+ *
+ * Click-to-pin (issue #4): the BibleUp popup normally closes as soon as the
+ * cursor leaves the scripture reference link. After a click on the reference
+ * we want it to stay visible until the user dismisses it — exactly like the
+ * footnote popup. To get that without forking BibleUp, we toggle a
+ * `bu-popup-pinned` class on the popup and, while pinned, watch for the
+ * library re-adding its own `bu-popup-hide` class (which it does on every
+ * link mouseleave). We strip `bu-popup-hide` back off and the popup stays
+ * visible. CSS also docks the pinned popup bottom-centre (matching the
+ * footnote popup) so it never gets pushed off-screen by BibleUp's inline
+ * absolute positioning. Pin is cleared by Escape, the close button, or any
+ * click outside the popup or its originating link.
  */
 interface Props {
   version?: 'KJV' | 'ASV' | 'LSV' | 'WEB';
@@ -24,11 +36,108 @@ const { version = 'KJV' } = Astro.props;
         bu_ignore: ['BLOCKQUOTE', 'NAV', 'HEADER', 'FOOTER'],
       });
       bu.create();
+
+      var popup = document.querySelector('[id^="bu-popup-"]');
+      if (!popup) return;
+
+      var pinned = false;
+
+      // Pin keeps the popup visible after the cursor leaves the link.
+      // BibleUp closes it on mouseleave by adding `bu-popup-hide` AND by
+      // overwriting the inline style with absolute top/left (which puts
+      // the popup off-screen for links near the bottom of the article).
+      // We watch both attributes and reset them on every change while
+      // pinned; the `bu-popup-pinned` class in CSS then docks the popup
+      // bottom-centre, matching the footnote popup.
+      var pinObserver = new MutationObserver(function (records) {
+        if (!pinned) return;
+        records.forEach(function (r) {
+          if (r.attributeName === 'class' && popup.classList.contains('bu-popup-hide')) {
+            popup.classList.remove('bu-popup-hide');
+          }
+          if (r.attributeName === 'style') {
+            popup.style.top = '';
+            popup.style.left = '';
+            popup.style.transform = '';
+            popup.style.bottom = '';
+          }
+        });
+      });
+      pinObserver.observe(popup, { attributes: true, attributeFilter: ['class', 'style'] });
+
+      function setPinned(next) {
+        pinned = next;
+        popup.classList.toggle('bu-popup-pinned', pinned);
+        if (pinned) {
+          // Strip whatever BibleUp just wrote inline so the CSS wins.
+          popup.style.top = '';
+          popup.style.left = '';
+          popup.style.transform = '';
+          popup.style.bottom = '';
+        }
+      }
+
+      function onLinkClick(e) {
+        // Wait one tick so BibleUp's own click handler (which opens the
+        // popup) runs first.
+        setTimeout(function () {
+          var open = !popup.classList.contains('bu-popup-hide');
+          if (!open) return;
+          setPinned(!pinned);
+        }, 0);
+      }
+
+      function bindLinks() {
+        var links = target.querySelectorAll('[class*="bu-link"]');
+        links.forEach(function (link) {
+          if (link.__pinWired) return;
+          link.__pinWired = true;
+          link.addEventListener('click', onLinkClick);
+        });
+      }
+      bindLinks();
+
+      // Re-bind if BibleUp mutates the article body (it scans lazily).
+      var bodyObserver = new MutationObserver(bindLinks);
+      bodyObserver.observe(target, { childList: true, subtree: true });
+
+      function dismiss() {
+        if (!pinned) return;
+        setPinned(false);
+        // Let BibleUp run its normal hide on next mouseleave; for an
+        // immediate close, also re-apply its hide class.
+        popup.classList.add('bu-popup-hide');
+      }
+
+      // Escape dismisses a pinned popup.
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') dismiss();
+      });
+
+      // BibleUp's close button: dismiss pin and let its own handler close.
+      var closeObserver = new MutationObserver(function () {
+        var closeBtn = popup.querySelector('.bu-popup-close');
+        if (!closeBtn || closeBtn.__wired) return;
+        closeBtn.__wired = true;
+        closeBtn.addEventListener('click', dismiss);
+      });
+      closeObserver.observe(popup, { childList: true, subtree: true });
+
+      // Click outside the popup or its originating link unpins.
+      document.addEventListener('click', function (e) {
+        if (!pinned) return;
+        var t = e.target;
+        if (popup.contains(t)) return;
+        if (t.closest && t.closest('[class*="bu-link"]')) return;
+        dismiss();
+      }, true);
     }
+
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', init);
     } else {
       init();
     }
+    document.addEventListener('astro:page-load', init);
   })();
 </script>
