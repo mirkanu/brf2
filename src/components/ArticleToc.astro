@@ -52,10 +52,12 @@ const h2Count = headings.filter((h) => h.depth === 2).length;
 
 {h2Count >= 2 && (
   <script>
-    // Scroll-spy: highlight the heading currently nearest the top of the
-    // viewport. Uses rootMargin "-80px 0px -85% 0px" so the current heading stays "active"
-    // until the next heading takes its place near the top of the viewport, which keeps the TOC highlighted through long section bodies the way the page
-    // actually reads.
+    // Scroll-spy: highlight the heading the reader is currently under.
+    // Pattern (Vercel docs style): a single rootMargin band near the top
+    // of the viewport. To keep the *current* heading highlighted all the
+    // way down a long body section — instead of clearing until the next
+    // heading enters the band — we hold the last chosen heading active
+    // until a new one shows up.
     (() => {
       const links = Array.from(document.querySelectorAll('[data-toc-link]'));
       if (links.length === 0) return;
@@ -98,55 +100,37 @@ const h2Count = headings.filter((h) => h.depth === 2).length;
         return (cur || el).id;
       };
 
-      const visible = new Set();
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            const id = entry.target.id;
-            if (entry.isIntersecting) visible.add(id);
-            else visible.delete(id);
+      // Pick the heading whose top edge has most recently crossed an
+      // imaginary horizontal line near the top of the viewport (just
+      // below the sticky site header). That heading is "the one the
+      // reader is currently reading under" — and it stays active all
+      // the way down the section body until the next heading crosses
+      // the line.
+      const ACTIVE_LINE = 96; // px from top of viewport (header + a little air)
+      let ticking = false;
+
+      const update = () => {
+        ticking = false;
+        let chosen = null;
+        for (const t of targets) {
+          if (t.el.getBoundingClientRect().top - ACTIVE_LINE <= 0) {
+            chosen = t;
+          } else {
+            break; // targets are in document order; once we pass the line, stop
           }
-          let chosen = null;
-          for (const t of targets) {
-            if (visible.has(t.id)) {
-              chosen = t.id;
-              break;
-            }
-          }
-          setActive(chosen ? ownerH2(document.getElementById(chosen)) : null);
-        },
-        {
-          // Header is ~64px tall; bias the active band to start ~16px below
-          // the header and end at 70% of the viewport so the next heading
-          // doesn't take over too early.
-          rootMargin: '-80px 0px -85% 0px',
-          threshold: 0,
-        },
-      );
-
-      for (const t of targets) observer.observe(t.el);
-
-      // "Back to top" link inside the desktop TOC sidebar: scroll to the
-      // very top of the document, not to the article's #top anchor.
-      document.addEventListener('click', (e) => {
-        const a = e.target.closest('[data-toc-top]');
-        if (!a) return;
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-
-      // Edge case: when the reader scrolls above the first heading, clear
-      // the active state so the TOC doesn't claim a section that isn't
-      // visible.
-      const onScroll = () => {
-        const first = targets[0];
-        if (!first) return;
-        const rect = first.el.getBoundingClientRect();
-        if (rect.top > window.innerHeight * 0.4) {
-          setActive(null);
         }
+        const id = chosen ? ownerH2(chosen.el) : null;
+        setActive(id);
+      };
+
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
       };
       window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      update();
     })();
   </script>
 )}

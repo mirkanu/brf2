@@ -44,19 +44,24 @@ html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   color-scheme: light dark;
-  /* Parchment background lives on <html>, not <body>, so Safari 26's
-     "bar = body background-color" rule sees a transparent body and leaves
-     the floating top/bottom chrome transparent over the page. */
-  background: var(--paper);
-  background-attachment: fixed;
+  /* Safari 26 (Liquid Glass) no longer keys its floating top/bottom chrome
+     to body { background-color } at scrollY=0; once the reader scrolls, the
+     chrome composites real page pixels behind it. The trick is to keep the
+     whole scroll height filled with the same parchment so the composited
+     bar matches the page — no brighter "tinted" stripe, no white seam
+     under the URL bar. <html> stays transparent so the scrollbar gutter
+     and any overscroll region match. */
+  background: transparent;
+  height: 100%;
 }
 
 body {
-  /* Transparent on purpose: Safari 26 uses body { background-color } as the
-     colour of its floating top/bottom bars. Letting the page parchment show
-     through html keeps the page filled while leaving the OS chrome fully
-     transparent. */
-  background: transparent;
+  background: var(--paper);
+  /* Fill the entire scroll height (including the area iOS reserves for the
+     floating URL bar) so Safari 26 never composites a different colour
+     under the floating chrome. min-height: 100% inherits the html
+     height declared just above. */
+  min-height: 100%;
   color: var(--ink);
   font-family: var(--font-serif);
   transition: background-color 0.15s ease, color 0.15s ease;
@@ -110,7 +115,10 @@ body {
 }
 .prose blockquote {
   border-left: 3px solid var(--rule);
-  padding-left: 1.1rem;
+  /* Right padding so the closing curly quote never sits at the iOS
+     Safari text-box edge (it clips the lower-right of the glyph
+     otherwise). */
+  padding: 0.1rem 0.6rem 0.1rem 1.1rem;
   color: var(--muted);
   font-style: italic;
   margin: 1.6rem 0 1.6rem 1.5rem;
