@@ -460,6 +460,23 @@ body {
   opacity: 0.4;
 }
 
+/* Safari 26 Liquid Glass tint anchor.
+   Articles have a fixed <div class="safari-tint-anchor"> at the bottom of
+   the page so iOS Safari samples paper (not the body bg, not a child
+   wrapper) when colouring the URL/toolbar glass. The element is
+   invisible to layout and input, sits behind the back-to-top button,
+   and is article-only (other routes don't need it). */
+.safari-tint-anchor {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 6px;
+  background: var(--paper, #fbf8f3);
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Sticky-to-bottom progress bar, fixed under the viewport.
    Width updated by inline style --reading-progress on the article shell.
    Desktop only — on mobile the back-to-top ring button carries progress. */
