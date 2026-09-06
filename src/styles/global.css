@@ -353,13 +353,7 @@ body {
   opacity: 0.85;
 }
 
-/* Dark-mode article pass: the article body section uses bg-white which
-   becomes blinding in dark mode. Brand tokens already flip on
-   [data-theme="dark"], so we only need to swap the static white
-   sections to the token-driven paper colour. */
-:where(html[data-theme="dark"]) section.bg-white {
-  background: var(--paper);
-}
+/* Dark-mode article figcaption tint (paper already flips via tokens) */
 :where(html[data-theme="dark"]) .prose figcaption {
   color: var(--muted);
 }
@@ -738,11 +732,14 @@ html { scroll-behavior: smooth; }
 .back-to-top {
   position: fixed;
   right: 1.25rem;
-  /* Sit clear of the sticky site header (which reappears on scroll-up:
-     top: 0, height ~3.5rem). 5rem = header bottom + a little air. */
-  bottom: 5rem;
-  width: 2.75rem;
-  height: 2.75rem;
+  /* Mobile-only button (the top progress bar takes over on lg+).
+     Sit close to the bottom edge so the reader can reach it with
+     the thumb; a hair above iOS Safari's bottom toolbar. Slightly
+     larger than the 44px iOS HIG minimum so the chevron reads at
+     arm's length. */
+  bottom: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 9999px;
   border: 1px solid var(--color-border, rgba(0, 0, 0, 0.12));
   /* Transparent when hidden so iOS 26 Safari's Liquid Glass chrome
@@ -811,8 +808,8 @@ html { scroll-behavior: smooth; }
 }
 .back-to-top__icon {
   position: relative;
-  width: 1rem;
-  height: 1rem;
+  width: 1.15rem;
+  height: 1.15rem;
   z-index: 1;
 }
 @media (prefers-reduced-motion: reduce) {

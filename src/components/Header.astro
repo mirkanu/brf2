@@ -11,9 +11,7 @@ const nav = [
 ];
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
-<header class="site-header sticky top-0 z-20 relative">
-  <div aria-hidden="true" data-header-fill class="absolute inset-0 bg-paper border-b border-rule"></div>
-  <div class="relative mx-auto max-w-6xl px-6 py-4 flex items-center justify-between gap-6">
+<header class="site-header sticky top-0 z-20 relative bg-paper border-b border-rule">
   <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between gap-6">
     <a href="/" class="flex items-center gap-3 no-underline">
       <img src="/img/brand-mark.png" alt="" class="h-9 w-9 rounded-md shadow-[0_1px_0_rgba(0,0,0,0.04)]" />
@@ -59,7 +57,6 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
         </svg>
       </button>
     </div>
-  </div>
   </div>
   <div
     data-menu-panel
