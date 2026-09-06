@@ -57,10 +57,12 @@ html {
 
 body {
   background: var(--paper);
-  /* Fill the entire scroll height (including the area iOS reserves for the
-     floating URL bar) so Safari 26 never composites a different colour
-     under the floating chrome. min-height: 100% inherits the html
-     height declared just above. */
+  /* background-attachment: fixed pins the page bg to the viewport so
+     iOS 26 Safari's Liquid Glass chrome samples a single, correct paper
+     tint regardless of scroll position or which fixed child element
+     happens to be rendered under the floating URL bar. min-height: 100%
+     inherits the html height declared just above. */
+  background-attachment: fixed;
   min-height: 100%;
   color: var(--ink);
   font-family: var(--font-serif);
@@ -473,12 +475,7 @@ body {
   right: 0;
   bottom: 0;
   height: 5px;
-  background: linear-gradient(
-    to right,
-    var(--oxblood) 0%,
-    var(--oxblood) 60%,
-    var(--oxblood-hover) 100%
-  );
+  background: var(--oxblood);
   box-shadow:
     0 -2px 12px rgba(122, 31, 31, 0.55),
     0 -1px 0 rgba(0, 0, 0, 0.08);
@@ -491,12 +488,7 @@ body {
 }
 
 :where(html[data-theme="dark"]) .reading-progress {
-  background: linear-gradient(
-    to right,
-    #d97a6a 0%,
-    #d97a6a 60%,
-    #e89282 100%
-  );
+  background: #d97a6a;
   box-shadow:
     0 -2px 14px rgba(217, 122, 106, 0.6),
     0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -746,13 +738,18 @@ html { scroll-behavior: smooth; }
 .back-to-top {
   position: fixed;
   right: 1.25rem;
-  bottom: 1.25rem;
+  /* Sit clear of the sticky site header (which reappears on scroll-up:
+     top: 0, height ~3.5rem). 5rem = header bottom + a little air. */
+  bottom: 5rem;
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 9999px;
   border: 1px solid var(--color-border, rgba(0, 0, 0, 0.12));
-  background: var(--color-background-elevated, #fff);
-  color: var(--color-foreground, #1a1a1a);
+  /* Transparent when hidden so iOS 26 Safari's Liquid Glass chrome
+     samples body bg (paper) instead of an opaque paper circle parked
+     right under the URL bar zone. */
+  background: transparent;
+  color: var(--ink, #1a1a1a);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -774,6 +771,7 @@ html { scroll-behavior: smooth; }
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  background: var(--paper, #fbf8f3);
 }
 .back-to-top:hover,
 .back-to-top:focus-visible {
