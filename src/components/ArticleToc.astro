@@ -27,7 +27,7 @@ const h2Count = headings.filter((h) => h.depth === 2).length;
 
 {headings.length > 0 && (
   <nav class="article-toc" aria-label="Table of contents">
-    <a class="article-toc__top" href="#top" data-toc-top>↑ Back to top</a>
+    <a class="article-toc__top" href="#" data-toc-top>↑ Back to top</a>
     <p class="article-toc-label">Sections</p>
     <ol class="article-toc-list">
       {headings.map((heading) => (
@@ -53,9 +53,9 @@ const h2Count = headings.filter((h) => h.depth === 2).length;
 {h2Count >= 2 && (
   <script>
     // Scroll-spy: highlight the heading currently nearest the top of the
-    // viewport. Uses rootMargin "-80px 0px -70% 0px" so a heading is "active"
-    // while it's in the top 30% of the viewport, which matches how the page
-    // actually reads (the eye lands near the top, not the middle).
+    // viewport. Uses rootMargin "-80px 0px -85% 0px" so the current heading stays "active"
+    // until the next heading takes its place near the top of the viewport, which keeps the TOC highlighted through long section bodies the way the page
+    // actually reads.
     (() => {
       const links = Array.from(document.querySelectorAll('[data-toc-link]'));
       if (links.length === 0) return;
@@ -119,12 +119,21 @@ const h2Count = headings.filter((h) => h.depth === 2).length;
           // Header is ~64px tall; bias the active band to start ~16px below
           // the header and end at 70% of the viewport so the next heading
           // doesn't take over too early.
-          rootMargin: '-80px 0px -70% 0px',
+          rootMargin: '-80px 0px -85% 0px',
           threshold: 0,
         },
       );
 
       for (const t of targets) observer.observe(t.el);
+
+      // "Back to top" link inside the desktop TOC sidebar: scroll to the
+      // very top of the document, not to the article's #top anchor.
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest('[data-toc-top]');
+        if (!a) return;
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
 
       // Edge case: when the reader scrolls above the first heading, clear
       // the active state so the TOC doesn't claim a section that isn't

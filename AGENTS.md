@@ -82,3 +82,27 @@ Consult these guides before working on related tasks:
 - [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+
+### Cloudflare Pages preview URL pattern
+
+Preview deploys are **not** keyed off the branch name. Each commit triggers a build that gets its own URL of the form:
+
+`https://<first-8-chars-of-deployment-id>.brf2.pages.dev`
+
+The deployment ID is unrelated to the commit SHA. Use the Cloudflare Pages API to find the latest preview URL for a given branch:
+
+```sh
+CF="https://api.cloudflare.com/client/v4"
+ACC="$CLOUDFLARE_ACCOUNT_ID"
+curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  "$CF/accounts/$ACC/pages/projects/brf2/deployments?per_page=5" \
+  | jq -r '.result[]
+      | select(.environment=="preview" and (.latest_stage.status=="success"))
+      | "\(.id[:8])  \(.created_on)  \(.url)"'
+```
+
+The first listed preview is the most recent. Never tell the user the preview URL is `<branch>.brf2.pages.dev` — that does not resolve.
+
+### Deploy budget — stay on preview
+
+Free Cloudflare Pages allows **500 production deploys/month but unlimited preview deploys**. Production deploys happen whenever `main` is updated. Therefore: **commit and push iteration-by-iteration to preview branches; only push to `main` when a milestone (issue/PR scope) is fully done and reviewed.** Each push to a preview branch only consumes a free preview build.

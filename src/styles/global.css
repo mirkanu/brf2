@@ -44,19 +44,22 @@ html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   color-scheme: light dark;
-  /* Extend the parchment background behind the iOS Safari chrome
-     so the OS bottom bar (transparent over the body) matches the page. */
+  /* Parchment background lives on <html>, not <body>, so Safari 26's
+     "bar = body background-color" rule sees a transparent body and leaves
+     the floating top/bottom chrome transparent over the page. */
   background: var(--paper);
+  background-attachment: fixed;
 }
 
 body {
-  background: var(--paper);
+  /* Transparent on purpose: Safari 26 uses body { background-color } as the
+     colour of its floating top/bottom bars. Letting the page parchment show
+     through html keeps the page filled while leaving the OS chrome fully
+     transparent. */
+  background: transparent;
   color: var(--ink);
   font-family: var(--font-serif);
   transition: background-color 0.15s ease, color 0.15s ease;
-  /* Prevent rubber-band scroll from revealing the page's underlying
-     white default background on iOS Safari. */
-  background-attachment: fixed;
 }
 
 /* prose adjustments so markdown content looks consistent with site typography */
@@ -471,7 +474,7 @@ body {
   display: none;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1024px) {
   .reading-progress {
     display: block;
   }
