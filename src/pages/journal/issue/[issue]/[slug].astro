@@ -159,7 +159,7 @@ if (encoding) articleLd.encoding = encoding;
         <article id="top" class="prose prose-brand max-w-none" data-has-toc={headings.length > 0}>
           {Content && <Content />}
         </article>
-        <div class="mt-10 border-t border-brand-ink/10 pt-6 flex items-center gap-3">
+        <div class="mt-10 pt-6 flex items-center gap-3">
           {pdfUrl ? (
             <a
               href={pdfUrl}
@@ -168,14 +168,12 @@ if (encoding) articleLd.encoding = encoding;
               Read PDF
             </a>
           ) : (
-            <button
-              type="button"
-              disabled
+            <span
               aria-disabled="true"
-              class="inline-flex items-center gap-2 rounded-sm bg-brand-ink/10 px-4 py-2 text-sm font-medium text-brand-ink/40 cursor-not-allowed"
+              class="inline-flex items-center gap-2 rounded-sm border border-brand-ink/15 px-4 py-2 text-sm font-medium text-brand-ink/40"
             >
               Read PDF
-            </button>
+            </span>
           )}
         </div>
       </div>
