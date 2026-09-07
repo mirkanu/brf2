@@ -759,10 +759,14 @@ html { scroll-behavior: smooth; }
   height: 3.5rem;
   border-radius: 9999px;
   border: 1px solid var(--color-border, rgba(0, 0, 0, 0.12));
-  /* Transparent when hidden so iOS 26 Safari's Liquid Glass chrome
-     samples body bg (paper) instead of an opaque paper circle parked
-     right under the URL bar zone. */
-  background: transparent;
+  /* iOS 26 Safari Liquid Glass samples the bottom strip for its URL-bar
+     tint. When the button is hidden, paint it with paper so the sample
+     matches the rest of the article body — prevents the visible grey
+     band where the iOS toolbar overlays a darker composite of card
+     edges + ring track + frosted glass. Opacity 0 still hides the
+     button visually; we just want the underlying pixels to look the
+     same as the body. */
+  background: var(--paper, #fbf8f3);
   color: var(--ink, #1a1a1a);
   display: inline-flex;
   align-items: center;
