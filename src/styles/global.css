@@ -471,7 +471,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 6px;
+  height: 140px;
   background: var(--paper, #fbf8f3);
   pointer-events: none;
   z-index: 0;
@@ -787,9 +787,16 @@ html { scroll-behavior: smooth; }
 }
 .back-to-top[data-visible="true"] {
   opacity: 1;
+  /* When visible, raise the button well above iOS Safari's bottom URL bar
+     (~80-100px tall). iOS's tint sampler reads the strip immediately
+     behind the URL bar, so anything that paints a non-paper pixel in
+     that strip shows up as a darker band. Keeping the button out of
+     that strip entirely. */
   transform: translateY(0);
+  bottom: 5.5rem;
   pointer-events: auto;
   background: var(--paper, #fbf8f3);
+  border-color: transparent;
 }
 .back-to-top:hover,
 .back-to-top:focus-visible {
