@@ -471,10 +471,24 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 140px;
+  /* Tall enough to cover iOS Safari 26's full Liquid Glass sample
+     band above the URL pill (~280px). The back-to-top button is
+     pushed above this band on iOS (see @supports block) so the
+     sampler only ever sees paper in the bottom strip. */
+  height: 320px;
   background: var(--paper, #fbf8f3);
   pointer-events: none;
   z-index: 0;
+}
+
+/* On iOS Safari, push the back-to-top button above the tint anchor
+   so the URL-bar sampler reads paper only. The @supports guard
+   scopes the override to real iOS Safari — desktop and Android keep
+   the original thumb-friendly position. */
+@supports (-webkit-touch-callout: none) {
+  .back-to-top[data-visible="true"] {
+    bottom: calc(320px + 0.75rem);
+  }
 }
 
 /* Sticky-to-bottom progress bar, fixed under the viewport.
