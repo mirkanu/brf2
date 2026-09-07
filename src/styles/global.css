@@ -777,7 +777,7 @@ html { scroll-behavior: smooth; }
   pointer-events: none;
   transition: opacity 180ms ease, transform 180ms ease, background-color 120ms ease;
   z-index: 40;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
   padding: 0;
 }
 /* Desktop: the top reading-progress bar is the progress indicator.
