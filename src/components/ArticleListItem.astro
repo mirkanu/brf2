@@ -1,5 +1,6 @@
 ---
 import { fmtDate } from '../lib/format';
+import { decodeEntities } from '../lib/text';
 import type { CollectionEntry } from 'astro:content';
 
 type AnyEntry = CollectionEntry<'journal'> | CollectionEntry<'conferences'> | CollectionEntry<'podcasts'>;
@@ -10,7 +11,8 @@ interface Props {
 }
 
 const { entry, href } = Astro.props;
-const { title, datePublished, primaryCategory, legacyPath } = entry.data as any;
+const { title: rawTitle, datePublished, primaryCategory, legacyPath } = entry.data as any;
+const title = decodeEntities(rawTitle);
 const issueNumber = (entry.data as any).issueNumber as number | null | undefined;
 const issueYear = (entry.data as any).issueYear as number | null | undefined;
 const authorNames: string[] = Array.isArray((entry.data as any).authors)
