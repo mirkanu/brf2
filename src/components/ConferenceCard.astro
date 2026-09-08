@@ -13,9 +13,9 @@ const subtitle = (item.data as any).subtitle as string | undefined;
 const realHref = href || (year != null ? `/conferences/${year}` : '/conferences');
 ---
 <li class="rounded-lg border border-brand-ink/15 bg-white p-5">
-  <a href={realHref} class="block hover:underline">
+  <a href={realHref} class="block hover:text-oxblood hover:underline transition-colors">
     <p class="text-xs uppercase tracking-wider text-muted">{year ?? ''}</p>
-    <p class="mt-1 font-serif text-xl text-brand-ink leading-tight">{title}</p>
+    <p class="mt-1 font-serif text-base sm:text-xl text-brand-ink leading-snug sm:leading-tight text-balance">{title}</p>
   </a>
   {subtitle && <p class="mt-2 text-sm text-brand-ink/75">{subtitle}</p>}
   {(venue || dates) && (
