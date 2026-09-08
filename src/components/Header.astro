@@ -11,7 +11,7 @@ const nav = [
 ];
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
-<header class="site-header sticky top-0 z-20 relative bg-paper border-b border-rule">
+<header class="site-header sticky top-0 z-20 relative bg-paper/70 backdrop-blur supports-[backdrop-filter]:bg-paper/55 border-b border-rule">
   <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between gap-6">
     <a href="/" class="flex items-center gap-3 no-underline">
       <img src="/img/brand-mark.png" alt="" class="h-9 w-9 rounded-md shadow-[0_1px_0_rgba(0,0,0,0.04)]" />
