@@ -128,7 +128,7 @@ if (encoding) articleLd.encoding = encoding;
   </section>
 
   <section class="bg-paper">
-    <div class={`mx-auto px-5 sm:px-6 py-12 sm:py-10 ${headings.length > 0 ? 'lg:grid lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-10 lg:max-w-3xl' : 'max-w-3xl'}`}>
+    <div class={`mx-auto px-5 sm:px-6 py-12 sm:py-10 ${headings.length > 0 ? 'lg:grid lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-10' : 'max-w-3xl'}`}>
       <div class="min-w-0">
         {pdfUrl && (
           <div class="mb-8 flex items-center justify-between gap-3 rounded-sm border border-brand-ink/15 bg-brand-cream/50 px-4 py-3">
@@ -167,7 +167,6 @@ if (encoding) articleLd.encoding = encoding;
       )}
     </div>
   </section>
-  <div class="safari-tint-anchor" aria-hidden="true"></div>
   <div
     class="reading-progress reading-progress--bottom"
     data-reading-progress
