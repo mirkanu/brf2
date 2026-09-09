@@ -1,6 +1,6 @@
 ---
 title: "Book Review: \"Princeton Seminary Vol. 1 : Faith &amp; Learning\" by David Calhoun"
-legacyPath: "/journal/articles/category/princeton-seminary-vol-1-faith-amp-learning"
+legacyPath: "/journal/articles/category/princeton-seminary-vol-1-faith-learning"
 datePublished: "2019-04-17 22:10:29"
 authors:
   - "KevinReed"

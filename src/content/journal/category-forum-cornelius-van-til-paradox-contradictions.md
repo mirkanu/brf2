@@ -1,6 +1,6 @@
 ---
 title: "Forum: Cornelius Van Til; Paradox &amp; Contradictions (2)"
-legacyPath: "/journal/articles/category/forum-cornelius-van-til-paradox-amp-contradictions"
+legacyPath: "/journal/articles/category/forum-cornelius-van-til-paradox-contradictions"
 datePublished: "2019-04-18 22:47:43"
 authors:
   - "VariousAuthors"

@@ -1,6 +1,6 @@
 ---
 title: "Forum: Process Theology &amp; The Absolute God"
-legacyPath: "/journal/articles/category/forum-process-theology-amp-the-absolute-god"
+legacyPath: "/journal/articles/category/forum-process-theology-the-absolute-god"
 datePublished: "2019-04-18 17:53:39"
 authors:
   - "VariousAuthors"

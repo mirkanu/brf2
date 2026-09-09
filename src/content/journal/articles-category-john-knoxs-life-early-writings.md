@@ -1,6 +1,6 @@
 ---
 title: "John Knox's Life &amp; Early Writings"
-legacyPath: "/journal/articles/articles/category/john-knoxs-life-amp-early-writings"
+legacyPath: "/journal/articles/articles/category/john-knoxs-life-early-writings"
 datePublished: "2019-04-23 20:47:30"
 authors:
   - "MichaelKimmitt"

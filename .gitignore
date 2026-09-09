@@ -12,3 +12,7 @@ STATUS.md.bak
 scratch/phase-2/ws-2.4/node_modules
 
 .astro/
+
+# Session-local probes (not part of the repo)
+scratch/ios-safari-probe/
+tools/

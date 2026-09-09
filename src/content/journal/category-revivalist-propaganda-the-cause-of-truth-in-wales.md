@@ -1,6 +1,6 @@
 ---
 title: "Revivalist Propaganda &amp; The Cause of Truth in Wales - Part 1"
-legacyPath: "/journal/articles/category/revivalist-propaganda-amp-the-cause-of-truth-in-wales"
+legacyPath: "/journal/articles/category/revivalist-propaganda-the-cause-of-truth-in-wales"
 datePublished: "2019-04-17 22:09:58"
 authors:
   - "AlanSpencer"

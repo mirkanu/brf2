@@ -1,6 +1,6 @@
 ---
 title: "The Antiquity of Infant &amp; Household Baptisms"
-legacyPath: "/journal/articles/category/the-antiquity-of-infant-amp-household-baptisms"
+legacyPath: "/journal/articles/category/the-antiquity-of-infant-household-baptisms"
 datePublished: "2019-04-20 18:22:00"
 authors:
   - "H.L.Williams"
