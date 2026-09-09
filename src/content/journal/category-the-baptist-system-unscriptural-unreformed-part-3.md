@@ -1,6 +1,6 @@
 ---
 title: "The Baptist System UnScriptural &amp; UnReformed Part 3"
-legacyPath: "/journal/articles/category/the-baptist-system-unscriptural-amp-unreformed-part-3"
+legacyPath: "/journal/articles/category/the-baptist-system-unscriptural-unreformed-part-3"
 datePublished: "2019-04-20 18:14:15"
 authors:
   - "H.L.Williams"

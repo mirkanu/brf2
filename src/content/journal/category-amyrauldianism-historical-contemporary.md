@@ -1,6 +1,6 @@
 ---
 title: "Amyrauldianism: Historical &amp; Contemporary"
-legacyPath: "/journal/articles/category/amyrauldianism-historical-amp-contemporary"
+legacyPath: "/journal/articles/category/amyrauldianism-historical-contemporary"
 datePublished: "2024-09-08 20:18:56"
 authors:
   - "AllenBaird"
