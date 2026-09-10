@@ -53,7 +53,7 @@ const renderConfirmationPage = (
 <body class="${isError ? "error" : ""}">
   <h1>${escape(title)}</h1>
   <p>${escape(message)}</p>
-  <p><a href="/about/contact/">Back to the contact form</a></p>
+  <p><a href="/contact/">Back to the contact form</a></p>
 </body>
 </html>`;
 
