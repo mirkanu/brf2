@@ -106,7 +106,7 @@ body {
 .prose ol + p {
   text-indent: 0;
 }
-.prose a {
+.prose a:not(.no-prose-style) {
   color: var(--oxblood);
   text-decoration: underline;
   text-underline-offset: 3px;

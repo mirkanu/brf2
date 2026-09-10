@@ -3,13 +3,14 @@ import ThemeToggle from './ThemeToggle.astro';
 
 const nav = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/beliefs', label: 'What we believe' },
-  { href: '/conferences', label: 'Conferences' },
-  { href: '/journal', label: 'Journal' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/journal/', label: 'Journal' },
+  { href: '/conferences/', label: 'Conferences' },
+  { href: '/podcasts/', label: 'Podcasts' },
+  { href: '/literature/', label: 'Literature' },
+  { href: '/about/', label: 'About' },
 ];
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isAbout = path === '/about' || path.startsWith('/about/');
 ---
 <header class="site-header sticky top-0 z-20 relative bg-paper border-b border-rule">
   <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between gap-6">
@@ -26,7 +27,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
           href={item.href}
           class:list={[
             'no-underline text-ink/80 hover:text-ink',
-            path === item.href && 'text-oxblood font-medium',
+            path === item.href.replace(/\/$/, '') && 'text-oxblood font-medium',
           ]}
         >
           {item.label}
@@ -35,7 +36,6 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     </nav>
     <div class="hidden md:flex items-center gap-2">
       <ThemeToggle />
-      <a href="/donate" class="font-sans text-sm bg-oxblood text-paper px-4 py-2 rounded-sm no-underline hover:bg-oxblood-hover">Donate</a>
     </div>
     <div class="md:hidden flex items-center gap-2">
       <ThemeToggle />
@@ -68,23 +68,18 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
           href={item.href}
           class:list={[
             'no-underline px-2 py-3 rounded-sm text-ink/80 hover:bg-ink/5',
-            path === item.href && 'text-oxblood font-medium',
+            path === item.href.replace(/\/$/, '') && 'text-oxblood font-medium',
           ]}
         >
           {item.label}
         </a>
       ))}
-      <a
-        href="/donate"
-        class="mt-2 inline-block text-center bg-oxblood text-paper px-4 py-3 rounded-sm no-underline hover:bg-oxblood-hover"
-      >
-        Donate
-      </a>
     </nav>
   </div>
 </header>
 
 <script>
+  // Mobile drawer
   const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const panel = document.querySelector<HTMLDivElement>('[data-menu-panel]');
   const iconOpen = document.querySelector<SVGElement>('[data-menu-icon-open]');
@@ -104,14 +99,8 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     setOpen(!isOpen);
   });
 
-  // Close menu when a link inside the panel is tapped.
   panel?.querySelectorAll('a').forEach((a) => {
     a.addEventListener('click', () => setOpen(false));
   });
 
-  // Reset state when crossing the md breakpoint upward.
-  const mq = window.matchMedia('(min-width: 768px)');
-  mq.addEventListener('change', (e) => {
-    if (e.matches) setOpen(false);
-  });
 </script>
