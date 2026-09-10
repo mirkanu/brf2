@@ -1,0 +1,148 @@
+---
+import Site from '../../layouts/Site.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const sections = [
+  { id: 'introduction', label: 'Introduction' },
+  { id: 'doctrinal-basis', label: 'Doctrinal Basis' },
+  { id: 'membership', label: 'Membership & Subscription' },
+  { id: 'general-council', label: 'General Council' },
+];
+---
+<Site title="About the BRF — British Reformed Fellowship">
+  <section class="bg-brand-cream border-b border-brand-ink/10">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
+      <p class="mt-4 font-sans text-xs uppercase tracking-[0.22em] text-oxblood">About</p>
+      <h1 class="mt-3 font-serif text-4xl md:text-5xl text-brand-ink text-balance">About the BRF</h1>
+      <p class="mt-4 max-w-2xl font-serif text-lg text-brand-ink/80 text-balance">
+        Founded in 1990 by a group of Reformed Christians concerned for the defence of the Historic Reformed Faith in the British Isles.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto px-6 py-12 lg:grid lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-10 lg:max-w-5xl">
+      <div class="min-w-0">
+        <nav aria-label="On this page" class="article-toc-inline lg:hidden" data-toc-inline>
+          <p class="article-toc-inline__label">On this page</p>
+          <ol class="article-toc-inline-list">
+            {sections.map((s) => (
+              <li class="article-toc-inline-item">
+                <a class="article-toc-inline-link" href={`#${s.id}`}>{s.label}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <article id="top" class="prose prose-brand max-w-none" data-has-toc={sections.length > 0}>
+          <section id="introduction" class="scroll-mt-24">
+            <h2 class="font-serif text-2xl text-brand-ink">Introduction</h2>
+            <p class="font-serif text-brand-ink/85 mt-3">
+              Founded in 1990 by a group of Reformed Christians concerned for the defence of the Historic Reformed Faith in the British Isles, the <em>British Reformed Fellowship</em> exists to serve and support Reformed Christians throughout the British Isles.
+            </p>
+            <h3 class="font-serif text-xl text-brand-ink mt-6">Aims &amp; Objectives</h3>
+            <ol class="font-serif text-brand-ink/85 mt-3 space-y-3 list-decimal pl-6">
+              <li>To promote knowledge of the Reformed Faith as is defined in the <a href="#doctrinal-basis">Doctrinal Basis</a> through the publication of a bi-annual journal (<a href="/journal"><em>British Reformed Journal</em></a>) and by organising a <a href="/conferences">biennial national family conference</a> and other conferences and lectures as opportunities arise, through media, internet and any lawful means.</li>
+              <li>To facilitate the networking of Reformed Christians scattered throughout the British Isles and to enable opportunities for supporting and communicating with one another.</li>
+              <li>To promote Reformed causes such as Christian education, Christian benevolence, biblical ecumenism and fellowship throughout the British Isles.</li>
+              <li>To provide a source of advice, information and support to Reformed Christians who are living and working in isolation. To provide practical answers to difficult questions arising among Reformed Christians isolated from fellowship.</li>
+            </ol>
+          </section>
+
+          <section id="doctrinal-basis" class="scroll-mt-24 mt-12">
+            <h2 class="font-serif text-2xl text-brand-ink">Doctrinal Basis</h2>
+            <blockquote class="font-serif italic text-brand-ink/85 mt-4 border-l-2 border-oxblood pl-4">
+              &ldquo;The basis of the BRF shall be the inspired, infallible, inerrant Scriptures of the Old and New Testaments as summarized and systemized in the Reformed confessions, specifically the Three Forms of Unity and the Westminster Standards.&rdquo;
+            </blockquote>
+            <h3 class="font-serif text-xl text-brand-ink mt-6">Doctrinal Basis</h3>
+            <ol class="font-serif text-brand-ink/85 mt-3 space-y-2 list-decimal pl-6">
+              <li>The Divine inspired, infallible, and inerrant Holy Scriptures</li>
+              <li>
+                The Doctrine set forth in:
+                <ol class="mt-2 space-y-2 list-decimal pl-6">
+                  <li>
+                    The <em>Three Forms of Unity</em>, being:
+                    <ul class="mt-2 space-y-1 list-disc pl-6">
+                      <li>The <em>Canons of Dordt</em>,</li>
+                      <li>The <em>Belgic Confession</em>,</li>
+                      <li>The <em>Heidelberg Catechism</em></li>
+                    </ul>
+                  </li>
+                  <li>The <em>Westminster Standards</em></li>
+                </ol>
+              </li>
+            </ol>
+          </section>
+
+          <section id="membership" class="scroll-mt-24 mt-12">
+            <h2 class="font-serif text-2xl text-brand-ink">Membership &amp; Subscription</h2>
+            <p class="font-serif text-brand-ink/85 mt-3">
+              Subscriptions to the BRJ and membership for the BRF are managed by the Covenant Protestant Reformed Church web store:
+            </p>
+            <p class="mt-6">
+              <a
+                href="https://cprc.co.uk/product-category/books/periodicals/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 rounded-sm bg-oxblood px-5 py-2.5 text-sm font-medium text-paper hover:bg-oxblood-hover transition-colors no-underline"
+              >
+                Membership / Subscription
+                <span aria-hidden="true">↗</span>
+              </a>
+            </p>
+          </section>
+
+          <section id="general-council" class="scroll-mt-24 mt-12">
+            <h2 class="font-serif text-2xl text-brand-ink">General Council</h2>
+            <dl class="mt-4 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-sm border border-brand-ink/15 bg-brand-cream/40 p-4">
+                <dt class="font-sans text-xs uppercase tracking-[0.18em] text-muted">Chairman</dt>
+                <dd class="font-serif text-brand-ink mt-1">Rev. Angus Stewart</dd>
+                <dd class="text-sm mt-1"><a class="text-oxblood no-underline hover:underline break-all" href="mailto:revangusstewart@tiscali.co.uk">revangusstewart@tiscali.co.uk</a></dd>
+              </div>
+              <div class="rounded-sm border border-brand-ink/15 bg-brand-cream/40 p-4">
+                <dt class="font-sans text-xs uppercase tracking-[0.18em] text-muted">Secretary</dt>
+                <dd class="font-serif text-brand-ink mt-1">Mr. Brian Crossett</dd>
+                <dd class="text-sm mt-1"><a class="text-oxblood no-underline hover:underline break-all" href="mailto:briancrossett@hotmail.com">briancrossett@hotmail.com</a></dd>
+              </div>
+              <div class="rounded-sm border border-brand-ink/15 bg-brand-cream/40 p-4">
+                <dt class="font-sans text-xs uppercase tracking-[0.18em] text-muted">Treasurer</dt>
+                <dd class="font-serif text-brand-ink mt-1">Mr. Dale Mansona</dd>
+                <dd class="text-sm mt-1"><a class="text-oxblood no-underline hover:underline break-all" href="mailto:dalemarmansona@gmail.com">dalemarmansona@gmail.com</a></dd>
+              </div>
+              <div class="rounded-sm border border-brand-ink/15 bg-brand-cream/40 p-4">
+                <dt class="font-sans text-xs uppercase tracking-[0.18em] text-muted">Journal Editor</dt>
+                <dd class="font-serif text-brand-ink mt-1">Mr. Samuel Watterson</dd>
+                <dd class="text-sm mt-1"><a class="text-oxblood no-underline hover:underline break-all" href="mailto:samuel.m.watterson@gmail.com">samuel.m.watterson@gmail.com</a></dd>
+              </div>
+              <div class="rounded-sm border border-brand-ink/15 bg-brand-cream/40 p-4 sm:col-span-2">
+                <dt class="font-sans text-xs uppercase tracking-[0.18em] text-muted">Conference Secretary</dt>
+                <dd class="font-serif text-brand-ink mt-1">Mr. Brian Harris</dd>
+                <dd class="text-sm mt-1"><a class="text-oxblood no-underline hover:underline break-all" href="mailto:brian_neath@btinternet.com">brian_neath@btinternet.com</a></dd>
+                <dd class="text-sm mt-2">
+                  <a class="text-oxblood no-underline hover:underline" href="https://www.britishreformed.org/podcast?format=rss">Conference Podcast RSS ↗</a>
+                </dd>
+              </div>
+            </dl>
+          </section>
+        </article>
+      </div>
+
+      <aside class="hidden lg:block" data-toc-sidebar-panel>
+        <nav aria-label="On this page" class="article-toc">
+          <p class="article-toc__top">
+            <span class="article-toc-label">On this page</span>
+          </p>
+          <ol class="article-toc-list">
+            {sections.map((s) => (
+              <li class="article-toc-item">
+                <a class="article-toc-link" href={`#${s.id}`}>{s.label}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </aside>
+    </div>
+  </section>
+</Site>

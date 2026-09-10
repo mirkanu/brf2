@@ -3,13 +3,17 @@ import ThemeToggle from './ThemeToggle.astro';
 
 const nav = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/beliefs', label: 'What we believe' },
-  { href: '/conferences', label: 'Conferences' },
-  { href: '/journal', label: 'Journal' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/about/', label: 'About', children: [
+    { href: '/about/', label: 'About the BRF' },
+    { href: '/about/contact/', label: 'Contact' },
+  ] },
+  { href: '/conferences/', label: 'Conferences' },
+  { href: '/journal/', label: 'Journal' },
+  { href: '/podcasts/', label: 'Podcasts' },
+  { href: '/literature/', label: 'Literature' },
 ];
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isInAbout = path === '/about' || path.startsWith('/about/');
 ---
 <header class="site-header sticky top-0 z-20 relative bg-paper border-b border-rule">
   <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between gap-6">
@@ -22,20 +26,57 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     </a>
     <nav class="hidden md:flex items-center gap-7 font-sans text-sm">
       {nav.map((item) => (
-        <a
-          href={item.href}
-          class:list={[
-            'no-underline text-ink/80 hover:text-ink',
-            path === item.href && 'text-oxblood font-medium',
-          ]}
-        >
-          {item.label}
-        </a>
+        item.children ? (
+          <div class="relative group" data-nav-group>
+            <button
+              type="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              data-nav-trigger
+              class:list={[
+                'inline-flex items-center gap-1 no-underline text-ink/80 hover:text-ink',
+                isInAbout && 'text-oxblood font-medium',
+              ]}
+            >
+              {item.label}
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true" class="opacity-70">
+                <path d="M2 4 L5 7 L8 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div
+              data-nav-menu
+              class="absolute left-1/2 -translate-x-1/2 top-full mt-2 hidden group-hover:block group-focus-within:block min-w-[12rem] rounded-md border border-rule bg-paper shadow-lg py-1 z-30"
+              role="menu"
+            >
+              {item.children.map((child) => (
+                <a
+                  href={child.href}
+                  role="menuitem"
+                  class:list={[
+                    'block px-4 py-2 text-sm no-underline text-ink/80 hover:bg-brand-cream/60 hover:text-ink',
+                    path === child.href.replace(/\/$/, '') && 'text-oxblood font-medium',
+                  ]}
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a
+            href={item.href}
+            class:list={[
+              'no-underline text-ink/80 hover:text-ink',
+              path === item.href.replace(/\/$/, '') && 'text-oxblood font-medium',
+            ]}
+          >
+            {item.label}
+          </a>
+        )
       ))}
     </nav>
     <div class="hidden md:flex items-center gap-2">
       <ThemeToggle />
-      <a href="/donate" class="font-sans text-sm bg-oxblood text-paper px-4 py-2 rounded-sm no-underline hover:bg-oxblood-hover">Donate</a>
     </div>
     <div class="md:hidden flex items-center gap-2">
       <ThemeToggle />
@@ -64,27 +105,42 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
   >
     <nav class="mx-auto max-w-6xl px-6 py-4 flex flex-col gap-1 font-sans text-base">
       {nav.map((item) => (
-        <a
-          href={item.href}
-          class:list={[
-            'no-underline px-2 py-3 rounded-sm text-ink/80 hover:bg-ink/5',
-            path === item.href && 'text-oxblood font-medium',
-          ]}
-        >
-          {item.label}
-        </a>
+        item.children ? (
+          <div class="flex flex-col">
+            <p class:list={[
+              'px-2 pt-3 pb-1 text-xs uppercase tracking-[0.18em] text-muted',
+              isInAbout && 'text-oxblood',
+            ]}>{item.label}</p>
+            {item.children.map((child) => (
+              <a
+                href={child.href}
+                class:list={[
+                  'no-underline px-2 py-2 rounded-sm text-ink/80 hover:bg-ink/5',
+                  path === child.href.replace(/\/$/, '') && 'text-oxblood font-medium',
+                ]}
+              >
+                {child.label}
+              </a>
+            ))}
+          </div>
+        ) : (
+          <a
+            href={item.href}
+            class:list={[
+              'no-underline px-2 py-3 rounded-sm text-ink/80 hover:bg-ink/5',
+              path === item.href.replace(/\/$/, '') && 'text-oxblood font-medium',
+            ]}
+          >
+            {item.label}
+          </a>
+        )
       ))}
-      <a
-        href="/donate"
-        class="mt-2 inline-block text-center bg-oxblood text-paper px-4 py-3 rounded-sm no-underline hover:bg-oxblood-hover"
-      >
-        Donate
-      </a>
     </nav>
   </div>
 </header>
 
 <script>
+  // Mobile drawer
   const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const panel = document.querySelector<HTMLDivElement>('[data-menu-panel]');
   const iconOpen = document.querySelector<SVGElement>('[data-menu-icon-open]');
@@ -104,14 +160,37 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     setOpen(!isOpen);
   });
 
-  // Close menu when a link inside the panel is tapped.
   panel?.querySelectorAll('a').forEach((a) => {
     a.addEventListener('click', () => setOpen(false));
   });
 
-  // Reset state when crossing the md breakpoint upward.
-  const mq = window.matchMedia('(min-width: 768px)');
-  mq.addEventListener('change', (e) => {
-    if (e.matches) setOpen(false);
+  // Desktop: keyboard-accessible submenus (hover handled by group, but also toggle on click/Enter/Space).
+  const groups = document.querySelectorAll<HTMLDivElement>('[data-nav-group]');
+  groups.forEach((group) => {
+    const trigger = group.querySelector<HTMLButtonElement>('[data-nav-trigger]');
+    const menu = group.querySelector<HTMLDivElement>('[data-nav-menu]');
+    if (!trigger || !menu) return;
+    const open = () => {
+      trigger.setAttribute('aria-expanded', 'true');
+      menu.classList.remove('hidden');
+    };
+    const close = () => {
+      trigger.setAttribute('aria-expanded', 'false');
+      menu.classList.add('hidden');
+    };
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      trigger.getAttribute('aria-expanded') === 'true' ? close() : open();
+    });
+    group.addEventListener('mouseenter', open);
+    group.addEventListener('mouseleave', close);
+    group.addEventListener('focusin', open);
+    group.addEventListener('focusout', (e) => {
+      const next = (e as FocusEvent).relatedTarget as Node | null;
+      if (!next || !group.contains(next)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
   });
 </script>
