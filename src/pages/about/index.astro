@@ -1,12 +1,15 @@
 ---
 import Site from '../../layouts/Site.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleToc from '../../components/ArticleToc.astro';
 
-const sections = [
-  { id: 'introduction', label: 'Introduction' },
-  { id: 'doctrinal-basis', label: 'Doctrinal Basis' },
-  { id: 'membership', label: 'Membership & Subscription' },
-  { id: 'general-council', label: 'General Council' },
+// Hand-curated outline for the static About page (no MD body, so we build
+// the headings ourselves and reuse the same ArticleToc component + scroll
+// spy that journal article templates use).
+const headings = [
+  { depth: 2, slug: 'doctrinal-basis', text: 'Doctrinal Basis' },
+  { depth: 2, slug: 'membership', text: 'Membership & Subscription' },
+  { depth: 2, slug: 'general-council', text: 'General Council' },
 ];
 ---
 <Site title="About the BRF — British Reformed Fellowship">
@@ -22,41 +25,26 @@ const sections = [
   </section>
 
   <section class="bg-white">
-    <div class="mx-auto px-6 py-12 lg:grid lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-10 lg:max-w-5xl">
+    <div class="mx-auto px-5 sm:px-6 py-12 sm:py-10 lg:grid lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-10 lg:max-w-5xl">
       <div class="min-w-0">
-        <nav aria-label="On this page" class="article-toc-inline lg:hidden" data-toc-inline>
-          <p class="article-toc-inline__label">On this page</p>
+        <nav aria-label="Sections" class="article-toc-inline lg:hidden" data-toc-inline>
+          <p class="article-toc-inline__label">Sections</p>
           <ol class="article-toc-inline-list">
-            {sections.map((s) => (
-              <li class="article-toc-inline-item">
-                <a class="article-toc-inline-link" href={`#${s.id}`}>{s.label}</a>
+            {headings.map((h) => (
+              <li class={`article-toc-inline-item${h.depth === 3 ? ' article-toc-inline-item--sub' : ''}`}>
+                <a class="article-toc-inline-link" href={`#${h.slug}`}>{h.text}</a>
               </li>
             ))}
           </ol>
         </nav>
 
-        <article id="top" class="prose prose-brand max-w-none" data-has-toc={sections.length > 0}>
-          <section id="introduction" class="scroll-mt-24">
-            <h2 class="font-serif text-2xl text-brand-ink">Introduction</h2>
-            <p class="font-serif text-brand-ink/85 mt-3">
-              Founded in 1990 by a group of Reformed Christians concerned for the defence of the Historic Reformed Faith in the British Isles, the <em>British Reformed Fellowship</em> exists to serve and support Reformed Christians throughout the British Isles.
-            </p>
-            <h3 class="font-serif text-xl text-brand-ink mt-6">Aims &amp; Objectives</h3>
-            <ol class="font-serif text-brand-ink/85 mt-3 space-y-3 list-decimal pl-6">
-              <li>To promote knowledge of the Reformed Faith as is defined in the <a href="#doctrinal-basis">Doctrinal Basis</a> through the publication of a bi-annual journal (<a href="/journal"><em>British Reformed Journal</em></a>) and by organising a <a href="/conferences">biennial national family conference</a> and other conferences and lectures as opportunities arise, through media, internet and any lawful means.</li>
-              <li>To facilitate the networking of Reformed Christians scattered throughout the British Isles and to enable opportunities for supporting and communicating with one another.</li>
-              <li>To promote Reformed causes such as Christian education, Christian benevolence, biblical ecumenism and fellowship throughout the British Isles.</li>
-              <li>To provide a source of advice, information and support to Reformed Christians who are living and working in isolation. To provide practical answers to difficult questions arising among Reformed Christians isolated from fellowship.</li>
-            </ol>
-          </section>
-
-          <section id="doctrinal-basis" class="scroll-mt-24 mt-12">
+        <article id="top" class="prose prose-brand max-w-none" data-has-toc={headings.length > 0}>
+          <section id="doctrinal-basis" class="scroll-mt-24">
             <h2 class="font-serif text-2xl text-brand-ink">Doctrinal Basis</h2>
             <blockquote class="font-serif italic text-brand-ink/85 mt-4 border-l-2 border-oxblood pl-4">
               &ldquo;The basis of the BRF shall be the inspired, infallible, inerrant Scriptures of the Old and New Testaments as summarized and systemized in the Reformed confessions, specifically the Three Forms of Unity and the Westminster Standards.&rdquo;
             </blockquote>
-            <h3 class="font-serif text-xl text-brand-ink mt-6">Doctrinal Basis</h3>
-            <ol class="font-serif text-brand-ink/85 mt-3 space-y-2 list-decimal pl-6">
+            <ol class="font-serif text-brand-ink/85 mt-6 space-y-2 list-decimal pl-6">
               <li>The Divine inspired, infallible, and inerrant Holy Scriptures</li>
               <li>
                 The Doctrine set forth in:
@@ -87,7 +75,7 @@ const sections = [
                 rel="noopener noreferrer"
                 class="inline-flex items-center gap-2 rounded-sm bg-oxblood px-5 py-2.5 text-sm font-medium text-paper hover:bg-oxblood-hover transition-colors no-underline"
               >
-                Membership / Subscription
+                <span>Membership / Subscription</span>
                 <span aria-hidden="true">↗</span>
               </a>
             </p>
@@ -116,32 +104,18 @@ const sections = [
                 <dd class="font-serif text-brand-ink mt-1">Mr. Samuel Watterson</dd>
                 <dd class="text-sm mt-1"><a class="text-oxblood no-underline hover:underline break-all" href="mailto:samuel.m.watterson@gmail.com">samuel.m.watterson@gmail.com</a></dd>
               </div>
-              <div class="rounded-sm border border-brand-ink/15 bg-brand-cream/40 p-4 sm:col-span-2">
+              <div class="rounded-sm border border-brand-ink/15 bg-brand-cream/40 p-4">
                 <dt class="font-sans text-xs uppercase tracking-[0.18em] text-muted">Conference Secretary</dt>
                 <dd class="font-serif text-brand-ink mt-1">Mr. Brian Harris</dd>
                 <dd class="text-sm mt-1"><a class="text-oxblood no-underline hover:underline break-all" href="mailto:brian_neath@btinternet.com">brian_neath@btinternet.com</a></dd>
-                <dd class="text-sm mt-2">
-                  <a class="text-oxblood no-underline hover:underline" href="https://www.britishreformed.org/podcast?format=rss">Conference Podcast RSS ↗</a>
-                </dd>
               </div>
             </dl>
           </section>
         </article>
       </div>
 
-      <aside class="hidden lg:block" data-toc-sidebar-panel>
-        <nav aria-label="On this page" class="article-toc">
-          <p class="article-toc__top">
-            <span class="article-toc-label">On this page</span>
-          </p>
-          <ol class="article-toc-list">
-            {sections.map((s) => (
-              <li class="article-toc-item">
-                <a class="article-toc-link" href={`#${s.id}`}>{s.label}</a>
-              </li>
-            ))}
-          </ol>
-        </nav>
+      <aside class="article-toc-aside hidden lg:block" data-toc-sidebar-panel>
+        <ArticleToc headings={headings} />
       </aside>
     </div>
   </section>
