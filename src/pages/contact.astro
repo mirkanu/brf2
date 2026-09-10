@@ -19,7 +19,7 @@ import Breadcrumbs from "../components/Breadcrumbs.astro";
         <article class="bg-white rounded-lg shadow-sm ring-1 ring-ink/10 p-6 sm:p-8">
           <h2 class="font-serif text-2xl text-ink">Send a message</h2>
           <p class="mt-2 text-sm text-ink/60">
-            Submissions are delivered to the BRF Secretary and answered in due course.
+            Submissions are delivered to the BRF Webmaster and answered in due course.
           </p>
 
           <form
@@ -191,11 +191,10 @@ import Breadcrumbs from "../components/Breadcrumbs.astro";
 
       try {
         const formData = new FormData(form);
-        const payload = Object.fromEntries(formData.entries());
         const response = await fetch("/api/contact", {
           method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(payload),
+          headers: { Accept: "application/json" },
+          body: formData,
         });
 
         if (response.ok) {
