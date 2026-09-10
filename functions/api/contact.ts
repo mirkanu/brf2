@@ -68,7 +68,7 @@ export const onRequestPost = async ({
     return html(
       renderConfirmationPage(
         "Contact form unavailable",
-        "The contact form is not configured on this deployment yet. Please email the Secretary at secretary@britishreformed.org.",
+        "The contact form is not configured on this deployment yet. Please email the BRF Webmaster at manuelkuhs@gmail.com.",
         true,
       ),
       503,
@@ -97,7 +97,7 @@ export const onRequestPost = async ({
     return json({ error: "One of the fields is too long." }, 400);
   }
 
-  const recipient = env.BRF_CONTACT_TO || "secretary@britishreformed.org";
+  const recipient = env.BRF_CONTACT_TO || "manuelkuhs@gmail.com";
   const sender = env.BRF_CONTACT_FROM || "BRF Website <onboarding@resend.dev>";
 
   const emailSubject = `[BRF contact] ${subject}`;
