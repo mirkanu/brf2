@@ -1,19 +1,41 @@
 ---
-interface Crumb { label: string; href?: string; }
-interface Props { items: Crumb[]; }
-const { items } = Astro.props;
+interface Crumb {
+  label: string;
+  href?: string;
+  current?: boolean;
+}
+interface Props {
+  items: Crumb[];
+  emphasis?: 'auto' | 'always';
+}
+const { items, emphasis = 'auto' } = Astro.props;
+const lastIdx = items.length - 1;
 ---
 <nav aria-label="Breadcrumb" class="text-sm text-brand-ink/70">
   <ol class="flex flex-wrap items-center gap-2">
-    {items.map((c, i) => (
-      <li class="flex items-center gap-2">
-        {c.href && i !== items.length - 1 ? (
-          <a href={c.href} class="hover:underline">{c.label}</a>
-        ) : (
-          <span class={i === items.length - 1 ? 'text-brand-ink/90' : ''}>{c.label}</span>
-        )}
-        {i < items.length - 1 && <span aria-hidden="true">›</span>}
-      </li>
-    ))}
+    {items.map((c, i) => {
+      const isLast = i === lastIdx;
+      const emphasised = emphasis === 'always' || (emphasis === 'auto' && (c.current ?? isLast));
+      return (
+        <li class="flex items-center gap-2">
+          {c.href && !emphasised ? (
+            <a href={c.href} class="hover:underline">{c.label}</a>
+          ) : (
+            <span
+              class={
+                emphasised && (c.label === 'Past' || c.label === 'Upcoming')
+                  ? 'inline-flex items-center rounded-full border border-white/70 bg-white/15 px-3 py-0.5 text-xs font-semibold uppercase tracking-[0.12em] text-white'
+                  : emphasised
+                    ? 'rounded-full bg-white/15 px-2.5 py-0.5 text-sm font-medium text-white'
+                    : 'text-brand-ink/90'
+              }
+            >
+              {c.label}
+            </span>
+          )}
+          {!isLast && <span aria-hidden="true" class={emphasised && items[i + 1] && (items[i + 1].label === 'Past' || items[i + 1].label === 'Upcoming') ? 'text-white/70' : 'text-brand-ink/40'}>›</span>}
+        </li>
+      );
+    })}
   </ol>
 </nav>

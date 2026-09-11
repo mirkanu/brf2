@@ -9,12 +9,10 @@ import { site } from '../../lib/site-config';
 
 export async function getStaticPaths() {
   const all = await getCollection('conferences');
-  // Only the year-summary entries get a year page.
   const yearEntries = all.filter((c) => {
     const y = c.data.year;
     return Number.isFinite(y) && y >= 1970 && y <= 2100;
   });
-  // Reviews: tagged with the same year via legacyPath or tags.
   const reviews = all.filter((c) => c.data.primaryCategory === 'review');
   return yearEntries.map((c) => ({
     params: { year: String(c.data.year) },
@@ -43,8 +41,7 @@ const country: string | null = data.country ?? null;
 const topic: string | null = data.topic ?? null;
 const year: number = data.year;
 const isUpcoming: boolean = (data.primaryCategory ?? '') === 'upcoming' || year >= new Date().getFullYear();
-const description: string | null = data.description ?? null;
-const heroPhoto: string | null = data.heroPhoto ?? null;
+const venuePhoto: string | null = data.venuePhoto ?? null;
 const statusUpdates: Array<{ date?: string; text: string; href?: string }> = Array.isArray(data.statusUpdates) ? data.statusUpdates : [];
 const draftProgramme: string | null = data.draftProgramme ?? null;
 const programmePdf: string | null = data.programmePdf ?? null;
@@ -53,7 +50,7 @@ const reviewsArr: Array<{ title: string; author: string; kind: 'brf' | 'brj' | '
 const speakers: Array<string> = Array.isArray(data.speakers) ? data.speakers : [];
 const externalBookingUrl: string | null = data.externalBookingUrl ?? null;
 const podcastSeasonUrl: string | null = data.podcastSeasonUrl ?? null;
-const oldReviews = reviews; // legacy category-review entries with year-tag in tags
+const oldReviews = reviews;
 
 function parseStartDate(d: string | null, fallbackYear: number): string | null {
   if (!d) return null;
@@ -89,10 +86,28 @@ const eventLd = startDate
       },
       eventStatus: 'https://schema.org/EventScheduled',
       eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-      description: description ?? undefined,
+      description: subtitle ?? undefined,
       mainEntityOfPage: pageUrl,
     }
   : null;
+
+const sectionLabels: Record<string, string> = {
+  'status-updates': 'Status updates',
+  'programme': 'Programme',
+  'draft-programme': 'Draft programme',
+  'planned-speeches': 'Planned speeches',
+  'recordings': 'Recordings',
+  'reviews': 'Reviews',
+  'resources': 'Resources',
+};
+const sectionIds: string[] = [];
+if (statusUpdates.length > 0) sectionIds.push('status-updates');
+if (!isUpcoming && programmePdf) sectionIds.push('programme');
+if (isUpcoming && draftProgramme) sectionIds.push('draft-programme');
+if (isUpcoming && recordings.length > 0) sectionIds.push('planned-speeches');
+if (!isUpcoming && recordings.length > 0) sectionIds.push('recordings');
+if (!isUpcoming && reviewsArr.length + oldReviews.length > 0) sectionIds.push('reviews');
+if (programmePdf || podcastSeasonUrl || speakers.length > 0) sectionIds.push('resources');
 
 const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | 'external'; href: string; date?: string }> = [
   ...reviewsArr,
@@ -100,29 +115,36 @@ const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | '
     title: r.data.title,
     author: (r.data.authors ?? ['Unknown'])[0] ?? 'Unknown',
     kind: 'brf' as const,
-    // legacy category review entries rendered inline (no body to migrate).
     href: `/conferences/${year}/review-${speakerSlug((r.data.authors ?? ['unknown'])[0] ?? 'unknown')}/`,
     date: r.data.datePublished,
   })),
 ];
+
+const statusLabel = isUpcoming ? 'Upcoming' : 'Past';
 ---
-<Site title={`${title} (${year}) — BRF`} description={description ?? title} jsonLd={eventLd}>
-  <section class="relative overflow-hidden bg-brand-ink">
-    {heroPhoto ? (
+<Site title={`${title} (${year}) — BRF`} description={subtitle ?? theme ?? title} jsonLd={eventLd}>
+  <!-- Hero: venue photograph as backdrop, dark gradient overlay for legibility, with prominent Past/Upcoming indicator. -->
+  <section class="relative overflow-hidden">
+    {venuePhoto && (
       <img
-        src={heroPhoto}
+        src={venuePhoto}
         alt={`${venue ?? title} venue photograph`}
-        class="absolute inset-0 h-full w-full object-cover opacity-70"
+        class="absolute inset-0 h-full w-full object-cover"
         loading="eager"
       />
-    ) : (
-      <div class="absolute inset-0 bg-gradient-to-br from-brand-ink via-brand-ink/85 to-brand-ink/65" aria-hidden="true" />
     )}
-    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/65" aria-hidden="true" />
+    {!venuePhoto && (
+      <div class="absolute inset-0 bg-gradient-to-br from-brand-ink via-brand-ink/90 to-brand-ink/70" aria-hidden="true" />
+    )}
+    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/70" aria-hidden="true" />
     <div class="relative max-w-4xl mx-auto px-6 py-16 sm:py-24">
-      <div class="text-white/85">
-        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Conferences', href: '/conferences' }]} />
-        <p class="mt-3 text-xs uppercase tracking-[0.18em] text-white/75">{year} BRF Conference</p>
+      <div class="text-white">
+        <Breadcrumbs items={[
+          { label: 'Home', href: '/' },
+          { label: 'Conferences', href: '/conferences' },
+          { label: statusLabel, href: undefined },
+        ]} />
+        <p class="mt-4 text-xs uppercase tracking-[0.18em] text-white/75">{year} BRF Conference</p>
         <h1 class="mt-2 font-serif text-4xl md:text-6xl text-white leading-tight text-balance">{theme ?? title}</h1>
         {subtitle && subtitle !== (theme ?? title) && (
           <p class="mt-3 text-lg text-white/85">{subtitle}</p>
@@ -130,10 +152,23 @@ const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | '
         <p class="mt-5 text-sm text-white/80">
           {[dates, venue, country].filter(Boolean).join(' · ')}
         </p>
+        <p class="mt-6">
+          <span class={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider ${isUpcoming ? 'bg-oxblood text-white' : 'bg-white/15 text-white ring-1 ring-white/30'}`}>
+            {isUpcoming ? (
+              <>
+                <span aria-hidden="true" class="h-2 w-2 rounded-full bg-white animate-pulse" />
+                Upcoming conference
+              </>
+            ) : (
+              <>Past conference</>
+            )}
+          </span>
+        </p>
       </div>
     </div>
   </section>
 
+  <!-- Metadata strip with embedded TOC. One background colour so the TOC anchors visually into the metadata block. -->
   <section class="bg-brand-cream border-b border-brand-ink/10">
     <div class="max-w-4xl mx-auto px-6 py-10">
       <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-5 text-sm">
@@ -187,16 +222,21 @@ const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | '
           </dd>
         </div>
       </dl>
+
+      {sectionIds.length >= 2 && (
+        <nav aria-label="On this page" class="mt-8 pt-6 border-t border-brand-ink/10">
+          <p class="text-xs uppercase tracking-wider text-muted">Sections</p>
+          <ol class="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            {sectionIds.map((id) => (
+              <li>
+                <a href={`#${id}`} class="text-brand-ink hover:text-oxblood hover:underline">{sectionLabels[id]}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
     </div>
   </section>
-
-  {description && (
-    <section class="bg-white border-b border-brand-ink/10">
-      <div class="max-w-3xl mx-auto px-6 py-10">
-        <p class="text-lg text-brand-ink/85 leading-relaxed text-balance">{description}</p>
-      </div>
-    </section>
-  )}
 
   {isUpcoming && externalBookingUrl && (
     <section class="bg-white border-b border-brand-ink/10">
@@ -209,7 +249,7 @@ const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | '
   )}
 
   {statusUpdates.length > 0 && (
-    <section class="bg-brand-parchment border-b border-brand-ink/10">
+    <section id="status-updates" class="bg-brand-parchment border-b border-brand-ink/10 scroll-mt-24">
       <div class="max-w-4xl mx-auto px-6 py-10">
         <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Status updates</h2>
         <ul class="mt-5 space-y-3">
@@ -233,7 +273,7 @@ const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | '
   )}
 
   {!isUpcoming && programmePdf && (
-    <section class="bg-white border-b border-brand-ink/10">
+    <section id="programme" class="bg-white border-b border-brand-ink/10 scroll-mt-24">
       <div class="max-w-4xl mx-auto px-6 py-10">
         <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Programme</h2>
         <p class="mt-4">
@@ -246,7 +286,7 @@ const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | '
   )}
 
   {isUpcoming && draftProgramme && (
-    <section class="bg-white border-b border-brand-ink/10">
+    <section id="draft-programme" class="bg-white border-b border-brand-ink/10 scroll-mt-24">
       <div class="max-w-4xl mx-auto px-6 py-10">
         <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Draft programme</h2>
         <div class="prose prose-brand mt-4 max-w-none">
@@ -257,7 +297,7 @@ const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | '
   )}
 
   {isUpcoming && recordings.length > 0 && (
-    <section class="bg-brand-parchment border-t border-brand-ink/10">
+    <section id="planned-speeches" class="bg-brand-parchment border-t border-brand-ink/10 scroll-mt-24">
       <div class="max-w-4xl mx-auto px-6 py-10">
         <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Planned speeches</h2>
         <ul class="mt-5 space-y-3 text-brand-ink/85">
@@ -276,14 +316,16 @@ const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | '
   )}
 
   {!isUpcoming && recordings.length > 0 && (
-    <ConferenceRecordings
-      speeches={recordings}
-      youtubePlaylistUrl={data.youtubePlaylistUrl ?? null}
-    />
+    <section id="recordings" class="scroll-mt-24">
+      <ConferenceRecordings
+        speeches={recordings}
+        youtubePlaylistUrl={data.youtubePlaylistUrl ?? null}
+      />
+    </section>
   )}
 
   {!isUpcoming && allReviews.length > 0 && (
-    <section class="bg-white border-t border-brand-ink/10">
+    <section id="reviews" class="bg-white border-t border-brand-ink/10 scroll-mt-24">
       <div class="max-w-4xl mx-auto px-6 py-12">
         <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Reviews</h2>
         <ul class="mt-6 divide-y divide-brand-ink/10">
@@ -306,8 +348,8 @@ const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | '
     </section>
   )}
 
-  {(programmePdf || podcastSeasonUrl) && (
-    <section class="bg-brand-cream border-t border-brand-ink/10">
+  {(programmePdf || podcastSeasonUrl || speakers.length > 0) && (
+    <section id="resources" class="bg-brand-cream border-t border-brand-ink/10 scroll-mt-24">
       <div class="max-w-4xl mx-auto px-6 py-10">
         <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Resources</h2>
         <ul class="mt-5 space-y-2 text-sm">
@@ -321,9 +363,11 @@ const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | '
               <a href={podcastSeasonUrl} class="text-brand-ink hover:text-oxblood hover:underline">Podcast season for this conference</a>
             </li>
           )}
-          <li>
-            <a href={`/author/${speakerSlug(speakers[0] ?? 'unknown')}/`} class="text-brand-ink hover:text-oxblood hover:underline">Speaker profiles and cross-references</a>
-          </li>
+          {speakers.length > 0 && (
+            <li>
+              <a href={`/author/${speakerSlug(speakers[0])}/`} class="text-brand-ink hover:text-oxblood hover:underline">Speaker profiles and cross-references</a>
+            </li>
+          )}
         </ul>
       </div>
     </section>
