@@ -12,6 +12,22 @@ const baseSchema = z.object({
   section: z.string(),
 });
 
+/**
+ * Per-speech recording metadata embedded inside a past conference.
+ * One element per speech in broadcast order. Lord's Day sermons and the
+ * Special Lecture are typed explicitly so they can be rendered at the end of
+ * the recording list, after the main speeches.
+ */
+const recordingSpeech = z.object({
+  number: z.number().int().nullable().default(null),
+  title: z.string(),
+  speaker: z.string(),
+  kind: z.enum(['speech', 'lords-day', 'special-lecture']).default('speech'),
+  youtubeId: z.string().nullable().default(null),
+  mp3Url: z.string().nullable().default(null),
+  mp3DurationSeconds: z.number().int().nullable().default(null),
+});
+
 const conferences = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/conferences' }),
   schema: baseSchema.extend({
@@ -21,6 +37,44 @@ const conferences = defineCollection({
     theme: z.string().nullable().default(null),
     dates: z.string().nullable().default(null),
     description: z.string().nullable().default(null),
+    // --- extended fields (issue #20, fully migrated BRF conferences) ---
+    status: z.enum(['past', 'upcoming']).nullable().default(null),
+    country: z.string().nullable().default(null),
+    venueUrl: z.string().nullable().default(null),
+    topic: z.string().nullable().default(null),
+    speakers: z.array(z.string()).nullable().default(null),
+    venuePhoto: z.string().nullable().default(null), // local asset path, e.g. /assets/conferences/2024-venue.webp
+    statusUpdates: z.array(
+      z.object({
+        date: z.string(),       // ISO date or "YYYY-MM-DD"
+        text: z.string(),
+        href: z.string().nullable().default(null),
+      })
+    ).nullable().default(null),
+    plannedSpeeches: z.array(
+      z.object({
+        number: z.number().int().nullable().default(null),
+        title: z.string(),
+        speaker: z.string().nullable().default(null), // null / 'TBD' for unannounced
+      })
+    ).nullable().default(null),
+    programmeDraft: z.string().nullable().default(null), // PDF, may be external
+    programmePdf: z.string().nullable().default(null),   // final programme PDF
+    recordings: z.array(recordingSpeech).nullable().default(null),
+    reviews: z.array(
+      z.object({
+        title: z.string(),
+        author: z.string(),
+        kind: z.enum(['brf', 'brj', 'external']),
+        href: z.string(),
+      })
+    ).nullable().default(null),
+    resources: z.array(
+      z.object({ label: z.string(), href: z.string() })
+    ).nullable().default(null),
+    // Conference-level redirect hint for past category-* entries
+    // that should 404 rather than appearing as their own page.
+    deprecatedRedirect: z.string().nullable().default(null),
   }),
 });
 
