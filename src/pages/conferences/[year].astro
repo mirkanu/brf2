@@ -1,17 +1,30 @@
 ---
 import Site from '../../layouts/Site.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ConferenceRecordings from '../../components/ConferenceRecordings.astro';
 import { getCollection, render } from 'astro:content';
+import { speakerSlug } from '../../lib/speakers';
 import { fmtDate } from '../../lib/format';
+import { site } from '../../lib/site-config';
 
 export async function getStaticPaths() {
   const all = await getCollection('conferences');
-  const reviews = all.filter(c => c.data.primaryCategory === 'review');
-  return all.map(c => ({
+  // Only the year-summary entries get a year page.
+  const yearEntries = all.filter((c) => {
+    const y = c.data.year;
+    return Number.isFinite(y) && y >= 1970 && y <= 2100;
+  });
+  // Reviews: tagged with the same year via legacyPath or tags.
+  const reviews = all.filter((c) => c.data.primaryCategory === 'review');
+  return yearEntries.map((c) => ({
     params: { year: String(c.data.year) },
     props: {
       conf: c,
-      reviews: reviews.filter(r => r.data.year === c.data.year || r.data.tags?.includes(String(c.data.year))),
+      reviews: reviews.filter((r) => {
+        if (r.data.year === c.data.year) return true;
+        const tags = (r.data as any).tags ?? [];
+        return tags.includes(String(c.data.year));
+      }),
     },
   }));
 }
@@ -19,132 +32,307 @@ export async function getStaticPaths() {
 const { conf, reviews } = Astro.props;
 const { Content } = await render(conf);
 
-const SITE = 'https://brf2.pages.dev';
-const pageUrl = `${SITE}/conferences/${conf.data.year}/`;
+const data: any = conf.data;
+const title: string = data.title ?? '';
+const subtitle: string | null = data.subtitle ?? null;
+const theme: string | null = data.theme ?? null;
+const dates: string | null = data.dates ?? null;
+const venue: string | null = data.venue ?? null;
+const venueUrl: string | null = data.venueUrl ?? null;
+const country: string | null = data.country ?? null;
+const topic: string | null = data.topic ?? null;
+const year: number = data.year;
+const isUpcoming: boolean = (data.primaryCategory ?? '') === 'upcoming' || year >= new Date().getFullYear();
+const description: string | null = data.description ?? null;
+const heroPhoto: string | null = data.heroPhoto ?? null;
+const statusUpdates: Array<{ date?: string; text: string; href?: string }> = Array.isArray(data.statusUpdates) ? data.statusUpdates : [];
+const draftProgramme: string | null = data.draftProgramme ?? null;
+const programmePdf: string | null = data.programmePdf ?? null;
+const recordings: Array<any> = Array.isArray(data.recordings) ? data.recordings : [];
+const reviewsArr: Array<{ title: string; author: string; kind: 'brf' | 'brj' | 'external'; href: string }> = Array.isArray(data.reviews) ? data.reviews : [];
+const speakers: Array<string> = Array.isArray(data.speakers) ? data.speakers : [];
+const externalBookingUrl: string | null = data.externalBookingUrl ?? null;
+const podcastSeasonUrl: string | null = data.podcastSeasonUrl ?? null;
+const oldReviews = reviews; // legacy category-review entries with year-tag in tags
 
-/**
- * Convert conference `dates` strings ("3-10 August", "16-23 July", "9-16 July, 2022", "21-28 July")
- * into an ISO date for `startDate`. The conference `year` is used for the year.
- * Returns null if the input is null/empty or cannot be parsed safely.
- */
-function parseStartDate(dates: string | null | undefined, fallbackYear: number | string | null | undefined): string | null {
-  if (!dates) return null;
-  const yearNum = Number(fallbackYear);
-  const year = Number.isFinite(yearNum) ? yearNum : new Date().getFullYear();
-
-  // Pull out "Month" word.
-  const monthMatch = dates.match(/\b(January|February|March|April|May|June|July|August|September|October|November|December|Jan|Febri Febr Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)\b/i);
-  let monthIdx: number | null = null;
-  if (monthMatch) {
-    const m = monthMatch[1].toLowerCase();
-    const monthMap: Record<string, number> = {
-      january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
-      july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
-      jan: 0, feb: 1, mar: 2, apr: 3, jun: 5, jul: 6, aug: 7, sept: 8, sep: 8, oct: 9, nov: 10, dec: 11,
-    };
-    monthIdx = monthMap[m] ?? null;
-  }
-
-  // Pull out an explicit year if present.
-  const yearMatch = dates.match(/\b((?:19|20)\d{2})\b/);
-  const effectiveYear = yearMatch ? Number(yearMatch[1]) : year;
-
-  // Pull out the first day number (1-31).
-  const dayMatch = dates.match(/\b([0-3]?\d)\b/);
-
+function parseStartDate(d: string | null, fallbackYear: number): string | null {
+  if (!d) return null;
+  const monthMap: Record<string, number> = {
+    january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+    july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
+    jan: 0, feb: 1, mar: 2, apr: 3, jun: 5, jul: 6, aug: 7, sept: 8, sep: 8, oct: 9, nov: 10, dec: 11,
+  };
+  const m = d.match(/\b(January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\b/i);
+  if (!m) return null;
+  const monthIdx = monthMap[m[1].toLowerCase()];
+  const yearMatch = d.match(/\b((?:19|20)\d{2})\b/);
+  const effectiveYear = yearMatch ? Number(yearMatch[1]) : fallbackYear;
+  const dayMatch = d.match(/\b([0-3]?\d)\b/);
   if (monthIdx == null || !dayMatch) return null;
   const day = Number(dayMatch[1]);
-  if (!Number.isFinite(day) || day < 1 || day > 31) return null;
-
-  // Use UTC to avoid TZ drift; emit date-only ISO.
   return new Date(Date.UTC(effectiveYear, monthIdx, day)).toISOString().slice(0, 10);
 }
+const startDate = parseStartDate(dates, year);
 
-const startDate = parseStartDate(conf.data.dates, conf.data.year);
+const pageUrl = `${site.origin}/conferences/${year}/`;
+const eventLd = startDate
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Event',
+      name: title,
+      startDate,
+      location: {
+        '@type': 'Place',
+        name: venue ?? '',
+        address: country ?? '',
+        url: venueUrl ?? undefined,
+      },
+      eventStatus: 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+      description: description ?? undefined,
+      mainEntityOfPage: pageUrl,
+    }
+  : null;
 
-const venue = conf.data.venue ?? null;
-
-const eventLd = startDate ? {
-  '@context': 'https://schema.org',
-  '@type': 'Event',
-  name: conf.data.title,
-  startDate,
-  location: {
-    '@type': 'Place',
-    name: venue ?? '',
-    address: '',
-  },
-  eventStatus: 'https://schema.org/EventScheduled',
-  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-  mainEntityOfPage: pageUrl,
-} : null;
+const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | 'external'; href: string; date?: string }> = [
+  ...reviewsArr,
+  ...oldReviews.map((r: any) => ({
+    title: r.data.title,
+    author: (r.data.authors ?? ['Unknown'])[0] ?? 'Unknown',
+    kind: 'brf' as const,
+    // legacy category review entries rendered inline (no body to migrate).
+    href: `/conferences/${year}/review-${speakerSlug((r.data.authors ?? ['unknown'])[0] ?? 'unknown')}/`,
+    date: r.data.datePublished,
+  })),
+];
 ---
-<Site title={`${conf.data.title} (${conf.data.year}) — BRF`} jsonLd={eventLd}>
+<Site title={`${title} (${year}) — BRF`} description={description ?? title} jsonLd={eventLd}>
+  <section class="relative overflow-hidden bg-brand-ink">
+    {heroPhoto ? (
+      <img
+        src={heroPhoto}
+        alt={`${venue ?? title} venue photograph`}
+        class="absolute inset-0 h-full w-full object-cover opacity-70"
+        loading="eager"
+      />
+    ) : (
+      <div class="absolute inset-0 bg-gradient-to-br from-brand-ink via-brand-ink/85 to-brand-ink/65" aria-hidden="true" />
+    )}
+    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/65" aria-hidden="true" />
+    <div class="relative max-w-4xl mx-auto px-6 py-16 sm:py-24">
+      <div class="text-white/85">
+        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Conferences', href: '/conferences' }]} />
+        <p class="mt-3 text-xs uppercase tracking-[0.18em] text-white/75">{year} BRF Conference</p>
+        <h1 class="mt-2 font-serif text-4xl md:text-6xl text-white leading-tight text-balance">{theme ?? title}</h1>
+        {subtitle && subtitle !== (theme ?? title) && (
+          <p class="mt-3 text-lg text-white/85">{subtitle}</p>
+        )}
+        <p class="mt-5 text-sm text-white/80">
+          {[dates, venue, country].filter(Boolean).join(' · ')}
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="bg-brand-cream border-b border-brand-ink/10">
-    <div class="max-w-4xl mx-auto px-6 py-12">
-      <Breadcrumbs items={[
-        { label: 'Home', href: '/' },
-        { label: 'Conferences', href: '/conferences' },
-        { label: String(conf.data.year) },
-      ]} />
-      <p class="mt-3 text-xs uppercase tracking-wider text-muted">{conf.data.year} Conference</p>
-      <h1 class="mt-2 font-serif text-4xl md:text-5xl text-brand-ink leading-tight">{conf.data.title}</h1>
-      {conf.data.subtitle && <p class="mt-3 text-lg text-brand-ink/80">{conf.data.subtitle}</p>}
-      <dl class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-        {conf.data.dates && (
+    <div class="max-w-4xl mx-auto px-6 py-10">
+      <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-5 text-sm">
+        <div>
+          <dt class="uppercase text-muted tracking-wider text-xs">Year</dt>
+          <dd class="mt-1 text-brand-ink font-medium">{year}</dd>
+        </div>
+        <div>
+          <dt class="uppercase text-muted tracking-wider text-xs">Dates</dt>
+          <dd class="mt-1 text-brand-ink">{dates ?? 'TBD'}</dd>
+        </div>
+        <div>
+          <dt class="uppercase text-muted tracking-wider text-xs">Topic</dt>
+          <dd class="mt-1 text-brand-ink">{topic ?? theme ?? 'TBD'}</dd>
+        </div>
+        {country && (
           <div>
-            <dt class="uppercase text-muted tracking-wider text-xs">Dates</dt>
-            <dd class="mt-1 text-brand-ink">{conf.data.dates}</dd>
+            <dt class="uppercase text-muted tracking-wider text-xs">Location</dt>
+            <dd class="mt-1 text-brand-ink">{country}</dd>
           </div>
         )}
-        {conf.data.venue && (
+        {venue && (
           <div>
             <dt class="uppercase text-muted tracking-wider text-xs">Venue</dt>
-            <dd class="mt-1 text-brand-ink">{conf.data.venue}</dd>
+            <dd class="mt-1 text-brand-ink">
+              {venueUrl ? (
+                <a href={venueUrl} target="_blank" rel="noopener" class="hover:underline">{venue}</a>
+              ) : (
+                venue
+              )}
+            </dd>
           </div>
         )}
-        {conf.data.theme && (
-          <div>
-            <dt class="uppercase text-muted tracking-wider text-xs">Theme</dt>
-            <dd class="mt-1 text-brand-ink">{conf.data.theme}</dd>
-          </div>
-        )}
+        <div>
+          <dt class="uppercase text-muted tracking-wider text-xs">Speakers</dt>
+          <dd class="mt-1 text-brand-ink">
+            {speakers.length > 0 ? (
+              <span class="flex flex-wrap gap-1.5">
+                {speakers.map((s) => {
+                  const sl = speakerSlug(s);
+                  return (
+                    <a href={`/author/${sl}/`} class="inline-flex items-center rounded-full border border-brand-ink/20 bg-white px-2.5 py-0.5 text-sm text-brand-ink hover:border-oxblood hover:text-oxblood">
+                      {s}
+                    </a>
+                  );
+                })}
+              </span>
+            ) : (
+              <span class="text-muted">TBD</span>
+            )}
+          </dd>
+        </div>
       </dl>
     </div>
   </section>
 
-  {(conf.data.description || (conf.body && conf.body.trim().length > 0)) && (
-    <section class="bg-white">
-      <div class="max-w-3xl mx-auto px-6 py-12">
-        {conf.data.description && (
-          <p class="text-lg text-brand-ink/85 leading-relaxed">{conf.data.description}</p>
-        )}
-        {conf.body && conf.body.trim().length > 0 && (
-          <div class="prose prose-brand mt-8">
-            <Content />
-          </div>
-        )}
+  {description && (
+    <section class="bg-white border-b border-brand-ink/10">
+      <div class="max-w-3xl mx-auto px-6 py-10">
+        <p class="text-lg text-brand-ink/85 leading-relaxed text-balance">{description}</p>
       </div>
     </section>
   )}
 
-  {reviews && reviews.length > 0 && (
+  {isUpcoming && externalBookingUrl && (
+    <section class="bg-white border-b border-brand-ink/10">
+      <div class="max-w-4xl mx-auto px-6 py-8">
+        <a href={externalBookingUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-md bg-oxblood px-4 py-2.5 text-white hover:bg-oxblood/90">
+          Book via brfconference.weebly.com ↗
+        </a>
+      </div>
+    </section>
+  )}
+
+  {statusUpdates.length > 0 && (
+    <section class="bg-brand-parchment border-b border-brand-ink/10">
+      <div class="max-w-4xl mx-auto px-6 py-10">
+        <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Status updates</h2>
+        <ul class="mt-5 space-y-3">
+          {statusUpdates
+            .slice()
+            .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
+            .map((u) => (
+              <li class="text-sm text-brand-ink/85">
+                <span class="font-medium">{u.text}</span>
+                {u.href && (
+                  <>
+                    {' — '}
+                    <a href={u.href} target="_blank" rel="noopener" class="text-brand-ink hover:text-oxblood hover:underline">link</a>
+                  </>
+                )}
+              </li>
+            ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {!isUpcoming && programmePdf && (
+    <section class="bg-white border-b border-brand-ink/10">
+      <div class="max-w-4xl mx-auto px-6 py-10">
+        <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Programme</h2>
+        <p class="mt-4">
+          <a href={programmePdf} target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-md border border-brand-ink/20 px-4 py-2 text-sm text-brand-ink hover:bg-brand-cream">
+            Final programme (PDF) ↗
+          </a>
+        </p>
+      </div>
+    </section>
+  )}
+
+  {isUpcoming && draftProgramme && (
+    <section class="bg-white border-b border-brand-ink/10">
+      <div class="max-w-4xl mx-auto px-6 py-10">
+        <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Draft programme</h2>
+        <div class="prose prose-brand mt-4 max-w-none">
+          <p>{draftProgramme}</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {isUpcoming && recordings.length > 0 && (
     <section class="bg-brand-parchment border-t border-brand-ink/10">
+      <div class="max-w-4xl mx-auto px-6 py-10">
+        <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Planned speeches</h2>
+        <ul class="mt-5 space-y-3 text-brand-ink/85">
+          {recordings.map((r: any) => (
+            <li class="flex items-baseline justify-between gap-3">
+              <span>
+                <span class="text-xs uppercase tracking-wider text-muted">{r.number != null ? `Speech ${r.number}` : (r.kind === 'special-lecture' ? 'Special Lecture' : (r.kind === 'lords-day' ? "Lord's Day Sermon" : 'Speech'))}</span>
+                <span class="ml-2">{r.title ?? 'Untitled'}</span>
+              </span>
+              <span class="text-sm text-muted">{r.speaker ?? 'TBD'}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {!isUpcoming && recordings.length > 0 && (
+    <ConferenceRecordings
+      speeches={recordings}
+      youtubePlaylistUrl={data.youtubePlaylistUrl ?? null}
+    />
+  )}
+
+  {!isUpcoming && allReviews.length > 0 && (
+    <section class="bg-white border-t border-brand-ink/10">
       <div class="max-w-4xl mx-auto px-6 py-12">
         <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Reviews</h2>
         <ul class="mt-6 divide-y divide-brand-ink/10">
-          {reviews.map(r => (
+          {allReviews.map((r) => (
             <li class="py-4">
-              <p class="font-medium text-brand-ink">{r.data.title}</p>
+              <p class="font-serif text-lg text-brand-ink leading-snug">
+                <a href={r.href} class="hover:underline">{r.title}</a>
+              </p>
               <p class="mt-1 text-sm text-brand-ink/65">
-                By {r.data.authors.join(', ')} · {fmtDate(r.data.datePublished)}
+                <span>{r.author}</span>
+                <span class="ml-2 inline-flex items-center rounded-full border border-brand-ink/20 px-2 py-0.5 text-xs text-brand-ink/75">
+                  {r.kind === 'brf' ? 'BRF' : r.kind === 'brj' ? 'BRJ' : 'External'}
+                </span>
+                {r.date && <span class="ml-2 text-xs text-muted">{fmtDate(r.date)}</span>}
               </p>
             </li>
           ))}
         </ul>
-        <p class="mt-4 text-xs text-muted">
-          Review pages are not yet routed; see Phase 2b.
-        </p>
+      </div>
+    </section>
+  )}
+
+  {(programmePdf || podcastSeasonUrl) && (
+    <section class="bg-brand-cream border-t border-brand-ink/10">
+      <div class="max-w-4xl mx-auto px-6 py-10">
+        <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Resources</h2>
+        <ul class="mt-5 space-y-2 text-sm">
+          {programmePdf && (
+            <li>
+              <a href={programmePdf} target="_blank" rel="noopener" class="text-brand-ink hover:text-oxblood hover:underline">Final programme (PDF) ↗</a>
+            </li>
+          )}
+          {podcastSeasonUrl && (
+            <li>
+              <a href={podcastSeasonUrl} class="text-brand-ink hover:text-oxblood hover:underline">Podcast season for this conference</a>
+            </li>
+          )}
+          <li>
+            <a href={`/author/${speakerSlug(speakers[0] ?? 'unknown')}/`} class="text-brand-ink hover:text-oxblood hover:underline">Speaker profiles and cross-references</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {conf.body && conf.body.trim().length > 0 && (
+    <section class="bg-white border-t border-brand-ink/10">
+      <div class="max-w-3xl mx-auto px-6 py-12 prose prose-brand">
+        <Content />
       </div>
     </section>
   )}
