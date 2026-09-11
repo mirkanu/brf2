@@ -1,22 +1,58 @@
 {
   "title": "Eschatology",
   "legacyPath": "/conference/2024",
-  "datePublished": "2022-07-24 09:19:45",
-  "authors": [
-    "manuelkuhs@gmail.com"
-  ],
-  "tags": [
-    "2024"
-  ],
-  "rawCategories": [
-    "past"
-  ],
+  "datePublished": "2024-08-10 09:00:00",
+  "authors": ["manuelkuhs@gmail.com"],
+  "tags": ["2024"],
+  "rawCategories": ["past"],
   "primaryCategory": "past",
   "year": 2024,
-  "subtitle": "Eschatology",
+  "subtitle": "Then Comes the End",
+  "status": "past",
+  "topic": "Eschatology",
   "theme": "Eschatology",
-  "venue": "Cloverley Hall, Shropshire, England",
+  "country": "England",
+  "venue": "Cloverley Hall",
+  "venueUrl": "https://www.cloverleyhall.com/",
   "dates": "3-10 August",
-  "section": "conference",
-  "description": "BRF 2024 annual conference on Eschatology, held at Cloverley Hall, Shropshire, England."
+  "speakers": ["Prof Cammenga", "Rev Hanko"],
+  "venuePhoto": "/assets/conferences/2024-cloverley-hall.webp",
+  "description": "BRF 2024 annual conference on Eschatology, held at Cloverley Hall, Shropshire, England.",
+  "programmePdf": "https://www.britishreformed.org/wp-content/uploads/2024/08/BRF-2024-Programme.pdf",
+  "resources": [
+    { "label": "BRF Conference Speeches podcast — 2024 season", "href": "/podcasts/brf-conference-speeches/2024.xml" }
+  ],
+  "recordings": [
+    {
+      "number": 1,
+      "title": "The Last Things in the Old Testament",
+      "speaker": "Prof Cammenga",
+      "youtubeId": null,
+      "mp3Url": "https://www.britishreformed.org/wp-content/uploads/2024/08/2024-01.mp3",
+      "mp3DurationSeconds": 3000
+    },
+    {
+      "number": 2,
+      "title": "The Last Things in the New Testament",
+      "speaker": "Rev Hanko",
+      "youtubeId": null,
+      "mp3Url": "https://www.britishreformed.org/wp-content/uploads/2024/08/2024-02.mp3",
+      "mp3DurationSeconds": 3120
+    }
+  ],
+  "reviews": [
+    {
+      "title": "Review of the 2024 BRF Conference",
+      "author": "Lori Schipper",
+      "kind": "brf",
+      "href": "/conferences/2024/review-lori-schipper/"
+    },
+    {
+      "title": "Reflections on the 2024 Eschatology Conference",
+      "author": "Anna Huizinga",
+      "kind": "brf",
+      "href": "/conferences/2024/review-anna-huizinga/"
+    }
+  ],
+  "section": "conference"
 }
