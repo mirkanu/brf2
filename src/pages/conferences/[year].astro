@@ -1,151 +1,241 @@
 ---
-import Site from '../../layouts/Site.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { getCollection, render } from 'astro:content';
-import { fmtDate } from '../../lib/format';
+import Site from "../../layouts/Site.astro";
+import ArticleToc from "../../components/ArticleToc.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { getCollection } from "astro:content";
+import { speakerSlug, isTbdSpeaker } from "../../lib/speakers";
 
 export async function getStaticPaths() {
-  const all = await getCollection('conferences');
-  const reviews = all.filter(c => c.data.primaryCategory === 'review');
-  return all.map(c => ({
-    params: { year: String(c.data.year) },
-    props: {
-      conf: c,
-      reviews: reviews.filter(r => r.data.year === c.data.year || r.data.tags?.includes(String(c.data.year))),
-    },
-  }));
+  const confs = await getCollection("conferences");
+  return confs
+    .filter((c) => /^\d{4}$/.test(c.id))
+    .map((c) => ({ params: { year: c.id } }));
 }
 
-const { conf, reviews } = Astro.props;
-const { Content } = await render(conf);
-
-const SITE = 'https://brf2.pages.dev';
-const pageUrl = `${SITE}/conferences/${conf.data.year}/`;
-
-/**
- * Convert conference `dates` strings ("3-10 August", "16-23 July", "9-16 July, 2022", "21-28 July")
- * into an ISO date for `startDate`. The conference `year` is used for the year.
- * Returns null if the input is null/empty or cannot be parsed safely.
- */
-function parseStartDate(dates: string | null | undefined, fallbackYear: number | string | null | undefined): string | null {
-  if (!dates) return null;
-  const yearNum = Number(fallbackYear);
-  const year = Number.isFinite(yearNum) ? yearNum : new Date().getFullYear();
-
-  // Pull out "Month" word.
-  const monthMatch = dates.match(/\b(January|February|March|April|May|June|July|August|September|October|November|December|Jan|Febri Febr Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)\b/i);
-  let monthIdx: number | null = null;
-  if (monthMatch) {
-    const m = monthMatch[1].toLowerCase();
-    const monthMap: Record<string, number> = {
-      january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
-      july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
-      jan: 0, feb: 1, mar: 2, apr: 3, jun: 5, jul: 6, aug: 7, sept: 8, sep: 8, oct: 9, nov: 10, dec: 11,
-    };
-    monthIdx = monthMap[m] ?? null;
-  }
-
-  // Pull out an explicit year if present.
-  const yearMatch = dates.match(/\b((?:19|20)\d{2})\b/);
-  const effectiveYear = yearMatch ? Number(yearMatch[1]) : year;
-
-  // Pull out the first day number (1-31).
-  const dayMatch = dates.match(/\b([0-3]?\d)\b/);
-
-  if (monthIdx == null || !dayMatch) return null;
-  const day = Number(dayMatch[1]);
-  if (!Number.isFinite(day) || day < 1 || day > 31) return null;
-
-  // Use UTC to avoid TZ drift; emit date-only ISO.
-  return new Date(Date.UTC(effectiveYear, monthIdx, day)).toISOString().slice(0, 10);
+const { year } = Astro.params;
+const all = await getCollection("conferences");
+const conference = all.find((c) => c.id === year);
+if (!conference) {
+  return Astro.redirect("/conferences/");
 }
+const d = conference.data;
+const today = new Date();
+const cy = today.getFullYear();
+const isCurrentYear = d.year === cy;
+const hasEnd = !!(d.dates && d.dates.trim() && d.dates.trim().toLowerCase() !== "tbd");
+const upcoming = d.year > cy || (isCurrentYear && hasEnd);
+const STATUS_LABEL = upcoming ? "UPCOMING CONFERENCE" : "PAST CONFERENCE";
 
-const startDate = parseStartDate(conf.data.dates, conf.data.year);
+const hasProgramme = !!d.programmePdf;
+const hasRecordings = (d.recordings ?? []).length > 0;
+const hasReviews = (d.reviews ?? []).length > 0;
 
-const venue = conf.data.venue ?? null;
+const headings: { depth: number; slug: string; text: string }[] = [];
+headings.push({ depth: 2, slug: "programme", text: "Programme" });
+if (hasRecordings) headings.push({ depth: 2, slug: "recordings", text: "Recordings" });
+if (hasReviews) headings.push({ depth: 2, slug: "reviews", text: "Reviews" });
+headings.push({ depth: 2, slug: "resources", text: "Resources" });
 
-const eventLd = startDate ? {
-  '@context': 'https://schema.org',
-  '@type': 'Event',
-  name: conf.data.title,
-  startDate,
-  location: {
-    '@type': 'Place',
-    name: venue ?? '',
-    address: '',
-  },
-  eventStatus: 'https://schema.org/EventScheduled',
-  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-  mainEntityOfPage: pageUrl,
-} : null;
+const venuePhotoUrl = d.venuePhoto ?? null;
+const pageTitle = `${d.title} | ${d.year} BRF Conference`;
+const description = (d.title ?? "").replace(/<[^>]+>/g, "").trim();
+
+const speakers = (d.speakers ?? []).map((s: string) => s.trim()).filter(Boolean);
 ---
-<Site title={`${conf.data.title} (${conf.data.year}) — BRF`} jsonLd={eventLd}>
-  <section class="bg-brand-cream border-b border-brand-ink/10">
-    <div class="max-w-4xl mx-auto px-6 py-12">
-      <Breadcrumbs items={[
-        { label: 'Home', href: '/' },
-        { label: 'Conferences', href: '/conferences' },
-        { label: String(conf.data.year) },
-      ]} />
-      <p class="mt-3 text-xs uppercase tracking-wider text-muted">{conf.data.year} Conference</p>
-      <h1 class="mt-2 font-serif text-4xl md:text-5xl text-brand-ink leading-tight">{conf.data.title}</h1>
-      {conf.data.subtitle && <p class="mt-3 text-lg text-brand-ink/80">{conf.data.subtitle}</p>}
-      <dl class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-        {conf.data.dates && (
-          <div>
-            <dt class="uppercase text-muted tracking-wider text-xs">Dates</dt>
-            <dd class="mt-1 text-brand-ink">{conf.data.dates}</dd>
-          </div>
-        )}
-        {conf.data.venue && (
-          <div>
-            <dt class="uppercase text-muted tracking-wider text-xs">Venue</dt>
-            <dd class="mt-1 text-brand-ink">{conf.data.venue}</dd>
-          </div>
-        )}
-        {conf.data.theme && (
-          <div>
-            <dt class="uppercase text-muted tracking-wider text-xs">Theme</dt>
-            <dd class="mt-1 text-brand-ink">{conf.data.theme}</dd>
-          </div>
-        )}
-      </dl>
+<Site title={pageTitle} description={description} ogImageUrl={venuePhotoUrl ?? undefined}>
+  <section
+    class="relative isolate overflow-hidden text-white"
+    style={venuePhotoUrl
+      ? `background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('${venuePhotoUrl}'); background-size: cover; background-position: center; min-height: 22rem;`
+      : "background-color: #7a6f57; min-height: 22rem;"}
+  >
+    <div class="relative mx-auto max-w-5xl px-5 py-16 sm:px-6 sm:py-20">
+      <div class="mb-6 flex flex-wrap items-center gap-2 text-xs uppercase tracking-wider">
+        <span class={upcoming ? "rounded-full bg-emerald-500/95 px-3 py-1 font-semibold text-white" : "rounded-full bg-white/15 px-3 py-1 font-semibold text-white ring-1 ring-white/30"}>
+          {STATUS_LABEL}
+        </span>
+      </div>
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Conferences", href: "/conferences/" },
+        ]}
+        tone="dark"
+        class="text-white/90"
+      />
+      <p class="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">{d.year} BRF Conference</p>
+      <h1 class="mt-3 font-serif text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">{d.title}</h1>
+      {d.subtitle && <p class="mt-3 text-lg text-white/85">{d.subtitle}</p>}
+      <p class="mt-6 text-sm text-white/85">
+        {d.dates ?? d.year}{(d.venue || d.country) ? " · " : ""}{d.venue ?? ""}{(d.venue && d.country) ? ", " : ""}{d.country ?? ""}
+      </p>
     </div>
   </section>
 
-  {(conf.data.description || (conf.body && conf.body.trim().length > 0)) && (
-    <section class="bg-white">
-      <div class="max-w-3xl mx-auto px-6 py-12">
-        {conf.data.description && (
-          <p class="text-lg text-brand-ink/85 leading-relaxed">{conf.data.description}</p>
-        )}
-        {conf.body && conf.body.trim().length > 0 && (
-          <div class="prose prose-brand mt-8">
-            <Content />
+  <section class="bg-white">
+    <div class={"mx-auto px-5 py-10 sm:px-6 sm:py-12 " + (headings.length > 0 ? "lg:grid lg:max-w-5xl lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-10" : "max-w-5xl")}>
+      <div class="min-w-0">
+        <dl class="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3">
+          <div>
+            <dt class="text-xs uppercase tracking-wider text-brand-muted">Year</dt>
+            <dd class="mt-1 text-sm font-medium text-brand-ink">{d.year}</dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-wider text-brand-muted">Dates</dt>
+            <dd class="mt-1 text-sm font-medium text-brand-ink">{d.dates ?? "TBD"}</dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-wider text-brand-muted">Topic</dt>
+            <dd class="mt-1 text-sm font-medium text-brand-ink">{d.topic ?? "TBD"}</dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-wider text-brand-muted">Location</dt>
+            <dd class="mt-1 text-sm font-medium text-brand-ink">{d.country ?? "TBD"}</dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-wider text-brand-muted">Venue</dt>
+            <dd class="mt-1 text-sm font-medium text-brand-ink">
+              {d.venueUrl ? (
+                <a href={d.venueUrl} target="_blank" rel="noopener" class="underline decoration-brand-ink/30 underline-offset-2 hover:decoration-brand-ink">{d.venue ?? "TBD"}</a>
+              ) : (
+                d.venue ?? "TBD"
+              )}
+            </dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-wider text-brand-muted">Speakers</dt>
+            <dd class="mt-1 flex flex-wrap gap-1.5">
+              {speakers.length > 0 ? speakers.map((s: string) => (
+                isTbdSpeaker(s) ? (
+                  <span class="inline-flex items-center rounded-full border border-brand-ink/30 bg-white px-2.5 py-0.5 text-xs font-medium text-brand-ink">TBD</span>
+                ) : (
+                  <a href={`/author/${speakerSlug(s)}/`} class="inline-flex items-center rounded-full border border-brand-ink/30 bg-white px-2.5 py-0.5 text-xs font-medium text-brand-ink hover:border-brand-ink/60">{s}</a>
+                )
+              )) : <span class="text-sm font-medium text-brand-ink">TBD</span>}
+            </dd>
+          </div>
+        </dl>
+
+        {hasProgramme && (
+          <div class="mt-10">
+            <h2 id="programme" class="font-serif text-2xl font-semibold text-brand-ink">Programme</h2>
+            <div class="mt-4 border-t border-brand-ink/15 pt-4">
+              <a href={d.programmePdf} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 rounded-full border border-brand-ink/30 bg-white px-3 py-1.5 text-sm font-medium text-brand-ink hover:border-brand-ink/60">
+                Final programme (PDF) ↗
+              </a>
+            </div>
           </div>
         )}
-      </div>
-    </section>
-  )}
+        {!hasProgramme && (
+          <div class="mt-10">
+            <h2 id="programme" class="font-serif text-2xl font-semibold text-brand-ink">Programme</h2>
+            <div class="mt-4 border-t border-brand-ink/15 pt-4">
+              <p class="text-sm text-brand-muted">Final programme not yet published.</p>
+            </div>
+          </div>
+        )}
 
-  {reviews && reviews.length > 0 && (
-    <section class="bg-brand-parchment border-t border-brand-ink/10">
-      <div class="max-w-4xl mx-auto px-6 py-12">
-        <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Reviews</h2>
-        <ul class="mt-6 divide-y divide-brand-ink/10">
-          {reviews.map(r => (
-            <li class="py-4">
-              <p class="font-medium text-brand-ink">{r.data.title}</p>
-              <p class="mt-1 text-sm text-brand-ink/65">
-                By {r.data.authors.join(', ')} · {fmtDate(r.data.datePublished)}
+        {hasRecordings && (
+          <div class="mt-12">
+            <h2 id="recordings" class="font-serif text-2xl font-semibold text-brand-ink">Recordings</h2>
+            <div class="mt-4 border-t border-brand-ink/15 pt-4 space-y-3">
+              {d.youtubePlaylistUrl && (
+                <p class="text-sm">
+                  <a href={d.youtubePlaylistUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-1 font-medium text-brand-ink underline decoration-brand-ink/30 underline-offset-2 hover:decoration-brand-ink">
+                    Full playlist ↗
+                  </a>
+                </p>
+              )}
+              {(d.recordings ?? []).map((r: any) => {
+                const kindLabel =
+                  r.kind === "speech" ? (r.number ? `Speech ${r.number}` : "Speech")
+                  : r.kind === "lords-day" ? "Lord's Day Sermon"
+                  : r.kind === "special-lecture" ? "Special Lecture"
+                  : r.kind === "outro" ? "Conference Closing"
+                  : r.label ?? "Recording";
+                return (
+                <details class="group rounded-md border border-brand-ink/15 bg-brand-cream/40 px-4 py-3">
+                  <summary class="cursor-pointer list-none">
+                    <p class="text-xs uppercase tracking-wider text-brand-muted">{kindLabel}</p>
+                    <p class="mt-1 font-serif text-lg font-semibold text-brand-ink">{r.title}</p>
+                    {r.speaker && (
+                      <p class="mt-0.5 text-sm text-brand-muted">
+                        {isTbdSpeaker(r.speaker) ? r.speaker : (
+                          <a href={`/author/${speakerSlug(r.speaker)}/`} class="underline decoration-brand-ink/30 underline-offset-2 hover:decoration-brand-ink">{r.speaker}</a>
+                        )}
+                      </p>
+                    )}
+                    <span class="mt-2 inline-block text-xs font-medium text-brand-muted group-open:hidden">▶ Listen</span>
+                  </summary>
+                  <div class="mt-3 space-y-3 border-t border-brand-ink/10 pt-3">
+                    {r.mp3Url && (
+                      <audio controls preload="none" class="w-full">
+                        <source src={r.mp3Url} type="audio/mpeg" />
+                      </audio>
+                    )}
+                    {r.youtubeId && (
+                      <div class="aspect-video overflow-hidden rounded">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${r.youtubeId}`}
+                          title={r.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen
+                          class="h-full w-full"
+                        ></iframe>
+                      </div>
+                    )}
+                    {!r.youtubeId && !r.mp3Url && (
+                      <p class="text-sm text-brand-muted">Recording not yet available.</p>
+                    )}
+                  </div>
+                </details>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {hasReviews && (
+          <div class="mt-12">
+            <h2 id="reviews" class="font-serif text-2xl font-semibold text-brand-ink">Reviews</h2>
+            <div class="mt-4 space-y-4 border-t border-brand-ink/15 pt-4">
+              {(d.reviews ?? []).map((r: any) => {
+                const author = (r.author ?? r.title ?? "Reviewer").toString();
+                const authorSlug = author.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+                const href = r.url ?? `/conferences/${d.year}/review-${authorSlug}/`;
+                return (
+                  <article class="border-b border-brand-ink/10 pb-4 last:border-b-0">
+                    <a href={href} class="font-serif text-lg font-semibold text-brand-ink underline decoration-brand-ink/30 underline-offset-2 hover:decoration-brand-ink">{r.title}</a>
+                    <p class="mt-1 text-sm text-brand-muted">{author}{r.host ? <span class="ml-2 inline-block rounded-full border border-brand-ink/30 bg-white px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-brand-ink">{r.host}</span> : null}</p>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <div class="mt-12">
+          <h2 id="resources" class="font-serif text-2xl font-semibold text-brand-ink">Resources</h2>
+          <div class="mt-4 space-y-3 border-t border-brand-ink/15 pt-4 text-sm">
+            {hasProgramme && (
+              <p>
+                <a href={d.programmePdf} target="_blank" rel="noopener" class="font-medium text-brand-ink underline decoration-brand-ink/30 underline-offset-2 hover:decoration-brand-ink">Final programme (PDF) ↗</a>
               </p>
-            </li>
-          ))}
-        </ul>
-        <p class="mt-4 text-xs text-muted">
-          Review pages are not yet routed; see Phase 2b.
-        </p>
+            )}
+            {speakers.length > 0 && (
+              <p class="text-brand-muted">Speaker profiles and cross-references for {speakers.join(", ")}.</p>
+            )}
+          </div>
+        </div>
       </div>
-    </section>
-  )}
+
+      {headings.length > 0 && (
+        <aside class="hidden lg:block">
+          <div class="sticky top-24">
+            <ArticleToc headings={headings} />
+          </div>
+        </aside>
+      )}
+    </div>
+  </section>
 </Site>
