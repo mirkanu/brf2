@@ -1,26 +1,35 @@
 {
-  "title": "Eschatology",
+  "title": "Then Comes the End: The Reformed Doctrine of Eschatology",
   "legacyPath": "/conference/2024",
   "datePublished": "2024-08-10 09:00:00",
-  "authors": ["manuelkuhs@gmail.com"],
-  "tags": ["2024"],
-  "rawCategories": ["past"],
+  "authors": [
+    "manuelkuhs@gmail.com"
+  ],
+  "tags": [
+    "2024"
+  ],
+  "rawCategories": [
+    "past"
+  ],
   "primaryCategory": "past",
   "year": 2024,
-  "subtitle": "Then Comes the End",
   "status": "past",
-  "topic": "Eschatology",
-  "theme": "Eschatology",
   "country": "England",
   "venue": "Cloverley Hall",
   "venueUrl": "https://www.cloverleyhall.com/",
   "dates": "3-10 August",
-  "speakers": ["Prof Cammenga", "Rev Hanko"],
+  "speakers": [
+    "Prof Cammenga",
+    "Rev Hanko"
+  ],
   "venuePhoto": "/assets/conferences/2024-cloverley-hall.webp",
   "description": "BRF 2024 annual conference on Eschatology, held at Cloverley Hall, Shropshire, England.",
   "programmePdf": "https://www.britishreformed.org/wp-content/uploads/2024/08/BRF-2024-Programme.pdf",
   "resources": [
-    { "label": "BRF Conference Speeches podcast — 2024 season", "href": "/podcasts/brf-conference-speeches/2024.xml" }
+    {
+      "label": "BRF Conference Speeches podcast — 2024 season",
+      "href": "/podcasts/brf-conference-speeches/2024.xml"
+    }
   ],
   "recordings": [
     {
