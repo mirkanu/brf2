@@ -30,15 +30,15 @@ const hasProgramme = !!d.programmePdf;
 const hasRecordings = (d.recordings ?? []).length > 0;
 const hasReviews = (d.reviews ?? []).length > 0;
 
-const headings: { id: string; level: 2 | 3; text: string }[] = [];
-headings.push({ id: "programme", level: 2, text: "Programme" });
-if (hasRecordings) headings.push({ id: "recordings", level: 2, text: "Recordings" });
-if (hasReviews) headings.push({ id: "reviews", level: 2, text: "Reviews" });
-headings.push({ id: "resources", level: 2, text: "Resources" });
+const headings: { depth: number; slug: string; text: string }[] = [];
+headings.push({ depth: 2, slug: "programme", text: "Programme" });
+if (hasRecordings) headings.push({ depth: 2, slug: "recordings", text: "Recordings" });
+if (hasReviews) headings.push({ depth: 2, slug: "reviews", text: "Reviews" });
+headings.push({ depth: 2, slug: "resources", text: "Resources" });
 
 const venuePhotoUrl = d.venuePhoto ?? null;
-const pageTitle = `${d.theme ?? d.title} | ${d.year} BRF Conference`;
-const description = (d.theme ?? d.title ?? "").replace(/<[^>]+>/g, "").trim();
+const pageTitle = `${d.title} | ${d.year} BRF Conference`;
+const description = (d.title ?? "").replace(/<[^>]+>/g, "").trim();
 
 const speakers = (d.speakers ?? []).map((s: string) => s.trim()).filter(Boolean);
 ---
@@ -64,7 +64,7 @@ const speakers = (d.speakers ?? []).map((s: string) => s.trim()).filter(Boolean)
         class="text-white/90"
       />
       <p class="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">{d.year} BRF Conference</p>
-      <h1 class="mt-3 font-serif text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">{d.theme ?? d.title}</h1>
+      <h1 class="mt-3 font-serif text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">{d.title}</h1>
       {d.subtitle && <p class="mt-3 text-lg text-white/85">{d.subtitle}</p>}
       <p class="mt-6 text-sm text-white/85">
         {d.dates ?? d.year}{(d.venue || d.country) ? " · " : ""}{d.venue ?? ""}{(d.venue && d.country) ? ", " : ""}{d.country ?? ""}
@@ -86,7 +86,7 @@ const speakers = (d.speakers ?? []).map((s: string) => s.trim()).filter(Boolean)
           </div>
           <div>
             <dt class="text-xs uppercase tracking-wider text-brand-muted">Topic</dt>
-            <dd class="mt-1 text-sm font-medium text-brand-ink">{d.theme ?? "TBD"}</dd>
+            <dd class="mt-1 text-sm font-medium text-brand-ink">{d.topic ?? "TBD"}</dd>
           </div>
           <div>
             <dt class="text-xs uppercase tracking-wider text-brand-muted">Location</dt>
