@@ -17,3 +17,18 @@ export function decodeEntities(input: string): string {
     .replace(/&apos;/g, "'")
     .replace(/&nbsp;/g, ' ');
 }
+
+/**
+ * Strip HTML tags from a string so it is safe to use in a meta description
+ * (which must be plain text) or in an excerpt / preview. Decodes entities
+ * via `decodeEntities` so that tags-with-entities ("&amp;") come through intact.
+ */
+export function stripHtml(input: string | undefined | null): string {
+  if (!input) return '';
+  return decodeEntities(
+    input
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+  );
+}
