@@ -61,12 +61,14 @@ const conferences = defineCollection({
     programmeDraft: z.string().nullable().default(null), // PDF, may be external
     programmePdf: z.string().nullable().default(null),   // final programme PDF
     recordings: z.array(recordingSpeech).nullable().default(null),
+    youtubePlaylistUrl: z.string().nullable().default(null),
     reviews: z.array(
       z.object({
         title: z.string(),
         author: z.string(),
         kind: z.enum(['brf', 'brj', 'external']),
         href: z.string(),
+        host: z.string().nullable().default(null),
       })
     ).nullable().default(null),
     resources: z.array(

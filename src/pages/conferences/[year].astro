@@ -139,9 +139,9 @@ const speakers = (d.speakers ?? []).map((s: string) => s.trim()).filter(Boolean)
           <div class="mt-12">
             <h2 id="recordings" class="font-serif text-2xl font-semibold text-brand-ink">Recordings</h2>
             <div class="mt-4 border-t border-brand-ink/15 pt-4 space-y-3">
-              {d.youtubePlaylist && (
+              {d.youtubePlaylistUrl && (
                 <p class="text-sm">
-                  <a href={d.youtubePlaylist} target="_blank" rel="noopener" class="inline-flex items-center gap-1 font-medium text-brand-ink underline decoration-brand-ink/30 underline-offset-2 hover:decoration-brand-ink">
+                  <a href={d.youtubePlaylistUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-1 font-medium text-brand-ink underline decoration-brand-ink/30 underline-offset-2 hover:decoration-brand-ink">
                     Full playlist ↗
                   </a>
                 </p>
@@ -172,12 +172,12 @@ const speakers = (d.speakers ?? []).map((s: string) => s.trim()).filter(Boolean)
                         ></iframe>
                       </div>
                     )}
-                    {r.mp3 && (
+                    {r.mp3Url && (
                       <audio controls preload="none" class="w-full">
-                        <source src={r.mp3} type="audio/mpeg" />
+                        <source src={r.mp3Url} type="audio/mpeg" />
                       </audio>
                     )}
-                    {!r.youtubeId && !r.mp3 && (
+                    {!r.youtubeId && !r.mp3Url && (
                       <p class="text-sm text-brand-muted">Recording not yet available.</p>
                     )}
                   </div>
