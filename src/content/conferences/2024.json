@@ -2,9 +2,17 @@
   "title": "Then Comes the End: The Reformed Doctrine of Eschatology",
   "legacyPath": "/conference/category/then-comes-the-end-the-reformed-doctrine-of-eschatology-england-2024",
   "datePublished": "2024-08-18 09:00:00",
-  "authors": ["Manuel Kuhs"],
-  "tags": ["2024", "eschatology", "England"],
-  "rawCategories": ["past"],
+  "authors": [
+    "Manuel Kuhs"
+  ],
+  "tags": [
+    "2024",
+    "eschatology",
+    "England"
+  ],
+  "rawCategories": [
+    "past"
+  ],
   "primaryCategory": "past",
   "year": 2024,
   "status": "past",
@@ -12,7 +20,11 @@
   "venue": "Cloverley Hall, Shropshire",
   "venueUrl": "https://www.cloverleyhall.com/",
   "dates": "3–10 August 2024",
-  "speakers": ["Prof. Brian Huizinga", "Rev. Ron Hanko", "Rev. Angus Stewart"],
+  "speakers": [
+    "Prof. Brian Huizinga",
+    "Rev. Ron Hanko",
+    "Rev. Angus Stewart"
+  ],
   "venuePhoto": "/assets/conferences/2024-cloverley-hall.webp",
   "description": "BRF 2024 annual conference on the Reformed doctrine of eschatology, held at Cloverley Hall, Shropshire, England, 3–10 August 2024.",
   "topic": "Eschatology",
@@ -42,9 +54,10 @@
       "title": "The Venerable Bede and His Commentary on Revelation",
       "speaker": "Rev. Angus Stewart",
       "kind": "special-lecture",
-      "youtubeId": null,
+      "youtubeId": "_0qjA31CB6M",
       "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2024/03-venerable-bede.mp3",
-      "mp3DurationSeconds": 3015
+      "mp3DurationSeconds": 3015,
+      "youtubeTitle": "The Venerable Bede and His Commentary on Revelation"
     },
     {
       "number": null,
@@ -60,54 +73,69 @@
       "title": "The End that is Coming",
       "speaker": "Prof. Brian Huizinga",
       "kind": "speech",
-      "youtubeId": null,
+      "youtubeId": "K1vcgSD-RNY",
       "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2024/05-the-end-that-is-coming.mp3",
-      "mp3DurationSeconds": 3267
+      "mp3DurationSeconds": 3267,
+      "youtubeTitle": "The End That Is Coming (Matthew 24:1-14)"
     },
     {
       "number": 2,
       "title": "The Day of the Lord in the Old Testament",
       "speaker": "Rev. Ron Hanko",
       "kind": "speech",
-      "youtubeId": null,
+      "youtubeId": "OlI9cP-qdGs",
       "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2024/06-day-of-the-lord.mp3",
-      "mp3DurationSeconds": 3505
+      "mp3DurationSeconds": 3505,
+      "youtubeTitle": "The Day of the Lord in the Old Testament (Isaiah 2)"
     },
     {
       "number": 3,
       "title": "The Antichrist in Daniel 8",
       "speaker": "Prof. Brian Huizinga",
       "kind": "speech",
-      "youtubeId": null,
+      "youtubeId": "wsG31h04ZDc",
       "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2024/07-antichrist-daniel-8.mp3",
-      "mp3DurationSeconds": 3324
+      "mp3DurationSeconds": 3324,
+      "youtubeTitle": "The Antichrist in Daniel 8"
     },
     {
       "number": 4,
       "title": "The Battle of Armageddon",
       "speaker": "Rev. Ron Hanko",
       "kind": "speech",
-      "youtubeId": null,
+      "youtubeId": "TELDnugglSk",
       "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2024/08-battle-of-armageddon.mp3",
-      "mp3DurationSeconds": 3345
+      "mp3DurationSeconds": 3345,
+      "youtubeTitle": "The Battle of Armageddon (Revelation 16)"
     },
     {
       "number": 5,
       "title": "The Final Resurrection",
       "speaker": "Rev. Ron Hanko",
       "kind": "speech",
-      "youtubeId": null,
+      "youtubeId": "EQ0nDxeLeRI",
       "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2024/09-final-resurrection.mp3",
-      "mp3DurationSeconds": 3218
+      "mp3DurationSeconds": 3218,
+      "youtubeTitle": "The Final Resurrection (I Corinthians 15:42-58)"
     },
     {
       "number": 6,
       "title": "The New Heavens and the New Earth",
       "speaker": "Prof. Brian Huizinga",
       "kind": "speech",
-      "youtubeId": null,
+      "youtubeId": "gpxeTzODaq0",
       "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2024/10-new-heavens-new-earth.mp3",
-      "mp3DurationSeconds": 3311
+      "mp3DurationSeconds": 3311,
+      "youtubeTitle": "The New Heavens and New Earth (II Peter 3:1-14)"
+    },
+    {
+      "number": null,
+      "title": "Thank Yous!",
+      "speaker": "Conference Closing",
+      "kind": "outro",
+      "youtubeId": "sWMf9xtX7ww",
+      "mp3Url": null,
+      "mp3DurationSeconds": 859
     }
   ],
   "reviews": [

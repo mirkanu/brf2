@@ -22,7 +22,7 @@ const recordingSpeech = z.object({
   number: z.number().int().nullable().default(null),
   title: z.string(),
   speaker: z.string(),
-  kind: z.enum(['speech', 'lords-day', 'special-lecture']).default('speech'),
+  kind: z.enum(['speech', 'lords-day', 'special-lecture', 'outro']).default('speech'),
   youtubeId: z.string().nullable().default(null),
   mp3Url: z.string().nullable().default(null),
   mp3DurationSeconds: z.number().int().nullable().default(null),

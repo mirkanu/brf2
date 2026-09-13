@@ -146,10 +146,17 @@ const speakers = (d.speakers ?? []).map((s: string) => s.trim()).filter(Boolean)
                   </a>
                 </p>
               )}
-              {(d.recordings ?? []).map((r: any) => (
+              {(d.recordings ?? []).map((r: any) => {
+                const kindLabel =
+                  r.kind === "speech" ? (r.number ? `Speech ${r.number}` : "Speech")
+                  : r.kind === "lords-day" ? "Lord's Day Sermon"
+                  : r.kind === "special-lecture" ? "Special Lecture"
+                  : r.kind === "outro" ? "Conference Closing"
+                  : r.label ?? "Recording";
+                return (
                 <details class="group rounded-md border border-brand-ink/15 bg-brand-cream/40 px-4 py-3">
                   <summary class="cursor-pointer list-none">
-                    <p class="text-xs uppercase tracking-wider text-brand-muted">{r.label ?? "Speech"}</p>
+                    <p class="text-xs uppercase tracking-wider text-brand-muted">{kindLabel}</p>
                     <p class="mt-1 font-serif text-lg font-semibold text-brand-ink">{r.title}</p>
                     {r.speaker && (
                       <p class="mt-0.5 text-sm text-brand-muted">
@@ -158,9 +165,14 @@ const speakers = (d.speakers ?? []).map((s: string) => s.trim()).filter(Boolean)
                         )}
                       </p>
                     )}
-                    <span class="mt-2 inline-block text-xs font-medium text-brand-muted group-open:hidden">▶ Play</span>
+                    <span class="mt-2 inline-block text-xs font-medium text-brand-muted group-open:hidden">▶ Listen</span>
                   </summary>
                   <div class="mt-3 space-y-3 border-t border-brand-ink/10 pt-3">
+                    {r.mp3Url && (
+                      <audio controls preload="none" class="w-full">
+                        <source src={r.mp3Url} type="audio/mpeg" />
+                      </audio>
+                    )}
                     {r.youtubeId && (
                       <div class="aspect-video overflow-hidden rounded">
                         <iframe
@@ -172,17 +184,13 @@ const speakers = (d.speakers ?? []).map((s: string) => s.trim()).filter(Boolean)
                         ></iframe>
                       </div>
                     )}
-                    {r.mp3Url && (
-                      <audio controls preload="none" class="w-full">
-                        <source src={r.mp3Url} type="audio/mpeg" />
-                      </audio>
-                    )}
                     {!r.youtubeId && !r.mp3Url && (
                       <p class="text-sm text-brand-muted">Recording not yet available.</p>
                     )}
                   </div>
                 </details>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}
