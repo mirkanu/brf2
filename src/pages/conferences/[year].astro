@@ -2,6 +2,7 @@
 import Site from '../../layouts/Site.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ConferenceRecordings from '../../components/ConferenceRecordings.astro';
+import ArticleToc from '../../components/ArticleToc.astro';
 import { getCollection, render } from 'astro:content';
 import { speakerSlug } from '../../lib/speakers';
 import { fmtDate } from '../../lib/format';
@@ -109,6 +110,15 @@ if (!isUpcoming && recordings.length > 0) sectionIds.push('recordings');
 if (!isUpcoming && reviewsArr.length + oldReviews.length > 0) sectionIds.push('reviews');
 if (programmePdf || podcastSeasonUrl || speakers.length > 0) sectionIds.push('resources');
 
+// Build TOC headings (drives inline nav + sticky sidebar)
+interface TocHeading { depth: number; slug: string; text: string }
+const headings: TocHeading[] = [];
+if (!isUpcoming && programmePdf) headings.push({ depth: 2, slug: 'programme', text: 'Programme' });
+if (!isUpcoming && recordings.length > 0) headings.push({ depth: 2, slug: 'recordings', text: 'Recordings' });
+if (!isUpcoming && (reviewsArr.length + oldReviews.length) > 0) headings.push({ depth: 2, slug: 'reviews', text: 'Reviews' });
+if (isUpcoming && recordings.length > 0) headings.push({ depth: 2, slug: 'planned-speeches', text: 'Planned speeches' });
+if (programmePdf || podcastSeasonUrl || speakers.length > 0) headings.push({ depth: 2, slug: 'resources', text: 'Resources' });
+
 const allReviews: Array<{ title: string; author: string; kind: 'brf' | 'brj' | 'external'; href: string; date?: string }> = [
   ...reviewsArr,
   ...oldReviews.map((r: any) => ({
@@ -139,7 +149,11 @@ const statusLabel = isUpcoming ? 'Upcoming' : 'Past';
     <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/70" aria-hidden="true" />
     <div class="relative max-w-4xl mx-auto px-6 py-16 sm:py-24">
       <div class="text-white">
-        <Breadcrumbs items={[
+              <p class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] bg-brand-cream text-brand-ink ring-1 ring-brand-ink/15" data-conf-status-top="true">
+        {isUpcoming && <span aria-hidden="true" class="h-2 w-2 rounded-full bg-oxblood animate-pulse" />}
+        {isUpcoming ? "Upcoming conference" : "Past conference"}
+      </p>
+<Breadcrumbs items={[
           { label: 'Home', href: '/' },
           { label: 'Conferences', href: '/conferences' },
           { label: statusLabel, href: undefined },
@@ -151,18 +165,6 @@ const statusLabel = isUpcoming ? 'Upcoming' : 'Past';
         )}
         <p class="mt-5 text-sm text-white/80">
           {[dates, venue, country].filter(Boolean).join(' · ')}
-        </p>
-        <p class="mt-6">
-          <span class={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider ${isUpcoming ? 'bg-oxblood text-white' : 'bg-white/15 text-white ring-1 ring-white/30'}`}>
-            {isUpcoming ? (
-              <>
-                <span aria-hidden="true" class="h-2 w-2 rounded-full bg-white animate-pulse" />
-                Upcoming conference
-              </>
-            ) : (
-              <>Past conference</>
-            )}
-          </span>
         </p>
       </div>
     </div>
@@ -370,7 +372,12 @@ const statusLabel = isUpcoming ? 'Upcoming' : 'Past';
           )}
         </ul>
       </div>
-    </section>
+            {headings.length >= 2 && (
+          <aside class="hidden lg:block pt-2" data-toc-sidebar-panel="conf">
+            <ArticleToc headings={headings} />
+          </aside>
+        )}
+      </section>
   )}
 
   {conf.body && conf.body.trim().length > 0 && (
