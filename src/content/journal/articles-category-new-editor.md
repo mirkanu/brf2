@@ -10,8 +10,9 @@ tags:
   - "editorial"
 ---
 
-## New Editor!
-*Rev. Angus Stewart*
+# New Editor!
+
+Rev. Angus Stewart
 
 This is the first publication of the British Reformed Journal (BRJ) under its sixth editor. The first editor, Tony Horne, was an Englishman who later moved to Scotland. The second, Lindsay Williams, is a Welshman who lives in England. The third editor, Michael Kimmitt, was an Englishman who lived in Wales. The fourth, Allen Baird, has lived in N. Ireland all his days. The fifth, Rev. Martyn McGeown, is an Ulsterman who was serving as a missionary in the Republic of Ireland (and is now in America, having accepted a call to pastor a church in Michigan). The sixth, Samuel Watterson, has spent most of his life in the Republic of Ireland and is now in Northern Ireland. All the five major parts of the British Isles are represented, in one way or another, by our BRJ editors!
 

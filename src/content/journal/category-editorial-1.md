@@ -9,7 +9,9 @@ issueYear: 1998
 tags: []
 ---
 
-In BRI issues Nos. 8, 9, 10, and 11, we ran a series of articles concerning Dr. John Kennedy (1819-1884), the peerless Scottish preacher and pastor from Dingwall in the Highland County of Ross-shire. The articles were blessed and appreciated by the Lord, and since then the James Begg Society has published two of Dr. Kennedy's theological and polemical works, namely "Man's Relations to God" (publ. 1995, and now sold out), and "Evangelism: A Reformed Debate" (published in 1997). More material of Dr. Kennedy's has been published in the magazine of the James Begg Society, "The Presbyterian Standard", over the last two years. We are pleased to publish here within the BRJ Mr. Raymond Kemp's appraisal of "Evangelism: A Reformed Debate", which we believe to be of vital importance in the preaching of the Gospel today.
+# British Reformed Fellowship
+
+In the previous six BRI issues Nos. 7, 8, 9, 10, and 11, we ran a series of articles which concerned Dr. John Kennedy (1819-1884), the peerless Scottish preacher and pastor from Dingwall in the Highland County of Ross-shire. The articles were likewise much appreciated at the time, and since then the James Begg Society has published two of Dr. Kennedy's theological and polemical works, namely "Man's Relations to God" (publ. 1995, and now sold out), and "Evangelism: A Reformed Debate", (published in 1997). More material of Dr. Kennedy's has been published in the magazine of the James Begg Society, "The Presbyterian Standard", over the last two years. We are pleased to publish here within the BRJ Mr. Raymond Kemp's appraisal of "Evangelism: A Reformed Debate", which we believe to be of vital importance in the preaching of the Gospel today.
 
 In appreciating Kennedy's work in defending the true Biblical Gospel against its modern perversions, our researches have revealed some eye-opening information about the course of events in the Free Kirk of Kennedy's day. Much of this is revealed herein in Mr. Kemp's article, and in a supplementary article following it.
 
@@ -27,4 +29,4 @@ On page 25, four lines up from the bottom of the middle paragraph, the phrase "m
 
 > "mental notions of the SANDEMANIANS"
 
-Contra. the opinions expressed in certain religious communications in recent months, the BRF and the BRJ wish to make it known that we regard Sandemanianism as heretical and that we hereby> REPUDIATE SANDEMANIANISM
+Contra. the opinions expressed in certain religious communications in recent months, the BRF and the BRJ wish to make it known that we regard Sandemanianism as heretical and that we hereby **REPUDIATE SANDEMANIANISM**

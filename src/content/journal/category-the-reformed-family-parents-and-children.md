@@ -3,13 +3,16 @@ title: "The Reformed Family: Parents and Children"
 legacyPath: /journal/articles/category/the-reformed-family-parents-and-children
 datePublished: "2025-11-16 09:56:44"
 authors:
-  - DavidEngelsma
+  - "David Engelsma"
 issueNumber: 75
-issueYear: null
+issueYear: 2010
 tags:
   - family
+---
 
-The Reformed Family: Parents and Children
+# The Reformed Family:
+
+# Parents and Children
 
 Prof. David J. Engelsma
 
@@ -21,7 +24,7 @@ God has made family of fundamental importance also to the spiritual kingdom, tha
 
 That family is of fundamental importance to the spiritual kingdom is evident also from God's attitude towards attacks on the family in Malachi 2. The evil in Judah was attack on family. Because of this evil, God refused to accept Judah's public worship: "he regardeth not the offering any more" (v. 13). This is a warning to the churches of our day that are destroying family in exactly the same way that Judah was destroying it in Malachi's time. The worship of these churches is in vain. In Malachi 2:16, God declared that He hates the attack on the family: "he hateth putting away," where "putting away" is divorce.
 
-Despite its fundamental importance to both the earthly and the spiritual kingdoms, indeed, because of its importance, the family is under attack both in the state and in the church. The attack is launched by Satan. The family needs to be defended. The attack on the family occurs on many fronts. It takes the form of sexual promiscuity. Sex belongs to marriage, and marriage is the heart and foundation of family. It takes the form of outright dismissal of family as outdated. It takes the form of the attempt to reconstruct family as legitimately the "marital" relation of males with males and females with females: homosexuality. It takes the form especially of prevalent, indeed, accepted, divorce and remarriage.
+Despite its fundamental importance to both the earthly and the spiritual kingdoms, because of its importance, the family is under attack both in the state and in the church. The attack is launched by Satan. The family needs to be defended. The attack on the family occurs on many fronts. It takes the form of sexual promiscuity. Sex belongs to marriage, and marriage is the heart and foundation of family. It takes the form of outright dismissal of family as outdated. It takes the form of the attempt to reconstruct family as legitimately the "marital" relation of males with males and females with females: homosexuality. It takes the form especially of prevalent, accepted, divorce and remarriage.
 
 These attacks are powerful in the churches, as well as in ungodly society. The war of the ages becomes more fierce, and threatening, and close to home. The apostasy of the churches develops. True churches and genuine Christians are called by God to hold the traditions, now with regard to the family.
 
@@ -39,7 +42,7 @@ Nevertheless, the remarkable oneness of family is not sameness, is not identity 
 
 Likewise, the children are not the same as each other or the same as their parents. They are different persons. However much they may resemble their parents, they have their own individual features or characteristics, not only of body but also of soul. Whereas the parents may be easygoing and deliberate, the child may be excitable and quick to decide and act. Whereas the parents may be qualified for, capable of, and interested in manual labour, the child may be utterly disinterested in working with his hands but interested instead in the work of the mind.
 
-This was a striking difference between the present writer and his father. His father worked with his hands, able to fix anything and, as a farmer, skilled in all the manual labour demanded by this calling. This was his interest, his joy, the passion and labour and satisfaction that contributed to forming his humanity. His son had little interest in, or ability for, that kind of work. Reading and study were his love, already in his youth. His father wondered about him, lacking as he did the natural make-up of the father, but never imposed his personal qualities on him. He allowed his son to be what he naturally was. His son had only respect and admiration for the kind of man his father was, and for his skills.
+> This was a striking difference between the present writer and his father. His father worked with his hands, able to fix anything and, as a farmer, skilled in all the manual labour demanded by this calling. This was his interest, his joy, the passion and labour and satisfaction that contributed to forming his humanity. His son had little interest in, or ability for, that kind of work. Reading and study were his love, already in his youth. His father wondered about him, lacking as he did the natural make-up of the father, but never imposed his personal qualities on him. He allowed his son to be what he naturally was. His son had only respect and admiration for the kind of man his father was, and for his skills.
 
 Family is oneness, but it is the oneness of different persons and the oneness of different—sometimes radically different—personalities. It is the oneness of a male husband and a female wife. It is the oneness of several children, all different persons, with sometimes strikingly different personalities and interests. It is the oneness of parents, with all the qualities and position of parents, and their children, with all the differences of children from parents.
 
@@ -85,4 +88,6 @@ According to Colossians 3:21, a special danger to be avoided by parents is provo
 
 For children, the structure of love in the family is chiefly obedience to parents, rising from their honour of them (Eph. 6:1-3). Ephesians 6:2-3 quotes and applies to children in the New Testament the fifth commandment of the Decalogue, which proves that the children of believers are included in the new covenant, just as children were included in the dispensation of the covenant in the Old Testament. Ephesians 6:1-3 is the refutation of the Baptist exclusion of the children of believers from the new covenant. Inasmuch as children, already as soon as they can understand the command to obey (which is very early childhood), are "in the Lord" and, therefore, are able to obey out of love for God, it is evident that God saves the children of believers from their earliest childhood. Therefore, the sign of baptism is rightfully theirs. And this is to say that believers' children are part of the Christian family from their birth.
 
-What a blessed, blissful life is the Reformed family, living in the love of God and of each other. And what a witness to the world with its
+What a blessed, blissful life is the Reformed family, living in the love of God and of each other. And what a witness to the world with its broken homes, its hatred for each other by husband and wife, and its rebellious children.
+
+This is not to deny or ignore that the Reformed family is threatened today by grave, powerful evils. There is the evil of the neglect of their marriage and home by husbands and wives who are also parents. They do not work at the biblical structure of their marriage and home.
