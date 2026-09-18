@@ -10,8 +10,6 @@ tags:
   - baptism
 ---
 
-I'll convert the raw PDF text into clean markdown, stopping at the article boundary.# Reformed View of Baptism (2): Its Mode
-
 > 'In those days John the Baptist came preaching in the wilderness of Judea...Then Jerusalem, all Judea, and all the region around Jordan went out to him and were baptized by him in the Jordan confessing their sins.' Matt. iii. 1; 5, 6.
 
 ## Introduction
@@ -24,13 +22,13 @@ After all, a rite which is to be administered to young and old; to those in heal
 
 Now in fact we might simply end our consideration there — and I suspect if we did so we would be close to the mind of the New Testament — were it not for the fact that not only Baptist churches but a growing number of Evangelical ones persist in asserting that only Total Immersion (dressed and usually backwards!) constitutes Baptism. To give an example, taken simply from the latest to hand:
 
-> The administration of baptism... will be by total immersion in water. Matt 3:5, 6. 13, 16 Jn 3:23 Acts 8:38, 39 Rom 6:3, 4[^1]
+> The administration of baptism... will be by total immersion in water. Matt 3:5, 6. 13, 16 Jn 3:23 Acts 8:38, 39 Rom 6:3, 4
 
 Needless to say, the proof texts do not prove the point, but of that more anon.
 
 How then is the matter to be resolved? Clearly the answer is by reference to those same inspired scriptures, which are:
 
-> 'profitable for doctrine, for reproof, for instruction in righteousness, that the man of God may be complete, thoroughly equipped for every good work.'[^2]
+> 'profitable for doctrine, for reproof, for instruction in righteousness, that the man of God may be complete, thoroughly equipped for every good work.'^[1]
 
 Every text referring to Baptism in the New Testament has been examined and classified. This seems to point to quite clear conclusions — and I can only urge anyone bothered about this issue to pursue the same course. What follows is simply a summary.
 
@@ -81,7 +79,7 @@ Although this seems quite clear it may be that certain objections are felt to th
 
 3. But surely says someone all this is beside the point: whatever your arguments we have an actual example in the case of Our Lord. His Baptism was by immersion. Well, taken on its own, it may have been. There is nothing in the narrative to rule it out — but neither is there anything there to imply it must have been. Although Our Lord's Baptism is mentioned in all four gospels only two have a direct account. In Matthew we read: 'And Jesus, when He had been baptized, came up immediately from the water;' and in Mark:
 
-   > 'coming up out of the water'.[^3]
+   > 'coming up out of the water'.^[2]
 
    Once again we are faced with the trickiness of Greek prepositions. In Matthew the word used is *apo*. This means *from* or *away from* — not *out of* as the AV translates, in Mark the word is *ek* which means *out of* or *from*. Putting both accounts together all we apparently are being told is that Our Lord came from the water. If he and John the Baptist had stepped into the Jordan and John had scooped up water and poured it on Our Lord's head and then they had both come away from the water all the facts in the Biblical narrative would be covered. In the light of our previous discussion immersion seems unlikely.
 
@@ -95,8 +93,6 @@ We have examined the circumstances surrounding John's Baptizing and have ascerta
 
 ## Footnotes
 
-[^1]: Quoted from a Baptist church's statement of faith regarding baptism.
+[^1]: II Tim. iii. 16, 17.
 
-[^2]: II Tim. iii. 16, 17.
-
-[^3]: Mark i. 10.
+[^2]: Mark i. 10.

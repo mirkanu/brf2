@@ -10,9 +10,9 @@ tags:
   - family
 ---
 
-# The Reformed Family:
+## The Reformed Family:
 
-# Parents and Children
+## Parents and Children
 
 Prof. David J. Engelsma
 
@@ -30,7 +30,7 @@ These attacks are powerful in the churches, as well as in ungodly society. The w
 
 ## Nature
 
-If we are to grasp the nature of the family—what the family essentially is—we must remind ourselves of the institution of the family by God in the beginning. Incidentally, this underscores the necessity of viewing Genesis 1 and 2 as history. Among the other deadly implications and effects of regarding these opening chapters in Scripture as myth is that the churches lose confidence in viewing the account of the institution of marriage as authoritative. What stands out in all the account in Genesis 1 and 2 is the remarkable oneness of the family, that is, that the members of the family are a unity. It is true of the family what the Reformed Lord's Supper Form says of the church that is joined to Christ in the Supper: many members joined together as one body.[^1] The comparison holds because God created the family to symbolize the church.
+If we are to grasp the nature of the family—what the family essentially is—we must remind ourselves of the institution of the family by God in the beginning. Incidentally, this underscores the necessity of viewing Genesis 1 and 2 as history. Among the other deadly implications and effects of regarding these opening chapters in Scripture as myth is that the churches lose confidence in viewing the account of the institution of marriage as authoritative. What stands out in all the account in Genesis 1 and 2 is the remarkable oneness of the family, that is, that the members of the family are a unity. It is true of the family what the Reformed Lord's Supper Form says of the church that is joined to Christ in the Supper: many members joined together as one body. The comparison holds because God created the family to symbolize the church.
 
 In the beginning, the husband, Adam, and his wife, Eve, were "one flesh" (Gen. 2:24). The reference is not only to sexual intimacy, although the one flesh expresses itself uniquely in this intimacy. But the oneness is also the unity of their complete human nature, soul and body. Two individuals, with different persons and personalities, share one human life. This comes to expression especially in the sexual embrace of marriage, in which there is oneness, not only of body but also of soul. In all their life together, there is oneness of the totality of life.
 
@@ -82,7 +82,7 @@ But this love, which is fundamental to family life, does not remain vague and un
 
 The structure of family life with regard to the Christian wife consists of her deliberate subjection of herself to the authority of her husband. She recognizes his headship. She helps him, by submission. This submission is not grudging but a submission in love, as is true of the church's submission to Christ. The submission of their mother to the authority of their father has an effect upon the children regarding their own submission to their parents. This calling of the Christian woman is not the outdated notion of a patriarchal time but the Word of God in Ephesians 5 to believing wives in all times.
 
-The love of parents for their children takes the form of the rearing of them "in the nurture and admonition of the Lord" (Eph. 6:4). This consists of teaching, discipline, example of life, instruction at home not only in the Bible and the faith, but also concerning the entire body of Christian doctrine and the whole range of life in the world. As mention of the "whole range of life in the world" indicates, the Christian rearing of the children requires good Christian schools, as Article 21 of the Reformed "Church Order" of the Synod of Dordt states, "The consistories shall see to it that there are good Christian schools in which the parents have their children instructed according to the demands of the covenant."[^2]
+The love of parents for their children takes the form of the rearing of them "in the nurture and admonition of the Lord" (Eph. 6:4). This consists of teaching, discipline, example of life, instruction at home not only in the Bible and the faith, but also concerning the entire body of Christian doctrine and the whole range of life in the world. As mention of the "whole range of life in the world" indicates, the Christian rearing of the children requires good Christian schools, as Article 21 of the Reformed "Church Order" of the Synod of Dordt states, "The consistories shall see to it that there are good Christian schools in which the parents have their children instructed according to the demands of the covenant."
 
 According to Colossians 3:21, a special danger to be avoided by parents is provoking the children to anger, lest they be discouraged. Parents provoke their children by unreasonable demands, usually in the interests of the parents, not of the children; by unnecessary or unfair discipline, a discipline administered in unrestrained parental wrath, and too severe; and by favouritism among the children. The evil is that the child becomes discouraged or, as is the original Greek, "broken in spirit." Like God with His children, we should desire spirited fellowship with our children, doing justice to the different personalities of them all and encouraging each one to be fully the person God has made him or her to be. This makes family-life interesting, even exciting.
 

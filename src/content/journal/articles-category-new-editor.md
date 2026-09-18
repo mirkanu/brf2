@@ -10,7 +10,7 @@ tags:
   - "editorial"
 ---
 
-# New Editor!
+## New Editor!
 
 Rev. Angus Stewart
 
