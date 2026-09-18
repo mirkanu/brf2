@@ -1,3 +1,4 @@
+---
 
 title: "The Reformed View of Baptism (2) Its Mode"
 legacyPath: /journal/articles/category/the-reformed-view-of-baptism-2-its-mode

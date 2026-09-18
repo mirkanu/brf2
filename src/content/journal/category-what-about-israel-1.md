@@ -1,3 +1,4 @@
+---
 
 title: "What About Israel? (1)"
 legacyPath: /journal/articles/category/what-about-israel-1

@@ -1,3 +1,4 @@
+---
 
 title: "New Editor!"
 legacyPath: "/journal/articles/articles/category/new-editor"

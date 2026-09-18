@@ -1,3 +1,4 @@
+---
 
 title: "Our Covenant God: Friend, Husband and Father (4)"
 legacyPath: "/journal/articles/articles/category/our-covenant-god-friend-husband-and-father-4"

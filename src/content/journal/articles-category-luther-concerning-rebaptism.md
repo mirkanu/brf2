@@ -1,3 +1,4 @@
+---
 
 title: "Luther Concerning Rebaptism"
 legacyPath: "/journal/articles/articles/category/luther-concerning-rebaptism"

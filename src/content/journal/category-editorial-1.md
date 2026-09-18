@@ -1,3 +1,4 @@
+---
 
 title: Editorial
 legacyPath: /journal/articles/category/editorial-1

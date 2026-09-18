@@ -1,3 +1,4 @@
+---
 
 title: "The Reformed Family: Parents and Children"
 legacyPath: /journal/articles/category/the-reformed-family-parents-and-children

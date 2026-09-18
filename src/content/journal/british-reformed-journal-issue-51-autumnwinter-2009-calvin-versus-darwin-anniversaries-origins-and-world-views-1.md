@@ -1,3 +1,4 @@
+---
 
 title: "Calvin Versus Darwin: Anniversaries, Origins and World-Views (1)"
 legacyPath: "/journal/articles/british-reformed-journal/issue-51-autumnwinter-2009/calvin-versus-darwin-anniversaries-origins-and-world-views-1"
