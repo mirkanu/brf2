@@ -1,4 +1,4 @@
----
+
 title: "Luther Concerning Rebaptism"
 legacyPath: "/journal/articles/articles/category/luther-concerning-rebaptism"
 datePublished: "2020-05-31 20:06:59"
@@ -16,13 +16,13 @@ Concerning Rebaptism
 
 Three years after Luther hammered his Ninety-Five Theses to the Castle Church in Wittenberg, thereby triggering the upheaval which lead to the Reformation, he published his polemical treatise against Rome, *The Babylonian Captivity of the Church* (1520). In this work, Luther takes issue with the sacraments of the church under papal control. Not only had Rome invented new sacraments, but she had also distorted and corrupted those given by Christ. The papacy had turned them into a system of coercion from birth to the grave. However, in his opening words in the section on baptism Luther expresses his conviction that baptism unlike the mass had been retained relatively free of superstition:
 
-> Blessed be the God and Father of our Lord Jesus Christ, who according to the riches of His mercy has at least preserved this one sacrament in His Church uninjured and uncontaminated by the devices of men, and has made it free to all nations and to men of every class. He has not suffered it to be overwhelmed with the foul and impious monstrosities of avarice and superstition; doubtless having this purpose, that He would have little children, incapable of avarice and superstition, to be initiated into this sacrament, and to be sanctified by perfectly simple faith in His word. [^2]
+> Blessed be the God and Father of our Lord Jesus Christ, who according to the riches of His mercy has at least preserved this one sacrament in His Church uninjured and uncontaminated by the devices of men, and has made it free to all nations and to men of every class. He has not suffered it to be overwhelmed with the foul and impious monstrosities of avarice and superstition; doubtless having this purpose, that He would have little children, incapable of avarice and superstition, to be initiated into this sacrament, and to be sanctified by perfectly simple faith in His word.
 
-When reading the section on baptism, one will search in vain for any defence of infant baptism, for the simple reason that it was not yet an issue. At this time in the Reformation, the enemy was the Roman Church which had buried the gospel with its many corruptions, but that was very soon to change. Luther's forced absence had seen Wittenberg threatened by the chaos of Anabaptist radicalism. Only his return saved the day. Anabaptism, however, like Rome, continued to be a threat to the church.[^3]
+When reading the section on baptism, one will search in vain for any defence of infant baptism, for the simple reason that it was not yet an issue. At this time in the Reformation, the enemy was the Roman Church which had buried the gospel with its many corruptions, but that was very soon to change. Luther's forced absence had seen Wittenberg threatened by the chaos of Anabaptist radicalism. Only his return saved the day. Anabaptism, however, like Rome, continued to be a threat to the church.
 
 The word Anabaptism literally means "rebaptism." All Anabaptists were united in their denial of the validity of infant baptism: they baptized, and often rebaptized, adults alone. The term Anabaptist covers a wide range of groups who were diverse in many of their core doctrines. Included among their ranks were anti-Trinitarians and wild-eyed revolutionaries. Francis N. Lee, describing the Anabaptists, states,
 
-> As to creation and providence, many were either anarchistic or neo-Manichaean. Indeed, some were very lascivious—and either adulterers or polygamists. Nearly all maintained a heretical neo-Gnostic Christology. Several claimed to be prophetic visionaries and/or glossolalists, and more than a few were thoroughly communistic. Most were millenarian, fanatically predicting the imminent return of Christ. Nearly all of them taught both soul-sleep and the final annihilation of the wicked (thus denying eternal punishment). Absolutely all of them were either antinomian or legalistic. [^4]
+> As to creation and providence, many were either anarchistic or neo-Manichaean. Indeed, some were very lascivious—and either adulterers or polygamists. Nearly all maintained a heretical neo-Gnostic Christology. Several claimed to be prophetic visionaries and/or glossolalists, and more than a few were thoroughly communistic. Most were millenarian, fanatically predicting the imminent return of Christ. Nearly all of them taught both soul-sleep and the final annihilation of the wicked (thus denying eternal punishment). Absolutely all of them were either antinomian or legalistic.
 
 Although modern Calvinistic Baptists are not guilty of the gross doctrinal errors of the Anabaptists, they continue to use many of the arguments employed by the Anabaptists against infant baptism. Frequently, one will also hear the assertion made in evangelical and Baptist churches that the Reformers unthinkingly and carelessly adopted Roman superstition. However, such assertions demonstrate a failure to grasp key Reformation doctrines, as well as ignorance of the clear refutations written by the Reformers. The Reformers did not adopt infant baptism because of superstition or tradition; they did so because they believed the Bible teaches it. Whether modern Baptists agree with the Reformers' exegesis of the Bible or not on this point, they should at least acknowledge that the Reformers did not blindly follow ecclesiastical tradition.
 
@@ -70,20 +70,6 @@ You must make sure of your baptism, for how can you know that you were baptized 
 
 Indeed, the whole argument that you need to be sure for yourself leads to radical scepticism. How can you believe anything if you are not willing to accept the testimony of another?
 
-## Footnotes
-
-[^1]: Brian Harris is a member of Swansea Evangelical Reformed Church and the Conference Chairman of the British Reformed Fellowship.
-
-[^2]: Paul W. Robinson (ed.), *The Annotated Luther*, vol. 3: *Church and Sacraments* (Minneapolis, MN: Fortress Press, 2016), pp. 59-60. There are various editions of Martin Luther's works, and this is a new series. While beautifully produced, it is marred in places by an uncritical commitment to the use of "inclusive language." Hereafter all page numbers in the body text refer to this book.
-
-[^3]: A short readable account of Anabaptism can be found in Herman Hanko, *Contending for the Saints* (Jenison, MI: RFPA, 2010), pp. 178-191.
-
-[^4]: Francis N. Lee, "The Anabaptists and Their Stepchildren," Section 3 (www.reformed.org/sacramentology/lee/index.html).
-
- I have not seen or felt these things. I've only heard them from people. So I won't believe them unless they are reenacted anew and happen and are done before my eyes. So I am above all a wholly free person, free from the commands of God. That's the way I would have it, if I could, the devil declares (286).
-
-Luther argues that we should accept our baptism, although we cannot remember it. He cautions us that, even if we are in a position to remember our own baptism, the devil is still quite capable of shaking our certainty in the validity of our own baptism. Perhaps we dreamed or hallucinated. The devil is able to find a multitude of ways of shaking us. It is important that we see the validity of our baptism not in our own action or in our own memory of the event, but that we view it from the perspective of God. Baptism is about what God does, not about what we do. Therefore, the validity of baptism does not rest on our memory, our doing or our action, but on God's action.
-
 ## Objection 3: According to Mark 16:16 we must not be baptized until we have first believed.
 
 Perhaps more than any other objection this one continues to be made. Who has not heard it? First believe, and then be baptized. Have you not read, "He that believeth and is baptized shall be saved" (*Mark* 16:16)? This seems to be the end of all arguments but Luther disagrees, for this is an impossible position to maintain. Listen to Luther commenting on this verse:
@@ -102,7 +88,7 @@ Luther concludes his discussion of Mark 16:16 by putting our understanding on a 
 
 Later, Luther returns to the theme of faith and baptism to deal with the problem of faith (or lack of faith) of the baptizer. What if the person who baptized me should prove to be a wicked man who does not appear to possess faith? Perhaps the person who baptized me later shows himself an unbeliever by leaving the faith and living in open sin. We can understand how this might trouble individuals. Does the wickedness of the baptizer invalidate my baptism? Should I seek rebaptism?
 
-First, observes Luther, even if Paul or Peter baptized you, you cannot know if they doubted at the time of the administration of the sacrament, for you cannot peer into their hearts. Luther observes that this was the error of the Donatists who separated themselves and rebaptized members of the church, when they saw the unholiness of some who baptized and preached.[^5] Their error was to base baptism on the holiness of the church officer contrary to Christ who based it on the Word and the commandment. Once you begin to travel down the path of making baptism dependent on the faith of the one who administers it, you will never receive baptism from anyone. Outward appearances and confessions of faith may be deceptive. You cannot know the heart of another (neither of the baptizer or of the baptized) and therefore cannot have the certainty that is demanded.
+First, observes Luther, even if Paul or Peter baptized you, you cannot know if they doubted at the time of the administration of the sacrament, for you cannot peer into their hearts. Luther observes that this was the error of the Donatists who separated themselves and rebaptized members of the church, when they saw the unholiness of some who baptized and preached. Their error was to base baptism on the holiness of the church officer contrary to Christ who based it on the Word and the commandment. Once you begin to travel down the path of making baptism dependent on the faith of the one who administers it, you will never receive baptism from anyone. Outward appearances and confessions of faith may be deceptive. You cannot know the heart of another (neither of the baptizer or of the baptized) and therefore cannot have the certainty that is demanded.
 
 Luther draws one other conclusion from his discussion on the dangers of putting the requirement of faith before baptism. The devil uses it to promote confidence in works. According to the Anabaptist, faith was something which man did by the power of his own will. This is not faith, for Luther, but it is a work. The subtle danger is that salvation is based on the righteousness of works. In his *Small Catechism* (1529), Luther describes faith in connection with the third article of the Apostle's Creed:
 
@@ -128,32 +114,12 @@ Second, Luther asks, what do you gain even if you do succeed in establishing tha
 
 ## Footnotes
 
+[^1]: Brian Harris is a member of Swansea Evangelical Reformed Church and the Conference Chairman of the British Reformed Fellowship.
+
+[^2]: Paul W. Robinson (ed.), *The Annotated Luther*, vol. 3: *Church and Sacraments* (Minneapolis, MN: Fortress Press, 2016), pp. 59-60. There are various editions of Martin Luther's works, and this is a new series. While beautifully produced, it is marred in places by an uncritical commitment to the use of "inclusive language." Hereafter all page numbers in the body text refer to this book.
+
+[^3]: A short readable account of Anabaptism can be found in Herman Hanko, *Contending for the Saints* (Jenison, MI: RFPA, 2010), pp. 178-191.
+
+[^4]: Francis N. Lee, "The Anabaptists and Their Stepchildren," Section 3 (www.reformed.org/sacramentology/lee/index.html).
+
 [^5]: The Donatists were a schismatic group who originated in North Africa in the fourth century and persisted until the late seventh century. Donatism is named after its leading light, Donatus, who was elected by the schismatics as Bishop of Carthage in 313 AD. The main reason behind their formation was the lax policy of the church at Carthage during the persecution of 303 AD by the Roman Empire. The Donatists claimed that sacraments given by priests who had compromised in persecution were of no value. As such, the Donatists would rebaptize Catholics and regarded themselves as the true church.
-
-stance. There can be no abuse unless the substance exists. When ten years after baptism faith appears, what then is the need of a second baptism, if baptism was correctly administered in all respects? For now a person believes, as baptism requires. Faith doesn't exist for the sake of baptism, but baptism for the sake of faith. When faith comes, baptism is complete. A second baptism is not necessary (299).
-
-Luther draws a parallel with a woman who reluctantly marries a man but completely lacks affection for him. After two years, the woman grows to love her husband. Does this then demand a second engagement and a second marriage, as if the first did not make her his wife? The foolishness of this is clearly seen by all, so why then is not the foolishness of rebaptism also seen? If the validity of baptism depends upon me, on my faith or on how I feel about my current state, then I will need to be baptized time and again. Luther asks,
-
-> What Christians will then ever be sufficiently baptized or consider that their baptisms are complete? But baptism can be truly correct and sufficient even if the Christian falls from faith or sins a thousand times a year. It is enough for people to right themselves and become faithful, without having to be rebaptized each time! Then why should not the first baptism be sufficient and proper if a person truly becomes a believing Christian? Since there is no difference in baptism whether lack of faith precedes or follows, baptism doesn't depend on faith. But if faith is lacking, the Anabaptists would have us believe we must alter the nature of baptism to accord with the verse 'Whoever believes" (301).
-
-Luther is not content to leave it there but drives home his point that the abuse of baptism does not invalidate it:
-
-> Gold does not become straw because a thief steals and misuses it. Silver doesn't turn into paper if a usurer dishonestly obtains it. Since then the Anabaptists demonstrate only the abuse of baptism, they fly in the face of God, nature, and reason, when they want to alter and make anew baptism itself in treating the abuse (301).
-
-~24~
-
-It is good that many will celebrate the Reformation on this 500th anniversary. However, it is puzzling that many of these will reject the baptism of infants and insist on rebaptism for membership in their churches. This cannot be done in the name of Luther. Indeed, it cannot be done in the name of the Reformation. Rebaptism has a different parentage. May not only the testimony of Luther but also the united voice of all the Reformers be heeded.
-
-As a fitting conclusion to this article, we quote Luther's own words:
-
-> We who know that baptism is a God-given thing, instituted and commanded by God, look not at its abuse by godless persons, but simply at God's ordinance. We find baptism in itself to be a holy, blessed, glorious, and heavenly thing, to be held in honor with fear and trembling, just as it is reasonable and right to hold any other ordinance and command of God. It is not the fault of baptism that many people abuse it. It would be just as wrong to call the gospel an empty babbling because there are many who abuse it. As far as I have been able to see and hear, the Anabaptists have no argument but high-sounding words of sacrilege. Therefore, everyone ought properly to shun and avoid them as messengers of none other than the devil, sent out into the world to blaspheme the word and ordinance of God so that people might not believe it and be saved. For they are the birds that eat the seed sown by the wayside, *Matt.* 13[:4] (313).
-
-## Footnotes
-
-1: Brian Harris is a member of Swansea Evangelical Reformed Church and the Conference Chairman of the British Reformed Fellowship.
-
-2: Paul W. Robinson (ed.), The Annotated Luther, vol. 3: Church and Sacraments (Minneapolis, MN: Fortress Press, 2016), pp. 59-60. There are various editions of Martin Luther's works, and this is a new series. While beautifully produced, it is marred in places by an editorial commitment to the use of "inclusive language." Hereafter all page numbers in the body text refer to this book.
-
-3: A short readable account of Anabaptism can be found in Herman Hanko, Contending for the Saints (Jenison, MI: RFPA, 2010), pp. 178-191.
-
-4: Francis N. Lee, "The Anabaptists and Their Stepchildren," Section 3 (www.reformed.org/sacramentology/lee/index.html).

@@ -1,4 +1,4 @@
----
+
 title: "The Reformed View of Baptism (2) Its Mode"
 legacyPath: /journal/articles/category/the-reformed-view-of-baptism-2-its-mode
 datePublished: "2015-09-02 13:04:34"
@@ -28,7 +28,7 @@ Needless to say, the proof texts do not prove the point, but of that more anon.
 
 How then is the matter to be resolved? Clearly the answer is by reference to those same inspired scriptures, which are:
 
-> 'profitable for doctrine, for reproof, for instruction in righteousness, that the man of God may be complete, thoroughly equipped for every good work.'^[1]
+> 'profitable for doctrine, for reproof, for instruction in righteousness, that the man of God may be complete, thoroughly equipped for every good work.'[^1]
 
 Every text referring to Baptism in the New Testament has been examined and classified. This seems to point to quite clear conclusions — and I can only urge anyone bothered about this issue to pursue the same course. What follows is simply a summary.
 
@@ -79,7 +79,7 @@ Although this seems quite clear it may be that certain objections are felt to th
 
 3. But surely says someone all this is beside the point: whatever your arguments we have an actual example in the case of Our Lord. His Baptism was by immersion. Well, taken on its own, it may have been. There is nothing in the narrative to rule it out — but neither is there anything there to imply it must have been. Although Our Lord's Baptism is mentioned in all four gospels only two have a direct account. In Matthew we read: 'And Jesus, when He had been baptized, came up immediately from the water;' and in Mark:
 
-   > 'coming up out of the water'.^[2]
+   > 'coming up out of the water'.[^2]
 
    Once again we are faced with the trickiness of Greek prepositions. In Matthew the word used is *apo*. This means *from* or *away from* — not *out of* as the AV translates, in Mark the word is *ek* which means *out of* or *from*. Putting both accounts together all we apparently are being told is that Our Lord came from the water. If he and John the Baptist had stepped into the Jordan and John had scooped up water and poured it on Our Lord's head and then they had both come away from the water all the facts in the Biblical narrative would be covered. In the light of our previous discussion immersion seems unlikely.
 
@@ -95,4 +95,4 @@ We have examined the circumstances surrounding John's Baptizing and have ascerta
 
 [^1]: II Tim. iii. 16, 17.
 
-[^2]: Mark i. 10.
+[^2]: *Mark* i. 10.

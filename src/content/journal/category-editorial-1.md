@@ -1,4 +1,4 @@
----
+
 title: Editorial
 legacyPath: /journal/articles/category/editorial-1
 datePublished: "2019-04-17 22:14:14"
@@ -29,4 +29,4 @@ On page 25, four lines up from the bottom of the middle paragraph, the phrase "m
 
 > "mental notions of the SANDEMANIANS"
 
-Contra. the opinions expressed in certain religious communications in recent months, the BRF and the BRJ wish to make it known that we regard Sandemanianism as heretical and that we hereby **REPUDIATE SANDEMANIANISM**
+Contra. the opinions expressed in certain religious communications in recent months, the BRF and the BRJ wish to make it known that we regard Sandemanianism as heretical and that we hereby **REPUDIATE SANDEMANIANISM**.

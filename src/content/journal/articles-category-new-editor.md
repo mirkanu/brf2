@@ -1,4 +1,4 @@
----
+
 title: "New Editor!"
 legacyPath: "/journal/articles/articles/category/new-editor"
 datePublished: "2022-02-20 16:14:44"
