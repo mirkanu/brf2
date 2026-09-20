@@ -151,4 +151,9 @@ Although this work attempts to provide a fuller understanding of the covenant, a
 
 ## Footnotes
 
-[^6]: "Form for the Administration of Baptism," in Confessions and Church Order, p. 258.
+[^1]: Matt Kortus is a fourth-year seminary student at the Protestant Reformed Theological School and a member of Zion Protestant Reformed Church in Jenison, MI, USA.
+[^2]: Cf. Herman Hoeksema, *Reformed Dogmatics*, vol. 1 (Grandville, MI: RFPA, 2004), pp. 455–458.
+[^3]: F. Brown, S. Driver and C. Briggs, *Hebrew and English Lexicon* (Peabody, MA: Hendrickson, repr. 2010), p. 1036.
+[^4]: John Calvin, *Commentary on the Book of Psalms*, trans. James Anderson (Grand Rapids, MI: Baker, repr. 1993), 5:155.
+[^5]: "Form for the Administration of Baptism" in *The Confessions and Church Order of the Protestant Reformed Churches* (Grandville, MI: PRCA, 2005), p. 258.
+[^6]: "Form for the Administration of Baptism," in *Confessions and Church Order*, p. 258.

@@ -213,7 +213,7 @@ def check_truncation(body: str, rep: ArticleReport) -> None:
     # ("This article is also available in [X](...)_._"). Treat _._ as a
     # sentence terminator so the validator does not falsely flag the
     # translation-link suffix as a truncated body.
-    terminators = (".", "!", "?", "”", "\"", "]", ")", "*", "`", "_._")
+    terminators = (".", "!", "?", "”", "\"", "]", ")", "*", "`", "_._", "_")
     if len(s) > 200 and not last.endswith(terminators):
         rep.findings.append(Finding(
             rule="3",

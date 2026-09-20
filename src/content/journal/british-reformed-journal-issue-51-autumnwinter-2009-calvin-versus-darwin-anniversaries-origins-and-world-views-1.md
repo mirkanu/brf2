@@ -90,3 +90,27 @@ Estos tres, la evolución, uniformismo y el big bang, son tres partes de un romp
 ¡Esta es la belleza del evolucionismo para el hombre caído e incrédulo! La biología evolutiva (que explica el origen de la vida) más la geología uniformista (que explica la forma de la tierra) más la astronomía del big bang (que explica la existencia del universo) equivalen al naturalismo ateo. No hay Dios, ni pecado, ni juicio, ni infierno eterno. Por lo tanto, no hay necesidad de arrepentimiento y fe, no hay necesidad de redención a traves de Jesucristo y no hay necesidad de la iglesia. Ese es exactamente el punto. Es por eso que tantos aman, enseñan, defienden y elogian la evolución: "Debemos mantener y promover el evolucionismo por encima de todo, porque sin el evolucionismo toda nuestra visión del mundo y nuestra forma de vida colapsarían a nuestro alrededor. Pero si podemos mantener el evolucionismo, entonces estamos bien. Podemos vivir y morir como queramos y negar cualquier necesidad de un creador a quien debemos amar y servir". No es de extrañar que "en el transcurso de la 'Semana de la Evolución' de la BBC en 1998", Darwin fuera llamado "el hombre que mató a Dios".[^21]
 
 De esta impía trinidad (el big bang en el comienzo mismo del universo, la geología uniformista que moldea la tierra para que sea como es hoy y la biología evolutiva que produce vida en nuestro planeta), el evolucionismo (y, por lo tanto, Darwin) es la opción más representativa e importante. Este es el caso porque el evolucionismo es el final de la cadena.
+
+
+## Footnotes
+
+[^1]: Este artículo es una ampliación de un discurso pronunciado en Irlanda del Norte, la República de Irlanda, Gales y Estados Unidos en 2009. Audio (Portadown, Irlanda del Norte) y vídeo (Grand Rapids, EE. UU.) están disponibles en línea.
+[^2]: Olivia Judson, New York Times, 12 de febrero de 2009.
+[^3]: Juan Calvino, *Commentary on the Book of Psalms*, trad. James Anderson (Grand Rapids, MI: Baker, repr. 1993), p. xl. Todas las citas de los comentarios de Calvino provienen de la edición Baker de 22 volúmenes (repr. 1993).
+[^4]: Brian L. Silver, *The Ascent of Science* (Oxford: Oxford University Press, 1998), p. 291.
+[^5]: A. N. Wilson, *The Victorians* (London: Hutchinson, 2002), p. 224.
+[^6]: Juan Calvino, *Instituciones de la religión Cristiana*, ed. John T. McNeill, trad. Ford Lewis Battles, 2 vols. (Filadelfia, PA: The Westminster Press, 1960).
+[^7]: J. M. Roberts, *The Penguin History of the World* (Inglaterra: Penguin Books, 1990), p. 802; cf. Brian Silver, *The Ascent of Science*, p. 282.
+[^8]: Wilson, *The Victorians*, p. 226.
+[^9]: Calvino produjo cinco ediciones en latín (1536, 1539, 1543 [reimpreso en 1545], 1550, 1559) y cuatro en francés (1541, 1545, 1551, 1560) de sus *Instituciones*. Darwin vio seis ediciones en inglés de su *Origen* entre 1859 y 1872.
+[^10]: Daniel J. Boorstin, *The Discoverers* (New York: Random House, 1983), págs. 470–472.
+[^11]: Calvino, *Instituciones* 1.2.2, p. 41; cf. 1.4.1, p. 47.
+[^12]: Calvino, *Commentary on I Corinthians* 3:19; cf. Herman J. Selderhuis, *Calvin's Theology of the Psalms* (Grand Rapids, MI: Baker, 2007), p. 69.
+[^13]: Stephen Jay Gould, *Ontogeny and Phylogeny* (Cambridge, MA: Belknap-Harvard Press, 1977), págs. 127–128.
+[^14]: Cf. Karl Marx (1818–1883) y el materialismo dialéctico; Stalin, Mao y Pol Pot aplicaron el evolucionismo para justificar la violencia atea.
+[^15]: Calvino, *Instituciones* 1.5.5, p. 58.
+[^16]: Charles Darwin, *On the Origin of Species* (London: John Murray, 1859) — título completo: *On the Origin of Species by Means of Natural Selection, or the Preservation of Favoured Races in the Struggle for Life*.
+[^17]: Roberts, *The Penguin History of the World*, p. 803.
+[^18]: Cf. Charles Lyell, *Principles of Geology* (London: John Murray, 1830), vol. 1.
+[^19]: Calvino enseñó la creación ex nihilo en seis días y un diluvio universal; su teología se opone diametralmente a la geología uniformista.
+[^21]: Boorstin, *The Discoverers*, págs. 465–472.

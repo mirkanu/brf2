@@ -331,4 +331,3 @@ In light of all we have seen so far regarding the saving will of the blessed Tri
 
 [^16]: Zanchius, *The Doctrine of Absolute Predestination*, pp. 23-24. In an excellent section of this book, Zanchius states, defends and develops 14 theological propositions or "positions" regarding the will of God (pp. 12-25).
 
-OUTPUT_TRUNCATED: NO
