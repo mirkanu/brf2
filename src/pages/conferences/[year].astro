@@ -34,7 +34,7 @@ const headings: { depth: number; slug: string; text: string }[] = [];
 headings.push({ depth: 2, slug: "programme", text: "Programme" });
 if (hasRecordings) headings.push({ depth: 2, slug: "recordings", text: "Recordings" });
 if (hasReviews) headings.push({ depth: 2, slug: "reviews", text: "Reviews" });
-headings.push({ depth: 2, slug: "resources", text: "Resources" });
+if ((d.resources ?? []).length > 0) headings.push({ depth: 2, slug: "resources", text: "Resources" });
 
 const venuePhotoUrl = d.venuePhoto ?? null;
 const pageTitle = `${d.title} | ${d.year} BRF Conference`;
@@ -283,19 +283,18 @@ const YouTubeIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
           </div>
         )}
 
-        <div class="mt-12">
-          <h2 id="resources" class="font-serif text-2xl font-semibold text-brand-ink">Resources</h2>
-          <div class="mt-4 space-y-3 border-t border-brand-ink/15 pt-4 text-sm">
-            {hasProgramme && (
-              <p>
-                <a href={d.programmePdf} target="_blank" rel="noopener" class="font-medium text-brand-ink underline decoration-brand-ink/30 underline-offset-2 hover:decoration-brand-ink">Final programme (PDF) ↗</a>
-              </p>
-            )}
-            {speakers.length > 0 && (
-              <p class="text-brand-muted">Speaker profiles and cross-references for {speakers.join(", ")}.</p>
-            )}
+        {(d.resources ?? []).length > 0 && (
+          <div class="mt-12">
+            <h2 id="resources" class="font-serif text-2xl font-semibold text-brand-ink">Resources</h2>
+            <ul class="mt-4 space-y-2 border-t border-brand-ink/15 pt-4 text-sm">
+              {(d.resources ?? []).map((r: { label: string; href: string }) => (
+                <li>
+                  <a href={r.href} target="_blank" rel="noopener" class="font-medium text-brand-ink underline decoration-brand-ink/30 underline-offset-2 hover:decoration-brand-ink">{r.label} ↗</a>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        )}
       </div>
 
       {headings.length > 0 && (
