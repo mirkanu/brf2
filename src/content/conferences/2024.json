@@ -138,21 +138,5 @@
       "mp3DurationSeconds": 859
     }
   ],
-  "reviews": [
-    {
-      "title": "Review of the 2024 BRF Conference",
-      "author": "Lori Schipper",
-      "kind": "brf",
-      "href": "/conferences/2024/review-lori-schipper/",
-      "host": null
-    },
-    {
-      "title": "Reflections on the 2024 Eschatology Conference",
-      "author": "Anna Huizinga",
-      "kind": "brf",
-      "href": "/conferences/2024/review-anna-huizinga/",
-      "host": null
-    }
-  ],
   "section": "conference"
 }

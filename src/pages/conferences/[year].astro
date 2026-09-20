@@ -72,7 +72,7 @@ function groupRecordings(recs: any[]): Group[] {
 }
 const recordingGroups = groupRecordings(d.recordings ?? []);
 
-const AudioIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3.5"><path d="M11.5 4.5a.75.75 0 0 1 .77-.02l3 1.8A.75.75 0 0 1 15.75 7v10a.75.75 0 0 1-.48.72l-3 1.8a.75.75 0 0 1-1.02-.7V5.2a.75.75 0 0 1 .25-.7ZM8 9.5a3.5 3.5 0 1 1-3 6.32V9.5ZM5 8.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0v-5.5A.75.75 0 0 1 5 8.5Z"/></svg>`;
+const AudioIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`;
 const YouTubeIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3.5"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.76C18.27 5 12 5 12 5s-6.27 0-7.84.44A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.76C5.73 19 12 19 12 19s6.27 0 7.84-.44a2.5 2.5 0 0 0 1.76-1.76A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15V9l5.2 3L10 15Z"/></svg>`;
 ---
 <Site title={pageTitle} description={description} ogImageUrl={venuePhotoUrl ?? undefined}>
@@ -174,8 +174,9 @@ const YouTubeIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
             <div class="mt-4 border-t border-brand-ink/15 pt-4 space-y-8">
               {d.youtubePlaylistUrl && (
                 <p class="text-sm">
-                  <a href={d.youtubePlaylistUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-1 font-medium text-brand-ink underline decoration-brand-ink/30 underline-offset-2 hover:decoration-brand-ink">
-                    Full YouTube playlist ↗
+                  <a href={d.youtubePlaylistUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 rounded-full border border-brand-ink/30 bg-white px-4 py-1.5 font-medium text-brand-ink hover:bg-brand-cream">
+                    <Fragment set:html={YouTubeIcon} />
+                    Full YouTube playlist
                   </a>
                 </p>
               )}
