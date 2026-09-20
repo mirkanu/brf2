@@ -1,0 +1,230 @@
+---
+/**
+ * Conference recordings: ordered list of main speeches, then Lord's Day 1,
+ * Lord's Day 2, then Special Lecture (when present).
+ *
+ * Behaviour:
+ *   - "Full playlist" link at top always visible when youtubePlaylistUrl is set.
+ *   - Each speech row has [▶ YouTube] + [▶ MP3] toggles.
+ *   - At most one YouTube panel is visible at a time across the page; clicking
+ *     a [▶ YouTube] button collapses any other open panel and reveals this one
+ *     in place (no scroll-jump). Pure JS, no scroll-into-view.
+ *   - MP3 panel is per-speech: clicking [▶ MP3] expands only that speech's
+ *     <audio> in place (also no scroll-jump). Re-click hides it.
+ *
+ * Until R2 upload lands, mp3Url is the britishreformed.org path; the audio
+ * still plays fine.
+ */
+interface Recording {
+  number?: number | null;
+  title?: string | null;
+  speaker?: string | null;
+  kind?: 'speech' | 'lords-day' | 'special-lecture';
+  youtubeId?: string | null;
+  mp3Url?: string | null;
+  durationSeconds?: number | null;
+}
+interface Props {
+  speeches: Recording[];
+  youtubePlaylistUrl?: string | null;
+}
+const { speeches, youtubePlaylistUrl } = Astro.props;
+
+// Re-order: main speeches (number asc), then LD1, LD2, then Special Lecture.
+const main = speeches
+  .filter((s) => (s.kind ?? 'speech') === 'speech')
+  .slice()
+  .sort((a, b) => (a.number ?? 0) - (b.number ?? 0));
+const ld1 = speeches.find((s) => s.kind === 'lords-day' && (s.title ?? '').toLowerCase().includes('1'));
+const ldAll = speeches.filter((s) => s.kind === 'lords-day');
+const ld2 = ld1 ? ldAll.find((s) => s !== ld1) : undefined;
+const special = speeches.find((s) => s.kind === 'special-lecture');
+
+const ordered: Recording[] = [
+  ...main,
+  ...(ld1 ? [ld1] : []),
+  ...(ld2 ? [ld2] : []),
+  ...(special ? [special] : []),
+];
+
+// Script: collapse-all-but-one for the YouTube group; per-row MP3 toggle.
+// Trigger pattern: any [data-yt-toggle] inside [data-yt-group="conf"]
+// closes every other [data-yt-panel] inside the same group.
+---
+<section class="bg-brand-parchment border-t border-brand-ink/10">
+  <div class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="font-serif text-2xl text-brand-ink border-b border-brand-ink/20 pb-3">Recordings</h2>
+
+    {youtubePlaylistUrl && (
+      <p class="mt-4">
+        <a
+          href={youtubePlaylistUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-1 text-sm text-brand-ink hover:text-oxblood hover:underline"
+        >
+          Full playlist on YouTube ↗
+        </a>
+      </p>
+    )}
+
+    <div class="mt-6 space-y-4" data-yt-group="conf">
+      {ordered.map((s, i) => {
+        const kind = s.kind ?? 'speech';
+        const kindLabel =
+          kind === 'lords-day' ? "Lord's Day Sermon" :
+          kind === 'special-lecture' ? 'Special Lecture' :
+          (s.number != null ? `Speech ${s.number}` : 'Speech');
+        const ytBtnId = `conf-yt-btn-${i}`;
+        const ytPanelId = `conf-yt-panel-${i}`;
+        const mp3BtnId = `conf-mp3-btn-${i}`;
+        const mp3PanelId = `conf-mp3-panel-${i}`;
+        return (
+          <article
+            class="rounded-lg border border-brand-ink/15 bg-white p-5"
+            data-recording
+          >
+            <header class="flex flex-wrap items-baseline justify-between gap-3">
+              <p class="text-xs uppercase tracking-wider text-muted">
+                {kindLabel}{s.speaker ? ` · ${s.speaker}` : ''}
+              </p>
+              {s.durationSeconds != null && (
+                <p class="text-xs tabular-nums text-muted">{Math.round(s.durationSeconds / 60)} min</p>
+              )}
+            </header>
+            <h3 class="mt-1 font-serif text-lg text-brand-ink leading-snug">{s.title ?? 'Untitled'}</h3>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              {s.youtubeId && (
+                <>
+                  <button
+                    type="button"
+                    id={ytBtnId}
+                    data-yt-toggle={s.youtubeId}
+                    aria-controls={ytPanelId}
+                    aria-expanded="false"
+                    class="inline-flex items-center gap-1.5 rounded-md border border-brand-ink/20 bg-brand-cream px-3 py-1.5 text-sm text-brand-ink hover:bg-brand-cream/70"
+                  >
+                    <span aria-hidden="true">▶</span> YouTube
+                  </button>
+                  <a
+                    href={`https://www.youtube.com/watch?v=${s.youtubeId}`}
+                    target="_blank"
+                    rel="noopener"
+                    class="inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-sm text-brand-ink/70 hover:text-brand-ink hover:underline"
+                  >
+                    Open on YouTube ↗
+                  </a>
+                </>
+              )}
+              {s.mp3Url && (
+                <button
+                  type="button"
+                  id={mp3BtnId}
+                  aria-controls={mp3PanelId}
+                  aria-expanded="false"
+                  class="inline-flex items-center gap-1.5 rounded-md border border-brand-ink/20 bg-brand-cream px-3 py-1.5 text-sm text-brand-ink hover:bg-brand-cream/70"
+                >
+                  <span aria-hidden="true">▶</span> MP3
+                </button>
+              )}
+              {!s.youtubeId && !s.mp3Url && (
+                <p class="text-sm text-muted">No recording yet.</p>
+              )}
+            </div>
+
+            {s.youtubeId && (
+              <div
+                id={ytPanelId}
+                data-yt-panel
+                hidden
+                class="yt-panel mt-4 aspect-video w-full overflow-hidden rounded-md border border-brand-ink/15 bg-black/5"
+              />
+            )}
+            {s.mp3Url && (
+              <div id={mp3PanelId} hidden class="mt-4">
+                <audio controls preload="none" src={s.mp3Url} class="w-full">
+                  Your browser does not support the audio element.
+                  <a href={s.mp3Url}>Download the MP3</a>
+                </audio>
+              </div>
+            )}
+          </article>
+        );
+      })}
+
+      {ordered.length === 0 && (
+        <p class="text-sm text-muted">No recordings have been added yet.</p>
+      )}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    function closePanel(panel) {
+      panel.hidden = true;
+      panel.innerHTML = '';
+      var btn = document.getElementById(panel.getAttribute('aria-controls') ? '' : '') || document.querySelector('[aria-controls="' + panel.id + '"]');
+      // fallback: set any toggle button with aria-controls = panel.id to expanded=false
+      var btns = document.querySelectorAll('[aria-controls="' + panel.id + '"]');
+      btns.forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+    }
+    function setExpanded(panel, expanded, btn) {
+      panel.hidden = !expanded;
+      if (btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    }
+    function showYouTube(panel, videoId, btn, group) {
+      // Close every other panel in the same group first.
+      var others = group.querySelectorAll('[data-yt-panel]');
+      others.forEach(function (p) {
+        if (p !== panel) {
+          p.hidden = true;
+          p.innerHTML = '';
+          var btns = document.querySelectorAll('[aria-controls="' + p.id + '"]');
+          btns.forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+        }
+      });
+      // Inject iframe.
+      panel.innerHTML = '<iframe class="h-full w-full" src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(videoId) + '?autoplay=1&rel=0" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+      setExpanded(panel, true, btn);
+    }
+
+    document.querySelectorAll('[data-yt-group]').forEach(function (group) {
+      group.addEventListener('click', function (ev) {
+        var target = ev.target;
+        if (!(target instanceof Element)) return;
+
+        // YouTube toggle
+        var ytBtn = target.closest('[data-yt-toggle]');
+        if (ytBtn && group.contains(ytBtn)) {
+          ev.preventDefault();
+          var panelId = ytBtn.getAttribute('aria-controls');
+          var panel = panelId ? document.getElementById(panelId) : null;
+          if (!panel) return;
+          if (!panel.hidden) {
+            // collapse current
+            panel.hidden = true;
+            panel.innerHTML = '';
+            ytBtn.setAttribute('aria-expanded', 'false');
+            return;
+          }
+          showYouTube(panel, ytBtn.getAttribute('data-yt-toggle'), ytBtn, group);
+          return;
+        }
+
+        // MP3 toggle
+        var mp3Btn = target.closest('button[aria-controls^="conf-mp3-panel-"]');
+        if (mp3Btn && group.contains(mp3Btn)) {
+          ev.preventDefault();
+          var panelId = mp3Btn.getAttribute('aria-controls');
+          var panel = panelId ? document.getElementById(panelId) : null;
+          if (!panel) return;
+          var expanded = mp3Btn.getAttribute('aria-expanded') === 'true';
+          setExpanded(panel, !expanded, mp3Btn);
+          return;
+        }
+      });
+    });
+  })();
+</script>

@@ -1,19 +1,53 @@
 ---
-interface Crumb { label: string; href?: string; }
-interface Props { items: Crumb[]; }
-const { items } = Astro.props;
+interface Crumb {
+  label: string;
+  href?: string;
+  current?: boolean;
+}
+interface Props {
+  items: Crumb[];
+  emphasis?: 'auto' | 'always';
+  tone?: 'auto' | 'light' | 'dark';
+}
+const { items, emphasis = 'auto', tone = 'auto' } = Astro.props;
+const lastIdx = items.length - 1;
+const isLight = tone === 'light' || (tone === 'auto' && false);
+const isDark = tone === 'dark';
 ---
-<nav aria-label="Breadcrumb" class="text-sm text-brand-ink/70">
+<nav
+  aria-label="Breadcrumb"
+  class:list={[
+    'text-sm',
+    isDark ? 'text-white/80' : (isLight ? 'text-brand-ink/70' : 'text-brand-ink/70'),
+  ]}
+>
   <ol class="flex flex-wrap items-center gap-2">
-    {items.map((c, i) => (
-      <li class="flex items-center gap-2">
-        {c.href && i !== items.length - 1 ? (
-          <a href={c.href} class="hover:underline">{c.label}</a>
-        ) : (
-          <span class={i === items.length - 1 ? 'text-brand-ink/90' : ''}>{c.label}</span>
-        )}
-        {i < items.length - 1 && <span aria-hidden="true">›</span>}
-      </li>
-    ))}
+    {items.map((c, i) => {
+      const isLast = i === lastIdx;
+      const emphasised = emphasis === 'always' || (emphasis === 'auto' && (c.current ?? isLast));
+      const linkClass = isDark
+        ? 'text-white/90 hover:text-white hover:underline'
+        : 'text-brand-ink hover:underline';
+      const plainClass = isDark ? 'text-white' : 'text-brand-ink';
+      const mutedClass = isDark ? 'text-white/80' : 'text-brand-ink/90';
+      const sepClass = isDark ? 'text-white/60' : 'text-brand-ink/40';
+      const badgeClass = isDark
+        ? 'inline-flex items-center rounded-full border border-white/70 bg-white/15 px-3 py-0.5 text-xs font-semibold uppercase tracking-[0.12em] text-white'
+        : 'inline-flex items-center rounded-full border border-brand-ink/40 bg-brand-cream px-3 py-0.5 text-xs font-semibold uppercase tracking-[0.12em] text-brand-ink';
+      return (
+        <li class="flex items-center gap-2">
+          {c.href && !emphasised ? (
+            <a href={c.href} class={linkClass}>{c.label}</a>
+          ) : (
+            <span
+              class={emphasised && (c.label === 'Past' || c.label === 'Upcoming') ? badgeClass : (emphasised ? plainClass : mutedClass)}
+            >
+              {c.label}
+            </span>
+          )}
+          {!isLast && <span aria-hidden="true" class={sepClass}>›</span>}
+        </li>
+      );
+    })}
   </ol>
 </nav>
