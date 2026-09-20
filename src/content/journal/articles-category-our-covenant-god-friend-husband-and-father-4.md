@@ -149,8 +149,6 @@ Maintaining this view of God as Friend, Husband and Father within the covenant b
 
 Although this work attempts to provide a fuller understanding of the covenant, a proper understanding of these three symbols still does not adequately capture the reality. Each symbol gives insights into the reality but even the combination cannot fully express the reality. This holds true because no man can fully comprehend the reality of what it means that Jehovah God of heaven declares, "I will be your God and you will be my people." To understand that reality would be to understand heaven itself. This is life everlasting, that God will be with His people and they shall be with Him forever (Rev. 21:3). Praise be to God for giving us these three earthly symbols that enable us to have an experiential foretaste of the heavenly fulfilment by living in these relationships.
 
-## Footnotes
-
 [^1]: Matt Kortus is a fourth-year seminary student at the Protestant Reformed Theological School and a member of Zion Protestant Reformed Church in Jenison, MI, USA.
 [^2]: Cf. Herman Hoeksema, *Reformed Dogmatics*, vol. 1 (Grandville, MI: RFPA, 2004), pp. 455–458.
 [^3]: F. Brown, S. Driver and C. Briggs, *Hebrew and English Lexicon* (Peabody, MA: Hendrickson, repr. 2010), p. 1036.

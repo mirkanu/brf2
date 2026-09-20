@@ -113,8 +113,6 @@ Second, Luther asks, what do you gain even if you do succeed in establishing tha
 
 > You say it is not proper baptism. What does it matter, if it is still a baptism? It was a correct baptism in itself, regardless of whether it was received rightly. The words were spoken and everything that pertains to baptism was done as fully as when faith is present. If a thing is in itself correct, you do not have to repeat it even though it was not correctly received. You correct what was wrong and do not have to do the entire thing over. Abuse does not change the nature of a substance; indeed it proves the sub-
 
-## Footnotes
-
 [^1]: Brian Harris is a member of Swansea Evangelical Reformed Church and the Conference Chairman of the British Reformed Fellowship.
 
 [^2]: Paul W. Robinson (ed.), *The Annotated Luther*, vol. 3: *Church and Sacraments* (Minneapolis, MN: Fortress Press, 2016), pp. 59-60. There are various editions of Martin Luther's works, and this is a new series. While beautifully produced, it is marred in places by an uncritical commitment to the use of "inclusive language." Hereafter all page numbers in the body text refer to this book.

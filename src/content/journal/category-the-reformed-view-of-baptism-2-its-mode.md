@@ -92,8 +92,6 @@ Although this seems quite clear it may be that certain objections are felt to th
 
 We have examined the circumstances surrounding John's Baptizing and have ascertained that it is precisely what might have been expected from a Priest carrying out purifications under the Old Dispensation. This fits in with the very large numbers who came — and nothing in the possible objections is inconsistent with the interpretation that these Baptisms were carried out by pouring and/or sprinkling. Everything cries out that they could not have been carried out by immersion. God willing we will continue the consideration of what we can learn of the mode of Baptism in the rest of the New Testament in subsequent articles.
 
-## Footnotes
-
 [^1]: II Tim. iii. 16, 17.
 
 [^2]: *Mark* i. 10.
