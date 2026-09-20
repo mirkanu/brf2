@@ -43,13 +43,28 @@ const hasRecordings = (d.recordings ?? []).length > 0;
 const hasReviews = (d.reviews ?? []).length > 0;
 
 const headings: { depth: number; slug: string; text: string }[] = [];
-headings.push({ depth: 2, slug: "programme", text: "Programme" });
+if (hasProgramme) headings.push({ depth: 2, slug: "programme", text: "Programme" });
 if (hasRecordings) headings.push({ depth: 2, slug: "recordings", text: "Recordings" });
 if (hasReviews) headings.push({ depth: 2, slug: "reviews", text: "Reviews" });
-headings.push({ depth: 2, slug: "resources", text: "Resources" });
+// Resources section suppressed (see template).
 
 const venuePhotoUrl = d.venuePhoto ?? null;
+// Prev/Next navigation: walk the conferences collection by year.
 const pageTitle = `${d.title} | ${d.year} BRF Conference`;
+const _allConfs = await getCollection("conferences");
+const _yearsWithPages = _allConfs
+  .map((c: any) => c.data?.year)
+  .filter((y: any): y is number => typeof y === "number");
+const _sortedYears = Array.from(new Set(_yearsWithPages)).sort((a: number, b: number) => a - b);
+const _idx = _sortedYears.indexOf(d.year);
+const _prevYear = _idx > 0 ? _sortedYears[_idx - 1] : null;
+const _nextYear = _idx >= 0 && _idx < _sortedYears.length - 1 ? _sortedYears[_idx + 1] : null;
+const _findConf = (y: number) => _allConfs.find((c: any) => c.data?.year === y);
+const _prev = _prevYear != null ? _findConf(_prevYear) : null;
+const _next = _nextYear != null ? _findConf(_nextYear) : null;
+const _prevTitle = _prev?.data?.title ?? (_prev ? `${_prevYear} BRF Conference` : null);
+const _nextTitle = _next?.data?.title ?? (_next ? `${_nextYear} BRF Conference` : null);
+
 const description = (d.title ?? "").replace(/<[^>]+>/g, "").trim();
 
 const speakers = (d.speakers ?? []).map((s: string) => s.trim()).filter(Boolean);
@@ -84,7 +99,7 @@ function groupRecordings(recs: any[]): Group[] {
 }
 const recordingGroups = groupRecordings(d.recordings ?? []);
 
-const AudioIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3.5"><path d="M11.5 4.5a.75.75 0 0 1 .77-.02l3 1.8A.75.75 0 0 1 15.75 7v10a.75.75 0 0 1-.48.72l-3 1.8a.75.75 0 0 1-1.02-.7V5.2a.75.75 0 0 1 .25-.7ZM8 9.5a3.5 3.5 0 1 1-3 6.32V9.5ZM5 8.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0v-5.5A.75.75 0 0 1 5 8.5Z"/></svg>`;
+const AudioIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3.5"><path d="M12 3a9 9 0 0 0-9 9v5a3 3 0 0 0 3 3h2a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1H5.5a6.5 6.5 0 0 1 13 0H16a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a3 3 0 0 0 3-3v-5a9 9 0 0 0-9-9Z"/></svg>`;
 const YouTubeIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3.5"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.76C18.27 5 12 5 12 5s-6.27 0-7.84.44A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.76C5.73 19 12 19 12 19s6.27 0 7.84-.44a2.5 2.5 0 0 0 1.76-1.76A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15V9l5.2 3L10 15Z"/></svg>`;
 ---
 <Site title={pageTitle} description={description} ogImageUrl={venuePhotoUrl ?? undefined}>
@@ -104,16 +119,16 @@ const YouTubeIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
         items={[
           { label: "Home", href: "/" },
           { label: "Conferences", href: "/conferences/" },
+          { label: String(d.year) },
         ]}
         tone="dark"
         class="text-white/90"
       />
-      <p class="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">{d.year} BRF Conference</p>
-      <h1 class="mt-3 font-serif text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">{d.title}</h1>
+      <p class="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">BRF Conference</p>
+      <h1 class="mt-3 font-serif text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
+        {d.title ?? `${d.year} BRF Conference`}
+      </h1>
       {d.subtitle && <p class="mt-3 text-lg text-white/85">{d.subtitle}</p>}
-      <p class="mt-6 text-sm text-white/85">
-        {d.dates ?? d.year}{(d.venue || d.country) ? " · " : ""}{d.venue ?? ""}{(d.venue && d.country) ? ", " : ""}{d.country ?? ""}
-      </p>
     </div>
   </section>
 
@@ -171,17 +186,10 @@ const YouTubeIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
             </div>
           </div>
         )}
-        {!hasProgramme && (
-          <div class="mt-10">
-            <h2 id="programme" class="font-serif text-2xl font-semibold text-brand-ink">Programme</h2>
-            <div class="mt-4 border-t border-brand-ink/15 pt-4">
-              <p class="text-sm text-brand-muted">Final programme not yet published.</p>
-            </div>
-          </div>
-        )}
+        {/* Programme section is hidden when no PDF is available. */}
 
         {hasRecordings && (
-          <div class="mt-12">
+          <div id="recordings" class="mt-12">
             <h2 id="recordings" class="font-serif text-2xl font-semibold text-brand-ink">Recordings</h2>
             <div class="mt-4 border-t border-brand-ink/15 pt-4 space-y-8">
               {d.youtubePlaylistUrl && (
@@ -294,19 +302,11 @@ const YouTubeIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
           </div>
         )}
 
-        <div class="mt-12">
-          <h2 id="resources" class="font-serif text-2xl font-semibold text-brand-ink">Resources</h2>
-          <div class="mt-4 space-y-3 border-t border-brand-ink/15 pt-4 text-sm">
-            {hasProgramme && (
-              <p>
-                <a href={d.programmePdf} target="_blank" rel="noopener" class="font-medium text-brand-ink underline decoration-brand-ink/30 underline-offset-2 hover:decoration-brand-ink">Final programme (PDF) ↗</a>
-              </p>
-            )}
-            {speakers.length > 0 && (
-              <p class="text-brand-muted">Speaker profiles and cross-references for {speakers.join(", ")}.</p>
-            )}
-          </div>
-        </div>
+        {/* The Resources section is intentionally suppressed: every item it
+            contained (programme PDF, speakers list) duplicates content
+            already shown in the Programme section and the Speakers metadata row.
+            Resurface here only when a future migration adds a link that is
+            genuinely unique to this conference (e.g. external archive). */}
       </div>
 
       {headings.length > 0 && (
@@ -316,6 +316,56 @@ const YouTubeIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
           </div>
         </aside>
       )}
+      {(_prev || _next) && (
+        <nav aria-label="Conference pagination" class="mt-12 grid max-w-5xl gap-6 border-t border-brand-ink/15 pt-10 sm:grid-cols-2">
+          {_prev ? (
+            <a href={`/conferences/${_prevYear}/`} class="group flex flex-col rounded-lg border border-brand-ink/10 bg-white p-5 transition hover:border-brand-ink/30">
+              <span class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-muted">← Previous conference</span>
+              <span class="mt-2 font-serif text-lg font-semibold text-brand-ink group-hover:underline">{_prevTitle}</span>
+              <span class="mt-1 text-xs text-brand-muted">{_prevYear}</span>
+            </a>
+          ) : <span aria-hidden="true" />}
+          {_next ? (
+            <a href={`/conferences/${_nextYear}/`} class="group flex flex-col rounded-lg border border-brand-ink/10 bg-white p-5 text-right transition hover:border-brand-ink/30 sm:items-end">
+              <span class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-muted">Next conference →</span>
+              <span class="mt-2 font-serif text-lg font-semibold text-brand-ink group-hover:underline">{_nextTitle}</span>
+              <span class="mt-1 text-xs text-brand-muted">{_nextYear}</span>
+            </a>
+          ) : <span aria-hidden="true" />}
+        </nav>
+      )}
     </div>
   </section>
-</Site>
+          <script>
+        // Exclusive-open recording panels: opening one closes any other
+        // open <details> and pauses its audio. Collapsing the current panel
+        // also pauses its audio.
+        (function () {
+          const root = document.getElementById("recordings");
+          if (!root) return;
+          const panels = Array.from(root.querySelectorAll("details"));
+          panels.forEach((panel) => {
+            panel.addEventListener("toggle", () => {
+              if (panel.open) {
+                // close siblings + pause their audio
+                panels.forEach((other) => {
+                  if (other !== panel && other.open) {
+                    other.open = false;
+                  }
+                  const a = other.querySelector("audio");
+                  if (a && a !== panel.querySelector("audio")) {
+                    try { a.pause(); } catch (_) { /* noop */ }
+                  }
+                });
+              } else {
+                // collapsing the current panel: pause its audio
+                const a = panel.querySelector("audio");
+                if (a) {
+                  try { a.pause(); } catch (_) { /* noop */ }
+                }
+              }
+            });
+          });
+        })();
+      </script>
+    </Site>
