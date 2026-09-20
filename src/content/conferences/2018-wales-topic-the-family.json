@@ -1,5 +1,5 @@
 {
-  "title": "2018: \"The Reformed Family—According to the Word of God\" (Hebron Hall, Wales; 21-28 July)",
+  "title": "The Reformed Family—According to the Word of God",
   "legacyPath": "/conference/category/2018-wales-topic-the-family",
   "datePublished": "2018-08-01 09:00:00",
   "authors": [
@@ -26,77 +26,77 @@
     "Rev. M. McGeown",
     "Rev. A. Stewart"
   ],
-  "programmePdf": "https://www.britishreformed.org/s/BRF-Conference-Programme-2018.pdf",
+  "programmePdf": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/pdfs/conferences/2018/BRF-2018-Programme.pdf",
   "recordings": [
     {
       "number": 1,
       "title": "The Divine Origin of the Family",
       "speaker": "Rev. A. Lanning",
       "kind": "speech",
-      "mp3Url": "https://www.britishreformed.org/s/1divineoriginoffamily-wal2.mp3"
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2018/01-divine-origin.mp3"
     },
     {
       "number": 2,
       "title": "The Authoritative Content of the Gospel",
       "speaker": "Prof. D. Engelsma",
       "kind": "speech",
-      "mp3Url": "https://www.britishreformed.org/s/2authoritativecontent-pegt.mp3"
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2018/02-authoritative-content.mp3"
     },
     {
       "number": 3,
       "title": "The God-Fearing Man and His Virtuous Wife",
       "speaker": "Rev. A. Lanning",
       "kind": "speech",
-      "mp3Url": "https://www.britishreformed.org/s/3Godfearingman.mp3"
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2018/03-god-fearing-man.mp3"
     },
     {
       "number": 4,
       "title": "The Reformed Family: Parents and Children",
       "speaker": "Prof. D. Engelsma",
       "kind": "speech",
-      "mp3Url": "https://www.britishreformed.org/s/4reformedfamily.mp3"
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2018/04-reformed-family.mp3"
     },
     {
       "number": 5,
       "title": "It Is Good to Be Single",
       "speaker": "Rev. A. Lanning",
       "kind": "speech",
-      "mp3Url": "https://www.britishreformed.org/s/5goodtobesingle.mp3"
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2018/05-good-to-be-single.mp3"
     },
     {
       "number": 6,
       "title": "Unbiblical Divorce and Adulterous Remarriage: A Scandal",
       "speaker": "Prof. D. Engelsma",
       "kind": "speech",
-      "mp3Url": "https://www.britishreformed.org/s/6unbiblicaldivorce.mp3"
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2018/06-unbiblical-divorce.mp3"
     },
     {
       "number": null,
       "title": "Introductory Speech",
       "speaker": "Rev. M. McGeown",
       "kind": "special-lecture",
-      "mp3Url": "https://www.britishreformed.org/s/hatingfamily-p783.mp3"
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2018/07-intro-speech.mp3"
     },
     {
       "number": null,
       "title": "The God of the Living (Matt. 22:23–33)",
       "speaker": "Rev. A. Lanning",
       "kind": "lords-day",
-      "mp3Url": "https://www.britishreformed.org/s/Godoftheliving2.mp3"
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2018/08-god-of-living.mp3"
     },
     {
       "number": null,
       "title": "Eunuchs Keeping the Sabbath",
       "speaker": "Rev. A. Stewart",
       "kind": "lords-day",
-      "mp3Url": "https://www.britishreformed.org/s/eunuchskeepsabbath2.mp3"
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2018/09-eunuchs-sabbath.mp3"
     },
     {
       "number": null,
       "title": "Spousal Abuse in the Christian Community",
       "speaker": "Prof. D. Engelsma",
       "kind": "special-lecture",
-      "mp3Url": "https://www.britishreformed.org/s/spousalabuse.mp3"
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2018/10-spousal-abuse.mp3"
     }
   ],
   "section": "conference"

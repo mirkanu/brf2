@@ -1,5 +1,5 @@
 {
-  "title": "2022: (Rescheduled from 2020/2021) Union with Jesus Christ (Castlewellan, Northern Ireland; 9-16 July, 2022)",
+  "title": "Union with Jesus Christ",
   "legacyPath": "/conference/category/2020-union-with-jesus-christ-castlewellan-northern-ireland-22-18-july",
   "datePublished": "2022-08-01 09:00:00",
   "authors": [
@@ -20,6 +20,107 @@
   "venue": "Castlewellan",
   "dates": "9–16 July 2022",
   "topic": "Union with Jesus Christ",
-  "programmePdf": "https://www.britishreformed.org/s/brf_conference_programme_2022.pdf",
+  "speakers": [
+    "Rev. Angus Stewart",
+    "Prof. David Engelsma",
+    "Rev. Martyn McGeown",
+    "Rev. Ron Hanko"
+  ],
+  "programmePdf": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/pdfs/conferences/2022/BRF-2022-Programme.pdf",
+  "recordings": [
+    {
+      "number": 1,
+      "title": "A Psalm of Union with Christ",
+      "speaker": "Rev. Martyn McGeown",
+      "kind": "speech",
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2022/01-psalm-of-union.mp3"
+    },
+    {
+      "number": 2,
+      "title": "Our Changeless Christ",
+      "speaker": "Prof. David Engelsma",
+      "kind": "speech",
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2022/02-changeless-christ.mp3"
+    },
+    {
+      "number": 3,
+      "title": "The Lamb of God",
+      "speaker": "Prof. David Engelsma",
+      "kind": "speech",
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2022/03-lamb-of-god.mp3"
+    },
+    {
+      "number": 4,
+      "title": "Union with Christ and the Covenant",
+      "speaker": "Rev. Ron Hanko",
+      "kind": "speech",
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2022/04-union-and-covenant.mp3"
+    },
+    {
+      "number": 5,
+      "title": "Union with Christ and Election",
+      "speaker": "Rev. Ron Hanko",
+      "kind": "speech",
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2022/05-union-and-election.mp3"
+    },
+    {
+      "number": 6,
+      "title": "Union with Christ's Death",
+      "speaker": "Prof. David Engelsma",
+      "kind": "speech",
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2022/06-union-with-christs-death.mp3"
+    },
+    {
+      "number": 7,
+      "title": "John Calvin on Union with Christ",
+      "speaker": "Rev. Angus Stewart",
+      "kind": "speech",
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2022/07-calvin-on-union.mp3"
+    },
+    {
+      "number": 8,
+      "title": "Union with Christ in His Resurrection",
+      "speaker": "Prof. David Engelsma",
+      "kind": "speech",
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2022/08-union-with-resurrection.mp3"
+    },
+    {
+      "number": 9,
+      "title": "Union with Christ and Marriage",
+      "speaker": "Rev. Ron Hanko",
+      "kind": "speech",
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2022/09-union-and-marriage.mp3"
+    },
+    {
+      "number": 10,
+      "title": "Union with Christ and the Antithesis",
+      "speaker": "Prof. David Engelsma",
+      "kind": "speech",
+      "mp3Url": "https://pub-011dc1a7faab4dbbafd9b3954e64f5f8.r2.dev/audio/conferences/2022/10-union-and-antithesis.mp3"
+    }
+  ],
+  "reviews": [
+    {
+      "title": "Review 1, by Lori Schipper",
+      "author": "Lori Schipper",
+      "href": "https://www.britishreformed.org/conference/category/review-1-lori-schipper",
+      "kind": "brf",
+      "host": null
+    },
+    {
+      "title": "Review 2, by Anna Huizinga",
+      "author": "Anna Huizinga",
+      "href": "https://www.britishreformed.org/conference/category/review-2-anna-huizinga",
+      "kind": "brf",
+      "host": null
+    },
+    {
+      "title": "Review 3, by Brian Harris (BRJ 74)",
+      "author": "Brian Harris",
+      "href": "https://www.britishreformed.org/static/5359681be4b04d0a00bdd9ad/t/65227024c2aa42303732be0b/1696755748597/BRJ74conferencereport.pdf",
+      "kind": "brf",
+      "host": null
+    }
+  ],
   "section": "conference"
 }
