@@ -7,18 +7,30 @@ import { speakerSlug, isTbdSpeaker } from "../../lib/speakers";
 
 export async function getStaticPaths() {
   const confs = await getCollection("conferences");
-  return confs
-    .filter((c) => /^\d{4}$/.test(c.id))
-    .map((c) => ({ params: { year: c.id } }));
+  // Canonical conferences have primaryCategory in {past, upcoming} AND a unique year.
+  const seen = new Map<number, any>();
+  for (const c of confs) {
+    const cat = (c.data as any).primaryCategory;
+    if (cat !== "past" && cat !== "upcoming") continue;
+    const y = (c.data as any).year;
+    if (typeof y !== "number") continue;
+    if (seen.has(y)) {
+      throw new Error(`Duplicate conference year ${y}: ${seen.get(y).id} and ${c.id}`);
+    }
+    seen.set(y, c);
+  }
+  return [...seen.values()].map((c) => ({
+    params: { year: String((c.data as any).year) },
+    props: { entry: c },
+  }));
 }
 
-const { year } = Astro.params;
-const all = await getCollection("conferences");
-const conference = all.find((c) => c.id === year);
+const { entry: conference } = Astro.props as { entry: any };
 if (!conference) {
   return Astro.redirect("/conferences/");
 }
 const d = conference.data;
+
 const today = new Date();
 const cy = today.getFullYear();
 const isCurrentYear = d.year === cy;
