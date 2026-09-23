@@ -14,7 +14,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 ## Project routing index
 
-Updated 2026-09-04. The project no longer keeps a `.planning/` directory; this file, `docs/agent-handbook/`, and `STATUS.md` are the canonical sources of project state.
+Updated 2026-09-04. The project no longer keeps a `.planning/` directory; this file and `docs/agent-handbook/` are the canonical sources of project state. Issue and milestone state lives on GitHub (Issues and Milestones are the planning layer).
 
 ### Collections (`src/content.config.ts`)
 
@@ -47,7 +47,7 @@ Base schema (`src/content.config.ts`): `title`, `legacyPath`, `datePublished`, `
 | `/sitemap-index.xml` + `/sitemap-N.xml` | `scratch/phase-2/gen-sitemaps.mjs` (postbuild) | Generated from `dist/` |
 | `/404` | `src/pages/404.astro` | Friendly not-found |
 
-Redirect rule (binding): redirects are only built **from `britishreformed.org` (Squarespace) → `brf2.pages.dev`**. No redirects are generated from `brf2.pages.dev` routes or `legacyPath` fields. Recorded in `0 Inbox/redirect-rule-britishreformed-only.md`.
+Redirect rule (binding): redirects are only built **from `britishreformed.org` (Squarespace) → `brf2.pages.dev`**. No redirects are generated from `brf2.pages.dev` routes or `legacyPath` fields.
 
 ### Assets
 
@@ -67,7 +67,6 @@ This rule is binding until phase 5. After cutover, slugs become load-bearing and
 ### Build & deploy
 
 - Build: `npm run build` (Astro 7 static). 696 pages, 0 errors. Postbuild script writes `dist/sitemap-index.xml`.
-- Live status: `STATUS.md`.
 - Hosted on Cloudflare Pages (project: `brf2`, branch: `main`).
 
 ## Documentation
